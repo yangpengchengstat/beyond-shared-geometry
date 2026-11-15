@@ -1,0 +1,205 @@
+--- 0.5.2/paper/main.tex
++++ 0.5.3/paper/main.tex
+@@ -29,11 +29,12 @@
+ \crefname{spectrallemma}{Lemma}{Lemmas}
+ \title{Beyond Shared Geometry: Predictive Recovery, Exact Actions, and Semantic Specificity in Language-Model Representations}
+ \author{Anonymous authors}
++\input{generated/bounded_macros.tex}
+ \begin{document}
+ \maketitle
+ 
+ \begin{abstract}
+-What can recovered transformations reveal about language-model representations beyond predictive accuracy? Given a prescribed finite-group action on input states, we fit maps that predict hidden representations of transformed states from their source representations in the same context. Each operator family is shared across contexts within a fixed model-layer coordinate space. Our architecture-independent theory distinguishes optimal unconstrained linear prediction from minimum risk over fixed-dimensional exact orthogonal actions under a common second-moment-whitened metric. An analytical example gives two observation systems with identical optimal regression risk and eigenvalue spectra of their orbit Gram matrices, but different exact-action risks. A spectral budget respecting real irreducible representation types gives lower and upper risk bounds differing by at most a factor of two. We study weekday cycles ($C_7$) and square-corner actions ($D_4$) in six frozen, pretrained decoder-only autoregressive Transformers from the Llama and Qwen families. Linear recovery, label-informed category controls and compact nonlinear predictors test competing predictive explanations; the latter are not established nonlinear group actions. Finite-bank spectra and constructed exact-action witnesses connect the theory to measured representations. Frozen witnesses have higher held-out loss than independent least squares in all 48 conditions, while exhaustive permutation-image comparisons do not uniformly favor the specified semantic image. On new authored contexts under matched validation selection, difference fitting lowers mean weekday loss but raises mean square-corner loss relative to coordinate fitting. These results distinguish predictive recovery, exact-action compatibility and semantic interpretation without identifying a uniquely supported semantic action or native computation.
++What can recovered transformations reveal about language-model representations beyond predictive accuracy? Given a prescribed finite-group action on input states, we fit maps that predict hidden representations of transformed states from their source representations in the same context. Each operator family is shared across contexts within a fixed model-layer coordinate space. Our architecture-independent theory distinguishes optimal unconstrained linear prediction from minimum risk over fixed-dimensional exact orthogonal actions under a common second-moment-whitened metric. An analytical example gives two observation systems with identical optimal regression risk and eigenvalue spectra of their orbit Gram matrices, but different exact-action risks. A spectral budget respecting real irreducible representation types gives lower and upper risk bounds differing by at most a factor of two. We study weekday cycles ($C_7$) and square-corner actions ($D_4$) in six frozen, pretrained decoder-only autoregressive Transformers from the Llama and Qwen families. Linear recovery, label-informed category controls and compact nonlinear predictors test competing predictive explanations; the latter are not established nonlinear group actions. Finite-bank lower bounds on the exact orthogonal-action premium over independent linear prediction are numerically positive in all \BoundedCellCount{} conditions. Frozen witnesses have higher held-out loss than independent least squares in all 48 conditions, while exhaustive permutation-image comparisons do not uniformly favor the specified semantic image. On new authored contexts under matched validation selection, difference fitting lowers mean weekday loss but raises mean square-corner loss relative to coordinate fitting. These results distinguish predictive recovery, exact-action compatibility and semantic interpretation without identifying a uniquely supported semantic action or native computation.
+ \end{abstract}
+ 
+ \section{Introduction}
+@@ -96,6 +97,7 @@
+ $E_z$ & $\mathbb E_{\rm train}\|z-\bar z_{\rm train}\|_2^2$ & Study~2 coordinate errors share this training-only denominator. \\
+ $E_u$ & $\mathbb E_{\rm train}\|u\|_2^2$, $u=z_{p_0}-z_{p_1}$ & Study~2 paired context-difference errors; no extra recentering. \\
+ $\eta,L^\star$ & Squared error after second-moment whitening, divided by $r$, with a full uniform group average & Same distribution and metric; independent least squares versus exact orthogonal actions. \\
++$L(I),L^\star-\eta$ & Identity-action risk and exact-class premium in the same whitened metric & $I$ means $\rho_g=\Id_r$ for every $g$; the premium concerns exact laws and orthogonality jointly. \\
+ $\gamma_r$ & Type-constrained invariant-subspace energy budget divided by $r$ & A finite-bank quantity or its specified population counterpart; not a historical error score. \\
+ \bottomrule
+ \end{tabular}
+@@ -145,7 +147,7 @@
+  \le 2(1-\gamma_r^2)-\eta.
+  \label{eq:risk-premium-main}
+ \end{equation}
+-This interval quantifies the additional risk of imposing both exact group laws and orthogonality, on the same bank and in the same metric. It is a direct consequence of the risk bound, not an exact measurement of $L^\star$ or a new independent theorem. A lower endpoint above zero rules out an equally accurate exact orthogonal action in that specified class.
++This interval quantifies the additional risk of imposing both exact group laws and orthogonality, on the same bank and in the same metric. It is a direct consequence of the risk bound, not an exact measurement of $L^\star$ or a new independent theorem. A lower endpoint above zero rules out an equally accurate exact orthogonal action in that specified class. The identity action $\rho_g=\Id_r$ for every $g$ has risk $L(I)=2(1-e_{\rm triv})$, where $e_{\rm triv}$ is total trivial-type energy. This gives a same-metric reference distinct from the selected budget share $b_{\rm triv}$ (\cref{sp:identity-reference}).
+ 
+ A large $\gamma_r$ guarantees a low-risk exact orthogonal action in the declared metric. It does not distinguish a semantic computation from stable category coding. State-invariant components can contribute to the budget, so total type energy and the selected portion should be distinguished (\cref{sp:type-energy}). These components need not be purely contextual; even nontrivial state structure can reflect category identity. The trivial representation is itself a valid action, so a large trivial contribution limits the semantic interpretation of the score rather than invalidating the action class.
+ 
+@@ -219,7 +221,7 @@
+ For a new application, specify the intended claim and competing explanation before choosing a diagnostic. The useful outcome is the interpretation changed by the comparison, including unfavorable results, rather than the number of positive scores obtained.
+ 
+ \section{Discussion and Scope}
+-The results connect three distinct targets. Predictors recover useful transformations; the spectral bound quantifies compatibility with an exact orthogonal action; exhaustive image comparisons ask how special the specified registration is within a finite comparator class. Their answers need not agree. In particular, the constructed action is feasible but less accurate than OLS in every held-out condition, and a high spectral budget is often shared by other registrations. The observed real-type correction is negligible in 47 of 48 conditions at rank 16, so the analytical separation is not a large universal empirical effect in this panel.
++The results connect three distinct targets. Predictors recover useful transformations; the spectral bound quantifies compatibility with an exact orthogonal action; exhaustive image comparisons ask how special the specified registration is within a finite comparator class. The finite-bank interval constrains the optimum over the entire exact orthogonal-action class in its declared metric. Frozen-witness losses measure one constructor's transfer performance, while registration margins compare spectral budgets across the fixed image class. Their answers need not agree. In particular, the constructed action is feasible but less accurate than OLS in every held-out condition, and a high spectral budget is often shared by other registrations. The observed real-type correction is negligible in 47 of 48 conditions at rank 16, so the analytical separation is not a large universal empirical effect in this panel.
+ 
+ Context transport supplies a further practical distinction. An objective that improves both domain means within the original construction improves only the weekday mean under the new construction, with square-corner results reversing. This prevents treating dedicated difference fitting as a universally better intervention or transport method. It also motivates reporting domain and model variation rather than only the nearly cancelling pooled contrast.
+ 
+--- 0.5.2/paper/sections/spectral_risk.tex
++++ 0.5.3/paper/sections/spectral_risk.tex
+@@ -158,6 +158,20 @@
+ \]
+ Here $0\le b_\tau\le e_\tau$; selected shares can depend on the choice of a tied maximizer even though $\gamma_r$ does not. The trivial type describes components invariant under the state action, including possible contextual and global-constant components, rather than uniquely identifying context information. A large $\gamma_r$ can also coexist with stable state coding when trivial energy is small. Removing trivial or weak directions changes the declared coordinates, dimension or metric; reporting their contributions preserves the target.
+ 
++\paragraph{Identity-action reference.}
++\label{sp:identity-reference}
++For the action $\rho_g=\Id_r$ for every $g$, let $Q_0=m^{-1}\sum_gU_g$ be the projection onto invariant functions. Under the same complete-state, uniform-group and whitening contract,
++\[
++ e_{\rm triv}=\|Q_0J\|_{\rm HS}^2/r
++ =\frac1{rm}\sum_g\mathbb E\langle x,x_g\rangle,
++ \qquad L(I)=2(1-e_{\rm triv}).
++\]
++Indeed, $Q_0^2=Q_0=Q_0^*$ gives the first equality with the orbit-Gram trivial energy. Uniform state averaging is invariant under each permutation, so both $x$ and $x_g$ have mean squared norm $r$; expanding $\|x-x_g\|^2$ proves the risk identity. For the transitive C7 and corner actions this also gives
++\[
++ e_{\rm triv}=\frac1r\mathbb E_c\left\|\frac1{|S|}\sum_s x_{c,s}\right\|^2.
++\]
++The reference uses total type energy, not $b_{\rm triv}$, and keeps identity elements and fixed points. It is a direct consequence of the existing observation contract. It implies $\eta\le L(I)$ and $2(1-\gamma_r)\le L(I)$; the existence upper bound on $L^\star$ need not upper-bound this particular candidate.
++
+ \paragraph{Equal regression risk and eigenvalues can conceal different action risk.}
+ \label{sp:counterexample}
+ Take $G=S=C_2\times C_2\times C_7$ acting by addition, uniform states $(a,b,k)$, one context, and $r=1$. Set
+--- 0.5.2/paper/sections/planned_studies.tex
++++ 0.5.3/paper/sections/planned_studies.tex
+@@ -3,16 +3,34 @@
+ The follow-up connects the class-risk theorem to the retained representations and evaluates transport under a new language construction. Its five analyses completed without dropping declared conditions: 48 spectral cells, 48 constructed witnesses, all 2,952 image-subgroup units, 36 fixed mechanism settings, and 48 new-context cells. The methods and provenance are in \cref{app:pending-protocols}; the results below concern distinct targets rather than a pooled success score.
+ 
+ \subsection{A feasible exact action need not be the best predictor}
+-\input{generated/followup_spectral.tex}
++\input{generated/followup_spectral_bounded.tex}
+ The empirical spectral budget averages $0.98510$ for weekdays and $0.93528$ for corners. The corresponding mean cell-wise lower/upper bounds are $[0.02980,0.05863]$ and $[0.12944,0.24895]$ in the test bank's own second-moment-whitened metric (\cref{tab:followup-spectral}). These are deterministic bounds on the specified finite-bank action class. They establish compatibility at those risk levels, not existence of a native semantic computation.
+ 
+ Trivial-type components account for selected energy $b_{\rm triv}=0.61540/0.72742$ on average. Thus much of the retained budget is state-invariant, although a trivial component need not be purely contextual and a nontrivial component need not reflect computation. The real-type correction is at numerical scale in 47/48 conditions (absolute correction at most $5.33\times10^{-15}$). The exception is Llama-3.1-8B, C7, layer 13: $\Delta_{\rm type}=0.13235$, or $\Delta_{\rm type}/16=0.00827$. The typed restriction is essential to the theorem and counterexample, but changes this rank-16 panel materially in only one condition.
+ 
+-\input{generated/followup_witness.tex}
+-All 48 constructed witnesses satisfy the frozen action-law and orthogonality checks, and their construction-bank risks lie within the analytic bounds. Frozen test losses average $0.02806/0.11117$, compared with $0.02141/0.08878$ for independent OLS (\cref{tab:followup-witness}). The witness is worse than OLS and fixed-coefficient ridge in every condition. This is an attained-risk comparison, not a measurement of the optimal risk premium: the witness need not minimize $L^\star$. Crucially, these prediction losses use \emph{training} whitening for both construction and test banks, whereas \cref{tab:followup-spectral} uses the test bank's own metric. Comparing their numerical endpoints as if they shared one loss would be invalid.
++\input{generated/followup_witness_bounded.tex}
++All 48 constructed witnesses satisfy the frozen action-law and orthogonality checks, and their construction-bank risks lie within the analytic bounds. Frozen test losses average $0.02806/0.11117$, compared with $0.02141/0.08878$ for independent OLS (\cref{tab:followup-witness}). The witness is worse than OLS and fixed-coefficient ridge in every condition. This is an attained-risk comparison, not a measurement of the optimal risk premium: the witness need not minimize $L^\star$. These prediction losses use \emph{training} whitening for both construction and test banks, whereas \cref{tab:followup-spectral} uses the test bank's own metric. The metrics also define different admissible classes of raw-coordinate functions. Conjugating the frozen training action into test-whitened coordinates preserves its group law but need not preserve orthogonality (\cref{app:metric-conjugation}); its transfer loss is therefore not checked against the test-bank exact-orthogonal bounds.
++
++\begin{table}[t]
++\centering\small
++\input{generated/bounded_risk_reference_table.tex}
++\caption{Same-metric reference and class-risk premium on the original Study~2 test bank. Each domain averages \BoundedCellsPerDomain{} fixed cells equally. $p^-=\max\{0,2(1-\gamma_r)-\eta\}$ and $p^+=2(1-\gamma_r^2)-\eta$ are computed per cell before averaging. They bound the mean cost of imposing exact laws and orthogonality jointly. $L(I)$ uses total trivial energy and was also checked by direct residuals on the saved coordinates. These are finite-bank quantities, not transfer losses or confidence limits.}
++\label{tab:bounded-risk}
++\end{table}
++
++\paragraph{The class constraint has a measurable cost on these banks.}
++\Cref{tab:bounded-risk} reports the same-metric identity reference and the bounds on $L^\star-\eta$ from \cref{eq:risk-premium-main}. The mean premium lies in $[\BoundedPremiumLowerCseven,\BoundedPremiumUpperCseven]$ for C7 and $[\BoundedPremiumLowerDfour,\BoundedPremiumUpperDfour]$ for D4. All \BoundedAllPositive{} lower endpoints exceed the original numerical tolerance. This fixed-panel count rules out matching independent linear prediction within the specified exact orthogonal class at those bounds; it is not a significance test or a conclusion about unseen contexts. Identity risks average $\BoundedIdentityCseven/\BoundedIdentityDfour$, illustrating the gain available from state-dependent prediction even though much total energy is invariant. The calculation constrains the whole class and is separate from the constructed witness's higher test loss. Complete cell and type values are in \cref{app:bounded-risk-details}.
+ 
+ \subsection{High compatibility does not uniquely favor the specified image}
+ The enumeration evaluates 120 distinct cyclic order-seven permutation images for C7 and three dihedral order-eight images for D4, on each of 24 model/readout banks. The specified semantic image has uniquely largest $\gamma_r$ in 7/24 and 16/24 conditions, respectively. C7's full-image gamma spread has median $3.88\times10^{-5}$ and maximum $4.07\times10^{-4}$; for D4 these are $1.36\times10^{-4}$ and $0.03984$. In C7, ranks can therefore differ substantially while the budget changes little. The specified C7 image ranges from rank 1 to a tie interval of 102--105 out of 120; D4 includes all three ranks.
++
++\begin{table}[t]
++\centering\small
++\input{generated/bounded_registration_margin_table.tex}
++\caption{Absolute spectral-budget margins of the specified image against the strongest and median alternatives, excluding that image itself. Summaries use all \BoundedCellsPerDomain{} cells per domain. U/T/B counts unique leading, tied leading and behind under the original pairwise tolerance. Raw margins retain their signs; they are not permutation $p$-values, exact-action risk rankings or probabilities of semantic correctness.}
++\label{tab:bounded-margins}
++\end{table}
++For semantic image $H_0$, define $d_{\rm top}=\gamma(H_0)-\max_{H\ne H_0}\gamma(H)$ and $d_{\rm median}=\gamma(H_0)-\operatorname{median}_{H\ne H_0}\gamma(H)$. \Cref{tab:bounded-margins} adds their absolute scale to the ranks. C7's median margin is negative against the best alternative but positive against the median alternative; its small margins show why ranking alone can overstate separation. D4's positive median coexists with both larger gains and losses across cells. These observations do not establish statistical equivalence or a uniformly preferred semantic image. Full margins and unchanged tolerance rules are in \cref{app:bounded-margin-details}.
+ 
+ These counts are descriptive across selected conditions. The comparison fixes coordinates, metric, weights and complete source/action coverage, but each image defines different target correspondences. It ranks spectral compatibility with registered tasks, not the exact optimum $L^\star$, a shared set of target labels, or semantic posterior probability. Even a uniquely leading image leaves action automorphisms and state-code mechanisms possible. The mechanism controls make the latter concrete: both the noiseless shared-action mechanism M1 and stable-code mechanism M3 yield machine-scale witness loss; the sampled contextual-orientation mechanism M2 has appreciably lower gamma (\cref{tab:followup-simulations}). These 36 fixed settings illustrate the constructions rather than calibrate a semantic classifier.
+ 
+--- 0.5.2/paper/sections/planned_protocols.tex
++++ 0.5.3/paper/sections/planned_protocols.tex
+@@ -5,7 +5,7 @@
+ \subsection{Finite-bank spectral analysis on retained coordinates}
+ The primary bank consists of the original Study~2 test partition for six models, four fixed readouts and C7/D4: 48 cells, each at $r=16$. Each cell contains 128 complete context blocks (64 families with two paired variants), with all states and all group elements equally weighted. This is a new analysis of already acquired coordinates; no model execution or historical calibration is required. The group average includes the identity and fixed points, unlike changed-state prediction endpoints elsewhere in the paper.
+ 
+-For each cell, the implementation verifies the archive and source identity, saved PCA, row correspondence and complete-state coverage, then evaluates the empirical second moment, orbit Gram matrix and real-type budget. The recorded quantities are $\gamma_r$, $\eta$, $\Delta_{\rm type}$, total and selected type energies $e_\tau,b_\tau$, and the two class-risk bounds. The risk-premium interval follows \cref{eq:risk-premium-main}. Full-rank, symmetry, positivity, contraction, projector and least-squares consistency checks have fixed numerical tolerances. A failed cell remains explicitly unevaluable; rank reduction, jitter, clipping and favorable cell selection are not permitted repairs.
++For each cell, the implementation verifies the archive and source identity, saved PCA, row correspondence and complete-state coverage, then evaluates the empirical second moment, orbit Gram matrix and real-type budget. The recorded quantities are $\gamma_r$, $\eta$, $\Delta_{\rm type}$, total and selected type energies $e_\tau,b_\tau$, and the two class-risk bounds. The risk-premium interval follows \cref{eq:risk-premium-main}. The additional offline derivation in \cref{app:bounded-risk-details} uses these saved full-precision values, including total type energies; its identity residual check is separately identified from the original spectral computation. Full-rank, symmetry, positivity, contraction, projector and least-squares consistency checks have fixed numerical tolerances. A failed cell remains explicitly unevaluable; rank reduction, jitter, clipping and favorable cell selection are not permitted repairs.
+ 
+ This analysis describes the retained bank and estimates no unseen-context coverage probability. The separate witness analysis below has its own fitting and evaluation contract. A small type correction is an informative limitation on the demonstrated contribution of type accounting, rather than a reason to search for another dimension. High total $\gamma_r$ must be read alongside the selected trivial contribution; an exact shared action and stable category coding remain compatible explanations.
+ 
+@@ -19,12 +19,24 @@
+ \subsection{Constructed exact-action witness and transfer}
+ The witness study constructs one $r$-dimensional orthogonal action from the invariant-subspace selection underlying \cref{sp:main}. The empirical training second moment, without additional centering, defines its whitening metric; type selection, invariant basis and alignment are fitted on training contexts only and frozen before test evaluation. The construction retains complete real-type blocks, using invariant rotation planes for C7 and reflection pairing for the D4 two-dimensional type, to obtain an equivariant basis, followed by orthogonal Procrustes alignment. It records the complete operators, their identity, orthogonality and multiplication residuals, and prediction losses for the construction bank and the held-out bank. The latter uses the same training metric and operators. Ordinary least squares and ridge with fixed coefficient $10^{-3}$ are fitted on the same training coordinates and scored on the same full state/action grid, including identity and fixed points. They are predictive controls, not assumed to satisfy the exact-action constraints. This is distinct from recomputing a descriptive spectral bound using the test bank's own second moment.
+ 
++\paragraph{Changing the whitening metric changes the orthogonal class.}
++\label{app:metric-conjugation}
++In the row-vector convention, a training-whitened witness $\rho_g$ represents the raw-coordinate function
++\[
++ R_g=\Sigma_{\rm tr}^{-1/2}\rho_g\Sigma_{\rm tr}^{1/2}.
++\]
++The same function in test-whitened coordinates has matrix
++\[
++ \rho_g^{(\rm te)}=\Sigma_{\rm te}^{1/2}R_g\Sigma_{\rm te}^{-1/2}.
++\]
++Conjugation preserves the group law but generally not Euclidean orthogonality. A frozen training-metric witness therefore need not belong to the test-metric exact-orthogonal class. Changing the scoring metric alone does not establish that the frozen predictor is admissible for the test-bank lower bound; even an admissible candidate need not satisfy the existence upper bound. No test-bank witness is fitted for this comparison.
++
+ A successfully constructed witness gives a feasible action and an attained risk, not a proof that its risk equals $L^\star$. The theorem's upper bound is checked on the same construction bank and metric; it does not guarantee that bound after context transfer. Numerical invariant-subspace or rank failures remain explicit failures. Neither raw-coordinate Euclidean orthogonality nor historical row-normalized $D$ is substituted for the declared metric.
+ 
+ \subsection{Exhaustive alternative permutation-image subgroups}
+ For these small state sets, the implementation enumerates the 120 distinct cyclic order-seven subgroups of $S_7$ and the three distinct dihedral order-eight subgroups of $S_4$. These are distinct permutation \emph{images}; they are not a count of all labeled homomorphisms or every possible semantic interpretation. Equivalent generator descriptions of one image are deduplicated. Each candidate is evaluated on the same complete coordinate bank, dimension and empirical metric, retaining the specified semantic action and every alternative. The source/state/action grid and weights are fixed, but each subgroup defines its own target correspondences; this is a comparison of registered tasks, not identical target labels.
+ 
+-For each image, frozen training-bank witnesses, OLS and ridge are also evaluated on the old test bank using training whitening. These transfer losses are distinct from the descriptive spectral bounds computed in the test bank's own metric. The comparison reports the spectral budget and class-risk bounds for each image, with the specified action's rank and ties stated under a fixed numerical tolerance. It uses a descriptive complete enumeration, not a permutation $p$-value or a test selected by observed scores. A competitive alternative shows compatibility within this finite comparator class. Even a uniquely favored image would not establish semantic uniqueness, since automorphisms, state coding and other generative explanations remain possible.
++For each image, frozen training-bank witnesses, OLS and ridge are also evaluated on the old test bank using training whitening. These transfer losses are distinct from the descriptive spectral bounds computed in the test bank's own metric. The comparison reports the spectral budget and class-risk bounds for each image, with the specified action's rank and ties stated under a fixed numerical tolerance. It uses a descriptive complete enumeration, not a permutation $p$-value or a test selected by observed scores. \Cref{app:bounded-margin-details} maps the saved canonical image identities to absolute margins without changing the enumeration or tie rule. A competitive alternative shows compatibility within this finite comparator class. Even a uniquely favored image would not establish semantic uniqueness, since automorphisms, state coding and other generative explanations remain possible.
+ 
+ \subsection{Controlled mechanism comparisons}
+ Three declared synthetic mechanisms examine interpretation of the spectral summaries and constructed witnesses. M1 uses one action shared across contexts. M2 changes the action's coordinate orientation by context-dependent conjugation; the sampled construction, rather than the label alone, determines whether a shared action remains feasible. M3 combines a stable state code with complementary context features. M3 admits a valid shared action that is trivial on the context coordinates: it is a coding control, \emph{not} a negative null for existence of a shared action.
+@@ -37,3 +49,62 @@
+ All 36 settings completed. In noiseless M1 and M3, test witness losses are at machine scale (below $3\times10^{-28}$); noisy M1/M3 remain distinct from the particular M2 draws. The archived numbers retain floating-point deviations, including gamma values infinitesimally above one, rather than clipping them into an apparent exact certificate. In the measured LLM panel all training witness risks satisfy the analytic interval within the frozen numerical tolerances; maximum multiplication and orthogonality residuals are $3.80\times10^{-15}$ and $7.20\times10^{-15}$. These checks concern numerical implementations, not rigorous interval-arithmetic certificates.
+ 
+ For the witness predictive control, the training second moment after whitening is the identity. With the frozen coefficient $10^{-3}$, ridge therefore shrinks OLS by $1/(1+10^{-3})$ up to floating-point error. The near-identical two test means are not evidence from a broad regularization search. All cell-level spectra, witness losses, image ranks, 36 simulation rows and authored-family transport effects are retained as compact public tables, with member hashes linking them to the immutable raw result archive. No resampling, model extraction or experimental refitting was repeated to generate the manuscript tables.
++
++
++\subsection{Same-bank derived references and complete cell accounting}
++\label{app:bounded-risk-details}
++The bounded offline revision reads the full-precision saved spectral and type rows, not rounded manuscript means. Each join binds the original Study~2 test partition, model and tokenizer revisions, readout, saved PCA, rank, row identities, semantic image, state/group/context weights and whitening metric. There are 64 families with two complete-state variants per family in every cell. The public input map and member hashes accompany the derivation code; the raw archive remains separately preserved.
++
++Total and selected type energies are already divided by $r$ in the source. We check $\sum_\tau e_\tau=1$, $\sum_\tau b_\tau=\gamma_r$ and $0\le b_\tau\le e_\tau$ under the original tolerances. All nontrivial energy is $1-e_{\rm triv}$, whereas selected nontrivial energy is $\gamma_r-b_{\rm triv}$; neither is $1-b_{\rm triv}$. Identity risk is derived from total energy using \cref{sp:identity-reference}, then independently checked by direct full-grid residuals after the same uncentered test-bank whitening. The maximum discrepancy is \BoundedIdentityMaxError. This is a new offline endpoint check on saved coordinates, not a rerun of spectral fitting, model extraction or the original experiments.
++
++Premium endpoints are computed cell-wise before equal-cell aggregation. Checks retain $\eta\le L(I)$, $2(1-\gamma_r)\le L(I)$ and $p^-\le p^+$; they do not impose $L(I)\le2(1-\gamma_r^2)$, which is not required by the theorem. No raw value is clipped, and no tolerance or dimension is changed. The code also retains full precision, signed nontrivial energies and explicit display rounding. The following tables give every declared cell; L and Q abbreviate the Llama and Qwen2.5 model identifiers, and $e_0,b_0$ denote total and selected trivial energy.
++
++\begin{table}[p]
++\centering\small\setlength{\tabcolsep}{3pt}
++\input{generated/bounded_cell_risk_C7.tex}
++\caption{C7 same-bank references and premium endpoints, all \BoundedCellsPerDomain{} fixed cells. $L(I)$ is the identity-action risk, not the loss for the identity group element alone.}
++\label{tab:bounded-cell-risk-c7}
++\end{table}
++\begin{table}[p]
++\centering\small\setlength{\tabcolsep}{3pt}
++\input{generated/bounded_cell_risk_D4.tex}
++\caption{D4 same-bank references and premium endpoints, all \BoundedCellsPerDomain{} fixed cells. No family or model resampling enters these quantities.}
++\label{tab:bounded-cell-risk-d4}
++\end{table}
++\begin{table}[p]
++\centering\small\setlength{\tabcolsep}{3pt}
++\input{generated/bounded_cell_type_energy_C7.tex}
++\caption{C7 total/selected type-energy pairs $e_\tau/b_\tau$. Complete real rotation planes are retained in the budget; total energy and selected energy are distinct.}
++\label{tab:bounded-cell-types-c7}
++\end{table}
++\begin{table}[p]
++\centering\small\setlength{\tabcolsep}{3pt}
++\input{generated/bounded_cell_type_energy_D4.tex}
++\caption{D4 total/selected type-energy pairs $e_\tau/b_\tau$. The corner action has only four states; absent types retain their recorded machine-scale values in the CSV, rounded here for display.}
++\label{tab:bounded-cell-types-d4}
++\end{table}
++
++\FloatBarrier
++\subsection{Registration margins and prepared family sensitivity}
++\label{app:bounded-margin-details}
++Margins use every saved image on each fixed bank: 120 for C7 and three for D4, including the semantic image. Canonical sorted permutation identities, rather than candidate ordinal numbers, define image equality. The semantic image is excluded from both the strongest-alternative maximum and the alternative median; the full-image spread still includes it. We retain the original dimensionless pairwise tolerance
++\[
++ \tau(a,b)=10^{-8}+10^{-7}\max(|a|,|b|).
++\]
++The rank interval is $[1+N_{\rm better},1+N_{\rm better}+N_{\rm tied}]$, where better alternatives exceed the semantic budget by more than their pairwise tolerance and tied alternatives differ by at most that tolerance. Unique/tied/behind counts and the original recorded ranks agree. No tolerance is chosen from the margins. Near numerical ties are distinct from finite-family sensitivity and statistical equivalence.
++
++The repository additionally prepares an optional leave-one-family-out analysis: each deletion keeps the two variants and all states together, retains the original PCA and rank, and recomputes the reduced bank's second moment, whitening and every image budget. Group-only structures and per-family state-pair moments reduce repeated computation. Synthetic engineering tests compare this implementation with direct coordinate calculation and retain rank failures. Metadata inspection establishes that the required saved inputs exist; no real family deletion or bootstrap was run. This optional sensitivity study is not a completed result or a prerequisite for the finite-bank conclusions here.
++
++\begin{table}[p]
++\centering\small
++\input{generated/bounded_cell_margins_C7.tex}
++\caption{C7 complete spectral margins, spread and original-tolerance rank intervals. U/T/B denotes unique leading/tied leading/behind. Full-precision CSV values and canonical image hashes are retained.}
++\label{tab:bounded-cell-margins-c7}
++\end{table}
++\begin{table}[p]
++\centering\small
++\input{generated/bounded_cell_margins_D4.tex}
++\caption{D4 complete spectral margins, spread and original-tolerance rank intervals. These registered tasks have different target correspondences and do not provide exact-action risk rankings.}
++\label{tab:bounded-cell-margins-d4}
++\end{table}
++\FloatBarrier

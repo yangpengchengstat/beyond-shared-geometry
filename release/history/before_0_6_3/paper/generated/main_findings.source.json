@@ -1,0 +1,341 @@
+{
+  "operation": "Select and format already recorded values; no new aggregation or statistical inference",
+  "source_run": "reviewed fixed-panel historical/replay evidence",
+  "inputs": {
+    "paper/generated/identification_summary.source.json": "fb34bb1e10911cd1d9db41aff21baf31596c5320ab187b8f47071f8d5328c581"
+  },
+  "renderer": "scripts/build_main_findings.py",
+  "renderer_sha256": "9ce7584e1c8c3e37fe8b457dacbb68442e312995978a7bd2c99453e86f806080",
+  "values": {
+    "C7.compact.decoded_centroid": {
+      "value": 0.012013175607929536,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/37/mean",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "decoded_centroid"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "D4.compact.decoded_centroid": {
+      "value": 0.0638211098864194,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/109/mean",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "decoded_centroid"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "C7.compact.ridge": {
+      "value": 0.01489666297644876,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/53/mean",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "ridge"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "D4.compact.ridge": {
+      "value": 0.041919489335583336,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/125/mean",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "ridge"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "C7.centroid_wins": {
+      "value": 9,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/paired_compact/1/cells_lower_than_ridge",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "track": "all_element",
+          "method": "decoded_centroid"
+        }
+      },
+      "operation": "read recorded paired count; independently checked against paired reviewed cell losses",
+      "cells": 24
+    },
+    "D4.centroid_wins": {
+      "value": 2,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/paired_compact/73/cells_lower_than_ridge",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "track": "all_element",
+          "method": "decoded_centroid"
+        }
+      },
+      "operation": "read recorded paired count; independently checked against paired reviewed cell losses",
+      "cells": 24
+    },
+    "C7.context.coordinate": {
+      "value": 0.04713707762636069,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/context/16/mean",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "method": "coordinate_fitted_operator_context",
+          "split": "test"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "D4.context.coordinate": {
+      "value": 0.13230432974229778,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/context/48/mean",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "method": "coordinate_fitted_operator_context",
+          "split": "test"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "C7.context.direct_context": {
+      "value": 0.03425993580081357,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/context/19/mean",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "method": "linear_transport_context",
+          "split": "test"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "D4.context.direct_context": {
+      "value": 0.11638618921310222,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/context/51/mean",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "method": "linear_transport_context",
+          "split": "test"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "C7.context.coherent": {
+      "value": 0.03446458727092743,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/context/3/mean",
+        "where": {
+          "domain": "C7",
+          "registration": "consistent_swap01",
+          "method": "linear_transport_context",
+          "split": "test"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "D4.context.coherent": {
+      "value": 0.11716502559429286,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/context/35/mean",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "consistent_swap01",
+          "method": "linear_transport_context",
+          "split": "test"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "C7.compact.nystrom.first_tested_crossover": {
+      "value": 2,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "array": "compact",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test"
+        },
+        "candidate_methods": [
+          "nystrom_budget_0p5",
+          "nystrom_budget_1",
+          "nystrom_budget_2",
+          "nystrom_budget_4",
+          "nystrom_budget_8"
+        ],
+        "reference_method": "ridge",
+        "field": "mean"
+      },
+      "operation": "first declared nominal budget whose recorded mean is below the recorded ridge mean",
+      "nominal_budget_grid": [
+        0.5,
+        1,
+        2,
+        4,
+        8
+      ],
+      "interpretation": "descriptive; not a selected deployment policy"
+    },
+    "C7.compact.rff.first_tested_crossover": {
+      "value": 4,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "array": "compact",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test"
+        },
+        "candidate_methods": [
+          "rff_budget_0p5",
+          "rff_budget_1",
+          "rff_budget_2",
+          "rff_budget_4",
+          "rff_budget_8"
+        ],
+        "reference_method": "ridge",
+        "field": "mean"
+      },
+      "operation": "first declared nominal budget whose recorded mean is below the recorded ridge mean",
+      "nominal_budget_grid": [
+        0.5,
+        1,
+        2,
+        4,
+        8
+      ],
+      "interpretation": "descriptive; not a selected deployment policy"
+    },
+    "D4.compact.nystrom.first_tested_crossover": {
+      "value": 2,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "array": "compact",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test"
+        },
+        "candidate_methods": [
+          "nystrom_budget_0p5",
+          "nystrom_budget_1",
+          "nystrom_budget_2",
+          "nystrom_budget_4",
+          "nystrom_budget_8"
+        ],
+        "reference_method": "ridge",
+        "field": "mean"
+      },
+      "operation": "first declared nominal budget whose recorded mean is below the recorded ridge mean",
+      "nominal_budget_grid": [
+        0.5,
+        1,
+        2,
+        4,
+        8
+      ],
+      "interpretation": "descriptive; not a selected deployment policy"
+    },
+    "D4.compact.rff.first_tested_crossover": {
+      "value": 4,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "array": "compact",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test"
+        },
+        "candidate_methods": [
+          "rff_budget_0p5",
+          "rff_budget_1",
+          "rff_budget_2",
+          "rff_budget_4",
+          "rff_budget_8"
+        ],
+        "reference_method": "ridge",
+        "field": "mean"
+      },
+      "operation": "first declared nominal budget whose recorded mean is below the recorded ridge mean",
+      "nominal_budget_grid": [
+        0.5,
+        1,
+        2,
+        4,
+        8
+      ],
+      "interpretation": "descriptive; not a selected deployment policy"
+    }
+  },
+  "output_sha256": "c5da2a732df0fae8c8fc7ea809dc2914502854f08c26de637128091978515341",
+  "model_execution": false,
+  "fitting": false,
+  "resampling": false,
+  "new_statistics": false,
+  "independent_confirmation": false
+}

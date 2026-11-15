@@ -1,0 +1,119 @@
+Gamma implementation and proposal review - revision 0.4.9
+Date: 29 October 2026
+Scope: implementation preparation and targeted manuscript clarification
+No real-coordinate spectral analysis or new empirical experiment in this revision
+
+REVIEWED MATERIAL
+The supplied gamma_r.py prototype and two Chinese proposal/audit PDFs were read
+against the 0.4.8 observation contract and finite-bank protocol. The prototype's
+SHA-256 is 12fff1cd64e801c5261a791c1700baf485512a6cbeac5704a845d636604057cb,
+matching the audit PDF's recorded source identity. This proves file identity,
+not the correctness of all reported numerical checks. The report's separate
+claims of 12 cross-implementation cases and 100 exhaustive budget checks are
+not adopted as independently verified project evidence: the associated audit
+check package was not supplied with these materials.
+
+The new study lives in studies/spectral_finite_bank_v1/. It is a separate,
+opt-in implementation, not a replacement for frozen historical experiments.
+The retained source prototype is reference material. New validation outcomes
+are recorded separately by the release validation, not inferred from a report.
+
+ADOPTED CORE
+- Use the fixed saved coordinates and their uncentered empirical second moment.
+- Average the complete uniformly weighted state/action grid, including identity
+  and fixed points. Do not import historical changed-state masks.
+- Build the orbit Gram matrix and known real isotypic projectors.
+- Use whole real irreducible dimensions in the integer budget. C7's real
+  two-dimensional rotation character has the appropriate coefficient already;
+  no extra factor of two is introduced. The D4 corner action has four states
+  and eight group elements, with two analytically absent one-dimensional types.
+- Report gamma, independent least-squares risk, ordinary spectral budget, type
+  correction, total type energy and budget-selected contributions separately.
+- Preserve every planned cell, including explicit not_evaluable outcomes.
+
+REQUIRED ENGINEERING CHANGES
+The prototype calculated several diagnostics without enforcing them. Its type
+pairing spread could be large while eigenvalues were still averaged and clipped;
+its type list could be incomplete without stopping the computation. Its array
+shape did not establish state, context or PCA identity. The new implementation
+must enforce the fixed numerical checks and separate them from metadata checks.
+
+Explicit validity decisions replace assertions as input acceptance rules. Check
+finite real input, second-moment rank and conditioning, whitened identity,
+Gram symmetry/PSD/contraction/trace, commutation with every group element,
+projector completeness/orthogonality/idempotence, repeated type eigenvalues,
+absent D4 energies and direct-LS/spectral agreement. Retain raw diagnostic values
+and full spectra. Do not repair failures by jitter, rank reduction, clipping,
+removing weak directions or selecting a different cell. Floating-point checks
+are engineering acceptance rules, not rigorous interval arithmetic.
+
+Input adaptation must verify the archive/member identities, row and PCA schema,
+complete original test blocks and source contract before computing the metric.
+A zero vector is not automatically invalid, but a missing row filled with zero
+cannot be authenticated by a commutation check. Provenance is indispensable.
+The public core is scoped to the declared C7/D4 actions; it must not be presented
+as a universal arbitrary-group or nonfaithful-action interface.
+
+SCIENTIFIC EXPLANATIONS CORRECTED OR RETAINED
+1. High gamma has a positive geometric implication: some exact orthogonal action
+   has low risk under Theorem 7's fixed-bank, whitened loss. It does not identify
+   a unique semantic interpretation, generating mechanism or native computation.
+   State coding and an exact shared action can coexist, so all M3 samples cannot
+   be labeled false positives for shared-action existence.
+2. The original proposal's T1 necessary condition was incorrect. A context offset
+   can have a nonzero projection on state directions while the combined linear
+   constraints remain compatible. Orthogonal separation is a sufficient example,
+   not a necessary condition. The existing manuscript already permits a global
+   invertible change of coordinates to its direct-sum construction.
+3. T6 omitted the centering/full-rank condition. Dimension r >= p-1 alone does
+   not imply linear realizability for arbitrary uncentered generic states. For
+   scalar states {1,2}, a swap would require a multiplier equal to both 2 and 1/2.
+   The existing centered rank-(p-1) proposition and proof remain unchanged.
+4. Theorem 7's upper bound is an existence statement, not a guarantee for every
+   matrix family satisfying group laws. A correct proof-based witness can be
+   checked on the same bank and metric. Historical row-normalized error on a
+   different test bank is not covered by that interval. Predictor differences
+   also contain estimation, regularization and optimization effects.
+5. At repeated eigenvalues, arbitrary eigenvector selection need not yield an
+   invariant subrepresentation. A witness implementation must construct and
+   validate the invariant projector and the equivariant correspondence from
+   orbit coefficients to the observation-function space. This is not provided
+   by reporting the scalar budget or multiplicity counts alone.
+6. C7 has 720 directed seven-cycle permutations and 120 distinct cyclic image
+   subgroups. Reindexing all actions by a group automorphism leaves gamma
+   unchanged; changing the image subgroup can, but need not, change it.
+   Ranking alternative registrations is descriptive without a justified
+   randomization null and its invariance conditions.
+7. Shared-action versus locally fitted training error mixes information levels.
+   A local interpolation oracle is not an equal-information generalization
+   baseline. Rotation distance from identity also need not measure incompatible
+   contextual orientation: rotations in the commutant leave the action unchanged.
+
+ACTIVE INPUT CONTRACT
+Keep the 0.4.8 primary panel: six pinned models x four saved readouts x C7/D4 =
+48 cells, each using its original test partition, fixed r=16 and the original
+semantic registration. Each declared bank has 128 complete state blocks, not
+128 independent natural-language samples. Preserve family/paraphrase identities.
+The proposal's 28 training templates and historical five-split extension are not
+this analysis. Pooling or replacing them would require a different protocol.
+No outcome-based layer, rank, registration or family selection is permitted.
+
+DEFERRED IDEAS
+- No four-mechanism power/FPR grid or three-state shared/not-shared classifier.
+  The proposed mechanism families overlap and lack a calibrated decision null.
+- No bootstrap intervals, p-values or Theorem 8 population certification.
+- No exact-action witness, alternative-subgroup enumeration or held-out witness
+  comparison is claimed as implemented empirical evidence.
+- No additional model extraction, GPU rental, historical FULL/AFS replay,
+  calibration rerun or restart of failed native interventions.
+- No empirical gamma result is inserted into the manuscript before the new
+  calculation is separately authorized, executed and reviewed.
+
+MANUSCRIPT DISPOSITION
+The main text now states the positive geometric meaning of a large gamma and
+identifies the accompanying opt-in implementation without claiming LLM output.
+The spectral appendix distinguishes image-subgroup changes from action relabeling
+and explicitly separates the same-bank witness bound from later prediction.
+Existing theorem/proof blocks, numerical measurements and scientific stops are
+retained. The original proposal's acceptance probabilities are not adopted;
+there is no empirical basis here for a quantitative publication probability.

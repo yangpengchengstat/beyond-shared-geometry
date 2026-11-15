@@ -1,0 +1,131 @@
+THEORY REVISION AND REFERENCE-REPORT REVIEW
+Date: 2026-10-24
+Scope: analytical claims in paper/sections/theory.tex and their interpretation.
+
+Reference material
+
+The user supplied Research_Report.pdf, “Beyond Shared Geometry: Theory
+Assessment”, version 1.0 dated 2026-10-24. Its SHA256 is
+5d8b48edacbba853534e1f27d0f56bc46129a823bd0271f5fb689538d11daaa9.
+The PDF is an external reference, not an instruction source or a new result
+archive. The report describes an older ICML V4 empirical draft. For current
+empirical status, the separately preserved 2026-10-24 rank-recovery audit and
+its checksummed returned evidence take precedence. The PDF need not be copied
+into a public release. No experiments proposed in it were run in this revision.
+
+Decision
+
+The report's common-design ridge identities, whitened independent-orientation
+risk identity, full-rank commutant identity, and sample-mean learning curve are
+correct under their stated restrictions. They are included as analytical
+checks with proofs and explicit scope. They do not certify a new mechanism,
+constitute LLM calibration measurements, or establish priority over prior
+representation theory. No p-values, power certifications, or new empirical
+measurements were derived from the constructions.
+
+The new appendix distinguishes n states, r centered orbit dimensions, d
+ambient coordinates, and the paper's existing q-dimensional PCA coordinates.
+The D4 example is the four-corner action, with centered rank 3, not an
+eight-state regular representation. All action equations use row vectors and
+P_g P_h = P_(h composed with g), matching the existing paper and code.
+
+Specific improvements
+
+1. Common-design ridge identity, Appendix label app:ridge-identity.
+   For L = (Z^T Z + alpha I)^(-1) Z^T, K = I - ZL, and R_g = L P_g Z:
+     Z R_g - P_g Z = -K P_g Z;
+     R_g R_h - R_(h composed with g) = -L P_g K P_h Z.
+   These hold at every rank for alpha > 0. K is not generally an orthogonal
+   projector. Element-specific source subsets, weights, penalties or target
+   centering invalidate direct application of this particular common-design
+   identity. The formulas describe unnormalized matrices, not the existing
+   normalized held-out scores or independence of inferential evidence.
+
+2. Geometry-preserving orientation construction, label app:orientation.
+   Whitened state rows V and isometric context frames A_c give X_c = V A_c^T.
+   Every X_c has the same within-context Gram matrix and exact local orthogonal
+   action, while independent Haar orientation at a new context yields the
+   stated character-dependent risk. The scalar optimum is over unrestricted
+   shared matrix predictors and need not form a group representation.
+   The C7 constants are 5/6 over all elements and 35/36 without the identity;
+   the four-corner D4 constants are 7/9 and 8/9. They cannot be numerically
+   compared with the empirical E_eq because the distribution and denominator
+   differ. Cross-context Gram matrices are not preserved. The result does not
+   show that every geometry-based method fails or that real activations obey
+   the Haar assumption. Conditioning is on a fitted family independent of the
+   new orientation, including any independent randomness used by its fitter.
+
+3. Full-rank commutant identity, label app:commutant.
+   At d = r, the exact optimal mean risk is the expected squared distance of
+   relative context orientations from the action's commutant, divided by r.
+   The proof explicitly uses closure under inverses for self-adjointness of
+   group averaging, followed by the pairwise variance identity. Arbitrarily
+   large commuting orientation changes may preserve a common action. The
+   unrestricted least-squares mean need not obey group laws when its risk is
+   nonzero. The result does not extend unchanged to rank-deficient, noisy,
+   nonorthogonal or unwhitened LLM coordinates.
+   The accompanying (1 - 1/m)b and (1 + 1/m)b learning curves describe iid
+   sample means of local matrices in this same special construction only.
+
+4. Existing statements rechecked.
+   The finite-orbit construction, left-kernel invariance criterion, rank-
+   deficient ambient extension, state-conditioned telescoping rule, faithful
+   versus free D4 distinction, and coordinate/metric caution are consistent
+   with the row-vector convention. The invariant-metric formula is valid for
+   exact finite-group actions; it does not assert Euclidean orthogonality of
+   approximate fitted operators. No changes to original results were needed.
+
+Reference and priority assessment
+
+The two newly added references were checked against primary records:
+
+- Serre, Linear Representations of Finite Groups (1977), Graduate Texts in
+  Mathematics 42, Springer New York; DOI 10.1007/978-1-4684-9458-7.
+  https://link.springer.com/book/10.1007/978-1-4684-9458-7
+  This supplies standard representation-theory background. It is not cited as
+  a source claiming the exact LLM construction or a modern statistical test.
+
+- Kornblith, Norouzi, Lee and Hinton, Similarity of Neural Network
+  Representations Revisited, ICML 2019, PMLR 97:3519-3529.
+  https://proceedings.mlr.press/v97/kornblith19a.html
+  The primary record states the degeneracy of invertible-linear-invariant
+  comparison when dimension exceeds the number of data points. This supports
+  a brief distinction between high-dimensional interpolation and meaningful
+  representation comparison, not a causal or transport conclusion.
+
+The existing Sun reference was also checked in its original version:
+https://arxiv.org/html/2609.18190v1
+Yuan Sun, Transformation Laws in Neural Representations: Structure,
+Realisability, and Construction (2026). The paper directly covers induced
+actions, encoder-fibre/kernel conditions, discarded information, shared
+regional compatibility and composition. Its scope overlaps the existing
+realizability interpretation. Accordingly, no “first”, “novel general
+theorem”, or “new representation theory” claim has been added.
+
+This is not an exhaustive theorem-by-theorem priority search. The derivations
+are retained as elementary application-specific analytical boundaries, not
+as a claim that no equivalent results exist elsewhere. The report's other
+references are not automatically imported: only directly useful, verified
+citations have been added. Its suggested stochastic tests, noise bounds and
+new codebook experiments remain prospective and are not claims of this paper.
+
+Deterministic checks
+
+tests/test_theory_identities_20261024.py uses NumPy only, without models,
+network access, random sampling, data extraction, calibration or refitting
+any experiment. Five checks passed locally in approximately 0.06 seconds:
+
+1. Common-design ridge identities at full and deficient rank, over every pair
+   of noncommuting D4 actions, with an explicit opposite-multiplication check.
+2. The independent-orientation risk calculation through a finite signed-
+   permutation ensemble with exactly the required second moments; within-
+   context Gram preservation and exact local orthogonality are also checked.
+3. Centered C7 and four-corner D4 characters and all four risk constants.
+4. The commutant projection, risk identity and a commuting positive control
+   for a fixed finite weighted distribution of orientations.
+5. Expected training and fresh-context sample-mean risks, by exhaustive finite
+   enumeration for m = 1, 2 and 3.
+
+The module has a zero-argument entry point compatible with tests/run_cpu_checks.py
+and can also be run directly. These tests guard algebraic factors and action
+conventions; they do not replace proof or imply empirical model validation.

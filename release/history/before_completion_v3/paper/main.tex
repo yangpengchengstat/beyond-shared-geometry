@@ -1,0 +1,86 @@
+\documentclass[10pt]{article}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{xurl}
+\usepackage{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage{tmlr}
+\usepackage{amsmath,amssymb,amsfonts,mathtools}
+\usepackage{amsthm}
+\usepackage{placeins}
+\usepackage{float}
+\usepackage{needspace}
+\usepackage[nameinlink,capitalize,noabbrev]{cleveref}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Id}{\mathbf{I}}
+\newcommand{\norm}[1]{\left\lVert #1\right\rVert}
+\newcommand{\Eeq}{E_{\mathrm{eq}}}
+\newcommand{\Ehom}{E_{\mathrm{hom,data}}}
+\newcommand{\Ehomop}{E_{\mathrm{hom,op}}}
+\newcommand{\Erel}{E_{\mathrm{rel,data}}}
+\newcommand{\Erelop}{E_{\mathrm{rel,op}}}
+\newcommand{\Ecomp}{E_{\mathrm{comp,data}}}
+\newcommand{\Ecompop}{E_{\mathrm{comp,op}}}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}[proposition]{Corollary}
+\newtheorem{spectraltheorem}[proposition]{Theorem}
+\newtheorem{spectrallemma}[proposition]{Lemma}
+\crefname{spectraltheorem}{Theorem}{Theorems}
+\crefname{spectrallemma}{Lemma}{Lemmas}
+\title{Beyond Shared Geometry: Predictive Recovery, Exact Actions, and Semantic Specificity in Language-Model Representations}
+\author{Anonymous authors}
+\input{generated/bounded_macros.tex}
+\begin{document}
+\maketitle
+% Keep natural vertical spacing on pages with displays and floats.
+\raggedbottom
+
+\begin{abstract}
+A map that predicts changes in a language model's representations need not explain which transformation structure the model supports. We study this distinction for prescribed finite-group actions on visible input states, using one operator family across contexts in fixed pretrained coordinates. Our theory connects a real-type-constrained spectral budget to the minimum prediction risk over fixed-dimensional exact orthogonal actions. Under a common second-moment-whitened loss, it bounds that class optimum within a factor of two; an analytical example shows that unconstrained regression risk and orbit-Gram eigenvalues do not determine exact-action risk. In six frozen Llama and Qwen models, weekday and square-corner transformations are predictively recoverable, while finite-bank bounds quantify the additional cost of requiring an exact orthogonal action. An independent orthogonal comparison separates orthogonality cost from bounds on the further cost of common group laws. The latter lower bounds are highly heterogeneous, with the primary weekday lower-bound sum dominated by one condition. Constructed exact actions predict held-out representations less accurately than independent least squares. Exhaustive small-group registration comparisons show that the prescribed semantic image is not uniformly favored, and its spectral ranking changes with retained dimension. A separate authored-context study finds opposite transport effects across the two domains. These results quantify exact-action compatibility while distinguishing it from predictive performance, semantic preference and native computation.
+\end{abstract}
+
+\input{sections/introduction_main.tex}
+\input{sections/related_work_main.tex}
+\input{sections/setup_main.tex}
+\input{sections/risk_main.tex}
+\input{sections/experiments_restructured.tex}
+\input{sections/discussion_main.tex}
+
+\FloatBarrier
+\label{sec:main-end}
+
+\section*{Impact Statement}
+This work develops diagnostics for interpreting language-model representations. Overinterpreting probes can mislead users about model capabilities or mechanisms. These controlled tasks do not assess demographic fairness or establish safety guarantees. We identify no other specific societal consequences requiring discussion.
+
+\bibliography{references}
+\bibliographystyle{tmlr}
+% Keep the complete reference list separate from the appendices.
+\clearpage
+\appendix
+% Explicit aliases keep appendix references portable across TeX distributions.
+\crefalias{section}{appendix}
+\crefalias{subsection}{appendix}
+\crefalias{subsubsection}{appendix}
+\crefname{appendix}{Appendix}{Appendices}
+\Crefname{appendix}{Appendix}{Appendices}
+\input{sections/theory.tex}
+\input{sections/spectral_risk.tex}
+\input{sections/methods.tex}
+\input{sections/results.tex}
+\input{sections/characterization.tex}
+\input{sections/reproduction.tex}
+\input{sections/prospective.tex}
+\input{sections/related_work.tex}
+\input{sections/planned_protocols.tex}
+\input{sections/dimension_rank_audit.tex}
+\FloatBarrier
+\input{sections/spectral_dimension_sensitivity.tex}
+\FloatBarrier
+\input{sections/predictive_controls_full.tex}
+\FloatBarrier
+\input{sections/orthogonal_comparator.tex}
+\FloatBarrier
+\input{sections/retained_summaries.tex}
+\end{document}

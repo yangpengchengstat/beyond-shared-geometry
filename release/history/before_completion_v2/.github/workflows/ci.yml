@@ -1,0 +1,36 @@
+name: TMLR CPU and publication checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  portable-release:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.11', '3.12']
+    env:
+      HF_HUB_OFFLINE: '1'
+      TRANSFORMERS_OFFLINE: '1'
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: python -m pip install -e '.[test,analysis,prospective]'
+      - name: CPU software and preserved-evidence checks
+        run: make check PYTHON=python
+      - name: Build preparation source and Overleaf archives
+        run: python scripts/package_release.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tmlr-preparation-python-${{ matrix.python-version }}
+          path: dist/

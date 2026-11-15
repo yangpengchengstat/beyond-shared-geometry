@@ -1,0 +1,71 @@
+# Scientific content lock — v0.5.9 limited wording revision
+
+Baseline: the actual v0.5.8 manuscript and complete publication project, snapshotted before edits. Baseline PDF SHA256: `a89e64ec995ea64b92a17a8ba63fcaabccaf300e99d0285092766c449922889d` (71 pages; main text through page 13).
+
+This revision changes wording in five main-text source files and creates a caption-only derivative of the existing core-risk table. It does not change theory, numerical results, matrices, study code, configurations, thresholds, dimensions, weights, splits or candidate images. No experiment, numerical fixture, matrix diagnostic, fit, resampling or model execution was run. All formulas and numerical anchors below are inherited evidence, not newly computed values.
+
+The previous full content lock remains in `release/history/before_0_5_9/`. The new wording explicitly separates registration/dimension sensitivity from the authored-context transport comparison. Neither one is presented as an independent contextual replication of the other.
+
+## Objects, assumptions and interpretation
+
+| Locked item | Existing authority / label | Contract that must survive | Revised home |
+|---|---|---|---|
+| Observation and sharing | `paper/main.tex`, `eq:projection`, `eq:convention`; `paper/sections/methods.tex` | Frozen pretrained model; unique state-token span at a fixed block readout; training-only mean/PCA; one operator family shared across contexts within a fixed domain/model/layer/split coordinate space. No shared matrices across models or layers. Row-action multiplication order is unchanged. | Section 3.1, `sec:setup`, `eq:projection`; Section 3.2, `eq:convention` |
+| Input actions | `paper/sections/theory.tex`, `app:faithful-not-free` | Prescribed C7 weekday shift and D4 square-corner rotations/reflections. D4 corner action is faithful, not free. The state is observed in the input; the action is supplied, not discovered. | Section 3.1, `sec:setup` |
+| Retained dimension and rank | `paper/sections/methods.tex`, `app:lexical-rank`; `app:dimension-rank-audit` | q=16 is a fixed retained dimension, not intrinsic dimension, a recovered optimum or a variance-retention criterion. Training projected ranks are matched at 6/3 using input-spectrum and PCA-construction evidence; missing historical projected arrays limit direct output remeasurement. q, training-data rank, bank rank, operator rank and theoretical r are distinct. | Section 3.1, `sec:setup`; Appendix J, `app:dimension-rank-audit` |
+| Study 1 prediction/consistency | `eq:D`; `paper/sections/methods.tex`, `app:metrics`; original generated tables | Mean rowwise squared error divided by target-row squared norm. Prediction and consistency have endpoint-specific targets. Operator diagnostics use their recorded unsquared Frobenius norms. No silent metric exchange. | Section 3.2, `eq:D`; Section 5.2, `sec:characterization` |
+| Study 2 coordinate/transport scores | `paper/sections/reproduction.tex`, `app:aggregation-contract`; `paper/generated/reproduction_context.tex` | Training-coordinate energy and training-difference energy are different denominators. Equal-action and pooled-changed-pair aggregates are not interchangeable, particularly for D4 fixed points. | Section 3, `tab:metric-contract`; Sections 5.2 and 5.6, `sec:characterization`, `sec:new-context` |
+| Theoretical class | `paper/sections/spectral_risk.tex`, `sp:setup`, `sp:risks` | Complete state blocks, uniform states and full uniform group average including identity/fixed points; fixed coordinates; positive-definite uncentered second moment. Exact row actions lie in O(r) and obey rho_g rho_h = rho_hg. This is not all GL(r) or nonlinear maps. | Section 3.3, `eq:class-loss-main`; Section 4.3, `eq:main-risk-bound`; Appendix B proof |
+| Spectral budget and bound | `sp:budget`, `sp:integer`, `sp:observable`, `sp:main` | Budget is the maximal captured energy in an invariant subspace of real dimension at most r, respecting whole real irreducible components. 2(1-gamma_r) <= L* <= 2(1-gamma_r^2). This bounds a class optimum, not one fitted map. Standard representation-theoretic tools retain attribution. | Section 4.2, `eq:orbit-gram-main`, `eq:budget-main`; Section 4.3, `eq:main-risk-bound` |
+| Analytical separation | `sp:counterexample` | Same eta=1/2 and untyped nonzero orbit spectrum {1/2,1/2}, different one-dimensional exact-action risks 1 and 2. Full labeled observations are not identical. The example separates summaries, not the full observation distribution. | Section 4.1, `sec:boundaries`; Appendix B, `sp:counterexample` |
+| Positive joint premium | `eq:positivity-main`, `sp:premium-positivity` | eta>0 implies a strictly positive mathematical joint-premium lower endpoint through gamma_r <= sqrt(1-eta). This is a corollary, not independent empirical novelty. Numerical tolerance, rigorous roundoff certification, statistical significance and practical magnitude are different. | Section 4.3, `eq:positivity-main`; Section 5.3, `sec:observed-risk` |
+| Independent orthogonality | `sp:orthogonal-comparator`; `results/orthogonal_comparator_v1/coverage.json` | eta <= L_orth <= L*. Independent O(r) optimization includes reflections and need not obey group laws. beta=L_orth-eta is measured on the same bank; L*-L_orth remains bounded, not exactly measured. True costs add, clipped lower bounds need not. | Section 4.3, `sec:boundaries`; Section 5.3, `par:orthogonal-results`, `tab:core-risk-summary`; Appendix M, `app:orthogonal-results` |
+| Constructed action | `results/tmlr_followup_v2/spectral/witness_units.csv`, `witness_domain_summary.csv`; `app:metric-conjugation` | Training construction and same-training-bank bound check are distinct from frozen-predictor test loss. Training whitening stays fixed in transfer. Test-bank self-whitening changes the metric and generally the admissible raw-coordinate orthogonal class. A feasible witness is not asserted optimal; its test ordering is empirical. | Section 5.4, `sec:witness-transfer`, `tab:followup-witness` |
+| Registered alternatives | `results/main30_bounded_v1/registration_margin_summary.csv`; `app:bounded-margin-details` | 120 C7 and three four-corner D4 distinct permutation-image subgroups, including the specified image. Candidates change targets while keeping the source bank and metric fixed. Gamma ranks/margins are not p-values, exact-L* rankings or semantic probabilities. | Section 5.5, `sec:registration-sensitivity`, `tab:bounded-margins` |
+| Dimensional sensitivity | `results/spectral_dimension_sensitivity_v1/`; `tab:spectral-dimension-sensitivity` | r=8 uses the first eight original PCA coordinates; each dimension has its own uncentered second-moment whitening and 1/r normalization. r=16 remains primary. No wider-cache reconstruction, dimension selection or cross-dimension common-loss superiority. Historical q=8/32/64 predictive endpoints do not certify spectral stability. | Sections 5.3 and 5.5, `par:orthogonal-results`, `tab:sensitivity-main`; Appendix K, `app:spectral-dimension-sensitivity` |
+| Statistical units | `app:inference`; `results/tmlr_followup_v2/context_metrics.json` | Six selected models/four readouts are a fixed panel. Five template splits overlap. Counts are not independent Bernoulli trials. Existing percentile ranges describe the specified resampling sensitivity, not calibrated population inference. No new significance or equivalence decisions. | Section 5.1, `sec:design`; `tab:core-risk-summary`, `tab:sensitivity-main`, `tab:followup-context` captions |
+| New-context transport | `results/tmlr_followup_v2/context_metrics.json`, `context_evidence.json` | New authored paired frames, same seen state vocabulary; methods fitted on old training data and primary selection matched on old-validation difference loss. Language construction and the comparison with the earlier selection rule are not a pure language-only intervention. Post-target text cannot affect a causal state-token readout. | Section 5.6, `sec:new-context`, `tab:followup-context`, `fig:context-followup` |
+| Mechanism controls | `results/tmlr_followup_v2/spectral/simulation_summary.csv`; `tab:followup-simulations` | M3 stable state coding can support a shared action and is not a no-action null. The existing 36 mechanism settings illustrate constructions; no calibrated semantic detector/power claim or expanded grid. | Section 5.5, `sec:registration-sensitivity`; retained `tab:followup-simulations` |
+| Stopped/pending branches | `paper/sections/reproduction.tex`, `tab:reproduction-status`; `paper/sections/prospective.tex`; `results/final_edit_v1/premium_lower_summary.json` | Historical lexical q=16 failure stays infeasible; native/pilot competence stops and blocked confirmation stay stopped/blocked. LOFO stays prepared and unexecuted. Completed 8/16 spectral and orthogonal analyses stay completed. Historical preparation snapshots are not current execution status. | Section 5.2, `sec:characterization`; Section 6, `sec:reading-protocol`; `tab:reproduction-status` and pending-protocol appendix |
+
+## Saved numerical anchors (not recomputed)
+
+All means retain the existing equal-cell weights, with 24 conditions per domain and dimension: all 48 primary r=16 conditions and all 48 r=8 sensitivity conditions remain represented. Bounds are per-cell endpoints averaged after the specified clipping, not confidence intervals. Full precision remains in the cited files; these entries do not replace them.
+
+| Endpoint | C7 | D4 | Existing record |
+|---|---:|---:|---|
+| Primary mean eta | 0.025631850779367624 | 0.10320627367664041 | `results/main30_bounded_v1/domain_risk_reference.csv` |
+| Primary mean L* bounds | [0.02979627746026327, 0.058633073953772485] | [0.12944321597922318, 0.248945749051769] | Same |
+| Primary mean joint-premium bounds | [0.004164426680895648, 0.03300122317440486] | [0.026236942302582777, 0.1457394753751286] | Same |
+| Mean identity-action risk | 0.7601247570330282 | 0.5293214369253398 | Same |
+| Joint lower-endpoint median | 0.00038929152944697925 | 0.0187559524517441415 | `results/final_edit_v1/premium_lower_summary.json` |
+| Frozen witness / OLS old-test mean | 0.02805853636113307 / 0.021407731153662048 | 0.11117161935740612 / 0.0887786707411905 | `results/tmlr_followup_v2/spectral/witness_domain_summary.csv` |
+| r=16 unique-leading semantic image | 7/24 | 16/24 | `results/main30_bounded_v1/registration_margin_summary.csv` |
+| r=8 unique-leading semantic image | 4/24 | 19/24 | `paper/generated/spectral_dimension_summary.tex` and saved dimension results |
+| r=16 / r=8 material real-type correction counts | 1 / 8 | 0 / 0 | `results/spectral_dimension_sensitivity_v1/interpretation_summary.json` |
+| New-context difference minus coordinate mean | -0.005832763794770089 | +0.006189720362704189 | `results/tmlr_followup_v2/context_metrics.json` |
+
+The new-context equal-domain mean is +0.0001784782839670499, with recorded paired-family percentiles [-0.0010346030861582845, +0.0013618319635874702]. Neither this near cancellation nor an interval containing zero establishes equivalence. Identity has the lowest mean C7 loss; both fitted methods improve over identity in D4.
+
+### Completed orthogonal comparison
+
+Source: `results/orthogonal_comparator_v1/coverage.json`. The original 96 units and previously passed eight numerical fixtures are evidence from the completed run, not executions of this editorial revision.
+
+| r/domain | Mean L_orth | Mean beta | Mean further-law lower/upper endpoints | Lower endpoint above original tolerance |
+|---|---:|---:|---:|---:|
+| 16/C7 | 0.028706138539504867 | 0.0030742877601372524 | [0.0010972473075670668, 0.029926935414265932] | 23/24 |
+| 16/D4 | 0.12773711539307211 | 0.02453084171643166 | [0.0018417862444482702, 0.12120863365869687] | 23/24 |
+| 8/C7 | 0.09671736976195285 | 0.029571351169869475 | [0.03539741217900925, 0.15184218588614895] | 22/24 |
+| 8/D4 | 0.08081945437417146 | 0.010216729667878904 | [0.000052338847710833684, 0.07693009390044526] | 19/24 |
+
+The primary C7 **joint** lower endpoints have two cells contributing 90.68064875787752% of their sum. The **further-law** lower endpoints instead have one cell, Llama-3.1-8B/layer 13, contributing 99.44454448767871%, with median 5.345539812429481e-6 and range [0, 0.026187662085921326]. These are concentrations of computed lower bounds, not fractions of the unknown true costs. The two facts must never be merged. Source: `results/orthogonal_comparator_v1/review/domain_diagnostics.json` and the older joint-premium summary.
+
+All nine zero further-law lower endpoints remain, as does the smallest positive r=8 C7 endpoint, 1.5462046788761175e-8 (Qwen2.5-3B/layer 7), about 1.55 times its fixed software tolerance. Zero does not establish zero cost; a small lower bound does not establish a small optimum. Source: `review/nonpositive_lower_cases.json` and `review/domain_diagnostics.json` within the comparator result subtree.
+
+## Verification of this bounded revision
+
+Hash comparison confirmed 645 inherited scientific/evidence/presentation files unchanged, including original result trees, source-locked scientific code, configurations, tests, prior analysis code, all inherited generated tables/figures/supplementary inputs and all unchanged appendix sources. Numeric literals in each of the five edited main-text files are unchanged. The new caption derivative changes exactly two prose strings, with its input/output hashes and unchanged-numeric check in `paper/generated/core_risk_decomposition_v059.provenance.json`; the original table is retained.
+
+The inherited 8/16 spectral and orthogonal results remain completed. LOFO and C7 family-influence analysis remain unexecuted. The old plan's prepared-only orthogonality language is historical and does not supersede the completed evidence. No new empirical claim, population guarantee or optimal-dimension claim was introduced.
+
+Checks here concern file identity and source semantics, not a new numerical replication or floating-point certificate. The private delivery audit contains the exact source diff, source-reference check, nine-question main-text reading check, build logs and source-preservation inventory.

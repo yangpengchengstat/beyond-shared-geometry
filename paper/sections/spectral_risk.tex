@@ -1,0 +1,751 @@
+\section{Fixed-Dimensional Risk Bounds for Exact Orthogonal Actions}
+\label{app:spectral-risk}
+
+This appendix proves bounds on the minimum prediction risk over exact orthogonal actions in a fixed real dimension. The observations, target correspondences and loss are held fixed within each class comparison. Orthogonality is defined after whitening by the observation distribution's own second moment. The same analysis applies to a fixed complete bank through its empirical distribution; a population interpretation requires additional sampling assumptions. The resulting class bounds are distinct from the errors of selected fitted predictors.
+
+\subsection{Observation contract and invariant-subspace budget}
+\label{sp:setup}
+Let a finite group $G$, of order $|G|$, act on a finite state set $S$, of size $n=|S|$. The state action may be nonfree or nonfaithful. A context $c$ supplies the complete labeled block $\{z_{c,s}:s\in S\}$ in fixed coordinates $z_{c,s}\in\R^{1\times r}$, with $r\ge1$. Here $(c,s)$ denotes the template--state pair written as $(t,i)$ in \cref{sec:setup}; transforming the input changes $s$ to $g\cdot s$ and leaves $c$ fixed.
+
+Expectations use $C\sim P_C$ and an independent uniform $s\in S$. The distribution $P_C$ may be a population distribution or the declared empirical distribution of a fixed bank. Group averages include every element, including the identity, and pairs with $g\cdot s=s$ are retained. Assume finite second moments and
+\[
+ \Sigma=\mathbb E[z_{C,s}^{\top}z_{C,s}]\succ0,
+ \qquad x=z\Sigma^{-1/2},
+ \qquad \mathbb E[x^{\top}x]=\Id_r.
+\]
+This is second-moment whitening; zero mean is not required. The group product $gh$ means first $h$, then $g$, giving the row-action convention
+\[
+ \mathcal R_r(G)=\{\rho:G\to O(r):\rho_e=\Id_r,\ \rho_g\rho_h=\rho_{hg}\}.
+\]
+The candidate representation need not be faithful; in particular, the identity family is admissible. With $x_g(c,s)=x(c,g\cdot s)$, define two risks for the same distribution and loss:
+\begin{equation}
+ \begin{aligned}
+ \eta
+ &=
+ \inf_{\{A_g\}}
+ \frac1{r|G|}
+ \sum_g
+ \mathbb E\norm{xA_g-x_g}_2^2,
+ \\
+ L^\star
+ &=
+ \inf_{\rho\in\mathcal R_r(G)}L(\rho),
+ \qquad
+ L(\rho)
+ =
+ \frac1{r|G|}
+ \sum_g
+ \mathbb E\norm{x\rho_g-x_g}_2^2.
+ \end{aligned}
+ \label{sp:risks}
+\end{equation}
+The first class allows independent unconstrained $A_g\in\R^{r\times r}$; the second requires one exact $r$-dimensional orthogonal action shared across contexts. In raw coordinates $R_g=\Sigma^{-1/2}\rho_g\Sigma^{1/2}$, its loss is
+\[
+ \frac1{r|G|}\sum_g\mathbb E\norm{(zR_g-z_g)\Sigma^{-1/2}}_2^2.
+\]
+This loss differs from the row-normalized discrepancy $D$ in \cref{eq:D}, the training-energy-normalized prediction losses $E_z$ and $E_u$, and the held-out witness score computed with frozen training whitening (\cref{tab:metric-contract,sec:witness-transfer}). Under complete uniform state averaging and full-rank second moments, zero-error shared linear maps satisfy $R_g^\top\Sigma R_g=\Sigma$ and become an exact orthogonal action after whitening; \cref{app:contextual-realization} gives the realization argument. Positive-error optima over unrestricted linear maps need not have this property. Thus the bounds below concern the exact class and loss in \cref{sp:risks}. Independently fitted Ridge and finite-step penalized Joint generally do not belong to that class, and their recorded prediction scores are not feasible-action upper bounds or quantities to which its lower bound directly applies.
+
+On the real Hilbert space $\mathcal H=L^2(P_C\times\mathrm{Unif}(S))$, define
+\[
+ \begin{aligned}
+ (Ja)(c,s)&=x_{c,s}a,
+ &
+ (U_gf)(c,s)&=f(c,g\cdot s),
+ \\
+ P&=JJ^*,
+ &
+ T&=\frac1{|G|}\sum_gU_gPU_g^*.
+ \end{aligned}
+\]
+Then $J^*J=\Id_r$, $P$ is a rank-$r$ orthogonal projection, and $U_gU_h=U_{hg}$ with each $U_g$ orthogonal. The group average $T$ commutes with every $U_g$, satisfies $0\preceq T\preceq\Id$ and $\operatorname{tr}T=r$, and is supported on
+\[
+ \mathcal W=\operatorname{span}\{U_gJa:g\in G,\ a\in\R^r\},\qquad \dim\mathcal W\le r|G|.
+\]
+Define
+\begin{equation}
+ \begin{aligned}
+ C_r(T)&=\max_Q\operatorname{tr}(TQ),
+ &
+ \gamma_r&=C_r(T)/r,
+ \\
+ Q^2&=Q=Q^*,
+ &
+ [Q,U_g]&=0\quad\text{for all }g,
+ \\
+ \operatorname{rank}Q&\le r,
+ &
+ \operatorname{range}Q&\subseteq\mathcal W.
+ \end{aligned}
+ \label{sp:budget}
+\end{equation}
+The inequality $\operatorname{rank}Q\le r$ permits unused dimensions when no complete irreducible block fits the remaining budget. Thus $0\le\gamma_r\le1$. Since invariant $Q$ satisfies $\operatorname{tr}(PQ)=\operatorname{tr}(TQ)$,
+\[
+ r-C_r(T)=\min_Q\norm{(\Id-Q)J}_{\mathrm{HS}}^2.
+\]
+This is a best invariant-subspace approximation quantity, not a new notion of identifiability. Spectral constructions for invariant approximation have precedents \citep{barbieri2020approximation}; the connection to the exact-action risk is established below.
+
+Decompose the finite-dimensional invariant space $\mathcal W$ into \emph{real} irreducible types. Let $V_\tau$ have real dimension $d_\tau$, and let $m_\tau$ be its multiplicity in $\mathcal W$. The multiplicity space has dimension $m_\tau$ over the division algebra
+\[
+ \mathbb D_\tau
+ =
+ \operatorname{End}_G(V_\tau)
+ \in\{\mathbb R,\mathbb C,\mathbb H\}.
+\]
+The self-adjoint multiplicity operator has real eigenvalues
+\[
+ \lambda_{\tau,1}
+ \ge\cdots\ge
+ \lambda_{\tau,m_\tau}
+ \ge0,
+\]
+counted over $\mathbb D_\tau$. Each contributes $d_\tau\lambda_{\tau,j}$ to the real trace and costs $d_\tau$ real dimensions. Thus the real dimension $d_\tau$ already accounts for complex or quaternionic type. Standard real representation theory \citep{serre1977linear} gives
+\begin{equation}
+ C_r(T)=\max_{\substack{k_\tau\in\{0,\ldots,m_\tau\}\\\sum_\tau d_\tau k_\tau\le r}}
+ \sum_\tau d_\tau\sum_{j=1}^{k_\tau}\lambda_{\tau,j}.
+ \label{sp:integer}
+\end{equation}
+Indeed, the commutant on each multiplicity space is a real, complex or quaternionic matrix algebra. Its self-adjoint operator diagonalizes, and the variational principle selects the largest $k_\tau$ eigenvalues for a fixed multiplicity budget. Optimizing the resulting integer real-dimension budget proves \cref{sp:integer}. A nontrivial real $C_7$ rotation plane cannot be split into two separately admissible one-dimensional directions.
+
+\begin{spectrallemma}[Unconstrained regression risk]
+\label{sp:regression}
+The optimal unconstrained matrices are $A_g=J^*U_gJ$, and
+\begin{equation}
+ \eta=\frac1{r|G|}\sum_g\norm{(\Id-P)U_gJ}_{\mathrm{HS}}^2
+ =1-\operatorname{tr}(T^2)/r.
+ \label{sp:eta}
+\end{equation}
+\end{spectrallemma}
+\begin{proof}
+Since $J$ is an isometry, $JA_g=PU_gJ$ is the least-squares projection of $U_gJ$ onto $\operatorname{range}J$. Averaging its residual squared gives $r-\operatorname{tr}(PT)$. Group averaging is the Hilbert--Schmidt orthogonal projection onto the commutant, so $\operatorname{tr}(PT)=\operatorname{tr}(T^2)$. Division by $r$ proves the result.
+\end{proof}
+
+\subsection{The fixed-dimensional risk bound}
+\label{sp:main-proof}
+Under the observation contract above, \cref{sp:main} states
+\[
+ 2(1-\gamma_r)\le L^\star\le2(1-\gamma_r^2).
+\]
+We prove the bound using \cref{sp:budget}; \cref{sp:observable} establishes its equivalence to the finite orbit-Gram formulation.
+\begin{proof}[Proof of \cref{sp:main}]
+For a fixed $\rho$, define on maps $A:\R^r\to\mathcal H$
+\[
+ \Pi_\rho(A)=\frac1{|G|}\sum_gU_gA\rho_g^*.
+\]
+Write $F_g(A)=U_gA\rho_g^*$. Each $F_g$ is a Hilbert--Schmidt isometry, and the row-action convention gives
+\[
+ F_gF_h=F_{hg},\qquad F_g^*=F_{g^{-1}}.
+\]
+Averaging these identities shows that $\Pi_\rho$ is self-adjoint and idempotent. Its range is the common fixed space of the $F_g$, equivalently the intertwiner space
+$\{A:U_gA=A\rho_g\ \forall g\}$.
+With $B=\Pi_\rho(J)$, expansion gives
+\begin{equation}
+ \begin{aligned}
+ L(\rho)
+ &=
+ 2-\frac2r\langle J,B\rangle_{\mathrm{HS}}
+ \\
+ &=
+ 2-\frac2r\norm B_{\mathrm{HS}}^2.
+ \end{aligned}
+ \label{sp:projection-risk}
+\end{equation}
+Let $Q_B$ project onto $\operatorname{range}B$. This range is invariant, contained in $\mathcal W$, and has rank at most $r$. Cauchy--Schwarz yields
+\[
+ \begin{aligned}
+ \norm B_{\mathrm{HS}}^2
+ &=
+ \langle Q_BJ,B\rangle_{\mathrm{HS}}
+ \le
+ \norm{Q_BJ}_{\mathrm{HS}}\norm B_{\mathrm{HS}},
+ \\
+ \norm B_{\mathrm{HS}}^2
+ &\le
+ \operatorname{tr}(PQ_B)
+ =
+ \operatorname{tr}(TQ_B)
+ \le C_r(T).
+ \end{aligned}
+\]
+The zero-$B$ case is immediate. Substitution into \cref{sp:projection-risk} proves the lower bound.
+
+For the upper bound, choose a maximizer $Q$ in \cref{sp:budget}, of rank $k\le r$. In an auxiliary space put
+\[
+ \begin{aligned}
+ \widetilde{\mathcal H}
+ &=
+ \mathcal H\oplus\R^{r-k},
+ &
+ \widetilde U_g
+ &=
+ U_g\oplus\Id_{r-k},
+ \\
+ \widetilde J
+ &=
+ (J,0),
+ &
+ \widetilde Q
+ &=
+ Q\oplus\Id_{r-k}.
+ \end{aligned}
+\]
+Let $V:\R^r\to\widetilde{\mathcal H}$ be an orthonormal basis of $\operatorname{range}\widetilde Q$. An SVD of $V^*\widetilde J$ and orthogonal Procrustes alignment give another such basis $J'$ with
+\[
+ \begin{aligned}
+ \langle J',\widetilde J\rangle_{\mathrm{HS}}
+ &=
+ \norm{V^*\widetilde J}_*
+ \\
+ &\ge
+ \norm{V^*\widetilde J}_F^2
+ \\
+ &=
+ \operatorname{tr}
+ (\widetilde Q\widetilde J\widetilde J^*)
+ =
+ C_r(T).
+ \end{aligned}
+\]
+The inequality uses singular values in $[0,1]$, since $V$ and $\widetilde J$ are isometries. Invariance of $\operatorname{range}J'$ makes
+$\rho_g=J'^*\widetilde U_gJ'$ an exact orthogonal action on $\R^r$:
+\[
+ \rho_e=\Id_r,\qquad
+ \rho_g\rho_h
+ =J'^*\widetilde U_g\widetilde U_hJ'
+ =\rho_{hg}.
+\]
+It also makes $J'$ an intertwiner. On maps into $\widetilde{\mathcal H}$, define
+\[
+ \widetilde\Pi_\rho(A)
+ =\frac1{|G|}\sum_g\widetilde U_gA\rho_g^*,
+ \qquad B'=\widetilde\Pi_\rho(\widetilde J).
+\]
+The same projection argument gives
+\[
+ \begin{aligned}
+ C_r(T)
+ &\le
+ \langle J',\widetilde J\rangle_{\mathrm{HS}}
+ \\
+ &=
+ \langle J',B'\rangle_{\mathrm{HS}}
+ \le
+ \sqrt r\norm{B'}_{\mathrm{HS}}.
+ \end{aligned}
+\]
+Equation~\eqref{sp:projection-risk} gives $L(\rho)\le2-2C_r(T)^2/r^2$. The data have zero auxiliary coordinates, so this construction changes neither the original loss nor the predictor dimension; the final matrices remain $r\times r$.
+\end{proof}
+
+For $\gamma_r<1$, the ratio of the upper and lower endpoints is $1+\gamma_r\le2$; at $\gamma_r=1$, both endpoints vanish. This endpoint-ratio guarantee concerns the absolute risk $L^\star$, not the constraint-cost intervals obtained by subtracting comparator optima.
+
+\paragraph{Zero-risk equivalence.}
+Under the same contract,
+\[
+ \eta=0\quad\Longleftrightarrow\quad
+ \gamma_r=1\quad\Longleftrightarrow\quad L^\star=0.
+\]
+Indeed, $\eta=0$ gives $\operatorname{tr}(T^2)=\operatorname{tr}T=r$. Since $0\preceq T\preceq\Id$, $T$ is then a rank-$r$ invariant orthogonal projection supported on $\mathcal W$. Taking $Q=T$ gives $\gamma_r=1$. The upper bound gives $L^\star=0$, and $\eta\le L^\star$ closes the equivalence. This agrees with the zero-error realization argument in \cref{app:contextual-realization}; it does not identify a unique state registration.
+
+\paragraph{Risk premium over unconstrained regression.}
+\label{sp:risk-premium}
+The inclusion $\mathcal R_r(G)\subseteq\{(A_g)_{g\in G}\}$ and \cref{sp:main} imply
+\[
+ p^-:=\max\{0,2(1-\gamma_r)-\eta\}
+ \le L^\star-\eta
+ \le p^+:=2(1-\gamma_r^2)-\eta.
+\]
+The premium concerns the combined exact-law and orthogonality constraints in the declared coordinates and metric. The computable endpoints bound it; they do not determine its exact value. In particular, an empirical estimate of a historical Ridge loss is not a substitute for the optimum $\eta$ in \cref{sp:risks}.
+
+\paragraph{Direct corollary: positivity does not establish magnitude.}
+Under the same assumptions,
+\begin{equation}
+ \gamma_r\le\sqrt{1-\eta},\qquad
+ \boxed{\ p^-\ge b_\eta:=(1-\sqrt{1-\eta})^2.\ }
+ \label{sp:premium-positivity}
+\end{equation}
+Indeed, every admissible projection $Q$ has $\norm Q_{\mathrm{HS}}\le\sqrt r$, so
+\[
+ \begin{aligned}
+ \operatorname{tr}(TQ)
+ &\le
+ \norm T_{\mathrm{HS}}\norm Q_{\mathrm{HS}}
+ \\
+ &\le
+ \sqrt{r\operatorname{tr}(T^2)}
+ =
+ r\sqrt{1-\eta}.
+ \end{aligned}
+\]
+Maximizing over $Q$ gives the first inequality; subtracting $\eta$ from $2(1-\gamma_r)$ gives the second. The same argument uses the finite orbit Gram matrix $K$ in \cref{sp:observable}. This is a direct consequence of the existing budget definition and regression identity, not a separate principal contribution.
+
+In exact arithmetic, $\eta>0$ already implies $p^->0$. Empirical positivity counts therefore do not by themselves establish a distinctive or practically large effect. They must be separated from exceeding a software tolerance, a certified numerical-error bound and statistical significance. A small lower endpoint does not show that $L^\star-\eta$ is small. For numerical evaluation, $b_\eta=[\eta/(1+\sqrt{1-\eta})]^2$ avoids subtracting nearly equal numbers when $\eta$ is small; an out-of-domain value of $\eta$ must be reported rather than silently clipped.
+
+\paragraph{Independent orthogonal comparison and the additional law cost.}
+Under this same distribution, complete uniform averaging and second-moment whitening, put $M_g=\mathbb E[x^\top x_g]=J^*U_gJ$. Define
+\begin{equation}
+ \begin{aligned}
+ L_{\mathrm{orth}}
+ &:=\inf_{\{Q_g\in O(r)\}}\frac1{r|G|}\sum_g
+       \mathbb E\norm{xQ_g-x_g}_2^2\\
+ &=2-\frac2{r|G|}\sum_g\norm{M_g}_*,
+ \qquad \eta\le L_{\mathrm{orth}}\le L^\star,
+ \end{aligned}
+ \label{sp:orthogonal-comparator}
+\end{equation}
+where the matrices are chosen independently and $\norm{\cdot}_*$ denotes the nuclear norm. Uniform state permutations give $\mathbb E[x_g^\top x_g]=\Id_r$, and the loss for one orthogonal $Q$ expands to $2r-2\operatorname{tr}(Q^\top M_g)$. If
+\[
+ M_g
+ =
+ U_g^{\mathrm{svd}}
+ \operatorname{diag}(\sigma_{g,j})
+ (V_g^{\mathrm{svd}})^\top,
+\]
+an orthogonal Procrustes optimum is $Q_g=U_g^{\mathrm{svd}}(V_g^{\mathrm{svd}})^\top$. This is an $O(r)$, not an $SO(r)$, constraint; the optimum may be nonunique when $M_g$ is singular. The individually optimal matrices need not obey the group multiplication law.
+
+Each $M_g=J^*U_gJ$ is a contraction, so $0\le\sigma_{g,j}\le1$. Independent least squares and the formula above give
+\[
+ \begin{aligned}
+ \eta
+ &=
+ \frac1{r|G|}
+ \sum_{g,j}(1-\sigma_{g,j}^2),
+ \\
+ \beta
+ &:=
+ L_{\mathrm{orth}}-\eta
+ =
+ \frac1{r|G|}
+ \sum_{g,j}(1-\sigma_{g,j})^2.
+ \end{aligned}
+\]
+Consequently $\eta>0$ already entails a positive orthogonality cost without imposing any multiplication relations. Cauchy--Schwarz on the mean singular value also gives $L_{\mathrm{orth}}-\eta\ge b_\eta$. The remaining group-law cost satisfies
+\[
+ \ell^-:=\max\{0,2(1-\gamma_r)-L_{\mathrm{orth}}\}
+ \le L^\star-L_{\mathrm{orth}}
+ \le\ell^+:=2(1-\gamma_r^2)-L_{\mathrm{orth}}.
+\]
+The decomposition
+\[
+ L^\star-\eta=\beta+(L^\star-L_{\mathrm{orth}})
+\]
+is exact, but the second term is only bounded. The endpoints satisfy
+\[
+ \beta+\ell^-=\max\{\beta,p^-\},\qquad
+ \beta+\ell^+=p^+.
+\]
+Joint-premium positivity alone therefore does not establish a positive additional group-law cost. In exact arithmetic, $\ell^->0$ does establish such a cost, whereas $\ell^-=0$ by itself is inconclusive. Ratios involving a lower endpoint, such as $\beta/p^-$, are not fractions of the unknown total cost.
+
+These formulas define the completed comparison in \cref{par:orthogonal-results,app:orthogonal-results}, which reports whether the additional-law lower endpoint exceeds the declared comparison tolerance. A tolerance-based numerical classification is distinct from a rigorous rounding certificate or a population significance statement. The formulas require the same distribution, target pairs and whitening throughout. They do not transfer unchanged to held-out observations scored with frozen training whitening, or to centered observations retaining the original whitening, because those second moments need not be the identity.
+
+\begin{proposition}[Compatibility of independent orthogonal optima]
+\label{sp:orthogonal-compatibility}
+Under the observation and averaging contract above, define
+\[
+ f_g(Q)=r^{-1}\mathbb E\norm{xQ-x_g}_2^2,
+ \qquad \mathcal A_g=\operatorname*{arg\,min}_{Q\in O(r)}f_g(Q).
+\]
+Then $L^\star=L_{\mathrm{orth}}$ if and only if there exists a family with
+$Q_g\in\mathcal A_g$ for every $g$, $Q_e=\Id_r$, and
+$Q_gQ_h=Q_{hg}$ for every $g,h\in G$.
+If all $M_g$ are nonsingular, each $\mathcal A_g$ is the singleton containing the orthogonal polar factor
+\[
+ Q_g^{\mathrm P}=M_g(M_g^\top M_g)^{-1/2}.
+\]
+In that case equality holds if and only if
+\[
+ Q_g^{\mathrm P}Q_h^{\mathrm P}
+ =
+ Q_{hg}^{\mathrm P}
+ \quad\text{for all }g,h;
+\]
+$Q_e^{\mathrm P}=\Id_r$ follows from $M_e=\Id_r$.
+\end{proposition}
+
+\begin{proof}
+The sets $O(r)$ are compact and each $f_g$ is continuous, so all elementwise minima are attained. The exact-action class is a nonempty closed subset of the finite product $O(r)^{|G|}$: its defining identities are closed, and the identity family belongs to it. It is therefore compact and attains $L^\star$. For any minimizing exact family $\rho$, separability of the independent objective gives
+\[
+ L^\star-L_{\mathrm{orth}}
+ =\frac1{|G|}\sum_{g\in G}
+ \left[f_g(\rho_g)-\min_{Q\in O(r)}f_g(Q)\right].
+\]
+Every summand is nonnegative and every element has positive weight. The sum vanishes exactly when $\rho_g\in\mathcal A_g$ for every $g$. Conversely, a compatible family of elementwise minima attains $L_{\mathrm{orth}}$ inside the exact-action class. The same equivalence holds for any strictly positive element weights summing to one, provided both objectives use those weights.
+
+For nonsingular $M_g=U\operatorname{diag}(\sigma_j)V^\top$, all $\sigma_j>0$. Maximizing $\operatorname{tr}(Q^\top M_g)$ over $O(r)$ forces every diagonal entry of $U^\top QV$ to equal one, hence $Q=UV^\top$. This is precisely the displayed polar factor and is unique even with repeated positive singular values. The first part then gives the stated criterion.
+\end{proof}
+
+When $M_g$ has rank $k_g<r$, write its SVD with the positive singular values first. Its full optimizer set is
+\[
+ \mathcal A_g=
+ \left\{U_g^{\mathrm{svd}}
+ \begin{pmatrix}I_{k_g}&0\\0&W_g\end{pmatrix}
+ (V_g^{\mathrm{svd}})^\top:
+ W_g\in O(r-k_g)\right\}.
+\]
+Indeed, equality in the same trace maximum fixes the first $k_g$ diagonal entries to one; orthogonality fixes their rows and columns, leaving the displayed orthogonal completion free. Compatibility must therefore be assessed over these sets, not just over an arbitrarily completed SVD family. An incompatible completion does not establish $L^\star>L_{\mathrm{orth}}$. In the nonsingular case an exact violation does imply strict inequality, but the proposition gives no quantitative lower bound from its size. Floating-point rank decisions and small law residuals alone certify neither exact compatibility nor a positive risk gap. This elementary equality characterization is separate from the spectral bound and is not an additional empirical test of the recorded cells.
+
+\paragraph{Relation to existing theory.}
+\label{sp:positioning}
+The averaging, intertwiner and dimension-accounting tools are standard in approximate representation theory \citep{gowers2017inverse,moore2015approximate}. The statement here connects invariant approximation to \emph{fixed-dimensional prediction risk}; it does not claim priority for those tools. Sun's realizability and error decomposition concern compatible transformations through an encoder \citep{sun2026transformationlaws}; EbC identifies jointly learned latent coordinates and actions under generative and diversity assumptions \citep{schmidt2025equivariance}. Neither observation contract is replaced by this frozen-coordinate bound.
+
+Finite-dimensional equivariant reconstruction and symmetry-compatible spectral truncation also appear in Neural Fourier Transform and equivariant conditional-operator learning \citep{koyama2024fourier,ordonez2026inference}. Those works optimize learned features or operator approximations, whereas the present theorem bounds transformed-observation risk over exact $O(r)$ actions on fixed whitened coordinates.
+
+\subsection{Finite observable form and an insufficient-summary example}
+\label{sp:observable}
+Let $D=r|G|$ denote the orbit-feature dimension, and put
+\[
+ v(c,s)
+ =
+ |G|^{-1/2}(x_{c,g\cdot s})_{g\in G}
+ \in\R^{1\times D},
+ \qquad
+ K=\mathbb E[v^\top v].
+\] Its blocks are $K_{g,h}=|G|^{-1}\mathbb E[x_g^\top x_h]$. For $a=(a_g)_g$, define
+\[
+ Wa=|G|^{-1/2}\sum_gU_gJa_g,\qquad (\Lambda_ta)_k=a_{kt^{-1}}.
+\]
+Direct multiplication gives $WW^*=T$, $W^*W=K$, $U_tW=W\Lambda_t$, and $\Lambda_t\Lambda_u=\Lambda_{ut}$. Thus $K$ commutes with the known block action $\Lambda$, has trace $r$, and is a positive contraction. The polar decomposition of $W$ identifies $\operatorname{range}K$ with $\mathcal W$ equivariantly: their nonzero spectra agree \emph{with their real irreducible types}. Therefore the optimization in \cref{sp:budget}, now using $K,\Lambda$ on $\R^D$, gives
+\[
+ C_r(K)=C_r(T),\qquad \eta=1-\operatorname{tr}(K^2)/r.
+\]
+The support constraint in \cref{eq:budget-main} can be dropped without changing $C_r(K)$. To see this, maximize over all invariant projections of rank at most $r$ on $\R^D$. Since $K$ commutes with $\Lambda$, the multiplicity-space decomposition in \cref{sp:integer} gives a maximizer assembled from whole irreducible eigenvalue blocks. Removing selected blocks with eigenvalue zero preserves the objective and leaves a projection of rank at most $r$ supported on $\operatorname{range}K$.
+
+This construction uses complete same-context labeled orbits as a structural diagnostic; its information is not the input available to a single-activation predictor. Computing the statistic still requires the type-constrained optimization, not ordinary top-$r$ eigenvalue truncation.
+
+\paragraph{Registration and the full action average.}
+A group automorphism merely reindexes the terms of the full uniform group average: the image action, $T$ and its invariant-subspace budget are unchanged. Conjugating the state registration to a different image subgroup can change the budget, but need not do so. With the abstract group and its indexing fixed, $\Lambda$ is unchanged, while the registered target correspondences and hence $K$ may change. The source bank, context weights, coordinates and whitening remain fixed within this comparison.
+
+For $C_7$ there are $6!=720$ seven-cycle permutations, generating 120 distinct cyclic subgroups; these are different counting units. On four states, the stabilizers of the three partitions into two unordered pairs are distinct order-eight dihedral subgroups of $S_4$. All order-eight subgroups are Sylow 2-subgroups, whose number divides three, so these three exhaust the dihedral images. Their comparison is a descriptive spectral-budget comparison. A larger budget does not by itself establish a smaller exact-action optimum; an ordering of the unknown optima requires separate justification from their risk bounds. Removing the identity or registration-dependent fixed points changes the averaging contract and cannot be substituted into \cref{sp:main}.
+
+\paragraph{Energy by type and its contribution to the budget.}
+\label{sp:type-energy}
+Let $\Pi_\tau$ project onto the real $\tau$-isotypic subspace of the known action $\Lambda$, and let $Q^\star$ attain $C_r(K)$. Distinguish total energy from energy retained by the dimension budget:
+\[
+ \begin{aligned}
+ e_\tau
+ &=
+ \frac{\operatorname{tr}(\Pi_\tau K)}r,
+ &
+ b_\tau
+ &=
+ \frac{\operatorname{tr}(\Pi_\tau KQ^\star)}r,
+ \\
+ \sum_\tau e_\tau&=1,
+ &
+ \sum_\tau b_\tau&=\gamma_r.
+ \end{aligned}
+\]
+These normalizations use $\operatorname{tr}K=r$. Here $0\le b_\tau\le e_\tau$; selected shares can depend on the choice of a tied maximizer even though $\gamma_r$ does not. The trivial type describes components invariant under the state action, including possible contextual and global-constant components, rather than uniquely identifying context information. A large $\gamma_r$ can also coexist with stable state coding when trivial energy is small. Reporting type contributions describes the original target. Removing invariant components defines a separate sensitivity analysis, whose normalization is specified below and in \cref{app:template-centering-sensitivity}.
+
+\paragraph{Identity-action reference.}
+\label{sp:identity-reference}
+For the action $\rho_g=\Id_r$ for every $g$, let $Q_0=|G|^{-1}\sum_gU_g$ be the projection onto invariant functions. Under the same complete-state, uniform-group and whitening contract,
+\[
+ \begin{aligned}
+ e_{\rm triv}
+ &=
+ \|Q_0J\|_{\rm HS}^2/r
+ \\
+ &=
+ \frac1{r|G|}
+ \sum_g\mathbb E\langle x,x_g\rangle,
+ \qquad
+ L(I)=2(1-e_{\rm triv}).
+ \end{aligned}
+\]
+Indeed, $Q_0^2=Q_0=Q_0^*$ gives the first equality with the orbit-Gram trivial energy. Uniform state averaging is invariant under each permutation, so both $x$ and $x_g$ have mean squared norm $r$; expanding $\|x-x_g\|^2$ proves the risk identity. For the transitive C7 and corner actions this also gives
+\[
+ e_{\rm triv}=\frac1r\mathbb E_c\left\|\frac1{|S|}\sum_s x_{c,s}\right\|^2.
+\]
+The reference uses total type energy, not $b_{\rm triv}$, and keeps identity elements and fixed points. Since the identity family is feasible,
+\[
+ \eta\le L_{\mathrm{orth}}\le L^\star\le L(I).
+\]
+In particular, $2(1-\gamma_r)\le L(I)$. The theorem's existence upper bound on $L^\star$ need not upper-bound this particular candidate.
+
+\paragraph{Total trivial energy is shared by transitive images.}
+For any transitive permutation image $H$ on the same complete, uniformly weighted state set, orbit--stabilizer counting gives
+\begin{equation}
+ \begin{aligned}
+ (Q_0^Hf)(c,s)
+ &=
+ \frac1{|H|}
+ \sum_{h\in H}f(c,h(s))
+ \\
+ &=
+ \frac1{|S|}
+ \sum_{j\in S}f(c,j).
+ \end{aligned}
+ \label{sp:transitive-trivial-energy}
+\end{equation}
+Thus $Q_0^H$ is the same operator for every such image. With the bank, context weights, coordinates and whitening fixed, $e_{\rm triv}=\norm{Q_0^HJ}_{\mathrm{HS}}^2/r$ and $L(I)$ are common to all candidates. In particular, this applies within the enumerated C7 images and within the four-corner D4 images. The selected quantity $b_{\rm triv}$ also depends on competition with other types for the dimension budget, and is not thereby forced to be constant. A common total trivial energy therefore does not imply either equal budgets or unchanged rankings after its removal.
+
+\paragraph{Within-template centering and the whitening metric.}
+For the transitive actions considered here, let
+\[
+ \begin{aligned}
+ \bar z_c
+ &=
+ \frac1n\sum_{s\in S}z_{c,s},
+ \\
+ z^\circ_{c,s}
+ &=
+ z_{c,s}-\bar z_c,
+ \\
+ x^{(\mathrm{fixed})}_{c,s}
+ &=
+ z^\circ_{c,s}\Sigma^{-1/2}.
+ \end{aligned}
+\]
+This operation subtracts the state-invariant component while retaining the original whitening metric. Let $\Pi_0$ be the trivial-type projector for $\Lambda$. Since $Q_0W=W\Pi_0$, the corresponding orbit Gram matrix is
+\[
+ K^{(\mathrm{fixed})}
+ =(\Id-\Pi_0)K(\Id-\Pi_0).
+\]
+As $K$ commutes with $\Pi_0$, centering deletes its trivial block and preserves its nontrivial blocks. It also releases dimensions previously allocated to trivial copies. The budget $C_r(K^{(\mathrm{fixed})})$ must therefore be optimized again; subtracting the previously selected trivial contribution from $C_r(K)$ is not sufficient.
+
+Write
+\[
+ E^{(\mathrm{fixed})}
+ =\operatorname{tr}K^{(\mathrm{fixed})}
+ =\mathbb E\|x^{(\mathrm{fixed})}\|_2^2.
+\]
+Then $C_r(K^{(\mathrm{fixed})})/r$ measures captured energy relative to the original total energy. When $E^{(\mathrm{fixed})}>0$, the fraction of remaining energy captured is
+$C_r(K^{(\mathrm{fixed})})/E^{(\mathrm{fixed})}$.
+Total type energies normalized by $r$ now sum to
+$E^{(\mathrm{fixed})}/r$, not generally to one. Under the full-group squared loss with its $1/r$ normalization, expansion gives
+\[
+ L^{(\mathrm{fixed})}(I)=\frac{2E^{(\mathrm{fixed})}}r.
+\]
+Here the group-averaged cross term vanishes because each centered template has zero state mean. Since the second moment of $x^{(\mathrm{fixed})}$ is generally not $\Id_r$, neither the regression identity \eqref{sp:eta} nor the unit-second-moment risk bounds apply directly to this treatment.
+
+If instead
+\[
+ \Sigma^\circ
+ =\mathbb E[(z^\circ)^\top z^\circ]\succ0,
+ \qquad
+ x^{(\mathrm{own})}=z^\circ(\Sigma^\circ)^{-1/2},
+\]
+the centered observations have unit second moment in their own whitening metric. The theorem then applies separately to this new bank and metric, with zero trivial energy and identity-family risk $2$. Rewhitening also changes the nontrivial spectra. Thus the original and rewhitened centered banks admit separate applications of the theorem under their respective positive-definiteness conditions, whereas the fixed-whitening treatment is reported through its energy budget and registration ranks.
+
+\Cref{app:template-centering-sensitivity} reports these three treatments on the saved Study~2 coordinates. Its budget and ranking comparisons assess sensitivity to the state-invariant component and to whitening. The applicability statements above do not constitute an additional empirical risk comparison, and the observed rank changes do not contradict the common-trivial-energy identity.
+
+\paragraph{Equal regression risk and eigenvalues can conceal different action risk.}
+\label{sp:counterexample}
+Take $G=S=C_2\times C_2\times C_7$ acting by addition, uniform states $(a,b,k)$, one context, and $r=1$. Set
+\[
+ x_A(a,b,k)=\frac{(-1)^a+(-1)^b}{\sqrt2},\qquad
+ x_B(a,b,k)=\sqrt2\cos(2\pi k/7).
+\]
+Both have zero mean and unit second moment. For $g=(u,v,w)$ their optimal scalar regression coefficients are
+\[
+ a_A(g)=\tfrac12\big((-1)^u+(-1)^v\big),\qquad
+ a_B(g)=\cos(2\pi w/7).
+\]
+Both satisfy $\mathbb E_g a(g)^2=1/2$, hence $\eta=1/2$. For $A$, $T$ has eigenvalue $1/2$ on each of two distinct real one-dimensional characters; for $B$, it is $\Id_2/2$ on a real irreducible rotation plane. The nonzero eigenvalues are thus the same, $\{1/2,1/2\}$. An exact real one-dimensional action is a character $\chi:G\to\{\pm1\}$ and is necessarily trivial on $C_7$. Its loss is $2-2\mathbb E_g[\chi(g)a(g)]$. Character orthogonality makes the largest correlation $1/2$ for $A$ and zero for $B$, so $L_A^\star=1$ and $L_B^\star=2$; correspondingly $\gamma_1=1/2$ and $0$. This illustrates the standard representation-dimension obstruction: regression risk and an untyped spectrum are insufficient summaries. The complete labeled observations distinguish the examples, so this is not observational nonidentifiability of the full data.
+
+For these scalar observations $M_g=a(g)$ and $O(1)=\{\pm1\}$, so the independent orthogonal optimum is
+\[
+ L_{\mathrm{orth}}
+ =
+ 2-2\mathbb E_g|a(g)|.
+\]
+In $A$, the four equally weighted $(u,v)$ pairs give correlations $1,0,0,-1$, and therefore $\mathbb E_g|a_A(g)|=1/2$. In $B$, put
+\[
+ a_7:=\frac17\sum_{w=0}^6|\cos(2\pi w/7)|.
+\]
+It follows exactly that
+\[
+\begin{array}{c|ccc}
+ & L_{\mathrm{orth}} & L_{\mathrm{orth}}-\eta & L^\star-L_{\mathrm{orth}}\\
+ \hline
+ A & 1 & 1/2 & 0\\
+ B & 2-2a_7 & 3/2-2a_7 & 2a_7
+\end{array}
+\]
+In $A$, the choice $Q_{(u,v,w)}=(-1)^u$ is both independently optimal and an exact character. Half the cross-moments vanish, so independent choices of their signs can also produce an incompatible family without changing $L_{\mathrm{orth}}$. For example, assigning $+1$ at both $(1,0,0)$ and $(0,1,0)$ conflicts with the uniquely optimal $-1$ at their sum $(1,1,0)$, although the compatible character just given remains available.
+
+In $B$, none of the seven cosine values vanishes. The unique polar family is $Q_{(u,v,w)}=\operatorname{sgn}\cos(2\pi w/7)$. For the cycle generator $g_0=(0,0,1)$, it has $Q_{g_0}=1$ but $Q_{g_0^2}=-1$, violating $Q_{g_0}^2=Q_{g_0^2}$. Thus the second system has a strictly positive further law cost, $2a_7$, whereas the first system's joint cost is entirely due to orthogonality. This extension of the same analytical example illustrates \cref{sp:orthogonal-compatibility}; it is not a numerical experiment or an estimate of the LLM class optimum.
+
+\paragraph{Scale of the type-budget correction for C7 and D4.}
+\label{sp:type-scale}
+For these two groups all real irreducible types have dimension one or two. Define the ordinary spectral budget $C_r^{\mathrm{untyped}}(K)$ as the sum of the largest $r$ eigenvalues of $K$, including zeros if needed. Order tied eigenvectors by complete irreducible blocks. This top-$r$ selection can split at most one two-dimensional block at its boundary. Dropping the selected half yields a feasible invariant subspace of dimension at most $r$ and loses at most one eigenvalue, which is at most one because $K\preceq\Id$. Hence
+\[
+ \begin{aligned}
+ 0
+ &\le
+ \Delta_{\mathrm{type}}
+ :=
+ C_r^{\mathrm{untyped}}(K)-C_r(K)
+ \le1,
+ \\
+ \Delta_{\mathrm{type}}/r&\le1/r.
+ \end{aligned}
+\]
+The variational characterization of the sum of the largest $r$ eigenvalues gives $C_r^{\rm untyped}(K)\ge\operatorname{tr}(K^2)$: the eigenvalues of $K$ lie in $[0,1]$ and sum to $r$, so they themselves are admissible fractional selection weights for this maximization. Consequently
+\[
+ (1-\eta)-\gamma_r\le\Delta_{\rm type}/r\le1/r.
+\]
+This limits how far the type-constrained budget can lie below $1-\eta$; it does not bound the risk premium by $1/r$.
+
+Under the unit-second-moment contract, this elementary consequence gives normalized upper bounds of $1/16$ at $r=16$ and $1/8$ at $r=8$. These are analytical bounds, not observed effects or claims of tightness. A zero type correction would leave the class-risk bound valid. The one-dimensional separation above therefore does not predict a large correction on the LLM panel, and does not justify searching dimensions for a positive correction.
+
+For the four-corner action $\mathsf r(i)=i+1$, $\mathsf s(i)=1-i\pmod4$, the state permutation representation decomposes as
+\[
+ \chi_{+,+}\oplus\chi_{-,-}\oplus E,
+\]
+where $\chi_{a,b}(\mathsf r)=a$, $\chi_{a,b}(\mathsf s)=b$ and $E$ is the real two-dimensional type. Indeed, the stabilizer of corner zero is $\{e,\mathsf r^3\mathsf s\}$, so a one-dimensional type has multiplicity $(1+ab)/2$. Context copies do not introduce the absent types: $K$ has zero energy in $\chi_{+,-}$ and $\chi_{-,+}$. The completed implementation checks these analytically absent type energies against zero under its declared numerical tolerances. This is an implementation check, not a rigorous rounding certificate of exact zero. The corner action has four states even though the group has eight elements.
+
+\subsection{A finite-context certificate and its practical limitation}
+\label{sp:certificate}
+Fix one state action, including its registration, one observation dimension $r$, and a raw-coordinate preprocessing rule independently of the certificate sample. Let $N_{\mathrm{ctx}}$ be the number of observed complete context blocks, and suppose $C_1,\ldots,C_{N_{\mathrm{ctx}}}$ are independent and identically distributed. Preprocessing fitted on independent data may be treated as fixed by conditioning on that fit, with the sampling and norm assumptions understood conditionally. This restriction concerns selection or fitting of the preprocessing rule, not evaluation of a fixed blockwise rule or computation of the sample whitening below.
+
+Assume the \emph{population} bound $\norm{z_{C,s}}_2\le H$ almost surely for every state, with the scalar $H$ fixed in advance. Define
+\[
+ \begin{aligned}
+ \Sigma_i
+ &=
+ n^{-1}\sum_s z_{C_i,s}^\top z_{C_i,s},
+ \\
+ v_z(c,s)
+ &=
+ |G|^{-1/2}(z_{c,g\cdot s})_g,
+ \\
+ M_i
+ &=
+ n^{-1}\sum_s
+ v_z(C_i,s)^\top v_z(C_i,s),
+ \end{aligned}
+\]
+for $i=1,\ldots,N_{\mathrm{ctx}}$, and let $\widehat\Sigma,\widehat M$ be their sample means, with population means $\Sigma,M$. When $\widehat\Sigma\succ0$, let
+\[
+ \widehat K=(\Id_{|G|}\otimes\widehat\Sigma^{-1/2})\widehat M
+                    (\Id_{|G|}\otimes\widehat\Sigma^{-1/2}).
+\]
+Complete uniform state averaging preserves the fixed $\Lambda$ symmetry exactly and gives $\operatorname{tr}\widehat K=r$.
+
+\begin{spectraltheorem}[Conservative complete-block certificate]
+\label{sp:finite}
+For $\alpha\in(0,1)$, set
+\[
+ \begin{aligned}
+ \tau_{N_{\mathrm{ctx}}}
+ &=
+ H^2
+ \sqrt{
+ \frac8{N_{\mathrm{ctx}}}
+ \log\frac{2(D+r)}\alpha
+ },
+ \\
+ a_{N_{\mathrm{ctx}}}
+ &=
+ \lambda_{\min}(\widehat\Sigma)
+ -
+ \tau_{N_{\mathrm{ctx}}}.
+ \end{aligned}
+\]
+If $a_{N_{\mathrm{ctx}}}>0$, define
+\[
+ \varepsilon_{N_{\mathrm{ctx}}}
+ =
+ \frac{\tau_{N_{\mathrm{ctx}}}}{a_{N_{\mathrm{ctx}}}}
+ +
+ \frac{H^2\tau_{N_{\mathrm{ctx}}}}{a_{N_{\mathrm{ctx}}}^2},
+ \qquad
+ \widehat\gamma_r=C_r(\widehat K)/r,
+\]
+and
+\[
+ \begin{aligned}
+ \gamma_-
+ &=
+ \max\{
+ 0,\widehat\gamma_r-\varepsilon_{N_{\mathrm{ctx}}}
+ \},
+ \\
+ \gamma_+
+ &=
+ \min\{
+ 1,\widehat\gamma_r+\varepsilon_{N_{\mathrm{ctx}}}
+ \}.
+ \end{aligned}
+\]
+There is an event of probability at least $1-\alpha$ on which, whenever this precheck passes,
+\begin{equation}
+ 2(1-\gamma_+)\le L^\star\le2(1-\gamma_-^2).
+ \label{sp:confidence}
+\end{equation}
+If $a_{N_{\mathrm{ctx}}}\le0$, the procedure returns inconclusive; discarding weak directions changes the specified $r$-dimensional target. This bounds the unconditional probability of issuing an incorrect interval, not the error probability conditional on passing the precheck.
+\end{spectraltheorem}
+\begin{proof}
+Each $\Sigma_i,M_i$ lies between zero and $H^2\Id$, so its centered square is bounded by $H^4\Id$. Applying the two-sided matrix Hoeffding inequality \citep[Theorem~1.3]{tropp2012user} and a union bound for dimensions $r,D$ gives, with probability at least $1-\alpha$,
+\[
+ \norm{\widehat\Sigma-\Sigma}_{\rm op}\le\tau_{N_{\mathrm{ctx}}},\qquad
+ \norm{\widehat M-M}_{\rm op}\le\tau_{N_{\mathrm{ctx}}}.
+\]
+On this event and when $a_{N_{\mathrm{ctx}}}>0$, both $\Sigma$ and $\widehat\Sigma$ are at least $a_{N_{\mathrm{ctx}}}\Id$. For positive $A,B\succeq a\Id$, the inverse-square-root resolvent formula gives
+\[
+ \begin{aligned}
+ \norm{A^{-1/2}-B^{-1/2}}_{\rm op}
+ &\le
+ \frac{\norm{A-B}_{\rm op}}\pi
+ \int_0^\infty
+ \frac{t^{-1/2}}{(a+t)^2}\,dt
+ \\
+ &=
+ \frac{\norm{A-B}_{\rm op}}{2a^{3/2}}.
+ \end{aligned}
+\]
+Writing $A_0=\Id_{|G|}\otimes\Sigma^{-1/2}$ and $\widehat A_0=\Id_{|G|}\otimes\widehat\Sigma^{-1/2}$, expand
+\[
+ \begin{aligned}
+ K-\widehat K
+ &=
+ A_0(M-\widehat M)A_0
+ \\
+ &\quad+
+ (A_0-\widehat A_0)\widehat M A_0
+ \\
+ &\quad+
+ \widehat A_0\widehat M(A_0-\widehat A_0).
+ \end{aligned}
+\]
+Using $\norm{\widehat M}_{\rm op}\le H^2$ yields
+\[
+ \norm{K-\widehat K}_{\rm op}
+ \le\varepsilon_{N_{\mathrm{ctx}}}.
+\] By \cref{sp:observable}, the maxima defining $C_r(K)$ and $C_r(\widehat K)$ can both be taken over the same set of projections: those that commute with $\Lambda$ and have rank at most $r$. For every $Q$ in this fixed set,
+\[
+ \begin{aligned}
+ \left|
+ \operatorname{tr}((K-\widehat K)Q)
+ \right|
+ &\le r\varepsilon_{N_{\mathrm{ctx}}},
+ \\
+ |C_r(K)-C_r(\widehat K)|
+ &\le r\varepsilon_{N_{\mathrm{ctx}}}.
+ \end{aligned}
+\]
+Apply \cref{sp:main} to obtain \cref{sp:confidence}.
+\end{proof}
+
+\paragraph{Why this does not certify the present experiments.}
+The bound is formally valid but can be uninformative. Necessarily
+\[
+\begin{gathered}
+ \lambda_{\min}(\widehat\Sigma)\le\operatorname{tr}(\widehat\Sigma)/r\le H^2/r,\\
+ a_{N_{\mathrm{ctx}}}>0\ \Longrightarrow\
+ N_{\mathrm{ctx}}>8r^2\log\frac{2r(|G|+1)}\alpha.
+\end{gathered}
+\]
+At $r=16$ and $\alpha=0.05$, even the possibility of passing the precheck requires at least 17,492 independent complete contexts for $C_7$, or 17,734 for $D_4$. These are necessary conditions for this conservative formula, not sufficient conditions, intrinsic sample-complexity lower bounds or proposed experimental sizes. Even after passing, \cref{sp:confidence} may be $[0,2]$.
+
+Study~1 uses 40 templates with overlapping partitions. The original Study~2 test bank and the authored context-transport bank each contain 64 paired families with two variants per family. These banks fall below the necessary sample sizes and do not satisfy the stipulated population sampling contract. States, actions, layers and repeated splits are not additional independent contexts. A sample maximum cannot replace the stipulated population bound $H$; clipping would change the target. Data-dependent preprocessing requires independent fitting data or a separate analysis. Simultaneous claims across models, layers, permutation images, dimensions or preprocessing treatments require an explicit joint error allocation, such as $\sum_j\alpha_j\le\alpha$, or a separate joint-event proof. A single-target guarantee does not cover searching the 120 or three images, comparing selected dimensions such as $r=8$ and $r=16$, or selecting a best layer using the certificate sample. No population certificate is reported here.
+
+\paragraph{Finite-bank interpretation.}
+\label{sp:finite-bank}
+A fixed, complete coordinate bank can instead define $P_C$ as its declared empirical distribution. If its second moment is positive definite, \cref{sp:observable,sp:main} then give deterministic structural summaries and risk bounds for that bank, without an independent-context assumption. All states and actions, including the identity and fixed points, receive their declared uniform weights. The primary original-bank analysis uses the second moment of the saved coordinates without additional within-template centering. Computing the whitening metric on this bank defines a new descriptive target, not a held-out score for the historical predictors. Its bounds are not confidence intervals for unseen contexts, and numerical rank or conditioning failures cannot be repaired by silently changing the target dimension. The 48 finite-bank values are reported in \cref{tab:followup-spectral}. The read-only input audit in \cref{app:dimension-rank-audit} verifies the saved banks' full-rank second moments against the original strict ratio threshold $\lambda_{\min}/\lambda_{\max}>10^{-10}$ and their saved whitening transforms against the $10^{-8}$ normalized Frobenius tolerance. These numerical checks support applicability to the primary $r=16$ banks; they are not rigorous rounding certificates and alone provide no evidence about other dimensions. The separate $r=8$ check in \cref{app:spectral-dimension-sensitivity} verifies its own second moment and whitening under the same rules. Complete cell-level records accompany the project.
+
+The centered-bank analysis in \cref{app:template-centering-sensitivity} has its own rank and whitening checks. Its rewhitened treatment satisfies the theorem's contract in the centered bank's own metric. The treatment retaining the original whitening generally lacks unit second moment and is interpreted through its spectral budgets, energy normalization and registration ranks, as described above.
+
+The accompanying C7/D4 implementation computes the budget and type energies, with separate checks for input provenance, numerical whitening, projector completeness, real-type multiplicities and agreement with direct least squares. Its analytic software fixtures are implementation checks, not statistical calibration or LLM evidence. The completed witness study in \cref{sec:witness-transfer} implements the invariant-subspace construction and checks its group laws, orthogonality and construction-bank risk. The theorem's upper endpoint is guaranteed for the specific construction using a budget-attaining subspace and the Procrustes alignment in the proof, on that construction bank and metric. Feasibility alone does not imply that an arbitrary exact orthogonal witness attains this endpoint.
+
+Any feasible witness supplies an upper bound on the class optimum through its own attained loss only when class membership and evaluation use the same bank and metric. Scoring the frozen training construction on held-out contexts with frozen training whitening is a separate prediction comparison. Those scores are not identified with the test bank's self-whitened class bounds, and the witness is not asserted to attain $L^\star$.

@@ -1,0 +1,19 @@
+# Table-to-evidence map
+
+All paths below are relative to this capsule. CSV decimal strings preserve the saved full-precision values. `manifest.json` binds each input and the frozen expected numerical targets by SHA-256. `reproduce.py` uses no other scientific input.
+
+| Manuscript output | Included evidence | Reproduction operation |
+| --- | --- | --- |
+| Table 3: gamma, class-bound endpoints, eta, selected trivial energy | `data/spectral_cells.csv`, 48 rows | Equal-weight mean within each 24-cell domain. Recompute per-cell bounds from gamma and check the saved bounds. `trivial_e` and `trivial_b` are already rank-normalized; the D4 trivial type is `chi_pp`. |
+| Table 3: unique image rank 1 count | `data/image_endpoints.csv`, 2,952 rows; `data/canonical_images.json`, 123 images | Recover the unique semantic row by canonical image identity, then apply the original symmetric pairwise tolerance. Unique-leading counts are 7/24 for C7 and 16/24 for D4. |
+| Table 4: construction witness and old-test witness/OLS/ridge means; witness-worse count | `data/witness_units.csv`, 48 rows | Equal-weight domain means of the four saved risk columns. Count `test_witness_risk > test_ols_risk` from the unrounded values. These use frozen training whitening. |
+| Table 5: same-metric identity and class-risk premium | `data/spectral_cells.csv`; comparison target `data/cell_risk_reference.csv`, 48 rows | For each cell, recompute `a`, `u`, `L(I)`, `premium_lower` and `premium_upper` from gamma, eta and total trivial energy. Compare exact Python float values with saved cell rows, then average all 24 cells per domain. |
+| Table 5 descriptive lower-endpoint summary | `data/cell_risk_reference.csv`, checked against the preceding formulas | For each domain, report all-24-cell mean, median, min, max and the sum of the two largest lower endpoints divided by the sum of all 24 lower endpoints. No rows are deleted. |
+| Table 6: top/median margins, range and U/T/B counts | `data/image_endpoints.csv`; `data/canonical_images.json`; comparison target `data/registration_margins.csv`, 48 rows | Exclude the semantic image by canonical hash, derive each cell's two signed margins and full-image spread, compare exact saved margin/rank/tolerance values, then calculate domain median/min/max and standing counts. |
+| Frozen numerical display and lower-endpoint summaries | `expected/table_values.json` | Exact string comparison for every displayed table value; tight floating comparison (`rel_tol=5e-14`, `abs_tol=5e-15`) for the unrounded descriptive aggregate targets. This comparison tolerance is distinct from, and does not replace, the original image tie tolerance. |
+
+The `cell` field identifies a fixed model/readout/domain condition. `join_key` is an opaque saved identity binding shared by the spectral-derived risk rows, image endpoints and margin rows. The capsule checks these joins, domain coverage, 48 distinct cells, 2,952 distinct cell/image conditions, and each canonical permutation-image hash. It does not reconstruct the underlying coordinates or claim to verify opaque bindings against an unavailable original archive.
+
+The two main CSV comparison targets retain the previously saved per-cell derived values. This permits checks of all rows before aggregation, instead of relying only on rounded manuscript means. Historical direct-identity diagnostics present in `cell_risk_reference.csv` are carried as saved data; the new command never treats them as newly recomputed coordinate evidence.
+
+The exported files omit source-summary archive paths and source-summary hashes. The risk export also omits its descriptive source-locator field. Canonical image records retain domain, canonical hash, semantic flag and sorted permutation list. No author metadata, private paths, run logs, coordinate arrays or model weights are included.

@@ -1,0 +1,285 @@
+{
+  "study_id": "icml2027-characterization-v1",
+  "study_type": "pilot_informed_independent_holdout_characterization_limited_precision",
+  "parent_study_id": "icml2027-identification-bf16-f64-v2",
+  "models": [
+    {
+      "hidden_dimension": 2048,
+      "id": "meta-llama/Llama-3.2-1B",
+      "layers": [
+        3,
+        6,
+        10,
+        13
+      ],
+      "lineage": "llama",
+      "native": false,
+      "revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+      "structural": true,
+      "tokenizer_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08"
+    },
+    {
+      "hidden_dimension": 3072,
+      "id": "meta-llama/Llama-3.2-3B",
+      "layers": [
+        6,
+        11,
+        17,
+        22
+      ],
+      "lineage": "llama",
+      "native": false,
+      "revision": "13afe5124825b4f3751f836b40dafda64c1ed062",
+      "structural": true,
+      "tokenizer_revision": "13afe5124825b4f3751f836b40dafda64c1ed062"
+    },
+    {
+      "hidden_dimension": 4096,
+      "id": "meta-llama/Llama-3.1-8B",
+      "layers": [
+        6,
+        13,
+        19,
+        26
+      ],
+      "lineage": "llama",
+      "native": true,
+      "revision": "d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+      "structural": true,
+      "tokenizer_revision": "d04e592bb4f6aa9cfee91e2e20afa771667e1d4b"
+    },
+    {
+      "hidden_dimension": 1536,
+      "id": "Qwen/Qwen2.5-1.5B",
+      "layers": [
+        6,
+        11,
+        17,
+        22
+      ],
+      "lineage": "qwen",
+      "native": false,
+      "revision": "8faed761d45a263340a0528343f099c05c9a4323",
+      "structural": true,
+      "tokenizer_revision": "8faed761d45a263340a0528343f099c05c9a4323"
+    },
+    {
+      "hidden_dimension": 2048,
+      "id": "Qwen/Qwen2.5-3B",
+      "layers": [
+        7,
+        14,
+        22,
+        29
+      ],
+      "lineage": "qwen",
+      "native": false,
+      "revision": "3aab1f1954e9cc14eb9509a215f9e5ca08227a9b",
+      "structural": true,
+      "tokenizer_revision": "3aab1f1954e9cc14eb9509a215f9e5ca08227a9b"
+    },
+    {
+      "hidden_dimension": 3584,
+      "id": "Qwen/Qwen2.5-7B",
+      "layers": [
+        6,
+        11,
+        17,
+        22
+      ],
+      "lineage": "qwen",
+      "native": true,
+      "revision": "d149729398750b98c0af14eb82c78cfe92750796",
+      "structural": true,
+      "tokenizer_revision": "d149729398750b98c0af14eb82c78cfe92750796"
+    }
+  ],
+  "runtime": {
+    "allow_cpu_offload": false,
+    "attention_implementation": "eager",
+    "attn_implementation": "eager",
+    "batch_size": 8,
+    "deterministic": true,
+    "device": "auto",
+    "device_map": "auto",
+    "dtype": "bfloat16",
+    "local_files_only": true,
+    "max_new_tokens": 32,
+    "trust_remote_code": false
+  },
+  "parent_configuration_sha256": "a5fd5d3ecabd8c15af3cd3d0220d89b9cca880bf8af6ee5d399e5e72d09c470b",
+  "parent_pins": {
+    "outputs/structural_pilot/run_identity.json": "3888e6fffe79332c3be60d3d82828e9fea93b6574640605a338fbbfa3499c2c7",
+    "outputs/structural_pilot/summary.json": "c625e385b17d39c832648b253898272eefd3a26c1dcb1129b24b54df8738cd2a",
+    "study_config.json": "a5fd5d3ecabd8c15af3cd3d0220d89b9cca880bf8af6ee5d399e5e72d09c470b"
+  },
+  "readiness_archive_sha256": "ac5038f1a4931e6cd765f159920f9dafa9ea7980af03e8f30b54d394f472e0c8",
+  "expected_numeric_code_identity": "f2ff2cd1398674757e0bb22ae5585ead94bf3c2b2fdc5f91426b940b2ff90f17",
+  "expected_development_cache_manifest_hashes": {
+    "Qwen/Qwen2.5-1.5B|C7": "4574e9ade48714d86e4aa361e4a4c79224f6e18d3ab63a1043e174c5a4817bf2",
+    "Qwen/Qwen2.5-1.5B|D4": "18ba78d582be9b15d305a525a111f634d7a4eb8c78d73c0ae4c559434746a299",
+    "Qwen/Qwen2.5-1.5B|S3": "65655c18344ecd625ff0872d2726fe385203daf6896184d76817738e73615d6d",
+    "Qwen/Qwen2.5-3B|C7": "dfb7e0701cb8abfb6723e4b70c3e1ea9cc0afeca6393c5e5ac5cbf84cab59b6f",
+    "Qwen/Qwen2.5-3B|D4": "276b1eeca4b940e4bd1fdcc9a0fe7299502544486718a6334499a8e7219e3a63",
+    "Qwen/Qwen2.5-3B|S3": "38a51502ab35d3131f1c67622070e890a3e5004535a3eb95149babf193133649",
+    "Qwen/Qwen2.5-7B|C7": "d7dfa863d08f23e69adb4b2337f907deea31c3a6fabf59a2448f7cc618b881b4",
+    "Qwen/Qwen2.5-7B|D4": "1b055eeaefd27f9a9be818eadb09571df4f365b3879b6565c3e876e3d098491c",
+    "Qwen/Qwen2.5-7B|S3": "75745d351d3d944a46e7346acd791067dbf2e6e4dd90245eedf4fc13c2333e0d",
+    "meta-llama/Llama-3.1-8B|C7": "31d85279a75000cf69f6785f7e2c4c358dcdd6c301b75f78a76f37b8db84a10c",
+    "meta-llama/Llama-3.1-8B|D4": "a1f7e077331c331fcdf39d62895a96b03dab79410f1f1a437523d0469b0451c8",
+    "meta-llama/Llama-3.1-8B|S3": "41bf92508d8d98e24c85c7600f3f18f566d010f48af3f12566c1f3b93af0a07a",
+    "meta-llama/Llama-3.2-1B|C7": "76f8556c673d4ec3405547bc61165ca148470dabfdb41fac9bbc300fc47f2e40",
+    "meta-llama/Llama-3.2-1B|D4": "75fe3d23c3a079e443373cd44e8f34194c8650b54f09189172b46411061c4768",
+    "meta-llama/Llama-3.2-1B|S3": "0707ae4c9e2a8db86f82d7a093ece4fcba3a331096dbb63bff7c114763ff3973",
+    "meta-llama/Llama-3.2-3B|C7": "8c7080b0419bab271148c5a18717711738681333235573d4e34c684ae832a342",
+    "meta-llama/Llama-3.2-3B|D4": "25b7ecffb19b84451c258cf77529c38ce3540ed24daa3f484fdd7982f9bd4bf0",
+    "meta-llama/Llama-3.2-3B|S3": "237ee5e92f9ad558fa5d5d206ee2f946f980e965b1c84e7709fba9bc5de2ebe8"
+  },
+  "dataset_seals": {
+    "C7": {
+      "dataset_sha256": "784120087a4572ec9f3ce5011f0d9c4e21a69e72536e6a1a848c8cda7ce854ce",
+      "generator_version": "compositional_scenarios_v1",
+      "manifest_sha256": "13f364fe96205009bf8a6dafbd7411026c17dfc406b94c9cd4350f4d5e75a806",
+      "n_rows": 1960,
+      "rows_sha256_recorded_not_rehashed": "1d00d5b1e2d87db13b31fd89c1eb49420757f1d900a2ebed71d4e1fa84de3c7c",
+      "status": "sealed",
+      "test_outcomes_accessed_at_seal_time": false
+    },
+    "D4": {
+      "dataset_sha256": "6676ae9524ef8d1f125dd4df51f9507ebface2d81ac0516715fb231e16b83748",
+      "generator_version": "compositional_scenarios_v1",
+      "manifest_sha256": "13eaf2691119b90dbc3d4d1fa5989f4901859744afa9c487d1d246ff2e0cd752",
+      "n_rows": 1120,
+      "rows_sha256_recorded_not_rehashed": "d406df57c56d7892f8350fbe48ac58f91ec0e7a74a922d260e45ce5bca65e0b0",
+      "status": "sealed",
+      "test_outcomes_accessed_at_seal_time": false
+    },
+    "S3": {
+      "dataset_sha256": "9c4eb51d727795a70fdb76b1ebd8e2c5a1a8f086bae59179704f582a8448c008",
+      "generator_version": "compositional_scenarios_v1",
+      "manifest_sha256": "288889124ee536415fd915ada9aed2e72a8cf4e4ef5274847a792ae9344ef40f",
+      "n_rows": 87744,
+      "rows_sha256_recorded_not_rehashed": "a6aaf13a0a43888e97180a2b5f537d6e6c847b02846ef89b359f071646acbbfa",
+      "status": "sealed",
+      "test_outcomes_accessed_at_seal_time": false
+    }
+  },
+  "structural": {
+    "bootstrap_replicates": 10000,
+    "bootstrap_sensitivity": false,
+    "context_energy_floor": 0.05,
+    "depths": [
+      0.2,
+      0.4,
+      0.6,
+      0.8
+    ],
+    "equal_support": true,
+    "groups": [
+      "C7",
+      "D4",
+      "S3"
+    ],
+    "joint_device": "cpu",
+    "joint_steps": 1200,
+    "lambda_grid": [
+      0,
+      1e-06,
+      1e-05,
+      0.0001,
+      0.001,
+      0.01,
+      0.1,
+      1
+    ],
+    "legal_action_reference": true,
+    "potential_q": 16,
+    "potential_steps": 500,
+    "potential_widths": [
+      32,
+      128
+    ],
+    "q_primary": 16,
+    "q_secondary": [],
+    "secondary": [
+      "affine",
+      "procrustes",
+      "residual",
+      "generator",
+      "joint",
+      "local"
+    ],
+    "support_contexts_per_state": 4
+  },
+  "statistics": {
+    "bootstrap_replicates": 10000,
+    "equivalence": 0.005,
+    "main_alpha": 0.04,
+    "margin": 0.01,
+    "s3_alpha": 0.01,
+    "seed": 314159
+  },
+  "test_context_families": 64,
+  "test_entity_orbits": 16,
+  "all_element_and_generator_tracks": [
+    "C7",
+    "D4_corner"
+  ],
+  "storage_curve_K": [
+    8,
+    16,
+    32,
+    64,
+    128,
+    256,
+    "full_N",
+    "counted_coordinate_storage_match"
+  ],
+  "all_test_rows_per_model": {
+    "C7": 896,
+    "D4": 512,
+    "S3": 40320
+  },
+  "included_S3_splits": [
+    "test_joint",
+    "test_context",
+    "test_entity",
+    "support"
+  ],
+  "S3_new_row_breakdown": {
+    "test_joint": 12288,
+    "test_context": 18432,
+    "test_entity": 9216,
+    "support": 384
+  },
+  "wall_budget_seconds_total": 21600,
+  "minimum_free_disk_reserve_GiB": 15,
+  "formal_inference_enabled": false,
+  "old_primary_margins_retained_for_reporting": true,
+  "old_structural_power_target_met": false,
+  "test_access_basis": "No confirmation freeze/stages/artifacts in named parent; all known cached helpers restricted to excluded pilot. This does not certify external script access. Stop if local contrary evidence is known.",
+  "model_execution_default": false,
+  "native_enabled": false,
+  "synthetic_calibration_enabled": false,
+  "new_primary_efficacy_claim": false,
+  "explicit_scope_changes_from_parent": [
+    "New pilot-informed characterization identity; old study remains stopped and unchanged.",
+    "q=16 only, matching the audited development comparisons; no new q sensitivity claims.",
+    "No formal significance decisions or bootstrap-calibration certificates from this run. Legacy endpoint definitions, margins and alpha families retained as provenance.",
+    "All previously registered structural secondary estimators and coherent-action references retained at q=16.",
+    "New input-only field and training-support storage curves on C7/D4 only; no validated S3 kernel comparator claimed.",
+    "Only test_joint/test_context/test_entity plus explicit support S3 blocks collected; reserved new validation cross blocks are excluded before extraction.",
+    "No native, cross-model, product, interface-training or historical rerun is included in this bounded study."
+  ],
+  "storage_curve_selection_scope": "All training rows may be used to choose farthest-first supports; only retained predictor arrays count toward the storage budget. This is not a matched training-data-exposure comparison.",
+  "descriptive_uncertainty": {
+    "replicates": 10000,
+    "seed": 314159,
+    "fixed_panel_conditions": 24,
+    "main_unit": "whole_context_family_after_fixed_panel_averaging",
+    "S3_unit": "independent_context_family_and_entity_orbit_resampling",
+    "interval": "95percent_percentile_sensitivity_only",
+    "multiplicity_adjusted": false,
+    "new_typeI_or_coverage_certification": false
+  }
+}

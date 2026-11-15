@@ -1,0 +1,13 @@
+\begin{table}[htbp]
+\caption{All-element changed-state prediction in the reviewed replay: equal action then equal cell means over 24 fixed model/readout cells per group; lower is better. $1\times$ denotes nominal incremental storage relative to ridge, not equal capacity or total RAM. Centroids additionally use construction labels and an action table. All budget and registration results are retained in the release.}
+\label{tab:reproduction-compact}\centering\small
+\begin{tabular}{lrr}\toprule
+Method & $C_7$ & $D_4$ (corners) \\
+\midrule
+Ridge & 0.01490 & 0.04192 \\
+Decoded centroid & 0.01201 & 0.06382 \\
+Limited support, $1\times$ & 0.66133 & 0.49167 \\
+RFF, $1\times$ & 0.30033 & 0.21265 \\
+Nystr\"om, $1\times$ & 0.08292 & 0.04942 \\
+\bottomrule\end{tabular}
+\end{table}

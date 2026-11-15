@@ -1,0 +1,222 @@
+--- 0.4.6/paper/main.tex
++++ 0.4.7/paper/main.tex
+@@ -42,7 +42,7 @@
+ \printAffiliationsAndNotice{}
+ 
+ \begin{abstract}
+-What do recovered group actions establish about language-model representations? We examine weekday cycles ($C_7$) and square-corner actions ($D_4$) across six pretrained models. Independent linear operators attain held-out squared relative prediction errors near 0.05, and generator-only fits predict excluded action elements on the same state vocabulary. The completed controls reveal three findings. Predictive recovery coexists with competitive category and coherently registered alternatives. Predictor rankings depend on storage: the tested RFF and Nystr\"om models do not improve panel means at the linear reference budget, but do at larger budgets. Directly fitting contextual differences reduces transport loss relative to applying coordinate-fitted operators, while a coherent alternative correspondence yields close means. Realization and error-propagation identities explain why positive recovery diagnostics alone do not resolve these alternatives. A complementary spectral bound relates invariant-subspace approximation to the best prediction risk over fixed-dimensional exact orthogonal actions. Together, the results characterize predictive action structure, estimator tradeoffs and contextual transport on a fixed panel. They support recovery across the declared contexts, while leaving preferential semantic alignment and native causal implementation unresolved.
++What do recovered group actions establish about language-model representations? We separate predictive recovery from optimal risk over an exact action class. An analytical example has identical optimal unconstrained regression error and ordinary orbit spectrum, yet different exact-action risks; a spectral bound relates the latter risk to a real-type-constrained invariant-subspace budget. On weekday cycles ($C_7$) and square-corner actions ($D_4$) across six pretrained models, completed controls reveal three empirical findings. Predictive recovery coexists with competitive category and coherently registered alternatives. Predictor rankings change with storage: tested nonlinear predictors do not improve panel means at the linear reference budget, but do at larger budgets. Directly fitting contextual differences improves transport relative to coordinate-fitted operators, while a coherent alternative retains close means. The theory characterizes a whitened exact orthogonal-action risk; the experiments describe separate prediction and transport endpoints on fixed panels. Together they specify what recovery scores distinguish and which competing explanations remain viable.
+ \end{abstract}
+ 
+ \section{Introduction}
+@@ -52,10 +52,9 @@
+ 
+ The protocol fits shared operators to activations of seven weekday states and four corner states across held-out short templates. States are visible in the input, and the language models remain unchanged. Independent fitting removes group-law penalties from the objective, while generator-only fitting withholds action elements. Both succeed predictively. We then compare category predictors, a coherently registered alternative action, compact nonlinear predictors and context-difference fits to determine what these successes distinguish.
+ 
+-\input{generated/identification_summary.tex}
+-
+-Our empirical contribution is threefold. First, predictive transfer across held-out templates and excluded action elements coexists with alternatives that disrupted-registration and training-correspondence controls do not exclude. Second, predictor rankings change with the declared storage budget; the label-informed category control also improves the $C_7$ mean without winning in most cells. Third, fitting contextual differences directly improves transport, while the tested coherent alternative still gives close descriptive means. The analytical results explain limits of interpreting these observations as semantic identification. A separate risk bound connects optimal invariant-subspace approximation to the entire fixed-dimensional exact orthogonal action class, under an explicitly whitened metric. This fixed-panel account of predictive structure and competing explanations, summarized in \cref{tab:identification-summary}, is our contribution within the established transformation-recovery literature.
+-
++\input{generated/main_findings.tex}
++
++Our contribution connects a theoretical distinction with three completed empirical comparisons. The theory shows why regression error and an ordinary spectrum do not determine fixed-dimensional exact-action risk, and bounds that risk using a type-constrained invariant-subspace budget. The empirical findings concern competitive alternative explanations, storage-dependent predictor rankings, and improved context transport under dedicated fitting (\cref{tab:main-findings}). These are complementary results: the new spectral quantity has not been evaluated on the LLM panel. Standard finite-orbit and error-propagation identities explain the interpretation of the controls; their role is supporting analysis rather than additional new theory.
+ 
+ \section{Protocol and Evidence Scope}
+ \label{sec:setup}
+@@ -93,54 +92,52 @@
+ \paragraph{Statistical scope.}
+ All empirical comparisons in this paper are descriptive analyses of the recorded fixed panels. Computational replay re-executes inspected designs and supplies no independent confirmation. We retain the recorded means and bootstrap percentile intervals. Historical FULL uses 5,000 draws, base seed 314159 with analysis-specific offsets, and model, depth, split, and template levels, adding random-control seed where relevant. AFS-D keeps depth fixed for its matched contrasts; the separate global-additive experiment resamples split aggregates. The six models are deliberately selected, layers are repeated measurements, and template partitions overlap. These intervals describe resampling sensitivity under the recorded scheme; nominal 95\% does not assert calibrated population coverage. Numerous secondary intervals are not globally multiplicity-adjusted. We make no new significance or equivalence decisions from them; \cref{app:inference} gives their scope.
+ 
+-\section{Why Positive Recovery Does Not Settle Identification}
++\section{Prediction Error and Exact-Action Risk}
+ \label{sec:boundaries}
+-The following elementary facts delimit the empirical claims. They specialize standard realization and perturbation arguments to our finite-state protocol; the broader induced-action and accumulation questions are developed by \citet{sun2026transformationlaws}. Proofs and further coordinate/context diagnostics appear in \cref{app:theory}.
+-
+-Measured predictor performance, the best risk in a specified function class, an exact action on supported features, and the model's native mechanism are distinct targets. A successful fit witnesses predictability under its information and evaluation conditions; failure of selected fits does not exclude other maps in a larger class. Under exact realizability, the observed states determine a linear action only on their span. Its extension beyond that span and its internal implementation remain separate questions (\cref{app:contextual-realization,app:coordinates}).
+-
+-\paragraph{Finite states can support exact algebra automatically.}
+-\begin{proposition}[Finite-orbit realizability]
+-\label{prop:finite}
+-Let $X\in\R^{n\times(n-1)}$ have centered rows and rank $n-1$. For a permutation $g$, define $(P_gX)_i=X_{g(i)}$. There is a unique invertible $R_g=X^\dagger P_gX$ satisfying $XR_g=P_gX$, and $R_gR_h=R_{h\circ g}$.
+-\end{proposition}
+-Thus seven generic centered lexical vectors in six dimensions realize a weekday cycle exactly; four generic centered vectors in three dimensions realize every corner permutation, including $D_4$. This is a conjugated permutation representation, not evidence that a model learned the named group's semantics. Separate contextual orbits need not share one realization; a conjugacy counterexample is given in \cref{app:theory}. Conversely, a stable state code plus context features in an invariant complementary subspace \emph{can} share a realization. Held-out templates alone do not exclude this alternative.
+-
+-\paragraph{Prediction already constrains composition.}
+-Write $e_g(i,t)=z_{i,t}R_g-z_{g(i),t}$.
+-\begin{proposition}[Prediction-error propagation]
+-\label{prop:propagation}
+-For $p=g_1\circ g_2$, the composition residual is
+-\begin{align}
+- z_{i,t}(R_{g_2}R_{g_1}-R_p)
+- &=e_{g_2}(i,t)R_{g_1} \nonumber\\
+- &\quad+e_{g_1}(g_2(i),t)-e_p(i,t).
+-\end{align}
+-Its norm is at most $\norm{e_{g_2}}_2\norm{R_{g_1}}_{\rm op}+\norm{e_{g_1}(g_2(i),t)}_2+\norm{e_p}_2$.
+-\end{proposition}
+-Independent ridge therefore removes \emph{objective} circularity without proving that measured consistency exceeds what prediction accuracy and operator norms entail. We report both properties, without treating their logical distinction as evidence of statistical independence.
+-
+-\paragraph{Balanced global displacements cancel.}
+-\begin{proposition}[Global-field cancellation]
+-\label{prop:additive}
+-For any permutation $g$ of a complete uniformly weighted orbit, $\sum_i(z_{g(i),t}-z_{i,t})=0$. Therefore the train-fitted global displacement $v_g=\mathbb{E}_{i,t}[z_{g(i),t}-z_{i,t}]$ is zero for every element of both tested groups, up to numerical precision.
+-\end{proposition}
+-This baseline is an identity predictor by construction. Its failure delimits a global additive estimator; it is not an independent empirical rejection of all displacement-based explanations. Source-conditioned displacements avoid this cancellation. With source identity updated after each step, differences of state centroids telescope to the composite centroid and can distinguish noncommuting actions (\cref{app:additive-composition}). The historical structural tests do not make that matched comparison; the separate characterization below compares these predictors in the same $q=16$ coordinates, with their information differences explicit.
+-
+-The appendix also gives a common-design ridge residual identity and a whitened-orbit construction with identical within-context geometry but failed shared transport under fresh independent orientations. Its full-rank specialization isolates the noncommuting part of relative orientations (\cref{app:ridge-identity,app:orientation,app:commutant}). Thus within-context geometry and exact local algebra alone do not guarantee a common predictor. These are analytical counterexamples, not a null distribution or calibrated lower bound for the measured LLM errors.
+-
+-\paragraph{A risk bound for an entire action class.}
+-\Cref{sp:main} connects best invariant-subspace approximation to the minimum prediction risk over all exact $r$-dimensional orthogonal actions. If $\gamma_r$ is the normalized energy captured by the best invariant subspace of dimension at most $r$, then
+-\[
+- 2(1-\gamma_r)\le L^\star_{\mathrm{rep},O(r)}
+- \le 2(1-\gamma_r^2).
+-\]
+-This uses population second-moment whitening and a complete, uniformly weighted state/action grid. It is a different estimand from $D$ and the registration-specific masks above. The bound can exclude every low-risk action in that specified class; it does not certify the reported LLM scores or identify a native mechanism. \Cref{sp:counterexample,sp:certificate} give a type-sensitive counterexample and the limitations of a conservative finite-context certificate. Classical invariant approximation and representation-stability tools are credited in \cref{sp:positioning}.
+-
++For a fixed distribution and loss, a predictor's risk upper-bounds the optimum over any function class containing it. It does not determine the optimum over a different class constrained to obey group laws. We make this distinction precise, then relate it to finite-state recovery controls.
++
++\subsection{Same summaries, different exact-action risk}
++Consider complete labeled states $s\in S$ in context $c$, with fixed-coordinate observations $z_{c,s}\in\R^{1\times r}$. For a fixed context distribution $P_C$, average uniformly over states and all group elements, including identity and fixed points. For positive-definite second moment $\Sigma=\mathbb E[z^\top z]$, set $x=z\Sigma^{-1/2}$ and $x_g(c,s)=x(c,g\cdot s)$. Let $\eta$ be the minimum normalized squared prediction error for independently chosen matrices $A_g$, and let
++\[
++ L^\star=\inf_{\rho\in\mathcal R_r(G)}
++ \frac1{r|G|}\sum_{g\in G}\mathbb E\norm{x\rho_g-x_g}_2^2,
++\]
++where $\mathcal R_r(G)$ contains exact row actions with $\rho_g\in O(r)$ and $\rho_g\rho_h=\rho_{hg}$. Both risks use this same whitened metric.
++
++\paragraph{An analytical separation.}
++Fix $G=S=C_2\times C_2\times C_7$ acting by addition, uniform states $(a,b,k)$, one context and $r=1$. The observations
++\[
++ x_A=\frac{(-1)^a+(-1)^b}{\sqrt2},\qquad
++ x_B=\sqrt2\cos(2\pi k/7)
++\]
++have unit second moment, the same optimal regression risk $\eta=1/2$, and the same untyped nonzero orbit spectrum $\{1/2,1/2\}$. Nevertheless,
++\[
++ \boxed{\ L_A^\star=1,\qquad L_B^\star=2.\ }
++\]
++The first spectrum occupies two real one-dimensional characters; the second occupies an indivisible real rotation plane. A one-dimensional exact action can retain one of the former but none of the latter. Thus regression error and an ordinary spectrum are insufficient summaries of exact-action recovery. The full labeled observations distinguish these examples; this is a separation of summaries, not nonidentifiability of the full data. \Cref{sp:counterexample} gives the calculation.
++
++\subsection{Bounding the entire exact-action class}
++Let $\gamma_r$ be the fraction of observation energy captured by the best group-invariant subspace of dimension at most $r$, respecting real irreducible types. Equivalently, it is the type-constrained spectral budget of the orbit Gram matrix, divided by $r$ (\cref{sp:budget,sp:observable}). \Cref{sp:main} proves
++\[
++ \boxed{\ 2(1-\gamma_r)\le L^\star\le2(1-\gamma_r^2).\ }
++\]
++The lower bound holds for every member of $\mathcal R_r(G)$, and some member of the same class attains the upper bound or better. For $\gamma_r<1$, the bounds differ by a factor $1+\gamma_r\le2$; both vanish at $\gamma_r=1$. This connects best invariant approximation with fixed-dimensional prediction risk, using classical averaging and representation tools credited in \cref{sp:positioning}. It is a risk bound, not a demonstrated learning algorithm.
++
++\paragraph{Metric and evidence contract.}
++This theoretical risk differs from the historical $D$ and later training-energy-normalized scores. Ridge and finite-step penalized Joint need not be exact orthogonal actions, so their reported scores are not witnesses for this bound. No LLM spectrum or independent-context certificate is reported here. The conservative certificate in \cref{sp:certificate} requires a sampling contract unmet by the present panel. The $r=1$ example establishes a possible distinction, not its empirical magnitude at $r=16$; \cref{sp:type-scale} gives a simple scale restriction for C7/D4.
++
++\subsection{Consequences for finite-state recovery}
++Three elementary facts explain the empirical controls; their formal statements and proofs are in \cref{app:theory}. First, any $n$ centered affinely independent state vectors in $n-1$ dimensions admit an exact action of every state permutation (\cref{prop:finite}). Seven generic weekday vectors therefore realize a cycle without group-specific semantic learning. A stable state code plus complementary context features can also share one action across contexts. Held-out templates do not exclude that construction, although arbitrary separate contextual realizations need not share a predictor.
++
++Second, composition residuals depend on prediction errors and operator norms (\cref{prop:propagation}). Independent fitting removes group-law penalties from the objective, but does not show that measured consistency adds identification information beyond accurate prediction. The common-design ridge identity in \cref{app:ridge-identity} makes this dependence explicit.
++
++Third, displacements averaged over a complete uniformly weighted state orbit cancel for every permutation (\cref{prop:additive}). The global additive baseline is therefore an identity predictor by construction. Source-conditioned displacements avoid that cancellation and can compose by telescoping centroid differences (\cref{app:additive-composition}). The comparison below evaluates such alternatives with their extra information stated.
++
++These facts use standard realization and perturbation arguments, related to the broader induced-action questions of \citet{sun2026transformationlaws}. Exact data determine an action only on the supported span; extensions and native implementation remain separate targets. The orientation counterexamples in \cref{app:orientation,app:commutant} further show that equal within-context geometry does not guarantee common transport. They delimit the controls rather than supply a null distribution for the measured LLM errors.
+ 
+ \section{What the Completed Controls Identify}
+ \label{sec:evidence}
+-\Cref{tab:identification-summary} links each observed result to the explanation it addresses. Compare losses within each endpoint: historical $D$, compact-coordinate prediction and context-difference transport use different denominators and sampling contracts.
++\Cref{tab:main-findings} summarizes the three empirical findings; \cref{tab:identification-summary} retains the detailed endpoint-by-endpoint comparison. Compare losses within each endpoint: historical $D$, compact-coordinate prediction and context-difference transport use different denominators and sampling contracts.
+ 
+ \subsection{Prediction and consistency: two properties, coupled evidence}
+ Independent ridge attains $\Eeq=0.04830/0.05200$ for $C_7/D_4$, while joint errors are $0.04934/0.05286$. Joint fitting decreases relation defects by $0.01699/0.00728$ at a small direct-fit cost. The maps support approximate predictive action structure without group-law penalties in the independent objective. However, \cref{prop:propagation} explains why this is not automatically an additional semantic discovery beyond accurate prediction. These diagnostics do not establish a comparison matched in prediction error and operator norm.
+@@ -158,7 +155,14 @@
+ 
+ In the $q=16$ replay, the decoded-centroid predictor improves the $C_7$ mean but wins only 9/24 cells; it is worse on the $D_4$ mean and wins in 2/24. It receives training state labels and the exact action table, beyond source-coordinate/action access. This is a strong explanatory control with an information advantage, not a claim of superiority at equal information.
+ 
+-The compact nonlinear comparison fits RFF and Nystr\"om residual predictors using all construction target pairs. Neither improves the group mean at the identity-pruned linear storage budget; Nystr\"om does at $2\times$ storage and RFF at $4\times$ in both groups. The whole curve, including $0.5,1,2,4,8\times$ budgets, remains in \cref{tab:reproduction-budgets}; the unit-budget means are in \cref{tab:reproduction-compact}. Storage includes predictor features, normalizers, coefficients and biases, but excludes shared PCA, model weights and runtime memory. The observed ranking is estimator- and budget-dependent; it is not universal linear superiority or total-compute efficiency. Budgets were not selected retrospectively as deployment operating points.
++The compact nonlinear comparison fits RFF and Nystr\"om residual predictors using all construction target pairs. Neither improves the group mean at the identity-pruned linear storage budget; Nystr\"om does at $2\times$ storage and RFF at $4\times$ in both groups. \Cref{fig:budget-frontier} shows all five declared nominal budgets; exact means and unit-budget comparisons remain in \cref{tab:reproduction-budgets,tab:reproduction-compact}. Storage includes predictor features, normalizers, coefficients and biases, but excludes shared PCA, model weights and runtime memory. The observed ranking is estimator- and budget-dependent; it is not universal linear superiority or total-compute efficiency. Budgets were not selected retrospectively as deployment operating points.
++
++\begin{figure*}[t]
++\centering
++\includegraphics[width=\textwidth]{figures/budget_frontier.pdf}
++\caption{\textbf{Predictor rankings change with storage.} Recorded direct-prediction means for all nonidentity actions on changed states under the specified semantic registration, over 24 fixed model/readout cells per domain. Losses use the replay training-coordinate-energy denominator; lower is better. The horizontal axis is the nominal incremental parameter-storage budget relative to identity-pruned ridge, not runtime memory or statistical capacity. All five declared budgets and all three budgeted predictor families are shown. Nystr\"om first improves the group mean over ridge at $2\times$, and RFF at $4\times$, in both groups. Lines connect recorded aggregates on logarithmic axes; they are not fitted scaling laws or confidence bands. This direct-prediction endpoint is distinct from generator-only composition.}
++\label{fig:budget-frontier}
++\end{figure*}
+ 
+ \subsection{Fitting context differences improves transport}
+ Fitting context differences directly yields losses $0.03426/0.11639$ for $C_7/D_4$, versus $0.04714/0.13230$ for applying coordinate-fitted operators to those differences. The coherent action gives $0.03446/0.11717$ under the same direct fitting procedure and registration-specific scoring just described. The improvement therefore identifies a useful fitting objective, while close means for distinct registered tasks do not establish semantic preference or equivalence. On jointly new $S_3$ contexts/entities, direct transport loss is $0.016290$ versus identity $0.016444$, a small absolute improvement below the inherited $0.01$ practical margin. Complete normalization and information conditions are in \cref{app:characterization,app:reproduction}.
+@@ -185,14 +189,14 @@
+ For a new application, specify the intended claim and competing explanation before choosing a diagnostic. The useful outcome is the interpretation changed by the comparison, including unfavorable results, rather than the number of positive scores obtained.
+ 
+ \section{Discussion and Remaining Scope}
+-The experiments show that predictable finite actions coexist with competitive explanatory alternatives. Storage changes predictor rankings, and fitting context differences directly improves transport without establishing preference for the specified semantic registration. The analytical identities and control definitions limit what additional identification information is justified by combining prediction, group-law and disrupted-control scores. The separate spectral result bounds a class-optimal orthogonal-action risk under its own metric; its finite-context certificate is not applied to this panel. These results specify what the tested controls change in an interpretation, rather than introduce a new representation theory or supersede competent-task causal studies.
++The experiments show that predictable finite actions coexist with competitive explanatory alternatives. Storage changes predictor rankings, and fitting context differences directly improves transport without establishing preference for the specified semantic registration. The analytical identities and control definitions limit what additional identification information is justified by combining prediction, group-law and disrupted-control scores. The analytical separation shows that identical regression risk and ordinary spectra can conceal different exact-action risks. The spectral bound characterizes that class optimum under its own metric; connecting it empirically to the LLM panel remains open. These results specify what the tested controls change in an interpretation, rather than introduce a new representation theory or supersede competent-task causal studies.
+ 
+ The main open issue is robustness beyond the present construction. C7/D4 use small seen-state vocabularies; repeated partitions reuse templates, and the later study uses a fixed grammar generator. S3 includes new entities and contexts but yields only small gains over identity. Models and layers are selected panels, not independent population samples. Structural power remained limited and native confirmation is blocked. The appendix retains secondary peer, cross-model, product and trained-interface results with their distinct endpoints and original failure records.
+ 
+-An independently authored, prospectively frozen context bank would test whether the principal comparisons survive a different context construction. A focused follow-up could compare specified and multiple coherent registrations on one common complete source/action grid, with fixed information, fitting rules and normalization. That would be a new evaluation contract, unlike the registration-specific masks used here. It would strengthen evidence about generalization and registration preference, not by itself exclude state coding or establish native causal use. It has not been run and is not needed to state the present fixed-panel findings.
++A bounded next step is to check whether saved, complete, same-coordinate banks permit the finite-bank spectral diagnostic in \cref{sp:observable}. Such a retrospective analysis could connect the theoretical quantities to this panel, but would not provide new-context validation. An independently authored, prospectively frozen context bank would instead test whether the principal comparisons survive a different context construction. A focused follow-up could compare specified and multiple coherent registrations on one common complete source/action grid, with fixed information, fitting rules and normalization. That would be a new evaluation contract, unlike the registration-specific masks used here. It would strengthen evidence about generalization and registration preference, not by itself exclude state coding or establish native causal use. It has not been run and is not needed to state the present fixed-panel findings.
+ 
+ \section{Conclusion}
+-Across the declared language-model panel, finite-action predictors transfer to held-out contexts and generator-composed elements. Their interpretation changes when category information, predictor storage and context-difference fitting are made explicit. In particular, dedicated fitting improves transport while the tested coherent alternative remains descriptively competitive. This combination of predictive success and viable alternatives motivates evaluating recovery by the explanation each control distinguishes, with semantic preference and native causal use treated as separate empirical questions.
++Across the declared language-model panel, finite-action predictors transfer to held-out contexts and generator-composed elements. Their interpretation changes when category information, predictor storage and context-difference fitting are made explicit. The analytical example and risk bound additionally distinguish unconstrained prediction from the best exact orthogonal action of a fixed dimension. In the empirical panel, dedicated fitting improves transport while the tested coherent alternative remains descriptively competitive. This combination of predictive success and viable alternatives motivates evaluating recovery by the explanation each control distinguishes, with semantic preference and native causal use treated as separate empirical questions.
+ 
+ \FloatBarrier
+ \label{sec:main-end}
+--- 0.4.6/paper/sections/theory.tex
++++ 0.4.7/paper/sections/theory.tex
+@@ -1,6 +1,31 @@
+ \section{Proofs and the Identification Problem}
+ \label{app:theory}
+ \label{sec:appendix}
++\subsection{Supporting finite-state statements}
++The following elementary statements support Section~\ref{sec:boundaries}; they are not presented as new general theory. Their original mathematical content is retained.
++
++\begin{proposition}[Finite-orbit realizability]
++\label{prop:finite}
++Let $X\in\R^{n\times(n-1)}$ have centered rows and rank $n-1$. For a permutation $g$, define $(P_gX)_i=X_{g(i)}$. There is a unique invertible $R_g=X^\dagger P_gX$ satisfying $XR_g=P_gX$, and $R_gR_h=R_{h\circ g}$.
++\end{proposition}
++
++Write $e_g(i,t)=z_{i,t}R_g-z_{g(i),t}$.
++\begin{proposition}[Prediction-error propagation]
++\label{prop:propagation}
++For $p=g_1\circ g_2$, the composition residual is
++\begin{align}
++ z_{i,t}(R_{g_2}R_{g_1}-R_p)
++ &=e_{g_2}(i,t)R_{g_1} \nonumber\\
++ &\quad+e_{g_1}(g_2(i),t)-e_p(i,t).
++\end{align}
++Its norm is at most $\norm{e_{g_2}}_2\norm{R_{g_1}}_{\rm op}+\norm{e_{g_1}(g_2(i),t)}_2+\norm{e_p}_2$.
++\end{proposition}
++
++\begin{proposition}[Global-field cancellation]
++\label{prop:additive}
++For any permutation $g$ of a complete uniformly weighted orbit, $\sum_i(z_{g(i),t}-z_{i,t})=0$. Therefore the train-fitted global displacement $v_g=\mathbb{E}_{i,t}[z_{g(i),t}-z_{i,t}]$ is zero for every element of both tested groups, up to numerical precision.
++\end{proposition}
++
+ \subsection{Finite-orbit realizability}
+ \begin{proof}[Proof of \cref{prop:finite}]
+ Centering implies $\operatorname{col}(X)\subseteq\mathbf{1}^{\perp}$. Both spaces have dimension $n-1$, so they are equal. Every permutation matrix preserves $\mathbf{1}^{\perp}$; hence $P_gX$ lies in the column space of $X$. Full column rank gives the unique solution $R_g=(X^\top X)^{-1}X^\top P_gX$. Our definition implies $P_gP_h=P_{h\circ g}$, and consequently
+--- 0.4.6/paper/sections/spectral_risk.tex
++++ 0.4.7/paper/sections/spectral_risk.tex
+@@ -150,6 +150,18 @@
+ \]
+ Both satisfy $\mathbb E_g a(g)^2=1/2$, hence $\eta=1/2$. For $A$, $T$ has eigenvalue $1/2$ on each of two distinct real one-dimensional characters; for $B$, it is $\Id_2/2$ on a real irreducible rotation plane. The nonzero eigenvalues are thus the same, $\{1/2,1/2\}$. An exact real one-dimensional action is a character $\chi:G\to\{\pm1\}$ and is necessarily trivial on $C_7$. Its loss is $2-2\mathbb E_g[\chi(g)a(g)]$. Character orthogonality makes the largest correlation $1/2$ for $A$ and zero for $B$, so $L_A^\star=1$ and $L_B^\star=2$; correspondingly $\gamma_1=1/2$ and $0$. This illustrates the standard representation-dimension obstruction: regression risk and an untyped spectrum are insufficient summaries. The complete labeled observations distinguish the examples, so this is not observational nonidentifiability of the full data.
+ 
++\paragraph{Scale of the type-budget correction for C7 and D4.}
++\label{sp:type-scale}
++For these two groups all real irreducible types have dimension one or two. Define the ordinary spectral budget $C_r^{\mathrm{untyped}}(K)$ as the sum of the largest $r$ eigenvalues of $K$, including zeros if needed. Order tied eigenvectors by complete irreducible blocks. This top-$r$ selection can split at most one two-dimensional block at its boundary. Dropping the selected half yields a feasible invariant subspace of dimension at most $r$ and loses at most one eigenvalue, which is at most one because $K\preceq\Id$. Hence
++\[
++ 0\le \Delta_{\mathrm{type}}
++ :=C_r^{\mathrm{untyped}}(K)-C_r(K)\le1,
++ \qquad \Delta_{\mathrm{type}}/r\le1/r.
++\]
++This elementary consequence gives a normalized upper bound of $1/16$ at $r=16$; it is not an observed effect or a claim that the bound is tight. A zero type correction would leave the class-risk bound valid. The one-dimensional separation above therefore does not predict a large correction on the LLM panel, and does not justify searching dimensions for a positive correction.
++
++For the four-corner action $R(i)=i+1$, $S(i)=1-i\pmod4$, the state permutation representation decomposes as $\chi_{+,+}\oplus\chi_{-,-}\oplus E$, where $\chi_{a,b}(R)=a$, $\chi_{a,b}(S)=b$ and $E$ is the real two-dimensional type. Indeed, the stabilizer of corner zero is $\{e,R^3S\}$, so a one-dimensional type has multiplicity $(1+ab)/2$. Context copies do not introduce the absent types: $K$ has zero energy in $\chi_{+,-}$ and $\chi_{-,+}$. This is an analytical input check for any future numerical diagnostic, not a completed numerical check. The corner action has four states even though the group has eight elements.
++
+ \subsection{A finite-context certificate and its practical limitation}
+ \label{sp:certificate}
+ Suppose $C_1,\ldots,C_n$ are independent identically distributed complete context blocks, independent of the choice of coordinates and preprocessing. Assume the \emph{population} bound $\norm{z_{C,s}}_2\le H$ almost surely for every state, with $H$ fixed in advance. Define
+--- 0.4.6/paper/sections/reproduction.tex
++++ 0.4.7/paper/sections/reproduction.tex
+@@ -1,6 +1,8 @@
+ \section{Returned Computational Replay and Completed Extensions}
+ \label{app:reproduction}
+ The returned run re-executes previously inspected historical and characterization designs and evaluates the previously specified compact/context and secondary extensions. It is a computational reproduction with preserved scientific stops. It does not supply an independent test of the historical claims or convert the failed native protocol into a successful causal study. Original \texttt{paper\_eligible=false} and \texttt{independent\_confirmation=false} records remain unchanged; the tables here are explicitly reviewed descriptive derivatives. All model/readout conditions are retained rather than selecting a favorable subset.
++
++\input{generated/identification_summary.tex}
+ 
+ \subsection{Completed scope and preserved stopping decisions}
+ \begin{table}[t]\centering\small

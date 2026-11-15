@@ -1,0 +1,234 @@
+\section{Fixed-Dimensional Risk Bounds for Exact Orthogonal Actions}
+\label{app:spectral-risk}
+
+This appendix separates the best risk in an entire action class from the error of selected fitted operators. The class and metric below are narrower than arbitrary linear prediction: they impose exact group laws and orthogonality after population second-moment whitening. The result is a mathematical extension, not an additional empirical result or a certificate for the recorded FULL/AFS scores.
+
+\subsection{Observation contract and invariant-subspace budget}
+\label{sp:setup}
+Let a finite group $G$, of order $m$, act on a finite state set $S$, of size $p$; the action may be nonfree or nonfaithful. A context $c$ supplies the complete labeled block $\{z_{c,s}:s\in S\}$ in fixed coordinates $z_{c,s}\in\R^{1\times r}$, with $r\ge1$. Expectations use $C\sim P_C$ and an independent uniform $s\in S$; group averages include every element, including the identity. Assume $\Sigma=\mathbb E[z_{C,s}^{\top}z_{C,s}]\succ0$, and put $x=z\Sigma^{-1/2}$, so $\mathbb E[x^{\top}x]=\Id_r$. This is a second moment; zero mean is not required. The group product $gh$ means first $h$, then $g$, giving the row-action convention
+\[
+ \mathcal R_r(G)=\{\rho:G\to O(r):\rho_e=\Id_r,\ \rho_g\rho_h=\rho_{hg}\}.
+\]
+Define two population risks, with $x_g(c,s)=x(c,g\cdot s)$:
+\begin{equation}
+ \eta=\inf_{\{A_g\}}\frac1{rm}\sum_g\mathbb E\norm{xA_g-x_g}_2^2,
+ \qquad L^\star=\inf_{\rho\in\mathcal R_r(G)}L(\rho),\quad
+ L(\rho)=\frac1{rm}\sum_g\mathbb E\norm{x\rho_g-x_g}_2^2.
+ \label{sp:risks}
+\end{equation}
+The first class allows independent unconstrained $A_g\in\R^{r\times r}$; the second requires one exact $r$-dimensional orthogonal action shared across contexts. In raw coordinates $R_g=\Sigma^{-1/2}\rho_g\Sigma^{1/2}$, its loss is
+\[
+ \frac1{rm}\sum_g\mathbb E\norm{(zR_g-z_g)\Sigma^{-1/2}}_2^2.
+\]
+This is neither the row-normalized metric $D$ in \cref{eq:D} nor the later training-energy normalization. Exact zero-error actions preserve $\Sigma$ and become orthogonal after whitening, but positive-error optima over all $GL(r)$ need not do so. Accordingly, a lower bound below excludes only the class in \cref{sp:risks}. Independently fitted Ridge and finite-step penalized Joint generally do not belong to that exact class. Their recorded errors are neither covered by its lower bound nor upper-bound witnesses for $L^\star$.
+
+On the real Hilbert space $\mathcal H=L^2(P_C\times\mathrm{Unif}(S))$, define
+\[
+ (Ja)(c,s)=x_{c,s}a,\qquad (U_gf)(c,s)=f(c,g\cdot s),\qquad
+ P=JJ^*,\qquad T=\frac1m\sum_gU_gPU_g^*.
+\]
+Then $J^*J=\Id_r$, $P$ is a rank-$r$ orthogonal projection, and $U_gU_h=U_{hg}$ with each $U_g$ orthogonal. The group average $T$ commutes with every $U_g$, satisfies $0\preceq T\preceq\Id$ and $\operatorname{tr}T=r$, and is supported on
+\[
+ \mathcal W=\operatorname{span}\{U_gJa:g\in G,\ a\in\R^r\},\qquad \dim\mathcal W\le mr.
+\]
+Define
+\begin{equation}
+ C_r(T)=\max_{Q}\operatorname{tr}(TQ),\qquad \gamma_r=C_r(T)/r,
+ \quad
+ \begin{gathered}
+ Q^2=Q=Q^*,\quad [Q,U_g]=0\ \text{for all }g,\\[-2pt]
+ \operatorname{rank}Q\le r,\quad\operatorname{range}Q\subseteq\mathcal W.
+ \end{gathered}
+ \label{sp:budget}
+\end{equation}
+Thus $0\le\gamma_r\le1$. Since invariant $Q$ satisfies $\operatorname{tr}(PQ)=\operatorname{tr}(TQ)$,
+\[
+ r-C_r(T)=\min_Q\norm{(\Id-Q)J}_{\mathrm{HS}}^2.
+\]
+This is a best invariant-subspace approximation quantity, not a new notion of identifiability. Spectral constructions for invariant approximation have precedents \citep{barbieri2020approximation}; the connection to the exact-action risk is established below.
+
+The rank constraint must respect \emph{real} irreducible types. If type $\tau$ has real dimension $d_\tau$ and multiplicity $m_\tau$, the corresponding self-adjoint multiplicity operator has eigenvalues $\lambda_{\tau,1}\ge\cdots\ge\lambda_{\tau,m_\tau}\ge0$, each repeated $d_\tau$ times in the real space. With integer multiplicities $k_\tau$, standard real representation theory \citep{serre1977linear} gives
+\begin{equation}
+ C_r(T)=\max_{\substack{0\le k_\tau\le m_\tau\\\sum_\tau d_\tau k_\tau\le r}}
+ \sum_\tau d_\tau\sum_{j=1}^{k_\tau}\lambda_{\tau,j}.
+ \label{sp:integer}
+\end{equation}
+Indeed, the commutant on each multiplicity space is a real, complex or quaternionic matrix algebra. Its self-adjoint operator diagonalizes, and the variational principle selects the largest $k_\tau$ eigenvalues for a fixed multiplicity budget. Optimizing the resulting integer real-dimension budget proves \cref{sp:integer}. A nontrivial real $C_7$ rotation plane cannot be split into two separately admissible one-dimensional directions.
+
+\begin{spectrallemma}[Unconstrained regression risk]
+\label{sp:regression}
+The optimal unconstrained matrices are $A_g=J^*U_gJ$, and
+\begin{equation}
+ \eta=\frac1{rm}\sum_g\norm{(\Id-P)U_gJ}_{\mathrm{HS}}^2
+ =1-\operatorname{tr}(T^2)/r.
+ \label{sp:eta}
+\end{equation}
+\end{spectrallemma}
+\begin{proof}
+Since $J$ is an isometry, $JA_g=PU_gJ$ is the least-squares projection of $U_gJ$ onto $\operatorname{range}J$. Averaging its residual squared gives $r-\operatorname{tr}(PT)$. Group averaging is the Hilbert--Schmidt orthogonal projection onto the commutant, so $\operatorname{tr}(PT)=\operatorname{tr}(T^2)$. Division by $r$ proves the result.
+\end{proof}
+
+\subsection{The fixed-dimensional risk bound}
+\begin{spectraltheorem}[Risk of the entire exact orthogonal action class]
+\label{sp:main}
+Under the assumptions of \cref{sp:setup},
+\begin{equation}
+ \boxed{\quad 2(1-\gamma_r)\ \le\ L^\star\ \le\ 2(1-\gamma_r^2).\quad}
+ \label{sp:sandwich}
+\end{equation}
+The lower bound holds for every $\rho\in\mathcal R_r(G)$, and some member of this same $r$-dimensional class satisfies the upper bound.
+\end{spectraltheorem}
+\begin{proof}
+For a fixed $\rho$, define on maps $A:\R^r\to\mathcal H$
+\[
+ \Pi_\rho(A)=\frac1m\sum_gU_gA\rho_g^*.
+\]
+Each summand is a Hilbert--Schmidt isometry. Reindexing by inverses and products proves that the average is self-adjoint and idempotent; it projects onto the intertwiner space $\{A:U_gA=A\rho_g\ \forall g\}$. With $B=\Pi_\rho(J)$, expansion gives
+\begin{equation}
+ L(\rho)=2-\frac2r\langle J,B\rangle_{\mathrm{HS}}
+        =2-\frac2r\norm B_{\mathrm{HS}}^2.
+ \label{sp:projection-risk}
+\end{equation}
+Let $Q_B$ project onto $\operatorname{range}B$. This range is invariant, contained in $\mathcal W$, and has rank at most $r$. Cauchy--Schwarz yields
+\[
+ \norm B_{\mathrm{HS}}^2=\langle Q_BJ,B\rangle_{\mathrm{HS}}
+ \le\norm{Q_BJ}_{\mathrm{HS}}\norm B_{\mathrm{HS}},\qquad
+ \norm B_{\mathrm{HS}}^2\le\operatorname{tr}(PQ_B)
+ =\operatorname{tr}(TQ_B)\le C_r(T).
+\]
+The zero-$B$ case is immediate. Substitution into \cref{sp:projection-risk} proves the lower bound.
+
+For the upper bound, choose a maximizer $Q$ in \cref{sp:budget}, of rank $k\le r$. In an auxiliary space put
+\[
+ \widetilde{\mathcal H}=\mathcal H\oplus\R^{r-k},\quad
+ \widetilde U_g=U_g\oplus\Id_{r-k},\quad
+ \widetilde J=(J,0),\quad \widetilde Q=Q\oplus\Id_{r-k}.
+\]
+Let $V:\R^r\to\widetilde{\mathcal H}$ be an orthonormal basis of $\operatorname{range}\widetilde Q$. An SVD of $V^*\widetilde J$ and orthogonal Procrustes alignment give another such basis $J'$ with
+\[
+ \langle J',\widetilde J\rangle_{\mathrm{HS}}
+ =\norm{V^*\widetilde J}_*
+ \ge\norm{V^*\widetilde J}_F^2
+ =\operatorname{tr}(\widetilde Q\widetilde J\widetilde J^*)=C_r(T).
+\]
+The inequality uses singular values in $[0,1]$, since $V$ and $\widetilde J$ are isometries. Invariance of $\operatorname{range}J'$ makes $\rho_g=J'^*\widetilde U_gJ'$ an exact orthogonal action on $\R^r$ and makes $J'$ an intertwiner. Hence, for $B'=\Pi_\rho(\widetilde J)$,
+\[
+ C_r(T)\le\langle J',\widetilde J\rangle_{\mathrm{HS}}
+ =\langle J',B'\rangle_{\mathrm{HS}}
+ \le\sqrt r\norm{B'}_{\mathrm{HS}}.
+\]
+Equation~\eqref{sp:projection-risk} gives $L(\rho)\le2-2C_r(T)^2/r^2$. The data have zero auxiliary coordinates, so this construction changes neither the original loss nor the predictor dimension; the final matrices remain $r\times r$.
+\end{proof}
+
+\paragraph{Relation to existing theory.}
+\label{sp:positioning}
+The averaging, intertwiner and dimension-accounting tools are standard in approximate representation theory \citep{gowers2017inverse,moore2015approximate}. The statement here connects invariant approximation to \emph{fixed-dimensional prediction risk}; it does not claim priority for those tools. Sun's realizability and error decomposition concern compatible transformations through an encoder \citep{sun2026transformationlaws}; EbC identifies jointly learned latent coordinates and actions under generative and diversity assumptions \citep{schmidt2025equivariance}. Neither observation contract is replaced by this frozen-coordinate bound.
+
+\subsection{Finite observable form and an insufficient-summary example}
+\label{sp:observable}
+Let $D=mr$, $v(c,s)=m^{-1/2}(x_{c,g\cdot s})_{g\in G}\in\R^{1\times D}$ and $K=\mathbb E[v^\top v]$. Its blocks are $K_{g,h}=m^{-1}\mathbb E[x_g^\top x_h]$. For $a=(a_g)_g$, define
+\[
+ Wa=m^{-1/2}\sum_gU_gJa_g,\qquad (\Lambda_ta)_k=a_{kt^{-1}}.
+\]
+Direct multiplication gives $WW^*=T$, $W^*W=K$, and $U_tW=W\Lambda_t$. Thus $K$ commutes with the known block action $\Lambda$, has trace $r$, and is a positive contraction. The polar decomposition of $W$ identifies $\operatorname{range}K$ with $\mathcal W$ equivariantly: their nonzero spectra agree \emph{with their real irreducible types}. Therefore the optimization in \cref{sp:budget}, now using $K,\Lambda$ on $\R^D$, gives
+\[
+ C_r(K)=C_r(T),\qquad \eta=1-\operatorname{tr}(K^2)/r.
+\]
+Zero-eigenvalue blocks add no trace objective. This construction uses complete same-context labeled orbits as a structural diagnostic; its information is not the input available to a single-activation predictor. Computing the statistic still requires the type-constrained optimization, not ordinary top-$r$ eigenvalue truncation.
+
+\paragraph{Equal regression risk and eigenvalues can conceal different action risk.}
+\label{sp:counterexample}
+Take $G=S=C_2\times C_2\times C_7$ acting by addition, uniform states $(a,b,k)$, one context, and $r=1$. Set
+\[
+ x_A(a,b,k)=\frac{(-1)^a+(-1)^b}{\sqrt2},\qquad
+ x_B(a,b,k)=\sqrt2\cos(2\pi k/7).
+\]
+Both have zero mean and unit second moment. For $g=(u,v,w)$ their optimal scalar regression coefficients are
+\[
+ a_A(g)=\tfrac12\big((-1)^u+(-1)^v\big),\qquad
+ a_B(g)=\cos(2\pi w/7).
+\]
+Both satisfy $\mathbb E_g a(g)^2=1/2$, hence $\eta=1/2$. For $A$, $T$ has eigenvalue $1/2$ on each of two distinct real one-dimensional characters; for $B$, it is $\Id_2/2$ on a real irreducible rotation plane. The nonzero eigenvalues are thus the same, $\{1/2,1/2\}$. An exact real one-dimensional action is a character $\chi:G\to\{\pm1\}$ and is necessarily trivial on $C_7$. Its loss is $2-2\mathbb E_g[\chi(g)a(g)]$. Character orthogonality makes the largest correlation $1/2$ for $A$ and zero for $B$, so $L_A^\star=1$ and $L_B^\star=2$; correspondingly $\gamma_1=1/2$ and $0$. This illustrates the standard representation-dimension obstruction: regression risk and an untyped spectrum are insufficient summaries. The complete labeled observations distinguish the examples, so this is not observational nonidentifiability of the full data.
+
+\paragraph{Scale of the type-budget correction for C7 and D4.}
+\label{sp:type-scale}
+For these two groups all real irreducible types have dimension one or two. Define the ordinary spectral budget $C_r^{\mathrm{untyped}}(K)$ as the sum of the largest $r$ eigenvalues of $K$, including zeros if needed. Order tied eigenvectors by complete irreducible blocks. This top-$r$ selection can split at most one two-dimensional block at its boundary. Dropping the selected half yields a feasible invariant subspace of dimension at most $r$ and loses at most one eigenvalue, which is at most one because $K\preceq\Id$. Hence
+\[
+ 0\le \Delta_{\mathrm{type}}
+ :=C_r^{\mathrm{untyped}}(K)-C_r(K)\le1,
+ \qquad \Delta_{\mathrm{type}}/r\le1/r.
+\]
+This elementary consequence gives a normalized upper bound of $1/16$ at $r=16$; it is not an observed effect or a claim that the bound is tight. A zero type correction would leave the class-risk bound valid. The one-dimensional separation above therefore does not predict a large correction on the LLM panel, and does not justify searching dimensions for a positive correction.
+
+For the four-corner action $R(i)=i+1$, $S(i)=1-i\pmod4$, the state permutation representation decomposes as $\chi_{+,+}\oplus\chi_{-,-}\oplus E$, where $\chi_{a,b}(R)=a$, $\chi_{a,b}(S)=b$ and $E$ is the real two-dimensional type. Indeed, the stabilizer of corner zero is $\{e,R^3S\}$, so a one-dimensional type has multiplicity $(1+ab)/2$. Context copies do not introduce the absent types: $K$ has zero energy in $\chi_{+,-}$ and $\chi_{-,+}$. This is an analytical input check for any future numerical diagnostic, not a completed numerical check. The corner action has four states even though the group has eight elements.
+
+\subsection{A finite-context certificate and its practical limitation}
+\label{sp:certificate}
+Suppose $C_1,\ldots,C_n$ are independent identically distributed complete context blocks, independent of the choice of coordinates and preprocessing. Assume the \emph{population} bound $\norm{z_{C,s}}_2\le H$ almost surely for every state, with $H$ fixed in advance. Define
+\[
+ \Sigma_i=p^{-1}\sum_sz_{C_i,s}^\top z_{C_i,s},\quad
+ v_z(c,s)=m^{-1/2}(z_{c,g\cdot s})_g,\quad
+ M_i=p^{-1}\sum_sv_z(C_i,s)^\top v_z(C_i,s),
+\]
+and sample means $\widehat\Sigma,\widehat M$ with population means $\Sigma,M$. When $\widehat\Sigma\succ0$, let
+\[
+ \widehat K=(\Id_m\otimes\widehat\Sigma^{-1/2})\widehat M
+                    (\Id_m\otimes\widehat\Sigma^{-1/2}).
+\]
+Complete uniform state averaging preserves the fixed $\Lambda$ symmetry exactly and gives $\operatorname{tr}\widehat K=r$.
+
+\begin{spectraltheorem}[Conservative complete-block certificate]
+\label{sp:finite}
+For $\alpha\in(0,1)$, set
+\[
+ \tau_n=H^2\sqrt{\frac8n\log\frac{2(D+r)}\alpha},\qquad
+ a_n=\lambda_{\min}(\widehat\Sigma)-\tau_n.
+\]
+If $a_n>0$, define $\varepsilon_n=\tau_n/a_n+H^2\tau_n/a_n^2$, $\widehat\gamma_r=C_r(\widehat K)/r$, and
+\[
+ \gamma_- =\max\{0,\widehat\gamma_r-\varepsilon_n\},\qquad
+ \gamma_+ =\min\{1,\widehat\gamma_r+\varepsilon_n\}.
+\]
+There is an event of probability at least $1-\alpha$ on which, whenever this precheck passes,
+\begin{equation}
+ 2(1-\gamma_+)\le L^\star\le2(1-\gamma_-^2).
+ \label{sp:confidence}
+\end{equation}
+If $a_n\le0$, the procedure returns inconclusive; discarding weak directions changes the specified $r$-dimensional target. This bounds the unconditional probability of issuing an incorrect interval, not the error probability conditional on passing the precheck.
+\end{spectraltheorem}
+\begin{proof}
+Each $\Sigma_i,M_i$ lies between zero and $H^2\Id$, so its centered square is bounded by $H^4\Id$. Applying the two-sided matrix Hoeffding inequality \citep[Theorem~1.3]{tropp2012user} and a union bound for dimensions $r,D$ gives, with probability at least $1-\alpha$,
+\[
+ \norm{\widehat\Sigma-\Sigma}_{\rm op}\le\tau_n,\qquad
+ \norm{\widehat M-M}_{\rm op}\le\tau_n.
+\]
+On this event and when $a_n>0$, both second moments are at least $a_n\Id$. For positive $A,B\succeq a\Id$, the inverse-square-root resolvent formula gives
+\[
+ \norm{A^{-1/2}-B^{-1/2}}_{\rm op}
+ \le\frac{\norm{A-B}_{\rm op}}\pi\int_0^\infty\frac{t^{-1/2}}{(a+t)^2}\,dt
+ =\frac{\norm{A-B}_{\rm op}}{2a^{3/2}}.
+\]
+Writing $A_0=\Id_m\otimes\Sigma^{-1/2}$ and $\widehat A_0=\Id_m\otimes\widehat\Sigma^{-1/2}$, expand
+\[
+ K-\widehat K=A_0(M-\widehat M)A_0
+ +(A_0-\widehat A_0)\widehat M A_0
+ +\widehat A_0\widehat M(A_0-\widehat A_0).
+\]
+Using $\norm{\widehat M}_{\rm op}\le H^2$ yields $\norm{K-\widehat K}_{\rm op}\le\varepsilon_n$. Every feasible invariant projection has rank at most $r$, so
+\[
+ |\operatorname{tr}((K-\widehat K)Q)|\le r\varepsilon_n,
+ \qquad |C_r(K)-C_r(\widehat K)|\le r\varepsilon_n.
+\]
+The feasible set is fixed by $G,\Lambda,r$, not selected from the data. Apply \cref{sp:main} to obtain \cref{sp:confidence}.
+\end{proof}
+
+\paragraph{Why this does not certify the present experiments.}
+The bound is formally valid but can be uninformative. Necessarily
+\[
+ \lambda_{\min}(\widehat\Sigma)\le\operatorname{tr}(\widehat\Sigma)/r\le H^2/r,
+ \qquad a_n>0\ \Longrightarrow\
+ n>8r^2\log\frac{2r(m+1)}\alpha.
+\]
+At $r=16$ and $\alpha=0.05$, even the possibility of passing the precheck requires at least 17,492 independent complete contexts for $C_7$, or 17,734 for $D_4$. These are necessary conditions for this conservative formula, not sufficient conditions, intrinsic sample-complexity lower bounds or proposed experimental sizes. Even after passing, \cref{sp:confidence} may be $[0,2]$.
+
+The current 40-template panel and its overlapping partitions cannot meet this condition. States, actions, layers and repeated splits are not additional independent contexts. A sample maximum cannot replace the stipulated population bound $H$; clipping would change the target. Data-dependent preprocessing requires independent fitting data or a separate analysis. Multiple reported model/layer targets require an explicit simultaneous-error allocation; selecting the best layer is not covered by the single-target formula. The complete observed panel could instead define a finite empirical population and an exact descriptive version of \cref{sp:sandwich}, but that would not establish new-context coverage. No such statistic or certificate is reported as an experimental result here. The retained scores, failed gates and inferential scope are unchanged.

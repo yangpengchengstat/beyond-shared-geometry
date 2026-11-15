@@ -1,0 +1,72 @@
+# Expansion and quantitative peer comparisons
+
+## Recommended scope
+
+Expand the experiments along **independent data, strong competing explanations, and native computation**. Add quantitative peer-method comparisons on shared data. Retain the existing six-checkpoint structural panel and the two-model causal pilot while resolving those questions. Another model size from the same training lineage is lower priority than a third lineage or a genuinely new evaluation family.
+
+This addendum develops the proposed identification study in `../icml2027_identification_v1/`. It specifies additional comparisons before registration. It reports no new model results. Preserve the version-1 planning package, historical FULL/AFS outputs and released submission; integrate the chosen additions into one final protocol before accessing any new confirmatory outcome.
+
+## Expansion priorities
+
+| Priority | Expansion | Concrete scope and decision |
+|---|---|---|
+| Required | New independent context families | Keep the default 48 training /16 validation /32 test families and two paraphrases per family, plus 12 excluded pilot families. Increase the test to 48/64 only through the prospective power rule. More strings from one grammar do not create more independent families. |
+| Required | New entity/orbit transfer | S3 role binding uses 48 disjoint entity triples split 24/8/16. If orbit variance limits precision, add held-out triples before outcomes rather than more paraphrases of the same triples. Retain zero-shot and equal-support as distinct arms. |
+| Required | Strong category and local controls | Train-only centroid displacement, validation-selected context retention, independent linear/affine Ridge, Procrustes and local displacement. Add peer-derived conditional means to the native baseline selector before sealing. |
+| Required | Native computational behavior | Two competent checkpoints; C7 and the new D4 free-eight-state pose task. Test complete answers and initial/intermediate edits followed by native continuation. The legacy four-corner D4 task remains a separate structural anchor. |
+| Required for behavioral comparison | Closest peer steering methods | Calendar-plane, train-only conditional-mean, and manifold methods on supported shared tasks. Include small implementation-reproduction anchors and a common benchmark. |
+| Conditional | Third training lineage | Add one checkpoint if broader robustness is a main claim or resources permit an independent replication. Freeze selection using clean task competence, provenance, hook support and availability; never select it by intervention advantage. |
+| Conditional | Full factorial interaction diagnosis | Needed if reproducing functional ANOVA or claiming interaction-order decomposition. A sparse 12-scenario sample cannot identify the full decomposition. Conditional-mean steering alone does not require the entire ANOVA experiment. |
+| Lower priority | More sizes, languages, groups or cross-model pairs | Add only to address a stated boundary after the core controls are informative. More groups alone do not distinguish stable category coding; more model sizes do not establish independent architecture replication. |
+
+The existing small checkpoints already provide structural size controls. A small-model native-causal control is informative only if the same clean-competence requirements are met. Poor task competence is a feasibility limitation, not evidence against a computational carrier. Instruction-tuned replacements require new checkpoint pins, development validation and predeclared scope; do not quietly pool them with base-model results.
+
+One third-lineage structural checkpoint adds **57,408 default prompts**, 12 primary arrays and `918,528 × hidden_dimension` bytes of float32 activation payload. It should be a separately reported replication rather than silently changing the fixed six-model primary average. A third competent causal checkpoint adds 1,536 default test recipients: 3,072 becomes 4,608. If promoted to the primary causal family, register six rather than four model/domain contrasts and recompute multiplicity and power before collecting outcomes. No GPU-hour estimate follows from these row counts.
+
+## Which peers need numerical comparison
+
+The following are the closest practical comparison families. The original papers' scores describe their own setups. A numerical superiority claim about our method requires rerunning comparable procedures on a shared task with explicit inputs and scoring.
+
+| Peer | Appropriate quantitative role | Required distinction |
+|---|---|---|
+| **Engels et al., ICLR 2025** | Calendar-plane intervention on C7; original-task reproduction anchor plus adaptation to our pinned models. | The published calendar intervention fits a two-dimensional plane within five PCA components and average-ablates the complement. Retain a faithful reproduction and a separate complement-preserving common-benchmark variant. A D4 extension is a new adaptation. [Official paper §5](https://proceedings.iclr.cc/paper_files/paper/2025/file/d3221cdb27e49d9c1cd35ad254feccfe-Paper-Conference.pdf#page=7), [author code](https://github.com/JoshEngels/MultiDimensionalFeatures). |
+| **Arora et al., 2026** | Train-only conditional-mean steering, alongside the category controls; full ANOVA on a separate factorial panel if needed. | Appendix B.2 relates relation steering to a conditional mean difference. Estimate all means on construction data; no test-family or test-target means may enter predictions. Conditioning on extra relation/operation labels is an explicit oracle-information track. [Primary paper](https://arxiv.org/html/2609.35970v1). |
+| **Wurgaft et al., 2026** | Nonlinear manifold steering on compatible cyclic tasks, including an overlapping Llama-3.1-8B checkpoint. | Match masks and complement preservation in the common benchmark; the published manifold/linear comparison uses different complement handling. Treat unsupported discrete D4 geometry as not applicable, not a failed method. [Primary paper](https://arxiv.org/html/2605.05115v1), [author code branch](https://github.com/goodfire-ai/causalab/tree/manifold_steering). |
+| **Hu, Niu and Varma, 2026** | A separate cross-model displacement-transport comparison if that claim remains central; otherwise an explicitly Hu-inspired local-field control. | Eq.12 uses the source model's test-word before/after displacement and target-model training displacements. It is not a same-model source-activation-only editor. Disclose the extra source information and retain the original word-held-out protocol when reproducing it. [Primary paper §5.1](https://arxiv.org/html/2607.04525v1#S5.SS1). |
+| **Yuan Sun, 2026** | Global versus state-conditioned local transport is a relevant comparison principle and control family. | Separate prediction, new-start transport and actual composite-target fidelity. A source-conditioned fit on our finite task is an adaptation, not reproduction of the paper's hue/shape or learned-interface experiments. [Primary paper](https://arxiv.org/html/2609.18190v1). |
+
+Public author code was verified for Engels and Wurgaft through primary-paper links. Code availability for Hu and Arora remains unverified from the inspected sources; this does not establish that no code exists. Use the paper's equations if implementing an independent reproduction, record deviations, and never invent missing settings.
+
+Lenc–Vedaldi's paired affine/Ridge family is already represented in the generic predictive controls: listing the same hypothesis class twice does not create an additional competitor. Chughtai, Nanda and Wu study group-operation networks and mechanisms with different supervision and training; they chiefly require precise conceptual comparison and known-mechanism calibration rather than an accuracy ranking against frozen LLMs. Sun–Toneva's Congruity requires implementation-family sampling and its own assumptions. Reproduce it only if interpretive equivalence is retained as a central claim; an intertwiner score cannot be relabeled as Congruity. See the version-1 [reference map](../icml2027_identification_v1/PRIOR_WORK_REFERENCE_MAP.md).
+
+## Common benchmark and information boundaries
+
+Use three separate reporting panels:
+
+1. **Faithful reproduction anchors:** retain each selected original's named checkpoint, prompts, extraction, fitting, intervention and metric. Report deviations and discrepancies against the original claim. One or two compact anchors establish implementation credibility; there is no need to reproduce every paper's complete model grid.
+2. **Shared representation/behavior benchmark:** refit the applicable methods on our construction set and select settings on our validation set. Evaluate identical sealed families, source states, target counterfactuals, hooks and complete-answer scores. Label transported algorithms as adaptations. Use paired family contrasts.
+3. **Separate cross-model module:** if included, compare Hu's published transport, ordinary paired Ridge/Procrustes and our proposed transport on identical word/orbit holdouts. Report source-model test displacement access separately from source-only prediction. A new target activation may be used for scoring but never preprocessing or fitting.
+
+Report two information tracks in the shared benchmark: source activation plus declared action, and oracle source/relation labels available from the high-level task. A construction-trained decoder supplies a deployable label-blind counterpart. Natural target donors are oracle references rather than trainable algorithms. Full group-table supervision and generator-only supervision are separate regimes; a comparator trained on held-out element targets is not a fair generator-only comparison.
+
+For geometry/capacity comparisons, report both each method's native capacity and matched-rank comparisons where meaningful. A two-dimensional circle remains rank two when embedded in a 16-dimensional outer PCA space. Do not pad it and claim equal capacity. Compare q=2 action maps with the plane and publish q=4/8/16 sensitivity and retained information; q=16 remains the structural primary. Fit PCA, centroids, manifolds and paths using construction data only, with validation-only smoothing/rank/dose choices. Publish training size, learned parameter count/effective degrees of freedom, edit norms and compute.
+
+Use the same complement-preserving hook for the shared comparison; keep original complement-ablation versions as reproduction diagnostics. For multi-token spans preserve within-span deviations. Some methods act only within a plane while others alter a larger carrier: report that effective edit rank and do not describe it as an identical intervention. Exact closure imposed by a circle parameterization or symbolic table is not a recovered native law. Direct target prediction and counterfactual answers are the meaningful common endpoints.
+
+## Optional compact factorial panel
+
+If full ANOVA diagnosis is part of the intended contribution, construct a separate three-factor panel: initial state × first operation × second operation. Use two levels per operation, all 7 C7 states or all 8 free D4 poses, and two paraphrases per family. The panel contains 56 C7 plus 64 D4 prompts per family/model.
+
+With 16 construction, 8 validation and 32 test families and two models, the full panel has **13,440 prompt rows**, of which **7,680 are test rows**. These are factorial measurement rows, not independent observations. Share underlying family IDs with the native study where justified and deduplicate exact prompts; do not count overlaps as replication. Published exact ANOVA is assessed on a compatible full factorial task. Our two-level D4 extension is an adaptation with its own interpretation. Fit predictive conditional-mean baselines on construction families and evaluate new families; a descriptive decomposition of the test activations is not a prediction method allowed to use those activations in advance.
+
+The panel is an optional addition for the interaction claim. The required peer-derived steering baseline can instead be implemented from train-only conditional means without asserting a full interaction decomposition.
+
+## Results and scaling gates
+
+The main shared table should contain, for every applicable method and named model/domain: clean competence; normalized target reconstruction; context-difference transport; complete-answer counterfactual accuracy; full-sequence margin; unrelated-output effects; effective rank/edit norm; and fitting/inference cost. Report inapplicability and all failures. Include ordinary and adjusted uncertainty on paired differences, rather than comparing overlapping separate confidence intervals.
+
+The primary causal comparison remains group editing versus the **best validation-selected trainable baseline**, now including the chosen peer adaptations. Freeze that selector and candidate set before testing and report every candidate. Do not select the strongest peer using the sealed test or add endpoints when a comparison fails. New primary endpoints, model cells or a cross-model claim require an updated multiplicity/power contract before collection. The old 69,120 patched evaluations cover only the version-1 condition matrix; extra peer conditions, original-model anchors and factorial interventions require a recomputed condition ledger and measured resource projection.
+
+Expand to the third lineage after implementation anchors and the two-model common benchmark are feasible. If strong category/conditional-mean/local methods explain the old effect, a larger model sweep will not repair that identification claim. If action operators show useful held-out fidelity or a clear cost/accuracy advantage, an independent-lineage replication has high value. If all good methods match, report equivalence where precision supports it and assess whether calibration or a simpler interface is the substantive contribution. No ranking or expansion establishes a unique internal algorithm or an acceptance probability.
+
+**Immediate work:** implement the category/local and conditional-mean controls using existing caches; validate the compact calendar-plane and manifold implementations on their anchors; then freeze the applicable common-benchmark matrix and its revised budget. New extraction should serve the new family/entity/native-task questions and these shared comparisons together.

@@ -1,0 +1,406 @@
+{
+  "schema_version": 1,
+  "study_id": "icml2027-native-instruct-fallback-v1",
+  "seed": 2027101700,
+  "technical_test": false,
+  "models": [
+    {
+      "id": "meta-llama/Llama-3.1-8B-Instruct",
+      "revision": "0e9e39f249a16976918f6564b8830bc894c89659",
+      "tokenizer_revision": "0e9e39f249a16976918f6564b8830bc894c89659",
+      "layers": [
+        6,
+        13,
+        19,
+        26
+      ],
+      "hidden_dimension": 4096,
+      "lineage": "llama",
+      "structural": false,
+      "native": true
+    },
+    {
+      "id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+      "tokenizer_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+      "layers": [
+        6,
+        11,
+        17,
+        22
+      ],
+      "hidden_dimension": 3584,
+      "lineage": "qwen",
+      "structural": false,
+      "native": true
+    }
+  ],
+  "runtime": {
+    "dtype": "float16",
+    "device_map": "auto",
+    "device": "auto",
+    "batch_size": 8,
+    "local_files_only": false,
+    "trust_remote_code": false,
+    "attn_implementation": "eager",
+    "allow_cpu_offload": false,
+    "max_new_tokens": 32,
+    "deterministic": true,
+    "attention_implementation": "eager",
+    "chat_template": true
+  },
+  "data": {
+    "groups": [
+      "C7",
+      "D4",
+      "S3"
+    ],
+    "train_families": 48,
+    "validation_families": 16,
+    "test_families": 32,
+    "max_test_families": 64,
+    "pilot_families": 12,
+    "paraphrases": 2,
+    "entity_triples": 48,
+    "entity_split": [
+      24,
+      8,
+      16
+    ],
+    "external_manifests": {},
+    "sampling_scope": "IID scenario ASTs conditional on declared fixed grammar generator; grammar-root sensitivity required",
+    "test_orbits": 16,
+    "max_test_orbits": 24,
+    "grammar_sensitivity": true
+  },
+  "structural": {
+    "groups": [
+      "C7",
+      "D4",
+      "S3"
+    ],
+    "q_primary": 16,
+    "q_secondary": [
+      2,
+      4,
+      8,
+      32,
+      64
+    ],
+    "depths": [
+      0.2,
+      0.4,
+      0.6,
+      0.8
+    ],
+    "secondary": [
+      "affine",
+      "procrustes",
+      "residual",
+      "generator",
+      "joint",
+      "local"
+    ],
+    "lambda_grid": [
+      0,
+      1e-06,
+      1e-05,
+      0.0001,
+      0.001,
+      0.01,
+      0.1,
+      1
+    ],
+    "context_energy_floor": 0.05,
+    "legal_action_reference": true,
+    "potential_q": 16,
+    "potential_widths": [
+      32,
+      128
+    ],
+    "potential_steps": 500,
+    "joint_steps": 1200,
+    "joint_device": "cpu",
+    "equal_support": true,
+    "support_contexts_per_state": 4,
+    "bootstrap_sensitivity": true,
+    "bootstrap_replicates": 10000
+  },
+  "statistics": {
+    "main_alpha": 0.04,
+    "s3_alpha": 0.01,
+    "margin": 0.01,
+    "equivalence": 0.005,
+    "seed": 314159,
+    "bootstrap_replicates": 10000
+  },
+  "synthetic": {
+    "groups": [
+      "C7",
+      "D4"
+    ],
+    "regimes": [
+      "Y1",
+      "Y2",
+      "Y3",
+      "Y4",
+      "Y5",
+      "Y6"
+    ],
+    "noise_ratios": [
+      0,
+      0.1,
+      0.3
+    ],
+    "conditions": [
+      1,
+      30
+    ],
+    "dimension": 16,
+    "replicates": 200,
+    "replicates_per_cell": 200,
+    "negative_replicates": 5000,
+    "timing_replicates": 10,
+    "crossed_replicates": 2000,
+    "bootstrap_datasets_per_cell": 50,
+    "bootstrap_replicates": 999,
+    "seed": 2027101600,
+    "negative_seed": 2227101600,
+    "power_seed": 2127101600,
+    "runtime_reserve": 2,
+    "worker_index": 0,
+    "worker_count": 1
+  },
+  "power": {
+    "replicates": 5000,
+    "seed": 2127101600,
+    "test_families": [
+      32,
+      48,
+      64
+    ],
+    "marginal_target": 0.9,
+    "joint_target": 0.8,
+    "alternative": 0.02,
+    "variance_inflation": 2,
+    "stress": [
+      "pilot",
+      "student_t5",
+      "high_variance_mixture"
+    ],
+    "correlations": [
+      0,
+      0.8
+    ],
+    "require_mc_lower_bound": true
+  },
+  "offline": {
+    "archive": "inputs/full.zip",
+    "index": "docs/prospective/icml2027_identification_v1/evidence/CELL_INPUT_INDEX.json",
+    "pilot_models": [
+      "Llama-3.2-1B",
+      "Qwen2.5-1.5B"
+    ],
+    "pilot_depths": [
+      0.4,
+      0.8
+    ],
+    "pilot_splits": [
+      101,
+      303
+    ],
+    "expected_archive_sha256": "5fe7234572120073d8dfab2e8dc0d3373a741f8d48abadc92288f98ab16721f4",
+    "mode": "pilot"
+  },
+  "native": {
+    "models": [
+      "meta-llama/Llama-3.1-8B-Instruct",
+      "Qwen/Qwen2.5-7B-Instruct"
+    ],
+    "domains": [
+      "C7",
+      "D4_free"
+    ],
+    "train_families": 16,
+    "validation_families": 8,
+    "test_families": 32,
+    "max_test_families": 64,
+    "pilot_families": 12,
+    "cases_per_family": 12,
+    "paraphrases": 2,
+    "q": 16,
+    "early_depth_candidates": [
+      0.2,
+      0.4,
+      0.6
+    ],
+    "late_depth_candidates": [
+      0.8
+    ],
+    "competence_threshold": 0.8,
+    "dose_grid": [
+      0,
+      0.25,
+      0.5,
+      1,
+      2
+    ],
+    "dose_family_fraction": 0.25,
+    "random_seeds": [
+      104729,
+      130363,
+      155921,
+      196613,
+      262147
+    ],
+    "primary_observed_margin": 0.05,
+    "power_alternative": 0.1,
+    "power_sensitivity": 0.05,
+    "power_replicates": 5000,
+    "power_marginal_target": 0.9,
+    "power_joint_target": 0.8,
+    "alpha": 0.05,
+    "bootstrap_replicates": 10000,
+    "include_operations": true,
+    "include_joint_variables": true,
+    "include_pathway": true,
+    "include_rebinding": true,
+    "include_shams": true,
+    "include_factorial": true,
+    "include_peer_methods": true,
+    "include_third_lineage": false,
+    "families": {
+      "train": 16,
+      "validation": 8,
+      "test": 32,
+      "pilot": 12
+    },
+    "rank": 16,
+    "include_peers": true,
+    "sites": {
+      "early": [
+        0.2,
+        0.4,
+        0.6
+      ],
+      "late": [
+        0.8
+      ]
+    },
+    "doses": [
+      0,
+      0.25,
+      0.5,
+      1,
+      2
+    ],
+    "power": {
+      "replicates": 5000,
+      "alternative": 0.1,
+      "sensitivity": 0.05,
+      "test_families": [
+        32,
+        48,
+        64
+      ],
+      "marginal_target": 0.9,
+      "joint_target": 0.8,
+      "require_measured": true,
+      "correlations": [
+        0,
+        0.5,
+        0.8
+      ],
+      "stress": [
+        "normal",
+        "t5"
+      ]
+    },
+    "rank_sensitivity": [
+      2,
+      4,
+      8
+    ]
+  },
+  "peers": {
+    "calendar_plane": true,
+    "conditional_mean": true,
+    "manifold": true,
+    "native_capacity_and_matched_rank": true,
+    "factorial_anova": true,
+    "reproduction_anchors": false,
+    "original_model_config": "configs/prospective/peer_anchors.json",
+    "manifold_domains": [
+      "C7"
+    ],
+    "paper_scores_as_observations": false
+  },
+  "crossmodel": {
+    "enabled": false,
+    "mode": "word_fields",
+    "word_file": "configs/prospective/word_field_vocabulary.json",
+    "source_models": [
+      "meta-llama/Llama-3.2-1B",
+      "Qwen/Qwen2.5-1.5B"
+    ],
+    "target_models": [
+      "meta-llama/Llama-3.1-8B",
+      "Qwen/Qwen2.5-7B"
+    ],
+    "depths": [
+      0.25,
+      0.5,
+      0.75
+    ],
+    "train_fraction": 0.7,
+    "validation_fraction": 0.1,
+    "test_fraction": 0.2,
+    "refit_nulls": true,
+    "null_replicates": 1000,
+    "rank_condition_diagnostics": true,
+    "fit_intertwiner": true,
+    "congruity_claim": false,
+    "rank": 16
+  },
+  "extensions": {
+    "product_actions": true,
+    "interface_training": true,
+    "third_lineage": false,
+    "external_language_banks": true,
+    "product": {
+      "splits": {
+        "train": 48,
+        "validation": 16,
+        "test": 32
+      },
+      "q": 16
+    },
+    "interface": {
+      "q": 16,
+      "steps": 500,
+      "batch_size": 256,
+      "seeds": [
+        101,
+        303,
+        909
+      ],
+      "weights": [
+        0.01,
+        0.1,
+        1.0
+      ],
+      "device": "cuda"
+    }
+  },
+  "execution": {
+    "resume": true,
+    "stop_on_calibration_failure": true,
+    "stop_on_competence_failure": true,
+    "freeze_before_test": true,
+    "allow_confirmatory_underpowered": false,
+    "cpu_workers": 4,
+    "require_historical_archive": false,
+    "allowed_model_execution": false
+  },
+  "protocol_note": "Use only a new native prepare/confirm namespace after base-model competence failure; freeze before any fallback test outcomes. Never choose fallback by observed intervention gains."
+}

@@ -1,0 +1,64 @@
+{
+  "diagnose_fixed_metric.py": {
+    "changes": [
+      {
+        "after": "ROOT = Path(__file__).resolve().parents[2]",
+        "before": "ROOT = Path.cwd()"
+      },
+      {
+        "after": "OUT = Path(__import__('os').environ['BSG_CENTERING_OUTPUT'])",
+        "before": "OUT = Path(__file__).resolve().parent"
+      },
+      {
+        "after": "SNAPSHOT = ROOT / \"studies/spectral_dimension_sensitivity_v1\"",
+        "before": "SNAPSHOT = ROOT / \"dimension_rank_revision_20261105/offline_dimension_execution_v1/analysis/source_snapshot\""
+      },
+      {
+        "after": "from retained_inputs import Study2Inputs",
+        "before": "from archive_inputs import Study2Inputs"
+      },
+      {
+        "after": "(Path(__file__).resolve().parent/\"historical_protocol.json\")",
+        "before": "(SNAPSHOT/\"historical_protocol.json\")"
+      },
+      {
+        "after": "ARCHIVED = ROOT / \"results/template_centering_v1/rewhitened\"",
+        "before": "ARCHIVED = ROOT / \"work/study2-within-template-20261110/archive\""
+      }
+    ],
+    "mathematical_statements_changed": false,
+    "original_source_distributed": true,
+    "original_source_path": "historical_sources/diagnose_fixed_metric.py",
+    "original_source_sha256": "eaaaa8114a79cc20baec687a94de48b9209295444dd780ab39b3cd3bcb8ea3cb",
+    "publication_source_sha256": "73759156eb88488705028ad4dedb06adc299873f63fc01afc61251e94bd427ab"
+  },
+  "diagnose_rewhitened.py": {
+    "changes": [
+      {
+        "after": "ROOT = Path(__file__).resolve().parents[2]",
+        "before": "ROOT = Path.cwd()"
+      },
+      {
+        "after": "OUT = Path(__import__('os').environ['BSG_CENTERING_OUTPUT'])",
+        "before": "OUT = Path(__file__).resolve().parent"
+      },
+      {
+        "after": "SNAPSHOT = ROOT / \"studies/spectral_dimension_sensitivity_v1\"",
+        "before": "SNAPSHOT = ROOT / \"dimension_rank_revision_20261105/offline_dimension_execution_v1/analysis/source_snapshot\""
+      },
+      {
+        "after": "from retained_inputs import Study2Inputs",
+        "before": "from archive_inputs import Study2Inputs"
+      },
+      {
+        "after": "(Path(__file__).resolve().parent / \"historical_protocol.json\")",
+        "before": "(SNAPSHOT / \"historical_protocol.json\")"
+      }
+    ],
+    "mathematical_statements_changed": false,
+    "original_source_distributed": true,
+    "original_source_path": "historical_sources/diagnose.py",
+    "original_source_sha256": "91993bc743422355387164f29ea818b53065ee7345f4122884d097d9858a839c",
+    "publication_source_sha256": "d77ec184c60a357478bc4432e1bd772becc67648a9fcfcf0c10ba2a7855bad0b"
+  }
+}

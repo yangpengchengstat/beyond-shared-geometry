@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "protocol_id": "tmlr_context_generalization_v1",
+  "status": "prepared_not_executed",
+  "primary_cells": 48,
+  "model_panel_source": "studies/spectral_finite_bank_v1/protocol.json",
+  "domains": [
+    "C7",
+    "D4"
+  ],
+  "rank": 16,
+  "readout": "span_mean",
+  "new_families": 64,
+  "paired_renderings": 2,
+  "new_prompt_rows_per_model": 1408,
+  "bank_authorship": "assistant_authored_64_explicit_fixed_frames",
+  "human_semantic_review_required_before_model_execution": true,
+  "old_train_families": 48,
+  "old_validation_families": 16,
+  "lambda_grid": [
+    0.0,
+    1e-05,
+    0.001,
+    0.1,
+    1.0
+  ],
+  "fitting": "old_train_all_state_pairs; no intercept; lambda*train_squared_frobenius/rank",
+  "selection": "both primary arms use old-validation changed-state context-difference loss per action; coordinate-validation-selected arm is secondary",
+  "primary_contrast": "difference_fitted_minus_coordinate_fitted_context_transport_loss",
+  "negative_primary_effect_favors": "difference_fitted",
+  "secondary_control": "identity_on_context_differences",
+  "normalization": "old_train_mean_uncentered_squared_context_difference",
+  "evaluation": "equal_changed_states_then_equal_nonidentity_actions_then_equal_cells_within_domain_then_equal_domains",
+  "bootstrap": {
+    "draws": 2000,
+    "seed": 2026102901,
+    "unit": "paired_authored_family_shared_across_models_layers_domains",
+    "interpretation": "conditional_sensitivity_not_population_certificate"
+  },
+  "new_test_selection": false,
+  "new_pca_fitting": false,
+  "missing_cell_policy": "retain_failure_and_mark_primary_panel_incomplete",
+  "population_certificate": false,
+  "automatic_manuscript_promotion": false,
+  "historical_calibration_or_full_rerun": false,
+  "secondary_controls": [
+    "identity_on_context_differences",
+    "coordinate_trained_coordinate_validation_selected"
+  ],
+  "primary_comparator": "coordinate_trained_context_difference_validation_selected",
+  "core_fact_scope": "fixed weekday/corner factual sentences; only outer narrative frames are new; no unseen vocabulary or independent grammar claim"
+}

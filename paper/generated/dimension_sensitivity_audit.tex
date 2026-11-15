@@ -1,0 +1,15 @@
+\begin{table}[htbp]
+\caption{Existing Study~1 test prediction errors on a matched dimension-sensitivity subset, reconstructed from unchanged per-template records. Each domain averages six models, depths 0.4/0.8 and splits 101/303 (24 conditions), with the same six held-out templates per split. The $q=16$ column is this subset, not the larger primary panel. Values retain the original $\Eeq$ normalization; no new dimension was run or selected. The separate computational replay and all recorded endpoints are retained in the audit CSV.}
+\label{tab:dimension-sensitivity-audit}
+\centering\small
+\begin{tabular}{@{}llrrrr@{}}
+\toprule
+Domain & Fit & $q=8$ & $q=16$ (matched) & $q=32$ & $q=64$ \\
+\midrule
+$C_7$ & Ridge & 0.115638 & 0.051285 & 0.050220 & 0.136808 \\
+$C_7$ & Joint & 0.116179 & 0.052251 & 0.050733 & 0.135502 \\
+$D_4$ & Ridge & 0.055581 & 0.060366 & 0.070745 & 0.135896 \\
+$D_4$ & Joint & 0.056169 & 0.061450 & 0.071429 & 0.135591 \\
+\bottomrule
+\end{tabular}
+\end{table}

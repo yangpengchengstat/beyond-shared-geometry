@@ -1,0 +1,219 @@
+\documentclass{article}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{xurl}
+\usepackage{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage{icml2026}
+\usepackage{amsmath,amssymb,amsfonts,mathtools}
+\usepackage{amsthm}
+\usepackage{placeins}
+\usepackage[nameinlink,capitalize,noabbrev]{cleveref}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Id}{\mathbf{I}}
+\newcommand{\norm}[1]{\left\lVert #1\right\rVert}
+\newcommand{\Eeq}{E_{\mathrm{eq}}}
+\newcommand{\Ehom}{E_{\mathrm{hom,data}}}
+\newcommand{\Ehomop}{E_{\mathrm{hom,op}}}
+\newcommand{\Erel}{E_{\mathrm{rel,data}}}
+\newcommand{\Erelop}{E_{\mathrm{rel,op}}}
+\newcommand{\Ecomp}{E_{\mathrm{comp,data}}}
+\newcommand{\Ecompop}{E_{\mathrm{comp,op}}}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}[proposition]{Corollary}
+\newtheorem{spectraltheorem}[proposition]{Theorem}
+\newtheorem{spectrallemma}[proposition]{Lemma}
+\crefname{spectraltheorem}{Theorem}{Theorems}
+\crefname{spectrallemma}{Lemma}{Lemmas}
+\icmltitlerunning{What Finite-Group Recovery Identifies}
+\begin{document}
+\twocolumn[
+\icmltitle{Beyond Shared Geometry: What Do Recovered Group Actions Identify in Language Models?}
+\begin{icmlauthorlist}
+\icmlauthor{Anonymous Authors}{anon}
+\end{icmlauthorlist}
+\icmlaffiliation{anon}{Anonymous Institution}
+\icmlcorrespondingauthor{Anonymous Authors}{anonymous@example.com}
+\icmlkeywords{representation learning, group actions, equivariance, mechanistic interpretability}
+\vskip 0.3in
+]
+\printAffiliationsAndNotice{}
+
+\begin{abstract}
+What do recovered group actions establish about language-model representations? We separate predictive recovery from optimal risk over an exact action class. An analytical example has identical optimal unconstrained regression error and ordinary orbit spectrum, yet different exact-action risks; a spectral bound relates the latter risk to a real-type-constrained invariant-subspace budget. On weekday cycles ($C_7$) and square-corner actions ($D_4$) across six pretrained models, completed controls reveal three empirical findings. Predictive recovery coexists with competitive category and coherently registered alternatives. Predictor rankings change with storage: tested nonlinear predictors do not improve panel means at the linear reference budget, but do at larger budgets. Directly fitting contextual differences improves transport relative to coordinate-fitted operators, while a coherent alternative retains close means. The theory characterizes a whitened exact orthogonal-action risk; the experiments describe separate prediction and transport endpoints on fixed panels. Together they specify what recovery scores distinguish and which competing explanations remain viable.
+\end{abstract}
+
+\section{Introduction}
+Which additional interpretation is justified when a fitted transformation predicts well, approximately obeys group laws, and outperforms disrupted correspondences? These tests may appear to reinforce one another, yet they address different questions. A useful predictor is not by itself an account of a model's computation; consistency can follow partly from accurate prediction; disrupting a registration does not test whether the specified semantic correspondence is uniquely favored. We study these distinctions through controlled finite actions in contextual language-model representations.
+
+Transformation fitting is established: \citet{lenc2015understanding} study paired maps and network stitching, and \citet{sun2026transformationlaws} develops compatible transformation families, realizability and transport. Equivariance by Contrast identifies jointly learned coordinates and actions under explicit assumptions \citep{schmidt2025equivariance}. Calendar mechanisms are studied by \citet{engels2025notall}; group-operation mechanisms and competing explanations by \citet{nanda2023progress,chughtai2023toy,wu2025unified}. Implementation-family equivalence requires abstraction assumptions \citep{sun2026tracking}. We test which identification claims finite-action controls support; \cref{app:related-work} gives the comparisons.
+
+The protocol fits shared operators to activations of seven weekday states and four corner states across held-out short templates. States are visible in the input, and the language models remain unchanged. Independent fitting removes group-law penalties from the objective, while generator-only fitting withholds action elements. Both succeed predictively. We then compare category predictors, a coherently registered alternative action, compact nonlinear predictors and context-difference fits to determine what these successes distinguish.
+
+\input{generated/main_findings.tex}
+
+Our contribution connects a theoretical distinction with three completed empirical comparisons. The theory shows why regression error and an ordinary spectrum do not determine fixed-dimensional exact-action risk, and bounds that risk using a type-constrained invariant-subspace budget. The empirical findings concern competitive alternative explanations, storage-dependent predictor rankings, and improved context transport under dedicated fitting (\cref{tab:main-findings}). These are complementary results: the new spectral quantity has not been evaluated on the LLM panel. Standard finite-orbit and error-propagation identities explain the interpretation of the controls; their role is supporting analysis rather than additional new theory.
+
+\section{Protocol and Evidence Scope}
+\label{sec:setup}
+Let $G$ act on states $i$, and let $t$ index contextual templates. For each model, layer, and split, training activations determine mean $\mu$ and orthonormal PCA columns $C\in\R^{d\times q}$. We use
+\begin{equation}
+ z_{i,t}=(h_{i,t}-\mu)C,\qquad z_{i,t}R_g\approx z_{g(i),t}.
+\end{equation}
+For row vectors, applying $g_2$ then $g_1$ gives
+\begin{equation}
+ R_{g_2}R_{g_1}\approx R_{g_1\circ g_2}.
+ \label{eq:convention}
+\end{equation}
+The primary dimension is $q=16$. AFS-D uses matched $q=6$ for seven weekdays and $q=3$ for four corners.
+
+\paragraph{Estimation.}
+Ridge fits each element independently, without an intercept, using regularization $\alpha=0.01$. Joint fitting starts from ridge: the data term has coefficient one, and the homomorphism, relation, identity and orthogonality penalties have coefficients $1,1,1,0.05$, respectively. AdamW runs for 1,200 steps, learning rate $0.002$, weight decay $10^{-5}$, and technical seed 42. All transformations use the same fixed training-only PCA. Full objectives appear in \cref{app:methods}.
+
+\paragraph{Evaluation.}
+For paired row matrices define
+\begin{equation}
+ D(A,B)=\frac{1}{m}\sum_{j=1}^m
+ \frac{\norm{A_j-B_j}_2^2}{\norm{B_j}_2^2+10^{-12}}.
+ \label{eq:D}
+\end{equation}
+$\Eeq$ averages $D(ZR_g,Z_g)$ over nonidentity actions on held-out templates. $\Ehom$ averages $D(ZR_{g_2}R_{g_1},ZR_{g_1\circ g_2})$ over element pairs. $\Ecomp$ uses the same expression excluding pairs containing the identity; it is a restricted consistency summary, not an independent unseen-element test. AFS-A instead compares generator products with \emph{actual} held-out transformed activations. Relation and operator-space definitions are explicit in \cref{app:metrics}. Data defects are squared relative errors, whereas the reported homomorphism, composition, and relation operator diagnostics use unsquared relative Frobenius norms. Their raw magnitudes cannot be directly compared.
+
+\paragraph{Panel and partitions.}
+\label{sec:design}
+We use pretrained base Llama-3.2-1B/3B, Llama-3.1-8B, and Qwen2.5-1.5B/3B/7B models at normalized depth slots $0.2,0.4,0.6,0.8$. The $C_7$ action cycles Monday through Sunday. The $D_4$ action rotates and reflects the labels NW, NE, SE, SW. Each domain contains 40 short templates, such as ``The current day is Monday.'' and ``The marked corner is NW.'' The state is visible in the input; no held-out vocabulary, unseen semantic domain, or abstract reasoning task is tested.
+
+For each of five split seeds $(101,303,909,2701,4243)$, 28 templates train PCA and operators, six are diagnostic validation templates, and six are test templates. Complete state orbits stay within their template split. The same 40 templates recur across splits; the seeds represent repeated partitions, not five independently sampled datasets. Activations are mean hidden states over the unique lexical target-token span at transformer block outputs. Exact model revisions, tokenization, layers, prompts, and sensitivity subsets are in \cref{app:methods}.
+
+The evidence comprises a structural recovery panel (FULL and AFS) and subsequent predictor and context-transport comparisons. FULL compares ridge, joint, identity and random controls; AFS tests generator products, disrupted correspondences and rank-matched lexical codes. Later comparisons use separate training-energy normalizations. The appendices map these experiments to their source records, full estimates and preserved stopping decisions.
+
+\paragraph{Statistical scope.}
+All empirical comparisons in this paper are descriptive analyses of the recorded fixed panels. Computational replay re-executes inspected designs and supplies no independent confirmation. We retain the recorded means and bootstrap percentile intervals. Historical FULL uses 5,000 draws, base seed 314159 with analysis-specific offsets, and model, depth, split, and template levels, adding random-control seed where relevant. AFS-D keeps depth fixed for its matched contrasts; the separate global-additive experiment resamples split aggregates. The six models are deliberately selected, layers are repeated measurements, and template partitions overlap. These intervals describe resampling sensitivity under the recorded scheme; nominal 95\% does not assert calibrated population coverage. Numerous secondary intervals are not globally multiplicity-adjusted. We make no new significance or equivalence decisions from them; \cref{app:inference} gives their scope.
+
+\section{Prediction Error and Exact-Action Risk}
+\label{sec:boundaries}
+For a fixed distribution and loss, a predictor's risk upper-bounds the optimum over any function class containing it. It does not determine the optimum over a different class constrained to obey group laws. We make this distinction precise, then relate it to finite-state recovery controls.
+
+\subsection{Same summaries, different exact-action risk}
+Consider complete labeled states $s\in S$ in context $c$, with fixed-coordinate observations $z_{c,s}\in\R^{1\times r}$. For a fixed context distribution $P_C$, average uniformly over states and all group elements, including identity and fixed points. For positive-definite second moment $\Sigma=\mathbb E[z^\top z]$, set $x=z\Sigma^{-1/2}$ and $x_g(c,s)=x(c,g\cdot s)$. Let $\eta$ be the minimum normalized squared prediction error for independently chosen matrices $A_g$, and let
+\[
+ L^\star=\inf_{\rho\in\mathcal R_r(G)}
+ \frac1{r|G|}\sum_{g\in G}\mathbb E\norm{x\rho_g-x_g}_2^2,
+\]
+where $\mathcal R_r(G)$ contains exact row actions with $\rho_g\in O(r)$ and $\rho_g\rho_h=\rho_{hg}$. Both risks use this same whitened metric.
+
+\paragraph{An analytical separation.}
+Fix $G=S=C_2\times C_2\times C_7$ acting by addition, uniform states $(a,b,k)$, one context and $r=1$. The observations
+\[
+ x_A=\frac{(-1)^a+(-1)^b}{\sqrt2},\qquad
+ x_B=\sqrt2\cos(2\pi k/7)
+\]
+have unit second moment, the same optimal regression risk $\eta=1/2$, and the same untyped nonzero orbit spectrum $\{1/2,1/2\}$. Nevertheless,
+\[
+ \boxed{\ L_A^\star=1,\qquad L_B^\star=2.\ }
+\]
+The first spectrum occupies two real one-dimensional characters; the second occupies an indivisible real rotation plane. A one-dimensional exact action can retain one of the former but none of the latter. Thus regression error and an ordinary spectrum are insufficient summaries of exact-action recovery. The full labeled observations distinguish these examples; this is a separation of summaries, not nonidentifiability of the full data. \Cref{sp:counterexample} gives the calculation.
+
+\subsection{Bounding the entire exact-action class}
+Let $\gamma_r$ be the fraction of observation energy captured by the best group-invariant subspace of dimension at most $r$, respecting real irreducible types. Equivalently, it is the type-constrained spectral budget of the orbit Gram matrix, divided by $r$ (\cref{sp:budget,sp:observable}). \Cref{sp:main} proves
+\[
+ \boxed{\ 2(1-\gamma_r)\le L^\star\le2(1-\gamma_r^2).\ }
+\]
+The lower bound holds for every member of $\mathcal R_r(G)$, and some member of the same class attains the upper bound or better. For $\gamma_r<1$, the bounds differ by a factor $1+\gamma_r\le2$; both vanish at $\gamma_r=1$. This connects best invariant approximation with fixed-dimensional prediction risk, using classical averaging and representation tools credited in \cref{sp:positioning}. It is a risk bound, not a demonstrated learning algorithm.
+
+\paragraph{Metric and evidence contract.}
+This theoretical risk differs from the historical $D$ and later training-energy-normalized scores. Ridge and finite-step penalized Joint need not be exact orthogonal actions, so their reported scores are not witnesses for this bound. No LLM spectrum or independent-context certificate is reported here. The conservative certificate in \cref{sp:certificate} requires a sampling contract unmet by the present panel. The $r=1$ example establishes a possible distinction, not its empirical magnitude at $r=16$; \cref{sp:type-scale} gives a simple scale restriction for C7/D4.
+
+\subsection{Consequences for finite-state recovery}
+Three elementary facts explain the empirical controls; their formal statements and proofs are in \cref{app:theory}. First, any $n$ centered affinely independent state vectors in $n-1$ dimensions admit an exact action of every state permutation (\cref{prop:finite}). Seven generic weekday vectors therefore realize a cycle without group-specific semantic learning. A stable state code plus complementary context features can also share one action across contexts. Held-out templates do not exclude that construction, although arbitrary separate contextual realizations need not share a predictor.
+
+Second, composition residuals depend on prediction errors and operator norms (\cref{prop:propagation}). Independent fitting removes group-law penalties from the objective, but does not show that measured consistency adds identification information beyond accurate prediction. The common-design ridge identity in \cref{app:ridge-identity} makes this dependence explicit.
+
+Third, displacements averaged over a complete uniformly weighted state orbit cancel for every permutation (\cref{prop:additive}). The global additive baseline is therefore an identity predictor by construction. Source-conditioned displacements avoid that cancellation and can compose by telescoping centroid differences (\cref{app:additive-composition}). The comparison below evaluates such alternatives with their extra information stated.
+
+These facts use standard realization and perturbation arguments, related to the broader induced-action questions of \citet{sun2026transformationlaws}. Exact data determine an action only on the supported span; extensions and native implementation remain separate targets. The orientation counterexamples in \cref{app:orientation,app:commutant} further show that equal within-context geometry does not guarantee common transport. They delimit the controls rather than supply a null distribution for the measured LLM errors.
+
+\section{What the Completed Controls Identify}
+\label{sec:evidence}
+\Cref{tab:main-findings} summarizes the three empirical findings; \cref{tab:identification-summary} retains the detailed endpoint-by-endpoint comparison. Compare losses within each endpoint: historical $D$, compact-coordinate prediction and context-difference transport use different denominators and sampling contracts.
+
+\subsection{Prediction and consistency: two properties, coupled evidence}
+Independent ridge attains $\Eeq=0.04830/0.05200$ for $C_7/D_4$, while joint errors are $0.04934/0.05286$. Joint fitting decreases relation defects by $0.01699/0.00728$ at a small direct-fit cost. The maps support approximate predictive action structure without group-law penalties in the independent objective. However, \cref{prop:propagation} explains why this is not automatically an additional semantic discovery beyond accurate prediction. These diagnostics do not establish a comparison matched in prediction error and operator norm.
+
+Generator-only fits predict five excluded nonidentity elements in each group. Their errors are $0.074443/0.056558$, versus directly fitted element errors $0.051124/0.050032$. Correct $D_4$ words outperform matched-length wrong words by $1.097329$ under the recorded contrast. This is meaningful transfer in the operator index; the component states and vocabulary were seen in training. Full structural and generator tables, their historical intervals and depth curves are retained in \cref{app:results}.
+
+\subsection{Invalid registration differs from a coherent alternative}
+True-registration homomorphism scores in AFS-B lie below the non-automorphic reference's 2.5\% quantile in all 120 cells per group and metric. Its restricted ensemble excludes the observed registration; no calibrated semantic-null inference is claimed. AFS-C refits Ridge on corrupted training pairs; errors increase against unchanged true held-out targets. Ordinary predictors can degrade similarly, so this establishes sensitivity to supervision rather than semantic specificity.
+
+The completed replay instead consistently supervises an alternative action induced by swapping two state labels. It preserves group laws and fixed-point counts. All-element ridge errors for the specified/coherent correspondence are $0.014897/0.017503$ in $C_7$ and $0.041919/0.041871$ in $D_4$. Each correspondence uses the same underlying source bank and abstract action labels, but its own targets and changed-state evaluation mask. In $D_4$, conjugacy preserves fixed-point counts while potentially changing their identities, so the scored source/action rows need not coincide. This compares the predictability of two registered tasks, rather than two predictors on identical target rows. The single conjugate alternative remains competitive descriptively despite the invalid-registration separation; it does not characterize all semantic alternatives or nonisomorphic representations.
+
+\subsection{Predictor rankings change with information and storage}
+\label{sec:characterization}
+Rank-matched embedding fits are near exact at $q=6$ for weekdays and $q=3$ for corners; internal errors are higher in the two-model lexical panel. \Cref{prop:finite} explains why this can occur without group-specific semantic learning. Equal rank retains the entire lexical span but can discard internal contextual variation, so it does not match retained information or compare all intrinsic structure at the two locations.
+
+In the $q=16$ replay, the decoded-centroid predictor improves the $C_7$ mean but wins only 9/24 cells; it is worse on the $D_4$ mean and wins in 2/24. It receives training state labels and the exact action table, beyond source-coordinate/action access. This is a strong explanatory control with an information advantage, not a claim of superiority at equal information.
+
+The compact nonlinear comparison fits RFF and Nystr\"om residual predictors using all construction target pairs. Neither improves the group mean at the identity-pruned linear storage budget; Nystr\"om does at $2\times$ storage and RFF at $4\times$ in both groups. \Cref{fig:budget-frontier} shows all five declared nominal budgets; exact means and unit-budget comparisons remain in \cref{tab:reproduction-budgets,tab:reproduction-compact}. Storage includes predictor features, normalizers, coefficients and biases, but excludes shared PCA, model weights and runtime memory. The observed ranking is estimator- and budget-dependent; it is not universal linear superiority or total-compute efficiency. Budgets were not selected retrospectively as deployment operating points.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/budget_frontier.pdf}
+\caption{\textbf{Predictor rankings change with storage.} Recorded direct-prediction means for all nonidentity actions on changed states under the specified semantic registration, over 24 fixed model/readout cells per domain. Losses use the replay training-coordinate-energy denominator; lower is better. The horizontal axis is the nominal incremental parameter-storage budget relative to identity-pruned ridge, not runtime memory or statistical capacity. All five declared budgets and all three budgeted predictor families are shown. Nystr\"om first improves the group mean over ridge at $2\times$, and RFF at $4\times$, in both groups. Lines connect recorded aggregates on logarithmic axes; they are not fitted scaling laws or confidence bands. This direct-prediction endpoint is distinct from generator-only composition.}
+\label{fig:budget-frontier}
+\end{figure*}
+
+\subsection{Fitting context differences improves transport}
+Fitting context differences directly yields losses $0.03426/0.11639$ for $C_7/D_4$, versus $0.04714/0.13230$ for applying coordinate-fitted operators to those differences. The coherent action gives $0.03446/0.11717$ under the same direct fitting procedure and registration-specific scoring just described. The improvement therefore identifies a useful fitting objective, while close means for distinct registered tasks do not establish semantic preference or equivalence. On jointly new $S_3$ contexts/entities, direct transport loss is $0.016290$ versus identity $0.016444$, a small absolute improvement below the inherited $0.01$ practical margin. Complete normalization and information conditions are in \cref{app:characterization,app:reproduction}.
+
+\paragraph{Behavioral scope.}
+Historical activation edits supply limited behavioral evidence: $C_7$ target logit improves over identity by 1.129, but the mean effect is smaller than that of the source-conditioned additive control. Correct $D_4$ ordering has lower final-logit distance than the matched wrong ordering. These are token/logit outcomes, not a certified native algorithm. The additive control uses full-hidden displacements and source identity, whereas the operator edits a PCA subspace; the historical mean-overwrite hook lacks a matched zero-delta sham. The separate native program branch failed clean competence and its confirmation remains blocked. Full endpoints and limits, including the unchanged failure records, are in \cref{app:behavior,app:reproduction}.
+
+\section{Implications for Evaluating Recovered Actions}
+\label{sec:reading-protocol}
+The findings motivate four complementary questions, conditional on states, contexts, coordinates, estimator and outcome. They organize interpretation rather than define a calibrated certification test or four statistically independent sources of evidence.
+
+\paragraph{1. Predictive recovery.}
+State what was held out: contexts, action elements, state identities or domains. Disclose comparator supervision and storage. Our generator result demonstrates why the distinction matters: transfer to an excluded action element can still use a completely familiar state vocabulary.
+
+\paragraph{2. Action consistency.}
+Specify the group-law residual, its metric and whether fitting encouraged it. The propagation identity relates consistency to prediction errors and operator norms. To claim additional identification information, compare predictors under conditions that account for those quantities; independent objectives alone do not establish independent evidence.
+
+\paragraph{3. Preferential semantic alignment.}
+Compare coherent alternatives as well as invalid registrations, making information, capacity, scoring rows, target definitions and predictive difficulty explicit. Our comparisons show why these controls answer different questions. Preference over selected alternatives would narrow the interpretation, rather than identify a unique semantic mechanism.
+
+\paragraph{4. Native causal use.}
+For a claim about successful native computation, establish clean-task competence and intervention fidelity, then distinguish sufficiency from necessity for the proposed mechanism. The historical edits illustrate the gap between moving an output score and identifying the computation used by the unedited model.
+
+For a new application, specify the intended claim and competing explanation before choosing a diagnostic. The useful outcome is the interpretation changed by the comparison, including unfavorable results, rather than the number of positive scores obtained.
+
+\section{Discussion and Remaining Scope}
+The experiments show that predictable finite actions coexist with competitive explanatory alternatives. Storage changes predictor rankings, and fitting context differences directly improves transport without establishing preference for the specified semantic registration. The analytical identities and control definitions limit what additional identification information is justified by combining prediction, group-law and disrupted-control scores. The analytical separation shows that identical regression risk and ordinary spectra can conceal different exact-action risks. The spectral bound characterizes that class optimum under its own metric; connecting it empirically to the LLM panel remains open. These results specify what the tested controls change in an interpretation, rather than introduce a new representation theory or supersede competent-task causal studies.
+
+The main open issue is robustness beyond the present construction. C7/D4 use small seen-state vocabularies; repeated partitions reuse templates, and the later study uses a fixed grammar generator. S3 includes new entities and contexts but yields only small gains over identity. Models and layers are selected panels, not independent population samples. Structural power remained limited and native confirmation is blocked. The appendix retains secondary peer, cross-model, product and trained-interface results with their distinct endpoints and original failure records.
+
+A bounded next step is to check whether saved, complete, same-coordinate banks permit the finite-bank spectral diagnostic in \cref{sp:observable}. Such a retrospective analysis could connect the theoretical quantities to this panel, but would not provide new-context validation. An independently authored, prospectively frozen context bank would instead test whether the principal comparisons survive a different context construction. A focused follow-up could compare specified and multiple coherent registrations on one common complete source/action grid, with fixed information, fitting rules and normalization. That would be a new evaluation contract, unlike the registration-specific masks used here. It would strengthen evidence about generalization and registration preference, not by itself exclude state coding or establish native causal use. It has not been run and is not needed to state the present fixed-panel findings.
+
+\section{Conclusion}
+Across the declared language-model panel, finite-action predictors transfer to held-out contexts and generator-composed elements. Their interpretation changes when category information, predictor storage and context-difference fitting are made explicit. The analytical example and risk bound additionally distinguish unconstrained prediction from the best exact orthogonal action of a fixed dimension. In the empirical panel, dedicated fitting improves transport while the tested coherent alternative remains descriptively competitive. This combination of predictive success and viable alternatives motivates evaluating recovery by the explanation each control distinguishes, with semantic preference and native causal use treated as separate empirical questions.
+
+\FloatBarrier
+\label{sec:main-end}
+
+\section*{Impact Statement}
+This work develops methods for evaluating structure in language-model representations. Better diagnostics may aid interpretability, while overinterpreting probes could produce misleading claims about model capabilities or mechanisms. The reported controlled tasks do not evaluate demographic fairness or establish safety guarantees. We identify no additional specific societal consequences requiring separate discussion.
+
+\bibliography{references}
+\bibliographystyle{icml2026}
+\appendix
+\onecolumn
+\input{sections/theory.tex}
+\input{sections/spectral_risk.tex}
+\input{sections/methods.tex}
+\input{sections/results.tex}
+\input{sections/characterization.tex}
+\input{sections/reproduction.tex}
+\input{sections/prospective.tex}
+\input{sections/related_work.tex}
+\end{document}

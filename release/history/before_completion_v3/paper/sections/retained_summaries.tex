@@ -1,0 +1,12 @@
+\section{Retained Spectral and Joint-Premium Summaries}
+\label{app:retained-summaries}
+The main text combines same-bank risks and constraint costs in \cref{tab:core-risk-summary}. For continuity with the complete cell-level results, this appendix retains the original separate spectral and joint-premium summaries. The numerical inputs, averaging weights and interpretations are unchanged. These tables use each original Study~2 test bank's own second-moment-whitened metric; they are distinct from the frozen-training-metric transfer comparison in \cref{tab:followup-witness}.
+
+\input{generated/followup_spectral_bounded.tex}
+
+\begin{table}[t]
+\centering\small
+\input{generated/bounded_risk_reference_table.tex}
+\caption{Same-metric reference and class-risk premium at $r=16$ on the original Study~2 test bank. Each domain averages \BoundedCellsPerDomain{} fixed cells equally. $p^-=\max\{0,2(1-\gamma_r)-\eta\}$ and $p^+=2(1-\gamma_r^2)-\eta$ are computed per cell before averaging. They bound the mean cost of imposing exact laws and orthogonality jointly. $L(I)$ uses total trivial energy and was also checked by direct residuals on the saved coordinates. These are finite-bank quantities, not transfer losses or confidence limits.}
+\label{tab:bounded-risk}
+\end{table}

@@ -1,0 +1,360 @@
+{
+  "schema_version": 1,
+  "protocol_version": "planning-v1",
+  "evidence_cutoff": "2026-10-16",
+  "status": "proposed_not_executed_not_finally_registered",
+  "execution_authorization": "planning_only_no_model_or_cloud_execution",
+  "immutable_inputs": {
+    "historical_source_commit": "30f3c6369a185f43e94b17ca03b0499cd5d65a78",
+    "full_archive": "runpod_output_by_date/result_9_6_2026/run_outputs_9_4_2026_full3.zip",
+    "full_archive_expected_sha256": "5fe7234572120073d8dfab2e8dc0d3373a741f8d48abadc92288f98ab16721f4",
+    "whole_archive_hash_recomputed_this_planning_task": false,
+    "checkpoint_hashes_verified": 888,
+    "raw_cache_metadata_keys_checked": 300
+  },
+  "retrospective": {
+    "pilot_cells": 16,
+    "full_primary_cells": 240,
+    "split_seeds": [
+      101,
+      303,
+      909,
+      2701,
+      4243
+    ],
+    "q_primary": 16,
+    "new_model_forwards": false,
+    "inference_status": "exploratory_existing_data",
+    "consistent_action_image_families": {
+      "C7": 120,
+      "D4_corner": 3
+    },
+    "semantic_randomization_p_value_justified_by_counts_alone": false
+  },
+  "models": [
+    {
+      "id": "meta-llama/Llama-3.2-1B",
+      "hidden_dimension": 2048,
+      "hidden_state_indices": [
+        3,
+        6,
+        10,
+        13
+      ],
+      "revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+      "tokenizer_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08"
+    },
+    {
+      "id": "meta-llama/Llama-3.2-3B",
+      "hidden_dimension": 3072,
+      "hidden_state_indices": [
+        6,
+        11,
+        17,
+        22
+      ],
+      "revision": "13afe5124825b4f3751f836b40dafda64c1ed062",
+      "tokenizer_revision": "13afe5124825b4f3751f836b40dafda64c1ed062"
+    },
+    {
+      "id": "meta-llama/Llama-3.1-8B",
+      "hidden_dimension": 4096,
+      "hidden_state_indices": [
+        6,
+        13,
+        19,
+        26
+      ],
+      "revision": "d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+      "tokenizer_revision": "d04e592bb4f6aa9cfee91e2e20afa771667e1d4b"
+    },
+    {
+      "id": "Qwen/Qwen2.5-1.5B",
+      "hidden_dimension": 1536,
+      "hidden_state_indices": [
+        6,
+        11,
+        17,
+        22
+      ],
+      "revision": "8faed761d45a263340a0528343f099c05c9a4323",
+      "tokenizer_revision": "8faed761d45a263340a0528343f099c05c9a4323"
+    },
+    {
+      "id": "Qwen/Qwen2.5-3B",
+      "hidden_dimension": 2048,
+      "hidden_state_indices": [
+        7,
+        14,
+        22,
+        29
+      ],
+      "revision": "3aab1f1954e9cc14eb9509a215f9e5ca08227a9b",
+      "tokenizer_revision": "3aab1f1954e9cc14eb9509a215f9e5ca08227a9b"
+    },
+    {
+      "id": "Qwen/Qwen2.5-7B",
+      "hidden_dimension": 3584,
+      "hidden_state_indices": [
+        6,
+        11,
+        17,
+        22
+      ],
+      "revision": "d149729398750b98c0af14eb82c78cfe92750796",
+      "tokenizer_revision": "d149729398750b98c0af14eb82c78cfe92750796"
+    }
+  ],
+  "structural": {
+    "relative_depths": [
+      0.2,
+      0.4,
+      0.6,
+      0.8
+    ],
+    "equal_depth_weighting": true,
+    "q_primary": 16,
+    "q_sensitivity": [
+      2,
+      4,
+      8,
+      32,
+      64
+    ],
+    "pilot_families_per_domain": 12,
+    "paraphrases_per_family": 2,
+    "family_split_default": {
+      "train": 48,
+      "validation": 16,
+      "test": 32
+    },
+    "candidate_test_families": [
+      32,
+      48,
+      64
+    ],
+    "power_target": {
+      "marginal": 0.9,
+      "joint_four_superiority_tests": 0.8,
+      "planning_alternative": 0.02,
+      "margin": 0.01,
+      "test_size_selected_before_confirmatory_outcomes": true
+    },
+    "tasks": {
+      "C7": {
+        "states": 7,
+        "readout": "legacy_unique_state_span_mean",
+        "rows_per_model_default": 1344,
+        "train_validation_test_rows": [
+          672,
+          224,
+          448
+        ],
+        "generator_only": [
+          "r"
+        ]
+      },
+      "D4_corner": {
+        "states": 4,
+        "group_order": 8,
+        "readout": "legacy_unique_state_span_mean",
+        "rows_per_model_default": 768,
+        "train_validation_test_rows": [
+          384,
+          128,
+          256
+        ],
+        "generator_only": [
+          "r",
+          "s"
+        ]
+      },
+      "S3_role": {
+        "states_per_orbit": 6,
+        "entity_triple_split_default": {
+          "train": 24,
+          "validation": 8,
+          "test": 16
+        },
+        "readout": "single_fixed_final_token_after_assignment_clause",
+        "role_concatenated_hidden_vectors_allowed_as_primary_readout": false,
+        "rows_per_model_default": 55296,
+        "crossed_train_validation_test_row_matrix": [
+          [
+            13824,
+            4608,
+            9216
+          ],
+          [
+            4608,
+            1536,
+            3072
+          ],
+          [
+            9216,
+            3072,
+            6144
+          ]
+        ],
+        "joint_new_test_rows_per_model": 6144,
+        "primary_arm": "zero_shot",
+        "per_test_orbit_activation_centroids_in_primary": false,
+        "secondary_equal_support_contexts_per_assignment": 4,
+        "generator_only": [
+          "swap_12",
+          "swap_23"
+        ]
+      }
+    },
+    "prompt_rows_total_default": 344448,
+    "primary_array_count_default": 72,
+    "float32_payload_bytes_default": 15049162752,
+    "overheads_in_payload_estimate": false,
+    "runtime_and_vram_estimates": "measure_pilot_before_scaling",
+    "information_tracks": [
+      "label_blind_source_decoded_on_train",
+      "oracle_source_label_explicit"
+    ],
+    "baseline_families": [
+      "identity",
+      "train_state_centroid",
+      "source_conditioned_centroid_displacement",
+      "validation_scalar_context_retention",
+      "independent_linear_affine_ridge",
+      "orthogonal_procrustes",
+      "generator_only_action",
+      "residual_operator",
+      "joint_operator_different_relation_supervision",
+      "S3_input_embedding_compositional_potential_field"
+    ],
+    "ridge": {
+      "normalized_lambda_grid": [
+        0,
+        1e-06,
+        1e-05,
+        0.0001,
+        0.001,
+        0.01,
+        0.1,
+        1
+      ],
+      "scale": "trace(X_transpose_X)/d_from_training",
+      "zero_lambda_solver": "float64_pinv_X",
+      "rcond": 1e-12,
+      "historical_replay_alpha": 0.01
+    },
+    "context_retention_grid": [
+      0,
+      0.25,
+      0.5,
+      0.75,
+      1,
+      1.25
+    ],
+    "selection": "validation_only_prediction_or_declared_difference_loss",
+    "tie_tolerance": 1e-08,
+    "formal_statistics": {
+      "main_family_fwer": 0.04,
+      "main_hypotheses": 8,
+      "S3_family_fwer": 0.01,
+      "S3_hypotheses": 4,
+      "within_family_correction": "Holm",
+      "superiority_margin": 0.01,
+      "equivalence_half_width": 0.005,
+      "context_energy_eligibility_V_over_S": 0.05,
+      "main_unit": "whole_prompt_family",
+      "models_and_depths": "fixed_conditions_averaged_within_family",
+      "main_primary": "family_t",
+      "S3_primary": "conservative_crossed_random_effects_SE_df_min_Fminus1_Ominus1_requires_calibration",
+      "default_S3_df": 15,
+      "bootstrap_replicates_sensitivity_only": 10000
+    },
+    "primary_prediction_operator": "independent_linear_ridge_lambda_validation",
+    "primary_context_operator": "independent_ridge_on_training_difference_pairs_lambda_validation",
+    "primary_category_information": "oracle_source_label_strong_explanatory_control"
+  },
+  "synthetic": {
+    "regimes": [
+      "Y1_category_only",
+      "Y2_shared_context",
+      "Y3_independent_context_noise",
+      "Y4_equivariant_context",
+      "Y5_family_specific_transport",
+      "Y6_unsupported_ambient_extension"
+    ],
+    "group_count": 2,
+    "noise_energy_ratios": [
+      0,
+      0.1,
+      0.3
+    ],
+    "condition_numbers": [
+      1,
+      30
+    ],
+    "timing_pilot_datasets": 120,
+    "primary_cells": 72,
+    "datasets_per_primary_cell": 200,
+    "primary_calibration_datasets": 14400,
+    "negative_cells": 12,
+    "replicates_per_negative_cell": 5000,
+    "negative_audit_datasets": 60000,
+    "inner_10000_bootstrap_in_each_audit_dataset": false,
+    "S3_crossed_calibration": "separate_timed_grid_in_statistical_protocol",
+    "stage_seed_namespaces_must_be_unique": true,
+    "measured_runtime_reserve_factor": 2
+  },
+  "native_causal_separate_study": {
+    "status": "proposed_requires_pilot_power_and_separate_registration",
+    "models": [
+      "meta-llama/Llama-3.1-8B",
+      "Qwen/Qwen2.5-7B"
+    ],
+    "domains": [
+      "C7_native",
+      "D4_free8_asymmetric_pose_native"
+    ],
+    "legacy_D4_corner_results_relabelled_as_free8": false,
+    "pilot_families_per_domain": 12,
+    "families_per_domain_default": {
+      "construction": 16,
+      "validation": 8,
+      "sealed_test": 32
+    },
+    "paraphrases_per_family": 2,
+    "source_word_scenarios_per_family": 12,
+    "test_recipient_cases_default": 3072,
+    "native_program_word_catalog_size": 16,
+    "word_lengths_familiar": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "word_lengths_transfer": [
+      6,
+      7,
+      8
+    ],
+    "sites_dev_frozen": 2,
+    "early_consumer_site_primary": true,
+    "late_site_positive_control": true,
+    "dose_grid": [
+      0,
+      0.25,
+      0.5,
+      1,
+      2
+    ],
+    "complete_answer_scoring": true,
+    "validation_clean_competence_proposed": 0.8,
+    "practical_accuracy_advantage_planning_target": 0.05,
+    "primary_no_test_correctness_filter": true,
+    "old_operator_application_to_changed_native_prompt": "secondary_transfer_only",
+    "patch_count": "sum_over_registered_condition_matrix_not_assumed_full_factorial",
+    "GPU_hours": "not_estimated_without_pilot",
+    "primary_patch_condition_evaluations_default": 69120,
+    "causal_power_planning_true_advantage": 0.1,
+    "causal_power_sensitivity_true_advantage": 0.05
+  }
+}

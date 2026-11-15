@@ -1,0 +1,37 @@
+\section{Related Work}
+\label{sec:related-main}
+\paragraph{Measuring transformations in learned representations.}
+\citet{lenc2015understanding} fit maps between representations of paired images to measure how features respond to input transformations, and use related mappings for network stitching.
+\citet{gruver2023lie} use the Lie derivative to measure how closely learned visual representations respect continuous input transformations.
+In language models, \citet{hernandez2024linearity} find that affine maps derived from model Jacobians approximate subject-to-object decoding for some relations.
+We fit maps for prescribed finite groups, where we can also test whether the fitted maps compose as the input transformations do.
+
+\paragraph{Sharing a map and satisfying a group law.}
+\citet[arXiv v1, Sections~III and V]{sun2026transformationlaws} characterizes when an input transformation induces a well-defined map on the image of an encoder.
+Sun separates local fitting error for a given transformation from the cost of sharing one map across regions defined by the encoder's activation patterns. The preprint compares global and local maps on frozen visual features.
+In our setting, each group element already uses a map shared across contexts. We give spectral bounds on the minimum prediction error in a fixed dimension when these maps must be orthogonal and jointly obey the group law exactly.
+In frozen language models, we also compare the prescribed way of transforming the input states with alternative ways that obey the same group laws.
+
+\paragraph{Learning equivariant representations.}
+The Homomorphism AutoEncoder learns representations and actions jointly from transitions \citep{keurti2023homomorphism}.
+Under its generative and diversity assumptions, Equivariance by Contrast identifies jointly learned representations and actions up to a common invertible change of coordinates \citep{schmidt2025equivariance}.
+We take the hidden representations and the action on the input states as given. The maps that predict changes in those representations are the objects of comparison.
+
+\paragraph{Spectral approximation and constraint costs.}
+Prior work uses spectral methods to approximate data in group-invariant spaces or to learn features subject to symmetry constraints \citep{barbieri2020approximation,koyama2024fourier,ordonez2026inference}.
+We use the energy that can be retained in whole symmetry components to bound the best prediction error at a given dimension.
+\citet{wang2023equivariance} bound equivariant regression error when both the input and output actions are prescribed. Our bounds allow the action on the hidden representations to vary.
+\citet{elesedy2021generalisation} analyze expected test error under symmetry assumptions. We report the cost of the constraints by comparing minimum errors on one fixed set of observed representations and assess generalization in separate held-out comparisons.
+
+\paragraph{Shared geometry.}
+\citet{hu2026language} report shared geometry across language models both in how concepts are represented and in how their representations shift with context. They use displacements in one model to help predict held-out displacements in another.
+\citet{wurgaft2026manifold} connect activation geometry to output behavior by steering along fitted manifolds.
+Our main comparisons change a state named in the input within a fixed model and context template. We ask how well an exact group action captures those changes and whether the prescribed state correspondences receive stronger support than alternatives on the same representations.
+
+\paragraph{Calendar representations and computation.}
+\citet{engels2025notall} identify circular representations of calendar concepts and study their role through interventions.
+\citet{gupta2026spokes} find that weekday representations in the models and layers they study can behave like discrete states arranged in a circle.
+\citet{feucht2026arithmetic} report that Llama-3.1-8B uses base-10 addition before mapping the sum back to a cyclic concept.
+We use weekdays as an established cyclic domain for testing transformation prediction and comparing state correspondences.
+Determining whether the model uses the fitted transformations to compute its answers calls for behavioral and intervention evidence \citep{makelov2024illusion,geiger2025causal}.
+Extended comparisons appear in \cref{app:related-work}.

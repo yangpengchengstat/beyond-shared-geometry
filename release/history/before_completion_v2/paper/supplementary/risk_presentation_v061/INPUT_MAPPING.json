@@ -1,0 +1,25 @@
+{
+  "purpose": "Replot saved r16 risks only; no scientific computation",
+  "join": "unique cell identity; original full-precision columns retained",
+  "source_columns": {
+    "cell_risk_reference.csv": [
+      "eta",
+      "a",
+      "u",
+      "identity_risk"
+    ],
+    "orthogonal_cell_summary.csv": [
+      "L_orth"
+    ]
+  },
+  "inputs": {
+    "cell_risk_reference.csv": {
+      "project_source": "results/main30_bounded_v1/cell_risk_reference.csv",
+      "sha256": "ec52b77b536d8241edf5229b548d559ec09b8845454807946e03a4bf6171ae61"
+    },
+    "orthogonal_cell_summary.csv": {
+      "project_source": "results/orthogonal_comparator_v1/cell_summary.csv",
+      "sha256": "a854db94382443ab5221e4daac0dbb92271763228a91bac198b1887133c46f5d"
+    }
+  }
+}

@@ -1,0 +1,568 @@
+--- a/paper/generated/causal_main.tex
++++ b/paper/generated/causal_main.tex
+@@ -1,4 +1,6 @@
+ \begin{table*}[t]
++\caption{Frozen behavioral contrasts from externally composed activation edits. Additive denotes the training-only source- and transformation-conditioned comparator, distinct from the global additive field. Positive logit/accuracy differences favor the learned edit; the D4 distance contrast is lower for the correct word. Top-1 measures the scored continuation token; all archived continuation counts are one. Recorded 95\% bootstrap percentile intervals preserve the original nested procedure; they describe fixed-panel resampling sensitivity, not calibrated population coverage (\cref{app:inference}).}
++\label{tab:causal-main}
+ \centering
+ \small
+ \begin{tabular}{llll}
+@@ -13,6 +15,4 @@
+ \multicolumn{4}{l}{D4 correct-minus-wrong final-logit distance: $-0.0422\;[-0.0543,\,-0.0298]$.} \\
+ \bottomrule
+ \end{tabular}
+-\caption{Frozen behavioral contrasts from externally composed activation edits. Additive denotes the training-only source- and transformation-conditioned comparator, distinct from the global additive field. Positive logit/accuracy differences favor the learned edit; the D4 distance contrast is lower for the correct word. Top-1 measures the scored continuation token; all archived continuation counts are one. Recorded 95\% bootstrap percentile intervals preserve the original nested procedure; they describe fixed-panel resampling sensitivity, not calibrated population coverage (\cref{app:inference}).}
+-\label{tab:causal-main}
+ \end{table*}
+--- a/paper/generated/characterization_intervals.tex
++++ b/paper/generated/characterization_intervals.tex
+@@ -1,4 +1,6 @@
+-\begin{table}[htbp]\centering\small
++\begin{table}[htbp]
++\caption{All ten original characterization contrasts with frozen 95\% percentile sensitivity intervals (10,000 draws, seed 314159). Positive favors linear. Prediction uses oracle-source category/retention controls, plus the $S_3$ input-metadata potential, selected on validation; context uses scalar retention. Prediction and context have different training-energy denominators. Fixed-panel sensitivities do not certify significance, equivalence, coverage or an old power gate.}
++\label{tab:characterization-intervals}\centering\small
+ \begin{tabular}{llrrr}\toprule
+ Domain / split & Endpoint & Baseline minus linear & Lower & Upper \\
+ \midrule
+@@ -13,5 +15,4 @@
+ $S_3$, joint & prediction & 0.000460 & 0.000262 & 0.000673 \\
+ $S_3$, joint & context & 0.000154 & -0.000017 & 0.000338 \\
+ \bottomrule\end{tabular}
+-\caption{All ten original characterization contrasts with frozen 95\% percentile sensitivity intervals (10,000 draws, seed 314159). Positive favors linear. Prediction uses oracle-source category/retention controls, plus the $S_3$ input-metadata potential, selected on validation; context uses scalar retention. Prediction and context have different training-energy denominators. Fixed-panel sensitivities do not certify significance, equivalence, coverage or an old power gate.}
+-\label{tab:characterization-intervals}\end{table}
++\end{table}
+--- a/paper/generated/core_risk_decomposition_v060.tex
++++ b/paper/generated/core_risk_decomposition_v060.tex
+@@ -1,5 +1,7 @@
+ % Presentation only: select and round previously saved means.
+ \begin{table*}[t]
++\caption{\textbf{Same-bank risks and constraint costs.} Each row averages all 24 fixed model/readout conditions on the Study~2 test banks. Panel (a) bounds the joint cost of exact laws and orthogonality; panel (b) separates the computed orthogonality cost $\beta$ from bounds on further common-law cost. Endpoints are computed per condition before averaging. The last column uses the fixed tolerance $\tau=10^{-8}+10^{-7}|\ell^-|$. Intervals bound mean class optima; they are not confidence intervals or measured optima. Each dimension uses its own second-moment-whitened metric.}
++\label{tab:core-risk-summary}
+ \centering\small
+ \setlength{\tabcolsep}{4pt}
+ \textbf{(a) Joint constraint cost, $r=16$}\par\smallskip
+@@ -23,6 +25,4 @@
+ 8 & $D_4$ & 0.080819 & 0.010217 & [0.000052, 0.076930] & 19/24 \\
+ \bottomrule
+ \end{tabular}
+-\caption{\textbf{Same-bank risks and constraint costs.} Each row averages all 24 fixed model/readout conditions on the Study~2 test banks. Panel (a) bounds the joint cost of exact laws and orthogonality; panel (b) separates the computed orthogonality cost $\beta$ from bounds on further common-law cost. Endpoints are computed per condition before averaging. The last column uses the fixed tolerance $\tau=10^{-8}+10^{-7}|\ell^-|$. Intervals bound mean class optima; they are not confidence intervals or measured optima. Each dimension uses its own second-moment-whitened metric.}
+-\label{tab:core-risk-summary}
+ \end{table*}
+--- a/paper/generated/diagnostic_controls.tex
++++ b/paper/generated/diagnostic_controls.tex
+@@ -1,4 +1,6 @@
+ \begin{table*}[t]
++\caption{Registration/correspondence controls and the scope of global additive falsification. AFS-C reports real-minus-scrambled test equivariance error after refitting on perturbed training pairs and scoring against unchanged true held-out targets; negative values favor the real correspondence. Brackets retain the historical bootstrap percentile intervals. AFS-B compares fixed operators with a restricted reference excluding automorphisms; observed and reference registrations are not established as exchangeable, so this is not calibrated semantic-null inference. The global displacement estimator averages complete state orbits and therefore reduces to identity independently of the activations.}
++\label{tab:diagnostic-controls}
+ \centering
+ \small
+ \begin{tabular}{lll}
+@@ -17,6 +19,4 @@
+ Global additive & Balanced complete orbit & $\widehat v_g=0$ by permutation cancellation \\
+ \bottomrule
+ \end{tabular}
+-\caption{Registration/correspondence controls and the scope of global additive falsification. AFS-C reports real-minus-scrambled test equivariance error after refitting on perturbed training pairs and scoring against unchanged true held-out targets; negative values favor the real correspondence. Brackets retain the historical bootstrap percentile intervals. AFS-B compares fixed operators with a restricted reference excluding automorphisms; observed and reference registrations are not established as exchangeable, so this is not calibrated semantic-null inference. The global displacement estimator averages complete state orbits and therefore reduces to identity independently of the activations.}
+-\label{tab:diagnostic-controls}
+ \end{table*}
+--- a/paper/generated/dimension_sensitivity_audit.tex
++++ b/paper/generated/dimension_sensitivity_audit.tex
+@@ -1,4 +1,6 @@
+ \begin{table}[htbp]
++\caption{Existing Study~1 test prediction errors on a matched dimension-sensitivity subset, reconstructed from unchanged per-template records. Each domain averages six models, depths 0.4/0.8 and splits 101/303 (24 conditions), with the same six held-out templates per split. The $q=16$ column is this subset, not the larger primary panel. Values retain the original $\Eeq$ normalization; no new dimension was run or selected. The separate computational replay and all recorded endpoints are retained in the audit CSV.}
++\label{tab:dimension-sensitivity-audit}
+ \centering\small
+ \begin{tabular}{@{}llrrrr@{}}
+ \toprule
+@@ -10,6 +12,4 @@
+ $D_4$ & Joint & 0.056169 & 0.061450 & 0.071429 & 0.135591 \\
+ \bottomrule
+ \end{tabular}
+-\caption{Existing Study~1 test prediction errors on a matched dimension-sensitivity subset, reconstructed from unchanged per-template records. Each domain averages six models, depths 0.4/0.8 and splits 101/303 (24 conditions), with the same six held-out templates per split. The $q=16$ column is this subset, not the larger primary panel. Values retain the original $\Eeq$ normalization; no new dimension was run or selected. The separate computational replay and all recorded endpoints are retained in the audit CSV.}
+-\label{tab:dimension-sensitivity-audit}
+ \end{table}
+--- a/paper/generated/followup_context.tex
++++ b/paper/generated/followup_context.tex
+@@ -1,4 +1,6 @@
+ \begin{table}[t]
++\caption{New authored contexts under matched validation selection. Losses use old-training difference energy. Negative contrasts favor difference fitting. The last column reports the 2.5th/97.5th percentiles from 2,000 paired-family bootstrap draws; it describes conditional sensitivity over 64 authored families, not calibrated population coverage. Model/readout cells and both domains remain paired in each family.}
++\label{tab:followup-context}
+ \centering\small\setlength{\tabcolsep}{3pt}
+ \begin{tabular}{@{}lrrrrr@{}}
+ \toprule
+@@ -10,6 +12,4 @@
+ Equal-domain mean & 0.10486 & 0.08652 & 0.08670 & +0.00018 & [-0.00103, +0.00136] \\
+ \bottomrule
+ \end{tabular}
+-\caption{New authored contexts under matched validation selection. Losses use old-training difference energy. Negative contrasts favor difference fitting. The last column reports the 2.5th/97.5th percentiles from 2,000 paired-family bootstrap draws; it describes conditional sensitivity over 64 authored families, not calibrated population coverage. Model/readout cells and both domains remain paired in each family.}
+-\label{tab:followup-context}
+ \end{table}
+--- a/paper/generated/followup_simulations.tex
++++ b/paper/generated/followup_simulations.tex
+@@ -1,4 +1,6 @@
+ \begin{table}[ht]
++\caption{All 36 fixed mechanism settings, averaged over three declared seeds per row. M1 is a shared action, M2 uses contextual orientations, and M3 is a stable state-code control admitting a shared action. Gamma uses test whitening; prediction risks use training whitening. Machine-scale values are shown without modifying archived numbers. These are mechanism illustrations, not a calibration or power experiment.}
++\label{tab:followup-simulations}
+ \centering\small
+ \begin{tabular}{@{}lllrrr@{}}
+ \toprule
+@@ -18,6 +20,4 @@
+ $D_4$ & M3 & 0.05 & 0.99513 & 0.013044 & 0.013039 \\
+ \bottomrule
+ \end{tabular}
+-\caption{All 36 fixed mechanism settings, averaged over three declared seeds per row. M1 is a shared action, M2 uses contextual orientations, and M3 is a stable state-code control admitting a shared action. Gamma uses test whitening; prediction risks use training whitening. Machine-scale values are shown without modifying archived numbers. These are mechanism illustrations, not a calibration or power experiment.}
+-\label{tab:followup-simulations}
+ \end{table}
+--- a/paper/generated/followup_spectral_bounded.tex
++++ b/paper/generated/followup_spectral_bounded.tex
+@@ -1,4 +1,6 @@
+ \begin{table}[t]
++\caption{Finite-bank exact-action bounds in the test-bank metric. Each domain has 24 model/readout cells at $r=16$. The bounds concern cell-specific $L^\star$ over the entire exact orthogonal-action class in each test bank's own second-moment-whitened metric; displayed endpoints average those bounds, not confidence limits. $b_{\rm triv}$ is selected trivial-type energy divided by $r$. The last column counts unique highest-$\gamma_r$ ranks of the specified image among 120 C7 or three D4 images; it is not a rank of exact $L^\star$ or a significance test.}
++\label{tab:followup-spectral}
+ \centering\small
+ \begin{tabular}{@{}lrrrrr@{}}
+ \toprule
+@@ -8,6 +10,4 @@
+ $D_4$ & 0.93528 & [0.12944, 0.24895] & 0.10321 & 0.72742 & 16/24 \\
+ \bottomrule
+ \end{tabular}
+-\caption{Finite-bank exact-action bounds in the test-bank metric. Each domain has 24 model/readout cells at $r=16$. The bounds concern cell-specific $L^\star$ over the entire exact orthogonal-action class in each test bank's own second-moment-whitened metric; displayed endpoints average those bounds, not confidence limits. $b_{\rm triv}$ is selected trivial-type energy divided by $r$. The last column counts unique highest-$\gamma_r$ ranks of the specified image among 120 C7 or three D4 images; it is not a rank of exact $L^\star$ or a significance test.}
+-\label{tab:followup-spectral}
+ \end{table}
+--- a/paper/generated/generator_transfer.tex
++++ b/paper/generated/generator_transfer.tex
+@@ -1,4 +1,6 @@
+ \begin{table*}[t]
++\caption{Generator-only predictions of five never-independently-fitted elements on held-out templates ($q=16$). Direct Ridge fits each element separately and has lower error. The final column preserves the recorded 95\% bootstrap percentile interval; models form a fixed panel with overlapping partitions. These are resampling sensitivities, not calibrated population confidence statements (\cref{app:inference}).}
++\label{tab:generator-transfer}
+ \centering
+ \small
+ \begin{tabular}{lrrl}
+@@ -9,6 +11,4 @@
+ D4 & 0.0566 & 0.0500 & $0.0065\;[0.0043,\,0.0094]$ \\
+ \bottomrule
+ \end{tabular}
+-\caption{Generator-only predictions of five never-independently-fitted elements on held-out templates ($q=16$). Direct Ridge fits each element separately and has lower error. The final column preserves the recorded 95\% bootstrap percentile interval; models form a fixed panel with overlapping partitions. These are resampling sensitivities, not calibrated population confidence statements (\cref{app:inference}).}
+-\label{tab:generator-transfer}
+ \end{table*}
+--- a/paper/generated/identification_summary.tex
++++ b/paper/generated/identification_summary.tex
+@@ -1,5 +1,7 @@
+ % Generated by scripts/build_identification_table.py; see identification_summary.source.json.
+ \begin{table*}[t]
++\caption{Evidence and identification boundaries. Paired numbers are $C_7$ / $D_4$ (corners); smaller losses are better. Rows concern different experiments, not one matched comparison or independent confirmations. Historical $D$ averages per-row target-normalized squared errors; replay prediction and context transport use distinct training-energy denominators $E_z$ and $E_u$. Compare losses only within the stated study and endpoint. Replay means cover 24 fixed model/readout cells per group. Budget crossovers are descriptive across the full recorded grid, not a test-selected deployment policy. D4 fixed-point identities, and hence scored rows, can differ across registrations. Statistical scope is defined in Section~\ref{sec:setup}.}
++\label{tab:identification-summary}
+ \centering\small
+ \setlength{\tabcolsep}{4pt}
+ \renewcommand{\arraystretch}{1.10}
+@@ -20,6 +22,4 @@
+ Restricted registration\newline (AFS-B) & 120/120 cells in each group, separately for data and operator defects, below the reference 2.5th percentile. & Separation from invalid registrations; the restricted ensemble is not a calibrated semantic null. \\
+ \bottomrule
+ \end{tabular}
+-\caption{Evidence and identification boundaries. Paired numbers are $C_7$ / $D_4$ (corners); smaller losses are better. Rows concern different experiments, not one matched comparison or independent confirmations. Historical $D$ averages per-row target-normalized squared errors; replay prediction and context transport use distinct training-energy denominators $E_z$ and $E_u$. Compare losses only within the stated study and endpoint. Replay means cover 24 fixed model/readout cells per group. Budget crossovers are descriptive across the full recorded grid, not a test-selected deployment policy. D4 fixed-point identities, and hence scored rows, can differ across registrations. Statistical scope is defined in Section~\ref{sec:setup}.}
+-\label{tab:identification-summary}
+ \end{table*}
+--- a/paper/generated/lexical_control.tex
++++ b/paper/generated/lexical_control.tex
+@@ -1,4 +1,6 @@
+ \begin{table*}[t]
++\caption{Rank-matched lexical control using independent Ridge, with generator-only composed predictions for $E_{\rm gen,eq}$. Matching refers to training projected rank, supported by audited input spectra and the recorded PCA procedure rather than direct remeasurement of historical coordinates (\cref{app:dimension-rank-audit}). Both locations use C7 $q=6$ or D4 $q=3$; these are not the FULL $q=16$ estimates. Internal means average four fixed depths. Embedding errors are smaller in every tested model/group; all 150 archived internal-minus-embedding intervals are positive. Repeated templates at the embedding location reuse the same category vectors.}
++\label{tab:lexical-control}
+ \centering
+ \small
+ \begin{tabular}{lllrrr}
+@@ -15,6 +17,4 @@
+ D4 & Qwen 1.5B & Internal mean & 0.055191 & 0.059383 & 0.027160 \\
+ \bottomrule
+ \end{tabular}
+-\caption{Rank-matched lexical control using independent Ridge, with generator-only composed predictions for $E_{\rm gen,eq}$. Matching refers to training projected rank, supported by audited input spectra and the recorded PCA procedure rather than direct remeasurement of historical coordinates (\cref{app:dimension-rank-audit}). Both locations use C7 $q=6$ or D4 $q=3$; these are not the FULL $q=16$ estimates. Internal means average four fixed depths. Embedding errors are smaller in every tested model/group; all 150 archived internal-minus-embedding intervals are positive. Repeated templates at the embedding location reuse the same category vectors.}
+-\label{tab:lexical-control}
+ \end{table*}
+--- a/paper/generated/main_findings.tex
++++ b/paper/generated/main_findings.tex
+@@ -1,5 +1,7 @@
+ % Existing reviewed values only; see main_findings.source.json.
+ \begin{table*}[t]
++\caption{Three original-bank findings motivating the completed follow-up. The new-context result limits the third finding to its original construction. Smaller losses are better. Category and budget results use the Study~2 compact-comparison training-coordinate-energy denominator; context differences use a separate difference-energy denominator. Each group contains 24 fixed model/readout cells. Targets and changed-state masks are registration-specific, so cross-registration means compare distinct tasks. Full recovery, generator and restricted-registration contrasts remain in \cref{tab:identification-summary}; \cref{sec:setup} defines the descriptive statistical scope.}
++\label{tab:main-findings}
+ \centering\small
+ \setlength{\tabcolsep}{4pt}
+ \renewcommand{\arraystretch}{1.10}
+@@ -14,6 +16,4 @@
+ An original-bank transport advantage & Coordinate fit: 0.047137 / 0.132304.\newline Difference fit: 0.034260 / 0.116386.\newline Coherent fit: 0.034465 / 0.117165. & The new authored bank reverses the advantage in D4 (Table~\ref{tab:followup-context}). Close cross-registration means do not establish semantic preference. \\
+ \bottomrule
+ \end{tabular}
+-\caption{Three original-bank findings motivating the completed follow-up. The new-context result limits the third finding to its original construction. Smaller losses are better. Category and budget results use the Study~2 compact-comparison training-coordinate-energy denominator; context differences use a separate difference-energy denominator. Each group contains 24 fixed model/readout cells. Targets and changed-state masks are registration-specific, so cross-registration means compare distinct tasks. Full recovery, generator and restricted-registration contrasts remain in \cref{tab:identification-summary}; \cref{sec:setup} defines the descriptive statistical scope.}
+-\label{tab:main-findings}
+ \end{table*}
+--- a/paper/generated/reproduction_budgets.tex
++++ b/paper/generated/reproduction_budgets.tex
+@@ -1,4 +1,6 @@
+-\begin{table}[htbp]\centering\small
++\begin{table}[htbp]
++\caption{All five declared nominal budgets for the all-element semantic track, equal action then equal cell means over 24 cells. This table does not choose a budget on the inspected test set. Generator-only and coherent-action results remain separate in the machine-readable release.}
++\label{tab:reproduction-budgets}\centering\small
+ \begin{tabular}{llrrrrr}\toprule
+ Group & Estimator & $0.5\times$ & $1\times$ & $2\times$ & $4\times$ & $8\times$ \\
+ \midrule
+@@ -9,5 +11,4 @@
+ $D_4$ & RFF & 0.63453 & 0.21265 & 0.06644 & 0.02778 & 0.02229 \\
+ $D_4$ & Nystr\"om & 0.17035 & 0.04942 & 0.03153 & 0.02333 & 0.01960 \\
+ \bottomrule\end{tabular}
+-\caption{All five declared nominal budgets for the all-element semantic track, equal action then equal cell means over 24 cells. This table does not choose a budget on the inspected test set. Generator-only and coherent-action results remain separate in the machine-readable release.}
+-\label{tab:reproduction-budgets}\end{table}
++\end{table}
+--- a/paper/generated/reproduction_compact.tex
++++ b/paper/generated/reproduction_compact.tex
+@@ -1,4 +1,6 @@
+-\begin{table}[htbp]\centering\small
++\begin{table}[htbp]
++\caption{All-element changed-state prediction in the reviewed replay: equal action then equal cell means over 24 fixed model/readout cells per group; lower is better. $1\times$ denotes nominal incremental storage relative to ridge, not equal capacity or total RAM. Centroids additionally use construction labels and an action table. All budget and registration results are retained in the release.}
++\label{tab:reproduction-compact}\centering\small
+ \begin{tabular}{lrr}\toprule
+ Method & $C_7$ & $D_4$ (corners) \\
+ \midrule
+@@ -8,5 +10,4 @@
+ RFF, $1\times$ & 0.30033 & 0.21265 \\
+ Nystr\"om, $1\times$ & 0.08292 & 0.04942 \\
+ \bottomrule\end{tabular}
+-\caption{All-element changed-state prediction in the reviewed replay: equal action then equal cell means over 24 fixed model/readout cells per group; lower is better. $1\times$ denotes nominal incremental storage relative to ridge, not equal capacity or total RAM. Centroids additionally use construction labels and an action table. All budget and registration results are retained in the release.}
+-\label{tab:reproduction-compact}\end{table}
++\end{table}
+--- a/paper/generated/reproduction_context.tex
++++ b/paper/generated/reproduction_context.tex
+@@ -1,4 +1,6 @@
+-\begin{table}[htbp]\centering\small
++\begin{table}[htbp]
++\caption{Context-difference transport on 24 fixed cells per stratum. Coherent swap01 defines a consistently relabeled alternative action; it is not an exchangeable semantic null. Each registration uses its own targets and changed-state mask; retained D4 pairs need not coincide. All predictors within one registration share its scoring rows. The context loss uses its own training-energy normalization, not the coordinate-prediction denominator.}
++\label{tab:reproduction-context}\centering\small
+ \begin{tabular}{lrrr}\toprule
+ Method & $C_7$ & $D_4$ (corners) & $S_3$ (joint) \\
+ \midrule
+@@ -8,5 +10,4 @@
+ Oracle category retention & 0.043825 & 0.166675 & 0.016313 \\
+ Context-fitted, coherent action & 0.034465 & 0.117165 & 0.016291 \\
+ \bottomrule\end{tabular}
+-\caption{Context-difference transport on 24 fixed cells per stratum. Coherent swap01 defines a consistently relabeled alternative action; it is not an exchangeable semantic null. Each registration uses its own targets and changed-state mask; retained D4 pairs need not coincide. All predictors within one registration share its scoring rows. The context loss uses its own training-energy normalization, not the coordinate-prediction denominator.}
+-\label{tab:reproduction-context}\end{table}
++\end{table}
+--- a/paper/generated/reproduction_interface.tex
++++ b/paper/generated/reproduction_interface.tex
+@@ -1,4 +1,6 @@
+-\begin{table}[htbp]\centering\small
++\begin{table}[htbp]
++\caption{Validation-selected supervised interfaces: 72 model/readout/seed cells per objective and domain, 500 steps per candidate. The loss is normalized full-hidden target-prediction error; it is not the compact-coordinate endpoint. State classification is an interface-head score, not language-model answer accuracy. Seed replicates are not independent datasets.}
++\label{tab:reproduction-interface}\centering\small
+ \begin{tabular}{lrrrr}\toprule
+ Objective & $C_7$ loss & $D_4$ loss & $S_3$ joint loss & $S_3$ joint acc. \\
+ \midrule
+@@ -7,5 +9,4 @@
+ Equivariance & 0.229303 & 0.254190 & 0.401808 & 0.1671 \\
+ Group regularization & 0.227646 & 0.253783 & 0.401694 & 0.1671 \\
+ \bottomrule\end{tabular}
+-\caption{Validation-selected supervised interfaces: 72 model/readout/seed cells per objective and domain, 500 steps per candidate. The loss is normalized full-hidden target-prediction error; it is not the compact-coordinate endpoint. State classification is an interface-head score, not language-model answer accuracy. Seed replicates are not independent datasets.}
+-\label{tab:reproduction-interface}\end{table}
++\end{table}
+--- a/paper/generated/reproduction_secondary.tex
++++ b/paper/generated/reproduction_secondary.tex
+@@ -1,4 +1,6 @@
+-\begin{table}[htbp]\centering\small
++\begin{table}[htbp]
++\caption{Secondary fixed-panel summaries. Word and structural transport use row-normalized errors; the product endpoint has its own target-energy normalization. Values across tasks are not directly comparable. The Hu adaptation receives source-model test displacements. These are implemented adaptations, not certified peer-author reproductions.}
++\label{tab:reproduction-secondary}\centering\small
+ \begin{tabular}{llrr}\toprule
+ Task & Method & Error & Conditions \\
+ \midrule
+@@ -12,5 +14,4 @@
+ $C_4\times C_4$ & joint & 0.07267 & 24 \\
+ $C_4\times C_4$ & local displacement & 0.00539 & 24 \\
+ \bottomrule\end{tabular}
+-\caption{Secondary fixed-panel summaries. Word and structural transport use row-normalized errors; the product endpoint has its own target-energy normalization. Values across tasks are not directly comparable. The Hu adaptation receives source-model test displacements. These are implemented adaptations, not certified peer-author reproductions.}
+-\label{tab:reproduction-secondary}\end{table}
++\end{table}
+--- a/paper/generated/reproduction_unseen.tex
++++ b/paper/generated/reproduction_unseen.tex
+@@ -1,4 +1,6 @@
+-\begin{table}[htbp]\centering\small
++\begin{table}[htbp]
++\caption{Generator-only fitting evaluated solely on the five excluded nonidentity elements in each group. Equal action means precede equal means over 24 cells. The unit storage budget now refers to generator matrices. These numbers are distinct from the all-nonidentity evaluation, which includes fitted generators. No new model or predictor was fitted for this aggregation.}
++\label{tab:reproduction-unseen}\centering\small
+ \begin{tabular}{lrr}\toprule
+ Method & $C_7$ & $D_4$ (corners) \\
+ \midrule
+@@ -8,5 +10,4 @@
+ RFF, $1\times$ & 3.040965 & 0.390158 \\
+ Nystr\"om, $1\times$ & 4.304052 & 0.095135 \\
+ \bottomrule\end{tabular}
+-\caption{Generator-only fitting evaluated solely on the five excluded nonidentity elements in each group. Equal action means precede equal means over 24 cells. The unit storage budget now refers to generator matrices. These numbers are distinct from the all-nonidentity evaluation, which includes fitted generators. No new model or predictor was fitted for this aggregation.}
+-\label{tab:reproduction-unseen}\end{table}
++\end{table}
+--- a/paper/generated/spectral_dimension_summary.tex
++++ b/paper/generated/spectral_dimension_summary.tex
+@@ -1,4 +1,6 @@
+ \begin{table}[htbp]
++\caption{Spectral sensitivity on the same Study~2 banks, with 24 equally weighted conditions per domain and $q=r$. The 16-dimensional rows reproduce the primary results under their original tolerances; the eight-dimensional rows use the leading eight saved training-PCA coordinates. Here $p^-=\max\{0,2(1-\gamma_r)-\eta\}$ bounds the joint cost of exact laws and orthogonality. Positive counts $p^->\tau(p^-,0)$; unique top counts the semantic image with uniquely largest budget among all 120 C7 or three D4 images. Each dimension has its own whitening metric; lower values across dimensions do not establish a superior dimension.}
++\label{tab:spectral-dimension-sensitivity}
+ \centering\small
+ \setlength{\tabcolsep}{3pt}
+ \begin{tabular}{@{}lrrrrrr@{}}
+@@ -12,6 +14,4 @@
+ $D_4$ & 8 & 0.959581 & 0.010235 & 0.005865 & 24/24 & 19/24 \\
+ \bottomrule
+ \end{tabular}
+-\caption{Spectral sensitivity on the same Study~2 banks, with 24 equally weighted conditions per domain and $q=r$. The 16-dimensional rows reproduce the primary results under their original tolerances; the eight-dimensional rows use the leading eight saved training-PCA coordinates. Here $p^-=\max\{0,2(1-\gamma_r)-\eta\}$ bounds the joint cost of exact laws and orthogonality. Positive counts $p^->\tau(p^-,0)$; unique top counts the semantic image with uniquely largest budget among all 120 C7 or three D4 images. Each dimension has its own whitening metric; lower values across dimensions do not establish a superior dimension.}
+-\label{tab:spectral-dimension-sensitivity}
+ \end{table}
+--- a/paper/generated/spectral_sensitivity_main.tex
++++ b/paper/generated/spectral_sensitivity_main.tex
+@@ -1,5 +1,7 @@
+ % Format-only selection from the completed sensitivity coverage.
+ \begin{table}[t]
++\caption{Retained-dimension sensitivity on the same complete Study~2 banks. Each row summarizes all 24 fixed conditions; $p^-$ is the lower endpoint for joint exact-law and orthogonality cost. The last column counts a uniquely highest budget for the specified semantic image among all 120 C7 or three D4 images, using the original tolerance. Eight coordinates are the leading eight saved PCA coordinates. The dimensions have different whitened metrics and normalizations; these are not optimal-dimension comparisons or significance tests.}
++\label{tab:sensitivity-main}
+ \centering\small
+ \setlength{\tabcolsep}{5pt}
+ \begin{tabular}{@{}lrrrr@{}}
+@@ -13,6 +15,4 @@
+ $D_4$ & 8 & 0.959581 & 0.005865 & 19/24 \\
+ \bottomrule
+ \end{tabular}
+-\caption{Retained-dimension sensitivity on the same complete Study~2 banks. Each row summarizes all 24 fixed conditions; $p^-$ is the lower endpoint for joint exact-law and orthogonality cost. The last column counts a uniquely highest budget for the specified semantic image among all 120 C7 or three D4 images, using the original tolerance. Eight coordinates are the leading eight saved PCA coordinates. The dimensions have different whitened metrics and normalizations; these are not optimal-dimension comparisons or significance tests.}
+-\label{tab:sensitivity-main}
+ \end{table}
+--- a/paper/generated/structural_main.tex
++++ b/paper/generated/structural_main.tex
+@@ -1,4 +1,6 @@
+ \begin{table}[t]
++\caption{Held-out structural errors at $q=16$: descriptive means over six fixed models, four normalized depths, five splits, and six test templates per split. Lower is better. Random values average five controls; these controls are not independent model replications. Identity relation defects are intentionally not interpreted.}
++\label{tab:structural-main}
+ \centering
+ \small
+ \begin{tabular}{llrr}
+@@ -16,6 +18,4 @@
+ D4 & Random orthogonal & 1.9978 & 1.9671 \\
+ \bottomrule
+ \end{tabular}
+-\caption{Held-out structural errors at $q=16$: descriptive means over six fixed models, four normalized depths, five splits, and six test templates per split. Lower is better. Random values average five controls; these controls are not independent model replications. Identity relation defects are intentionally not interpreted.}
+-\label{tab:structural-main}
+ \end{table}
+--- a/paper/generated/witness_transfer_main.tex
++++ b/paper/generated/witness_transfer_main.tex
+@@ -1,4 +1,6 @@
+ \begin{table}[t]
++\caption{Transfer of frozen predictors at $r=16$ in the training metric. These means use training whitening for both construction and old test banks, including identity and fixed points. OLS and ridge need not obey group laws. The witness is feasible, not claimed optimal. Its transfer loss is not checked against Table~\ref{tab:core-risk-summary}'s test-metric exact-orthogonal bounds: changing whitening can also change admissibility of the same raw-coordinate function.}
++\label{tab:followup-witness}
+ \centering\small
+ \begin{tabular}{@{}lrrrrr@{}}
+ \toprule
+@@ -9,6 +11,4 @@
+ $D_4$ & 0.11996 & 0.11117 & 0.08878 & 0.08878 & 24/24 \\
+ \bottomrule
+ \end{tabular}
+-\caption{Transfer of frozen predictors at $r=16$ in the training metric. These means use training whitening for both construction and old test banks, including identity and fixed points. OLS and ridge need not obey group laws. The witness is feasible, not claimed optimal. Its transfer loss is not checked against Table~\ref{tab:core-risk-summary}'s test-metric exact-orthogonal bounds: changing whitening can also change admissibility of the same raw-coordinate function.}
+-\label{tab:followup-witness}
+ \end{table}
+--- a/paper/main.tex
++++ b/paper/main.tex
+@@ -34,8 +34,7 @@
+ \input{generated/bounded_macros.tex}
+ \begin{document}
+ \maketitle
+-% Keep natural vertical spacing on pages with displays and floats.
+-\raggedbottom
++% Retain the official TMLR page-bottom alignment.
+ 
+ \begin{abstract}
+ A map that predicts changes in a language model's representations need not explain which transformation structure the model supports. We study this distinction for prescribed finite-group actions on visible input states, using one operator family across contexts in fixed pretrained coordinates. Our theory connects a real-type-constrained spectral budget to the minimum prediction risk over fixed-dimensional exact orthogonal actions. Under a common second-moment-whitened loss, it bounds that class optimum within a factor of two; an analytical example shows that unconstrained regression risk and orbit-Gram eigenvalues do not determine exact-action risk. In six frozen Llama and Qwen models, weekday and square-corner transformations are predictively recoverable, while finite-bank bounds quantify the additional cost of requiring an exact orthogonal action. An independent orthogonal comparison separates orthogonality cost from bounds on the further cost of common group laws. The latter lower bounds are highly heterogeneous, with the primary weekday lower-bound sum dominated by one condition. Constructed exact actions predict held-out representations less accurately than independent least squares. Exhaustive small-group registration comparisons show that the prescribed semantic image is not uniformly favored, and its spectral ranking changes with retained dimension. A separate authored-context study finds opposite transport effects across the two domains. These results quantify exact-action compatibility while distinguishing it from predictive performance, semantic preference and native computation.
+--- a/paper/sections/dimension_rank_audit.tex
++++ b/paper/sections/dimension_rank_audit.tex
+@@ -1,9 +1,9 @@
+ \section{Audit of Retained Dimensions and Numerical Rank}
+ \label{app:dimension-rank-audit}
+-The initial post hoc audit described in this appendix inspects the recorded design, source history, archived matrices and existing sensitivity results. The separately completed spectral dimension check is reported in \cref{app:spectral-dimension-sensitivity}. It performs only read-only matrix diagnostics and aggregation of existing measurements: no model forward pass, PCA refit, operator refit, new dimension search or change to a frozen result. The accompanying \texttt{dimension\_rank\_audit.csv} identifies each object, input and PCA identity, bank, weighting, precision, threshold and evidence source. Missing historical arrays remain marked unavailable. The source hashes, commands and preservation checks are retained with the audit scripts.
++The initial post hoc audit described in this appendix inspects the recorded design, source history, archived matrices and existing sensitivity results. The separately completed spectral dimension check is reported in \cref{app:spectral-dimension-sensitivity}. It performs only read-only matrix diagnostics and aggregation of existing measurements: no model forward pass, PCA refit, operator refit, new dimension search or change to a frozen result. The accompanying \texttt{dimension\_rank\_audit.csv} in \path{supplementary/verification_evidence_v3/dimension_rank/} identifies each object, input and PCA identity, bank, weighting, precision, threshold and evidence source. Missing historical arrays remain marked unavailable. The source hashes, commands, audit scripts and historical preservation checks are retained in the \texttt{audit\_records} subdirectory; the package README distinguishes historical records from the current analysis status. Personal path prefixes are replaced by declared source aliases without changing numerical fields. The original raw activations and missing historical projected arrays are not supplied by these records.
+ 
+ \paragraph{Why 16 is used.}
+-The earliest committed configuration contains a development grid $\{8,16,32\}$ without a primary designation. A subsequent design revision explicitly fixes 16 as primary before the final structural run; its stated compute rationale concerns restricting the causal branch to one dimension. The inspected record does not establish why the particular value 16 was originally preferred for the structural analysis. The protocol prohibits validation- or test-based dimension selection, and the audited implementation fixes rather than optimizes this dimension. These records establish a versioned analysis setting, not external preregistration, absence of earlier development influence, or optimality. Study~2 explicitly retains 16 to match its development comparisons but fits PCA on its own training bank. The compact-predictor, spectral and witness extensions reuse those coordinates. The complete provenance, configuration keys and commit identities are in \texttt{DIMENSION\_RANK\_AUDIT.md}.
++The earliest committed configuration contains a development grid $\{8,16,32\}$ without a primary designation. A subsequent design revision explicitly fixes 16 as primary before the final structural run; its stated compute rationale concerns restricting the causal branch to one dimension. The inspected record does not establish why the particular value 16 was originally preferred for the structural analysis. The protocol prohibits validation- or test-based dimension selection, and the audited implementation fixes rather than optimizes this dimension. These records establish a versioned analysis setting, not external preregistration, absence of earlier development influence, or optimality. Study~2 explicitly retains 16 to match its development comparisons but fits PCA on its own training bank. The compact-predictor, spectral and witness extensions reuse those coordinates. The complete provenance, configuration keys and commit identities are in \texttt{audit\_records/DIMENSION\_RANK\_AUDIT.md} within that evidence directory.
+ 
+ \paragraph{Objects and numerical rules.}
+ Let $H_c$ denote a particular original training activation matrix after subtracting its training mean. The retained coordinate count $q$, the rank of $H_c$, the rank of a specified coordinate bank $Z$, and the rank of an operator $R_g$ are distinct. The theoretical dimension $r$ declares the entire action space; it is not automatically replaced by a numerical rank. A nonzero support analysis would change the specified problem.
+--- a/paper/sections/experiments_restructured.tex
++++ b/paper/sections/experiments_restructured.tex
+@@ -88,10 +88,10 @@
+ The median strongest-alternative margin is $-5.52\times10^{-6}$ in C7 and $5.96\times10^{-6}$ in D4 (Table~\ref{tab:bounded-margins}). C7's budget spread across all images has median $3.88\times10^{-5}$ and maximum $4.07\times10^{-4}$, although its semantic rank ranges from first to a tied interval of 102--105 among 120. D4 spans all three ranks, with median spread $1.36\times10^{-4}$ and maximum $0.03984$. Rank changes can therefore accompany small absolute changes, particularly for weekdays. These are spectral-budget comparisons between registered tasks, not exact-$L^\star$ rankings, permutation $p$-values or semantic probabilities.
+ 
+ \begin{table}[t]
++\caption{Registration margins at $r=16$ in all 24 fixed conditions per domain. Positive values favor the prescribed image over the strongest or median alternative. U/T/B counts unique leading, tied leading and behind under the recorded pairwise tolerance. The margins measure spectral-budget differences between coherent target actions.}
++\label{tab:bounded-margins}
+ \centering\small
+ \input{generated/bounded_registration_margin_table.tex}
+-\caption{Registration margins at $r=16$ in all 24 fixed conditions per domain. Positive values favor the prescribed image over the strongest or median alternative. U/T/B counts unique leading, tied leading and behind under the recorded pairwise tolerance. The margins measure spectral-budget differences between coherent target actions.}
+-\label{tab:bounded-margins}
+ \end{table}
+ 
+ A shared invariant component does not by itself settle this comparison. All enumerated images are transitive, so their full trivial energy $e_{\rm triv}$ is the same within a fixed bank: the invariant projection is the within-context state mean. Their selected contributions $b_{\rm triv}$ can differ because types compete for the dimension budget. Even a unique leader leaves automorphisms and stable state coding possible. The mechanism controls illustrate that distinction: both a shared-action construction and a stable-code construction have machine-scale noiseless witness loss, while the sampled contextual-orientation construction has smaller budgets. Stable coding is thus a compatible explanation, not a no-action null that a useful diagnostic must reject. These fixed constructions do not calibrate a semantic classifier (\cref{sp:transitive-trivial-energy,tab:followup-simulations}).
+--- a/paper/sections/family_influence.tex
++++ b/paper/sections/family_influence.tex
+@@ -7,11 +7,11 @@
+ Twelve synthetic numerical tests passed, including closed-form risks, an independent Fourier-budget check, complete-family deletion and rank-failure cases. All 24 complete-bank baselines matched the saved results under the original rules before the 1,536 deletions were evaluated; all deletions completed. The analysis used Python 3.11.8 and NumPy 2.4.0, compared with NumPy 2.2.6 in the earlier orthogonal comparison. Baseline scalar discrepancies were at most $1.09\times10^{-14}$ without changing tolerances. The smallest reduced-bank second-moment eigenvalue ratio was $0.0039445$, above the original strict threshold $10^{-10}$. These are numerical validation checks, not rigorous floating-point certificates.
+ 
+ \begin{table}[t]
++\caption{C7 family-deletion sensitivity of the further-law lower endpoint $\ell^-$, at $r=16$, in all 24 model/readout conditions. Minima and maxima cover all 64 complete-family deletions, each with its own empirical whitening; they are not confidence intervals. The final column counts endpoints satisfying $\ell^->10^{-8}+10^{-7}|\ell^-|$, out of 64. Zero is an inconclusive bound on strict positivity. Values are rounded only for display; full-precision endpoints and family identities are retained.}
++\label{tab:c7-family-influence}
+ \centering\small
+ \setlength{\tabcolsep}{5pt}
+ \input{generated/c7_family_influence_summary.tex}
+-\caption{C7 family-deletion sensitivity of the further-law lower endpoint $\ell^-$, at $r=16$, in all 24 model/readout conditions. Minima and maxima cover all 64 complete-family deletions, each with its own empirical whitening; they are not confidence intervals. The final column counts endpoints satisfying $\ell^->10^{-8}+10^{-7}|\ell^-|$, out of 64. Zero is an inconclusive bound on strict positivity. Values are rounded only for display; full-precision endpoints and family identities are retained.}
+-\label{tab:c7-family-influence}
+ \end{table}
+ 
+ \Cref{tab:c7-family-influence} reports every condition. The same 23 conditions exceed the original tolerance after every deletion; Llama-3.2-3B/layer 11 retains a zero lower endpoint throughout. Across the 64 common-family deletions, the equal-cell mean $\ell^-$ ranges from $0.00102081$ to $0.00112915$, compared with $0.00109725$ on the complete bank; the mean upper endpoint ranges from $0.02970592$ to $0.03043969$. Llama-3.1-8B/layer 13 remains the largest contributor, with $\ell^-\in[0.02434807,0.02695796]$ versus $0.02618766$ originally. Deleting family 016 gives its largest reduction, about $7.02\%$; deleting family 044 gives its largest increase, about $2.94\%$. Its share of the lower-endpoint sum remains $99.3822\%$--$99.4776\%$. No single-family deletion removes this positive guarantee or the cross-condition concentration; neither statement measures the unknown true costs.
+--- a/paper/sections/planned_protocols.tex
++++ b/paper/sections/planned_protocols.tex
+@@ -66,28 +66,28 @@
+ Premium endpoints are computed cell-wise before equal-cell aggregation. Checks retain $\eta\le L(I)$, $2(1-\gamma_r)\le L(I)$ and $p^-\le p^+$; they do not impose $L(I)\le2(1-\gamma_r^2)$, which is not required by the theorem. No raw value is clipped, and no tolerance or dimension is changed. The code also retains full precision, signed nontrivial energies and explicit display rounding. The following tables give every declared cell; L and Q abbreviate the Llama and Qwen2.5 model identifiers, and $e_0,b_0$ denote total and selected trivial energy.
+ 
+ \begin{table}[p]
++\caption{C7 same-bank references and premium endpoints, all \BoundedCellsPerDomain{} fixed cells. $L(I)$ is the identity-action risk, not the loss for the identity group element alone.}
++\label{tab:bounded-cell-risk-c7}
+ \centering\small\setlength{\tabcolsep}{3pt}
+ \input{generated/bounded_cell_risk_C7.tex}
+-\caption{C7 same-bank references and premium endpoints, all \BoundedCellsPerDomain{} fixed cells. $L(I)$ is the identity-action risk, not the loss for the identity group element alone.}
+-\label{tab:bounded-cell-risk-c7}
+ \end{table}
+ \begin{table}[p]
++\caption{D4 same-bank references and premium endpoints, all \BoundedCellsPerDomain{} fixed cells. No family or model resampling enters these quantities.}
++\label{tab:bounded-cell-risk-d4}
+ \centering\small\setlength{\tabcolsep}{3pt}
+ \input{generated/bounded_cell_risk_D4.tex}
+-\caption{D4 same-bank references and premium endpoints, all \BoundedCellsPerDomain{} fixed cells. No family or model resampling enters these quantities.}
+-\label{tab:bounded-cell-risk-d4}
+ \end{table}
+ \begin{table}[p]
++\caption{C7 total/selected type-energy pairs $e_\tau/b_\tau$. Complete real rotation planes are retained in the budget; total energy and selected energy are distinct.}
++\label{tab:bounded-cell-types-c7}
+ \centering\small\setlength{\tabcolsep}{3pt}
+ \input{generated/bounded_cell_type_energy_C7.tex}
+-\caption{C7 total/selected type-energy pairs $e_\tau/b_\tau$. Complete real rotation planes are retained in the budget; total energy and selected energy are distinct.}
+-\label{tab:bounded-cell-types-c7}
+ \end{table}
+ \begin{table}[p]
++\caption{D4 total/selected type-energy pairs $e_\tau/b_\tau$. The corner action has only four states; absent types retain their recorded machine-scale values in the CSV, rounded here for display.}
++\label{tab:bounded-cell-types-d4}
+ \centering\small\setlength{\tabcolsep}{3pt}
+ \input{generated/bounded_cell_type_energy_D4.tex}
+-\caption{D4 total/selected type-energy pairs $e_\tau/b_\tau$. The corner action has only four states; absent types retain their recorded machine-scale values in the CSV, rounded here for display.}
+-\label{tab:bounded-cell-types-d4}
+ \end{table}
+ 
+ \FloatBarrier
+@@ -102,15 +102,15 @@
+ The repository additionally prepares an optional all-image registration leave-one-family-out (LOFO) analysis: each deletion keeps the two variants and all states together, retains the original PCA and rank, and recomputes the reduced bank's second moment, whitening and every image budget. Group-only structures and per-family state-pair moments reduce repeated computation. Synthetic engineering tests compare this implementation with direct coordinate calculation and retain rank failures. Metadata inspection establishes that the required saved inputs exist; no real-data execution of this all-image protocol or bootstrap was performed. This optional registration study remains prepared and unexecuted. It is distinct from the completed C7, $r=16$ canonical-action family-risk analysis in \cref{app:c7-family-influence}, which does not rerank alternative images. Neither study is a prerequisite for the original complete-bank bounds.
+ 
+ \begin{table}[p]
++\caption{C7 complete spectral margins, spread and original-tolerance rank intervals. U/T/B denotes unique leading/tied leading/behind. Full-precision CSV values and canonical image hashes are retained.}
++\label{tab:bounded-cell-margins-c7}
+ \centering\small
+ \input{generated/bounded_cell_margins_C7.tex}
+-\caption{C7 complete spectral margins, spread and original-tolerance rank intervals. U/T/B denotes unique leading/tied leading/behind. Full-precision CSV values and canonical image hashes are retained.}
+-\label{tab:bounded-cell-margins-c7}
+ \end{table}
+ \begin{table}[p]
++\caption{D4 complete spectral margins, spread and original-tolerance rank intervals. These registered tasks have different target correspondences and do not provide exact-action risk rankings.}
++\label{tab:bounded-cell-margins-d4}
+ \centering\small
+ \input{generated/bounded_cell_margins_D4.tex}
+-\caption{D4 complete spectral margins, spread and original-tolerance rank intervals. These registered tasks have different target correspondences and do not provide exact-action risk rankings.}
+-\label{tab:bounded-cell-margins-d4}
+ \end{table}
+ \FloatBarrier
+--- a/paper/sections/reproduction.tex
++++ b/paper/sections/reproduction.tex
+@@ -10,7 +10,7 @@
+ \label{tab:reproduction-status}
+ \begin{tabular}{p{.31\textwidth}p{.61\textwidth}}\toprule
+ Component & Recorded outcome and interpretation \\\midrule
+-Structural recovery and pilot & Complete; archived computations agree with the previous frozen tables. \\
++Structural recovery and historical structural pilot & Complete; archived computations agree with the previous frozen tables. \\
+ AFS A/B/C and additive extensions & Complete under their historical definitions; pass labels do not exclude all category/context explanations. \\
+ Original $q=16$ embedding AFS-D & Infeasible: centered lexical training rank is six in the failing weekday cell. Original failed unit retained. \\
+ Separate rank-aware AFS-D & Complete at $q=6$ for $C_7$ and $q=3$ for $D_4$; embedding-dominant diagnostic, not a replacement $q=16$ pass. \\
+@@ -18,7 +18,7 @@
+ Revised BF16/F64 calibration & Complete; passed its specified synthetic-generator criteria. \\
+ Characterization / compact--context & Complete; 72 coordinate cells / 240 component--registration jobs. Descriptive analyses of inspected designs. \\
+ Structural power & Limited precision; no selected family count or overall powered-confirmation claim. Separate $S_3$ planning target met. \\
+-Pilot / native preparation & Stopped: first $m_0.C_7$ clean accuracies are $0.0625$ development and $0.15625$ transfer, below $0.80$. \\
++Native/program pilot and preparation & Stopped: first $m_0.C_7$ clean accuracies are $0.0625$ development and $0.15625$ transfer, below $0.80$. \\
+ Structural / native confirmation & Blocked by their scientific dependencies; no confirmatory outcomes. \\
+ Peer, cross-model, product, interface & Complete as separate secondary diagnostics; their scopes are detailed below. \\
+ \bottomrule\end{tabular}
+--- a/paper/sections/results.tex
++++ b/paper/sections/results.tex
+@@ -6,7 +6,7 @@
+ \begin{figure}[t]
+ \centering
+ \includegraphics[width=.85\textwidth]{figures/structural_errors.pdf}
+-\caption{Historical direct prediction and relation consistency across the fixed six-model FULL panel at $q=16$. Joint fitting changes the prediction--consistency tradeoff; the diagnostics do not isolate semantic specificity.}
++\caption{Historical direct prediction and relation consistency across the fixed six-model FULL panel at $q=16$. Identity relation scores were not evaluated under the recorded protocol and are omitted as unavailable, not as zero values. Joint fitting changes the prediction--consistency tradeoff; the diagnostics do not isolate semantic specificity.}
+ \label{fig:historical-structural}
+ \end{figure}
+ \begin{figure}[t]
+@@ -22,6 +22,8 @@
+ 
+ 
+ \begin{table}[h]
++\caption{Recorded primary FULL consistency diagnostics at dimension 16. Data/op pairs deliberately preserve distinct historical metrics: data defects are squared and op defects unsquared; C7 relation aggregands additionally differ. These paired columns should not be read as a comparison on one numerical scale. Homomorphism and composition differ only by excluding identity-containing pairs in the latter.}
++\label{tab:full-diagnostics}
+ \centering
+ \small
+ \begin{tabular}{llccc}
+@@ -36,8 +38,6 @@
+ $D_4$ & Random & 1.52346 / 1.08021 & 1.96710 / 1.39203 & 1.98983 / 1.41088 \\
+ \bottomrule
+ \end{tabular}
+-\caption{Recorded primary FULL consistency diagnostics at dimension 16. Data/op pairs deliberately preserve distinct historical metrics: data defects are squared and op defects unsquared; C7 relation aggregands additionally differ. These paired columns should not be read as a comparison on one numerical scale. Homomorphism and composition differ only by excluding identity-containing pairs in the latter.}
+-\label{tab:full-diagnostics}
+ \end{table}
+ 
+ \input{generated/diagnostic_controls.tex}
+@@ -79,7 +79,7 @@
+ \begin{figure}[h]
+ \centering
+ \includegraphics[width=0.76\textwidth]{figures/causal_additive.pdf}
+-\caption{Learned-minus-source-conditioned-additive target-logit effects. Negative differences favor the stronger additive comparator for that outcome. Directional behavioral effects do not demonstrate causal necessity of a recovered matrix family.}
++\caption{Learned-minus-control target-logit effects for the identity, random and source-conditioned additive controls. Negative differences favor the named control for that outcome. Directional behavioral effects do not demonstrate causal necessity of a recovered matrix family.}
+ \label{fig:causal}
+ \end{figure}
+ For C7, powers $r^1,\ldots,r^6$ are transformation interventions; $r^7$ is a separate cycle diagnostic. D4 tests $r,s,r^2,r^3$, identity-recovery words $r^4,s^2$, and the relation word $srs$ against a direct $r^{-1}$ intervention. The matched-length wrong word is $rsr$. For final next-token logit vectors $L$, the relation distance is
+--- a/paper/sections/retained_summaries.tex
++++ b/paper/sections/retained_summaries.tex
+@@ -5,8 +5,8 @@
+ \input{generated/followup_spectral_bounded.tex}
+ 
+ \begin{table}[t]
++\caption{Same-metric reference and class-risk premium at $r=16$ on the original Study~2 test bank. Each domain averages \BoundedCellsPerDomain{} fixed cells equally. $p^-=\max\{0,2(1-\gamma_r)-\eta\}$ and $p^+=2(1-\gamma_r^2)-\eta$ are computed per cell before averaging. They bound the mean cost of imposing exact laws and orthogonality jointly. $L(I)$ uses total trivial energy and was also checked by direct residuals on the saved coordinates. These are finite-bank quantities, not transfer losses or confidence limits.}
++\label{tab:bounded-risk}
+ \centering\small
+ \input{generated/bounded_risk_reference_table.tex}
+-\caption{Same-metric reference and class-risk premium at $r=16$ on the original Study~2 test bank. Each domain averages \BoundedCellsPerDomain{} fixed cells equally. $p^-=\max\{0,2(1-\gamma_r)-\eta\}$ and $p^+=2(1-\gamma_r^2)-\eta$ are computed per cell before averaging. They bound the mean cost of imposing exact laws and orthogonality jointly. $L(I)$ uses total trivial energy and was also checked by direct residuals on the saved coordinates. These are finite-bank quantities, not transfer losses or confidence limits.}
+-\label{tab:bounded-risk}
+ \end{table}
+--- a/paper/sections/setup_main.tex
++++ b/paper/sections/setup_main.tex
+@@ -72,6 +72,8 @@
+ The third research question changes the target action itself. A \emph{registration} assigns the prescribed transformations to the labeled states. A coherent alternative, such as conjugating the weekday cycle by a state-label swap, keeps group laws but changes which state is the target of each transformation. We compare distinct permutation-image subgroups on the same source bank. The spectral budget introduced next measures each candidate's compatibility with the exact-action class. It does not turn these different registered tasks into identical-target predictor comparisons.
+ 
+ \begin{table}[t]
++\caption{Targets used in the experiments. The denominators and prediction objects differ across rows, so their numerical values are not directly comparable. In the spectral analysis, the action dimension $r$ equals retained dimension $q$ in a nonsingular bank.}
++\label{tab:metric-contract}
+ \centering\small
+ \begin{tabular}{@{}p{.19\textwidth}p{.40\textwidth}p{.33\textwidth}@{}}
+ \toprule
+@@ -84,6 +86,4 @@
+ {\raggedright Constructed-action transfer\par} & The same squared loss form, retaining training whitening and fitted maps & A particular predictor on a new bank, not that bank's class optimum. \\
+ \bottomrule
+ \end{tabular}
+-\caption{Targets used in the experiments. The denominators and prediction objects differ across rows, so their numerical values are not directly comparable. In the spectral analysis, the action dimension $r$ equals retained dimension $q$ in a nonsingular bank.}
+-\label{tab:metric-contract}
+ \end{table}

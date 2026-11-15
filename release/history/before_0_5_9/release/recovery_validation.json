@@ -1,0 +1,214 @@
+{
+  "version": "0.3.1",
+  "date": "2026-10-19",
+  "input_archives": {
+    "bsg-bf16-full-run-backup.tar.gz": {
+      "sha256": "609914e2e34dc53c362c09823d4cd298673e1c97efc27da2566663ea05a73976",
+      "local_checksum_verified": true
+    },
+    "cpu-bf16-gate-failed-results.zip": {
+      "sha256": "d169584f091884bdd12a393c6f95bce8af2f4fca01226a81a912b9879e4d3800",
+      "local_checksum_verified": true
+    }
+  },
+  "recovery_actions": {
+    "historical_frozen_source_modified": false,
+    "failed_run_modified": false,
+    "gpu_jobs_launched": false,
+    "model_weights_downloaded": false,
+    "full_calibration_rerun": false
+  },
+  "independent_positive_validation": {
+    "scope": "four positive cells only; full revised calibration not performed",
+    "test_families": 64,
+    "datasets": 800,
+    "wall_seconds": 128.44995162502164,
+    "gate": {
+      "confirmation_authorized": false,
+      "full_calibration_passed": false,
+      "positive": [
+        {
+          "cell": [
+            "Y4",
+            "C7",
+            0.0,
+            1.0
+          ],
+          "sensitivity": {
+            "interval": [
+              0.9817246596448638,
+              1.0
+            ],
+            "mcse": 0.0,
+            "rate": 1.0,
+            "successes": 200,
+            "trials": 200,
+            "upper_one_sided": 1.0
+          }
+        },
+        {
+          "cell": [
+            "Y4",
+            "C7",
+            0.1,
+            1.0
+          ],
+          "sensitivity": {
+            "interval": [
+              0.9817246596448638,
+              1.0
+            ],
+            "mcse": 0.0,
+            "rate": 1.0,
+            "successes": 200,
+            "trials": 200,
+            "upper_one_sided": 1.0
+          }
+        },
+        {
+          "cell": [
+            "Y4",
+            "D4",
+            0.0,
+            1.0
+          ],
+          "sensitivity": {
+            "interval": [
+              0.9817246596448638,
+              1.0
+            ],
+            "mcse": 0.0,
+            "rate": 1.0,
+            "successes": 200,
+            "trials": 200,
+            "upper_one_sided": 1.0
+          }
+        },
+        {
+          "cell": [
+            "Y4",
+            "D4",
+            0.1,
+            1.0
+          ],
+          "sensitivity": {
+            "interval": [
+              0.9817246596448638,
+              1.0
+            ],
+            "mcse": 0.0,
+            "rate": 1.0,
+            "successes": 200,
+            "trials": 200,
+            "upper_one_sided": 1.0
+          }
+        }
+      ],
+      "seed_manifest_identity": "a31dfd9f0820095cc83fd4039fd455690fc0edc9bb6b2b59503f10d0c478145f",
+      "status": "passed_positive_sentinel_only"
+    },
+    "config_sha256": "247c787e3b52e6e829e3ada3b9f21816d1bf42c05afcf83f38838ab001a05893",
+    "run_identity_sha256": "b4cdb039008496ccbf98a21d384440a822278547e6cc195ffe8a7a43c7304332"
+  },
+  "allocation_tracing_benchmark": [
+    {
+      "seed": 2026101960,
+      "equal_numeric_outputs": true,
+      "speed_ratio": 16.445905675756432,
+      "runs": [
+        {
+          "tracemalloc": false,
+          "elapsed": 0.13329204096226022,
+          "peak": null,
+          "numeric_output_sha256_excluding_seconds": "40aa8f3671fd5d3ae83d33f9630ac79c8882da0ae89b8eb6680cef3b2cd2f3de",
+          "technical_test": true,
+          "paper_eligible": false
+        },
+        {
+          "tracemalloc": true,
+          "elapsed": 2.192108332994394,
+          "peak": 5059794,
+          "numeric_output_sha256_excluding_seconds": "40aa8f3671fd5d3ae83d33f9630ac79c8882da0ae89b8eb6680cef3b2cd2f3de",
+          "technical_test": true,
+          "paper_eligible": false
+        }
+      ]
+    },
+    {
+      "seed": 2026101961,
+      "equal_numeric_outputs": true,
+      "speed_ratio": 17.45899605924751,
+      "runs": [
+        {
+          "tracemalloc": false,
+          "elapsed": 0.13157258299179375,
+          "peak": null,
+          "numeric_output_sha256_excluding_seconds": "a61596e8eff52b4249ee40f8c44b2edb8d6dab2ceffba90e0db66e26c3246934",
+          "technical_test": true,
+          "paper_eligible": false
+        },
+        {
+          "tracemalloc": true,
+          "elapsed": 2.297125207958743,
+          "peak": 5059762,
+          "numeric_output_sha256_excluding_seconds": "a61596e8eff52b4249ee40f8c44b2edb8d6dab2ceffba90e0db66e26c3246934",
+          "technical_test": true,
+          "paper_eligible": false
+        }
+      ]
+    },
+    {
+      "seed": 2026101962,
+      "equal_numeric_outputs": true,
+      "speed_ratio": 16.925687579419463,
+      "runs": [
+        {
+          "tracemalloc": false,
+          "elapsed": 0.12916070799110457,
+          "peak": null,
+          "numeric_output_sha256_excluding_seconds": "042abcff95574a65305d70e65a8f080b95b85ea04b1f7121430c2dcbe639ffc2",
+          "technical_test": true,
+          "paper_eligible": false
+        },
+        {
+          "tracemalloc": true,
+          "elapsed": 2.186133790994063,
+          "peak": 5058024,
+          "numeric_output_sha256_excluding_seconds": "042abcff95574a65305d70e65a8f080b95b85ea04b1f7121430c2dcbe639ffc2",
+          "technical_test": true,
+          "paper_eligible": false
+        }
+      ]
+    }
+  ],
+  "development_screen": {
+    "replicates": 12,
+    "paired_sizes": [
+      32,
+      48,
+      64
+    ],
+    "joint_successes": [
+      10,
+      12,
+      12
+    ],
+    "paper_eligible": false
+  },
+  "remaining_required": [
+    "complete revised negative/crossed calibration",
+    "measured model pilot and competence",
+    "power freeze",
+    "confirmation and comparisons",
+    "scientific manuscript review"
+  ],
+  "submission_ready": false,
+  "engineering_checks": {
+    "prospective_tests_passed": 105,
+    "legacy_cpu_checks_passed": 99,
+    "shell_syntax_files_passed": 5,
+    "shell_stub_contracts_passed": 12,
+    "frozen_evidence_files_verified": 26,
+    "legacy_source_files_locked": 53
+  }
+}

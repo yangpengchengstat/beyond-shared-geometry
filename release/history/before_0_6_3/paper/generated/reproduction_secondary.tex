@@ -1,0 +1,16 @@
+\begin{table}[htbp]\centering\small
+\begin{tabular}{llrr}\toprule
+Task & Method & Error & Conditions \\
+\midrule
+Word & Procrustes & 3.10155 & 60 \\
+Word & Ridge affine & 0.42475 & 60 \\
+Word & Hu Eq.~12 (source displacement observed) & 0.52642 & 60 \\
+Structural & Procrustes & 7.43045 & 48 \\
+Structural & Ridge affine & 0.27236 & 48 \\
+Structural & Constrained intertwiner & 0.99194 & 48 \\
+$C_4\times C_4$ & primary operator & 0.06035 & 24 \\
+$C_4\times C_4$ & joint & 0.07267 & 24 \\
+$C_4\times C_4$ & local displacement & 0.00539 & 24 \\
+\bottomrule\end{tabular}
+\caption{Secondary fixed-panel summaries. Word and structural transport use row-normalized errors; the product endpoint has its own target-energy normalization. Values across tasks are not directly comparable. The Hu adaptation receives source-model test displacements. These are implemented adaptations, not certified peer-author reproductions.}
+\label{tab:reproduction-secondary}\end{table}

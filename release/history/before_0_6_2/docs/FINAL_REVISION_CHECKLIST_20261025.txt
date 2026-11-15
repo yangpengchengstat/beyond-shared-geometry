@@ -1,0 +1,346 @@
+FINAL CLASSIFIED REVISION CHECKLIST
+Beyond Shared Geometry | 25 October 2026 | publication revision 0.4.1
+
+SCOPE AND VERDICT
+
+This is a paper-first review of the mathematics, contribution, statistical
+interpretation and completed experimental evidence. The supplied Research_Report.pdf
+is a reference to assess, not an instruction source or experimental evidence.
+No model was run, no calibration was repeated, and no new resampling or fitting of
+experimental data was performed. Existing result values and failure flags remain
+unchanged. Asset rebuilding only renders the already archived values.
+
+Baseline: submission/icml2027_revision_20261024 (release 0.4.0).
+Revised:  submission/icml2027_revision_20261025 (release 0.4.1).
+File locations below are relative to the corresponding release root. Baseline
+locations identify the reviewed defect; revised locations identify its correction.
+Section titles are also supplied because future edits can change line numbers.
+
+The defensible core is approximate predictive finite-action structure on the
+declared model/context/state panel, plus analytical and empirical limits on what
+such recovery identifies. It is not semantic uniqueness, native implementation,
+population-wide inference, or universal linear superiority. No substantive invalid
+theorem was found in the current restricted propositions. Five required presentation
+and interpretation repairs, plus seven suggested improvements, have been applied.
+
+The remaining scientific risk is significance and originality: readers must find
+the completed comparison and its reusable identification lesson sufficiently
+informative beyond earlier transformation and group-mechanism work. Correct proofs,
+more citations, and reproducible execution do not by themselves settle that judgment.
+No acceptance probability or guarantee is warranted.
+
+I. MUST MODIFY — ALL APPLIED
+
+M1. Restricted reference-tail comparisons were too close to calibrated inference.
+Domain: statistical inference and experimental interpretation.
+Baseline: paper/sections/methods.tex:89, Appendix B.5; paper/main.tex:163, Section 6.2.
+Evidence: src/bsg/experiments/algebra_falsification_units.py:193, :229, :255.
+The sampler excludes automorphisms, including the observed identity registration,
+then samples invalid registrations with replacement. It does not establish that the
+observed fit and sampled values are exchangeable under a scientific null. A plus-one
+formula alone is not a justification for a calibrated p-value or Type-I-error claim.
+Fix: name the same quantity s_MC, a recorded smoothed lower-tail score; interpret
+separation from the chosen reference ensemble descriptively. Explicitly exclude
+semantic-null rejection and 120 independent discoveries. Preserve the historical
+empirical_p fields and every value in the evidence archives.
+Revised: paper/sections/methods.tex:89; paper/main.tex:163;
+paper/generated/diagnostic_controls.tex:20 (caption); scripts/build_paper_assets.py:131.
+Status: fixed without reanalysis. This changes interpretation, not the measured score.
+
+M2. Standalone interval labels overstated inferential status.
+Domain: statistical inference.
+Baseline: paper/generated/generator_transfer.tex:6 and paper/generated/causal_main.tex:6,
+Tables in Sections 6.2 and Appendix C.4; scripts/build_paper_assets.py:80, :87.
+The 95% CI wording was stronger than the methods' correct acknowledgment of selected
+models, repeated layers, overlapping template partitions and unverified coverage.
+Fix: label the values as recorded 95% bootstrap percentile intervals and describe
+fixed-panel resampling sensitivity. Refer standalone captions to Appendix B.7.
+Do not infer calibrated population coverage, globally corrected significance, or
+equivalence from these intervals. Every estimate and endpoint is preserved.
+Revised: paper/generated/generator_transfer.tex:12; paper/generated/causal_main.tex:16;
+paper/main.tex:138; paper/sections/methods.tex:102.
+Status: fixed in both generated tables and their renderer; no bootstrap rerun.
+
+M3. Two passages treated completed controls as still missing.
+Domain: mathematical interpretation and experimental evidence integration.
+Baseline: paper/sections/theory.tex:36, Appendix A.3;
+paper/sections/results.tex:90, Appendix C.6.
+Category predictors, coherent alternative registration, compact predictors,
+context-difference comparisons and peer adaptations are already reported in the
+completed replay. Calling them future work obscures the available negative or
+competitive evidence. Their completion does not imply that every stronger proposed
+test or native confirmation passed.
+Fix: explicitly incorporate the completed controls and retain the narrower gap:
+no conditional test jointly matched in prediction error, norms, information and
+capacity; no independently certified native semantic mechanism.
+Revised: paper/sections/theory.tex:36; paper/sections/results.tex:89;
+paper/sections/reproduction.tex:27, :40, :52.
+Status: reconciled. Existing strong-claim limitations remain.
+
+M4. The contribution paragraph listed activities more clearly than findings.
+Domain: novelty and significance positioning.
+Baseline: paper/main.tex:51, Introduction; :55, Related Work.
+Paired transformation fitting, compatible families, action realization and
+composition are established topics. A model count or new task choice alone is a
+weak distinction from Lenc--Vedaldi and Yuan Sun. The completed storage and
+context/alternative-registration results were underrepresented in the contribution.
+Fix: identify three contributions: predictive transfer with algebra/prediction
+dependence; competing lexical/category/coherent explanations; and estimator-storage
+versus context-fitting tradeoffs. State that the contribution is the empirical
+audit and its analytical boundaries, not new general representation theory.
+Revised: paper/main.tex:41, :51, :55; Discussion and Conclusion at :184 and :192.
+Status: applied. This improves the argument for originality; it does not prove
+priority or make the contribution automatically sufficient for ICML.
+
+M5. Rendered assets used d for the PCA dimension while the setup uses q.
+Domain: mathematical notation and presentation.
+Baseline: scripts/build_paper_assets.py:73, :85, :109, :157, :171, :186;
+generated structural/transfer/lexical captions and the associated figure titles.
+The setup reserves d for hidden dimension and q for PCA dimension. d=16 in figures
+was therefore inconsistent, although the underlying experiment was unchanged.
+Fix: use q=16, q=6 and q=3 consistently in rendered table captions and figure titles.
+Revised: scripts/build_paper_assets.py; paper/generated/structural_main.tex;
+paper/generated/generator_transfer.tex; paper/generated/lexical_control.tex;
+paper/figures/structural_errors.pdf, paper/figures/generator_transfer.pdf and paper/figures/lexical_internal.pdf.
+Status: applied; source CSVs and numerical coordinates are unchanged.
+
+II. SUGGESTED IMPROVEMENTS — ALL APPLIED, NOT NEW SCIENTIFIC FAILURES
+
+S1. Formalize the sample-mean learning-curve estimand.
+Baseline: paper/sections/theory.tex:146, Appendix A.7.
+Revised: the same file:146 (estimator, empirical risk, b and both expectations).
+The (1-1/m)b and (1+1/m)b identities were correct. The revision makes explicit the
+iid training-context expectation and fresh-context expectation, and that the
+estimator is the unregularized mean of local matrices in the special construction.
+It is not a forecast for PCA/ridge fits to real activations. No new theorem needed.
+
+S2. Assign all objective coefficients unambiguously.
+Baseline and revised: paper/main.tex:86, Section 3; Appendix B.3 already correct.
+The data term has coefficient one; homomorphism, relation, identity and orthogonality
+penalties have coefficients 1, 1, 1, 0.05. This fixes presentation of four weights
+beside five terms, not a discovered training-objective mismatch.
+
+S3. Put cell heterogeneity beside the category-control mean.
+Baseline: paper/main.tex:180, Section 7.
+Revised: paper/main.tex:41 and :180.
+The centroid has lower C7 mean error but wins only 9/24 cells; it wins 2/24 in D4.
+Both facts are taken from results/reproduction_v1_review/derived_summary.json,
+paired_compact. A panel mean is not uniform model/layer superiority. Preserve the
+extra training-state labels and exact action-table information given to this control.
+
+S4. State the theory-to-experiment boundary in the main text.
+Baseline and revised: paper/main.tex:128, Section 4.
+Equal within-context geometry with failed shared transport is an analytical
+counterexample. It is not a measured LLM null distribution, a calibrated lower bound
+for E_eq, or evidence that all geometry measures are uninformative. These restrictions
+were already in the appendix and are now visible in the main text.
+
+S5. Trim operational narrative from scientific appendices.
+Baseline: paper/sections/characterization.tex:35 and paper/sections/reproduction.tex:65.
+Removed billing/export timing and the specific missing-directory repair narrative.
+Keep checksum/source verification limits, all scientific stops, and full engineering
+history in the dated release documentation and preserved result archive.
+
+S6. Narrow the Wu comparison and make the closest-work distinction concrete.
+Baseline and revised: paper/main.tex:55 and :61, Related Work.
+Wu supplies compact performance proofs for a subset of group-operation networks;
+matching intervention effects need not identify the algorithm. The revision avoids
+an unnecessarily broad 'verified circuit accounts' description. Lenc--Vedaldi and
+Yuan Sun remain acknowledged as direct antecedents of transformation fitting.
+
+S7. Protect an acronym in the bibliography.
+Baseline and revised: paper/references.bib:366, Arora et al. title.
+LLM is now {LLM} for BibTeX case protection. The audit did not find a false author,
+year or venue in the seven specifically requested core references. Cosmetic changes
+must not be presented as corrections to their substantive bibliographic identity.
+
+III. CAN RETAIN — CHECKED, WITH THEIR EXISTING RESTRICTIONS
+
+R1. Finite-orbit realizability and the row-vector action convention.
+Locations: paper/main.tex:103; paper/sections/theory.tex:5.
+Centered rank n-1 is essential; invertibility and opposite composition are valid.
+The report uses a different convention. Do not reverse or transpose the current
+paper again. Generic finite lexical codes can support exact actions without semantic
+learning; shared-context prediction is stronger than fitting each orbit separately.
+
+R2. Exact shared-fit subspace criterion and rank-deficient extension.
+Location: paper/sections/theory.tex:38, Appendix A.4.
+Projection residual, left-kernel invariance and coherent ambient extension are valid.
+The minimum-norm identity on a deficient span is a projector, not ambient identity.
+These are unregularized unnormalized matrix statements, not the held-out metric.
+
+R3. Common-design ridge identities.
+Location: paper/sections/theory.tex:65, Appendix A.5.
+The identities hold at all ranks for alpha>0 with one common design and penalty.
+K_alpha need not be an orthogonal projector. Separate source subsets/weights cannot
+be silently substituted. The identities explain dependence; they do not establish
+statistical independence or automatically certify small normalized test defects.
+
+R4. Independent-orientation and commutant constructions.
+Locations: paper/sections/theory.tex:80 and :121, Appendices A.6--A.7.
+The Stiefel/Haar construction and its four C7/D4 constants are correct. Full-rank
+commutant risk has the stated 1/r factor. Retain whitening, noiselessness,
+orthogonality, independence and full-rank restrictions where used. Do not compare
+the constants numerically with empirical E_eq, whose denominator and data law differ.
+
+R5. Prediction propagation, global cancellation and stateful additive composition.
+Locations: paper/sections/theory.tex:159, :172 and :182, Appendices A.8--A.10.
+The residual decomposition and cancellation are valid. A small average prediction
+error alone supplies neither a uniform bound nor a denominator lower bound. A
+centroid displacement composes exactly only with the state carried and updated;
+the stateless re-decoding counterexample is valid. The global additive estimator is
+identity-like by construction, so its failure does not reject every additive account.
+
+R6. Faithful/non-free D4 and coordinate-metric cautions.
+Locations: paper/sections/theory.tex:203 and :207, Appendices A.11--A.12.
+Four corners are a faithful, non-free action, not the eight-state regular action.
+Exact conjugacy preserves laws; approximate Euclidean defects depend on coordinates.
+The invariant metric and character restrictions are appropriate for exact actions.
+
+R7. Different errors and different supervision must remain distinct.
+Locations: paper/sections/methods.tex:55; paper/sections/characterization.tex:9;
+paper/sections/reproduction.tex:28, :33, :37 and :42.
+Historical mean rowwise relative errors, newer training-energy errors and context-
+difference errors have different denominators. Generator-only all-nonidentity
+averages include fitted generators; true-unseen-only averages exclude them. Category
+controls receive state/action information. Do not combine these as like-for-like
+estimates or silently label all-action means unseen-composite performance.
+
+R8. Full compact-predictor storage curves.
+Locations: paper/main.tex:180; paper/sections/reproduction.tex:30;
+paper/generated/reproduction_budgets.tex.
+The tested RFF and Nystrom methods do not improve the group means at the nominal
+linear storage budget. Nystrom improves at 2x and RFF at 4x. All five budgets remain.
+This is a property of the fitted estimator/panel/budget combination, not a theorem
+that linear models beat nonlinear models. Shared PCA and runtime memory exclusions
+are explicit; coefficient storage is not total computational cost.
+
+R9. Coherent alternative and context-difference results.
+Locations: paper/main.tex:182; paper/sections/reproduction.tex:35, :40.
+Direct difference fitting improves over coordinate fitting, while one consistently
+registered alternative gives close means. This supports unresolved specificity,
+not equivalence, a semantic p-value, or exhaustive rejection of semantic structure.
+The small S3 improvement does not meet the inherited 0.01 margin merely by being
+positive. No new power decision is justified from the returned descriptive means.
+
+R10. Behavioral and cross-model limitations.
+Locations: paper/sections/results.tex:44 and :75, Appendices C.4--C.5.
+Visible-input source states, continuation-token outcomes, a full-hidden additive
+control, and absence of a historical matched zero-delta sham limit causal claims.
+A 1.129 target-logit change is not an accuracy gain of 1.129. Same-element fits and
+test-fitted Procrustes are compatibility checks, not unseen-transformation transfer.
+A low-rank intertwiner does not establish invertible representation equivalence.
+
+R11. Failed gates and constructed interfaces.
+Locations: paper/sections/reproduction.tex:5, :46 and :52.
+Original calibration failure, rank-16 lexical infeasibility, native clean-competence
+failure and limited structural power remain. Revised calibration is a separate
+protocol. Completed execution is not an independent scientific pass. Supervised
+interface-head accuracy is not native answer accuracy; peer adaptations are not
+certified reproductions of authors' full methods. Preserve all these restrictions.
+
+IV. PRIMARY-SOURCE REFERENCE CHECK AND NOVELTY IMPLICATION
+
+Lenc and Vedaldi, CVPR 2015.
+Files: paper/references.bib:214; paper/main.tex:55.
+Paired linear/affine transformations and stitching are precedents. Retain attribution;
+do not claim matrix-fitting itself as the principal novelty.
+https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Lenc_Understanding_Image_Representations_2015_CVPR_paper.pdf
+
+Engels et al., ICLR 2025.
+Files: paper/references.bib:230; paper/main.tex:58.
+Calendar representations and causal patching are precedents. Statistical feature
+irreducibility differs from representation-theoretic invariant-subspace irreducibility.
+Joshua Engels and Eric J. Michaud are the names in the original paper.
+https://proceedings.iclr.cc/paper_files/paper/2025/file/d3221cdb27e49d9c1cd35ad254feccfe-Paper-Conference.pdf
+
+Chughtai, Chan and Nanda, ICML 2023.
+Files: paper/references.bib:246; paper/main.tex:61.
+Group-operation network mechanisms predate this study. Attribution is correct.
+https://proceedings.mlr.press/v202/chughtai23a.html
+
+Nanda et al., 2023.
+Files: paper/references.bib:260; paper/main.tex:61.
+Fourier modular-addition analysis is an algorithmic-mechanism precedent, not the
+same visible-state post-hoc transport experiment.
+https://arxiv.org/abs/2301.05217
+
+Wu et al., ICLR 2025.
+Files: paper/references.bib:270; paper/main.tex:61.
+Retain identity and venue; narrow the proof and intervention claims as in S6.
+https://proceedings.iclr.cc/paper_files/paper/2025/hash/9a583178bd18b2e55095c3a53f8fe88a-Abstract-Conference.html
+https://arxiv.org/html/2410.07476v3
+
+Yuan Sun, Transformation Laws in Neural Representations, 2026 preprint v1.
+Files: paper/references.bib:309; paper/main.tex:55.
+Compatible families, realization, local/global structure and accumulation overlap
+with the analytical motivation. Retain preprint status and avoid unsupported priority.
+https://arxiv.org/html/2609.18190v1
+
+Alan Sun and Mariya Toneva, Tracking Equivalent Mechanisms, ICLR 2026.
+Files: paper/references.bib:322; paper/main.tex:67.
+This is a different Sun. Congruity and causal abstraction require conditions beyond
+the present same-element intertwiner. Current distinction is correct.
+https://arxiv.org/pdf/2603.30002v1
+
+This is a targeted original-paper audit, not an exhaustive theorem-priority search.
+The Arora acronym correction does not change that paper's attributed method.
+
+V. HOW THE REFERENCE REPORT WAS USED
+
+Reference SHA256:
+5d8b48edacbba853534e1f27d0f56bc46129a823bd0271f5fb689538d11daaa9
+Detailed earlier integration record: docs/theory_revision_20261024.txt.
+
+ADOPT AND RETAIN: common-design ridge identities, independent-orientation risk,
+full-rank commutant characterization, and sample-mean learning curves, with proofs,
+explicit assumptions and compatible row-vector notation. These were already integrated
+in 0.4.0; this review checked them again and clarified their use. They are analytical
+identification boundaries, not automatically novel theory or observed LLM results.
+
+USE WITH RESTRICTIONS: the report's warning that geometry/algebra need not identify
+shared semantic computation is relevant. The manuscript now separates theoretical
+constructions from empirical normalization and recognizes completed alternative
+controls. The report's older empirical assessment is not allowed to replace the
+subsequent completed replay evidence.
+
+DO NOT IMPORT AS COMPLETED OR MANDATORY: a Haar-based stochastic calibration/test,
+new codebooks, additional noisy-recovery theory, and a larger experiment matrix.
+An exact orthogonal D4 commutator identity cannot certify empirical irreducible
+multiplicities from approximate Euclidean operators. No such new diagnostic or
+general noisy theorem is claimed. The report's stronger proposed agenda is optional
+for a future stronger claim, not an ICML requirement for every paper.
+
+VI. EXPERIMENT DECISION AND REMAINING SUBMISSION WORK
+
+Decision: ZERO new experiments for this revision. No new calibration, full replay,
+model execution, empirical resampling or post-hoc threshold tuning is authorized or
+needed by the narrowed core. Existing observed failures are retained and discussed.
+
+If the authors later choose to claim algebraic/semantic information beyond matched
+predictive recovery, at most one new targeted study should be designed first: an
+independent, preregistered conditional comparison of the declared action against
+coherent alternatives matched on held-out prediction error, operator norm, supplied
+state information and capacity. Its selection data and final evaluation must be
+separate. Such a study would address that additional identification claim, not by
+itself prove native causal implementation. It is NOT proposed as the next required
+step, and it is not launched or added to the current run list.
+
+The next step is author-level review of the revised contribution and claim limits,
+followed by final venue/anonymity checks. The public source ZIP preserves license
+and source identity metadata; the separate Overleaf bundle is anonymous. A public
+repository link and an anonymous code supplement have different requirements.
+
+Current official review basis: ICML 2026 reviewer/author instructions. Soundness,
+presentation, significance and originality are separate dimensions; evaluating
+existing methods to provide new understanding can be original. A new theorem or
+SOTA result is not a blanket requirement. This does not guarantee the current
+paper's significance. ICML 2027 rules/template remain UNVERIFIED, not demonstrated
+to be unpublished. The unmodified 2026 template remains a recorded fallback.
+https://icml.cc/Conferences/2026/ReviewerInstructions
+https://icml.cc/Conferences/2026/AuthorInstructions
+
+Build and preservation evidence: release/validation_20261025.json,
+release/paper_revision_20261025.json, release/pdf_qa.json and the packaged release
+report. These engineering checks certify the stated artifacts, not scientific
+acceptance, independent confirmation, or completion of blocked branches.

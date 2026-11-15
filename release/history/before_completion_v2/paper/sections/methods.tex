@@ -1,0 +1,140 @@
+\section{Historical Experimental Methods}
+\label{app:methods}
+This section specifies the Study~1 experiments and their preserved source identifiers. The later characterization study uses a separate protocol and training-energy-normalized losses; its numerical values are not directly comparable with the per-target relative losses defined below.
+
+\paragraph{Names in archived records.}
+The descriptive names in the main text map to the unchanged source identifiers below. These identifiers locate the corresponding code and results; they do not denote additional independent datasets.
+\begin{center}
+\small
+\begin{tabular}{@{}p{.36\textwidth}p{.12\textwidth}p{.44\textwidth}@{}}
+\toprule
+Main-text comparison & Source name & Scope \\
+\midrule
+All-element structural recovery & FULL & Independent and joint fits, prediction and consistency diagnostics, and controls. \\
+Generator-only comparison & AFS-A & Generator fits evaluated on excluded action elements and word controls. \\
+Group-label registration control & AFS-B & Fixed fitted operators evaluated under non-automorphic element relabeling. \\
+Training-correspondence controls & AFS-C & Ridge refits under template-wise state relabeling or target scrambling. \\
+Rank-matched lexical comparison & AFS-D & Lexical and internal readouts matched in training projected rank; input spectra and the PCA procedure support the match. \\
+\bottomrule
+\end{tabular}
+\end{center}
+\subsection{States, actions, and prompts}
+$C_7$ states are ordered Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, indexed $0,\ldots,6$. The generator applies $i\mapsto i+1\pmod7$. All seven group elements are available for FULL element-specific fitting; the focal AFS-A fit uses only the one-step generator.
+
+$D_4$ states are NW, NE, SE, SW, indexed $0,1,2,3$. Rotation is clockwise $r(i)=i+1\pmod4$. Reflection is $s(0)=1$, $s(1)=0$, $s(2)=3$, $s(3)=2$. Elements $(k,b)$ first reflect when $b=1$ and then rotate $k$ times. Composition $g_1\circ g_2$ means apply $g_2$ first and $g_1$ second. The action is faithful on four vertices and obeys $r^4=e$, $s^2=e$, $srs=r^{-1}$. It is a vertex-label task, not a task using rendered square images or full square configurations.
+
+Each domain uses 40 fixed English template strings with one state insertion. Weekday examples include ``The current day is \{state\}.'', ``The calendar shows \{state\}.'', and ``The event happens on \{state\}.'' Corner examples include ``The marked corner is \{state\}.'', ``The square position is \{state\}.'', and ``The diagram label is \{state\}.'' The complete strings are distributed in the dataset definitions. They are semantically similar short contexts, not independent natural-language corpora. FULL contains 280 weekday and 160 corner prompts per model before partitioning. Changing the state within a template defines a paired transformation example.
+
+A seeded permutation of the 40 template IDs selects 28 train, six validation, and six test templates. Split seeds are 101, 303, 909, 2701, and 4243. All state variants of a template stay in the same partition. Consequently, held-out transformation targets do not leak between partitions within a split. Across splits, prompts recur; this repeated-partition design does not create independent datasets. Validation observations are diagnostic; the reported primary results use test observations.
+
+\subsection{Models, tokenization, and representation extraction}
+\begin{table}[h]
+\centering
+\caption{Exact base-model revisions and primary transformer block output indices. The embedding hidden state is index zero and is excluded from FULL.}
+\label{tab:models}
+\small
+\begin{tabular}{lrrrrl}
+\toprule
+Model & 0.20 & 0.40 & 0.60 & 0.80 & Revision \\
+\midrule
+Llama-3.2-1B & 3&6&10&13 & \texttt{4e20de362430cd3b72f300e6b0f18e50e7166e08}\\
+Llama-3.2-3B & 6&11&17&22 & \texttt{13afe5124825b4f3751f836b40dafda64c1ed062}\\
+Llama-3.1-8B & 6&13&19&26 & \texttt{d04e592bb4f6aa9cfee91e2e20afa771667e1d4b}\\
+Qwen2.5-1.5B & 6&11&17&22 & \texttt{8faed761d45a263340a0528343f099c05c9a4323}\\
+Qwen2.5-3B & 7&14&22&29 & \texttt{3aab1f1954e9cc14eb9509a215f9e5ca08227a9b}\\
+Qwen2.5-7B & 6&11&17&22 & \texttt{d149729398750b98c0af14eb82c78cfe92750796}\\
+\bottomrule
+\end{tabular}
+\end{table}
+The tokenizer revision matches the model revision. Fast tokenizers, special tokens, right padding, float16 model loading, automatic device mapping, and extraction batches of eight are used. Models are in evaluation mode and extraction uses inference mode without KV caching. A character-span search requires exactly one occurrence of the state string. Offset mappings select tokens overlapping that span; their hidden vectors are averaged at each location. The target is an input token, not an unobserved answer. Extraction therefore measures representations of already presented states.
+
+For each model, group, layer, and split, centered PCA is fitted only to training-template activations, using an SVD basis and no whitening. With orthonormal component rows $B=U_{\mathrm{PCA}}^\top$, encoding is $(h-\hat{\mu})B^\top$ and decoding is $zB+\hat{\mu}$. Primary FULL uses 16 components as a fixed setting, without a recovered optimality or variance-retention criterion. The recorded sensitivity subset uses dimensions 8, 32, and 64 at depths 0.4/0.8 and split seeds 101/303. These sensitivity cells are not pooled with primary results. A matched summary must restrict the $q=16$ comparator to the same model, depth, split and endpoint subset; the archived aggregate table does not impose that restriction on its $q=16$ row. \Cref{app:dimension-rank-audit} reports the verified matched subset. Additional terminal-layer structural fits in the historical run are likewise excluded from the primary four-depth means. These historical prediction and group-law checks do not establish dimension stability of $\gamma_r$, the exact-class premium or registration rankings. The original spectral analysis used $r=16$; the subsequent same-bank comparison also evaluates $r=8$ under its own whitening metric (\cref{app:spectral-dimension-sensitivity}), with the completed independent-orthogonal comparison reported in \cref{app:orthogonal-results}.
+
+\subsection{Independent and joint fitting}
+For group element $g$, stack training source rows in $X$ and their matched same-template transformed rows in $Y_g$. The no-intercept independent fit is
+\[
+ R_g=(X^\top X+0.01\Id)^{-1}X^\top Y_g.
+\]
+The operator knows the training source-target correspondence for that element. It receives no multiplication table, generator identities, or relation loss; this is absence of algebraic \emph{loss} supervision, not absence of transformation supervision.
+
+For a matrix $A$ let $\operatorname{mse}(A)$ be its mean squared entry. Joint fitting minimizes
+\begin{align*}
+ L&=L_{\rm data}+L_{\rm hom}+L_{\rm rel}+L_{\rm id}+0.05L_{\rm orth},\\
+ L_{\rm data}&=\mathbb{E}_{(i,t),g}\frac{1}{q}\norm{z_{i,t}R_g-z_{g(i),t}}_2^2,\\
+ L_{\rm hom}&=\mathbb{E}_{g_1,g_2}\operatorname{mse}(R_{g_2}R_{g_1}-R_{g_1\circ g_2}),\\
+ L_{\rm id}&=\operatorname{mse}(R_e-\Id),\\
+ L_{\rm orth}&=\mathbb{E}_g\operatorname{mse}(R_g^\top R_g-\Id).
+\end{align*}
+For $C_7$, $L_{\rm rel}=\operatorname{mse}(R_r^7-\Id)$. For $D_4$ it is the mean of $\operatorname{mse}(R_r^4-\Id)$, $\operatorname{mse}(R_s^2-\Id)$, and $\operatorname{mse}(R_sR_rR_s-R_{r^{-1}})$. The fitting losses are not the normalized evaluation metrics. All elements, including identity, are jointly optimized, initialized from ridge. The full-batch implementation uses float32 parameters and AdamW with learning rate 0.002, weight decay $10^{-5}$, 1,200 steps, and seed 42. Exported matrices are converted to float64. One fit per scientific cell is used; technical optimization seeds are not independent scientific replications.
+
+Identity predicts $z$ itself. Random-orthogonal controls use Gaussian matrices followed by QR with diagonal-sign correction. FULL uses independent nonidentity element matrices and fixes its identity matrix exactly, with seeds 104729, 130363, 155921, 196613, and 262147; AFS-A composes random \emph{generators} to match its focal method's construction. Neither random baseline is a direct-error-matched null. The all-identity family satisfies exact group algebra while failing nontrivial target prediction. Its algebra columns are left unscored by the protocol; those defects are not mathematically undefined, and zero algebra error alone would not establish target recovery.
+
+\subsection{Exact evaluation metrics}
+\label{app:metrics}
+Let $Z$ contain held-out source rows for one template and $Z_g$ the actual same-template transformed rows. $D$ is defined in \cref{eq:D}. Every average below is taken before the documented higher-level experimental aggregation. With $K(A,B)=\norm{A-B}_F/(\norm{B}_F+10^{-12})$,
+\begin{align*}
+ \Eeq&=\mathbb{E}_{g\ne e}D(ZR_g,Z_g),\\
+ \Ehom&=\mathbb{E}_{g_1,g_2}D(ZR_{g_2}R_{g_1},ZR_{g_1\circ g_2}),\\
+ \Ehomop&=\mathbb{E}_{g_1,g_2}K(R_{g_2}R_{g_1},R_{g_1\circ g_2}).
+\end{align*}
+$\Ecomp$ and $\Ecompop$ use these same homomorphism expressions with $g_1\ne e$ and $g_2\ne e$. Thus their difference from homomorphism is the set of action pairs, not a separate held-out-element fitting protocol. Operator diagnostics repeat the same matrix value across template rows because the fitted matrix is fixed within a cell.
+
+\paragraph{C7 relation definitions.}
+Write $A=R_r$, with $R_k$ the independently available matrix for $r^k$. The historical data relation metric is
+\[
+ \Erel^{C_7}=\frac13\left\{
+ D(ZA^7,Z)+\frac17\sum_{k=0}^6D(ZA^k,ZR_k)
+ +\frac16\sum_{k=1}^6D(ZR_kR_{-k\bmod7},Z)\right\}.
+\]
+The historical operator relation metric is only $\Erelop^{C_7}=K(A^7,R_e)$. It is not an unsquared version of the data aggregate. We retain these frozen metric definitions and values and make the mismatch explicit rather than silently redefining a recorded result.
+
+\paragraph{D4 relation definitions.}
+Writing $A=R_r$ and $J=R_{r^{-1}}$,
+\begin{align*}
+ \Erel^{D_4}&=\tfrac13\{D(ZA^4,Z)+D(ZR_s^2,Z)+D(ZR_sAR_s,ZJ)\},\\
+ \Erelop^{D_4}&=\tfrac13\{K(A^4,R_e)+K(R_s^2,R_e)+K(R_sAR_s,J)\}.
+\end{align*}
+The data definition compares the first two relations with $Z$, while the operator definition compares with the learned $R_e$. Relation components are also retained individually. All data metrics in these definitions are squared relative per-row errors; all $K$ diagnostics are unsquared. A lower raw data number than operator number does not by itself show a quantitative gap between supported and unsupported directions.
+
+\paragraph{Auxiliary inverse and word metrics.}
+The historical inverse data metric averages
+$\mathbb{E}_{i}\norm{z_iR_gR_{g^{-1}}-z_i}_2^2/(\mathbb{E}_i\norm{z_i}_2^2+10^{-12})$ over $g$; this is a ratio of means, unlike $D$'s mean of ratios. Its operator counterpart averages $\norm{R_gR_{g^{-1}}-\Id}_F^2/q$, and is also squared. FULL word diagnostics compare generator products with actual target rows, but their parent operator systems were trained on all elements (joint fitting can also use all relations); AFS-A separately enforces generator-only fitting. These distinctions prevent conflating metrics that have similar historical names.
+
+\subsection{AFS-A/B/C controls}
+AFS-A uses training-only PCA and fits only $r$ for $C_7$ or $r,s$ for $D_4$ with the same ridge coefficient. C7 evaluates $r^2,\ldots,r^6$; $r^7$ is a separate cycle diagnostic. D4 uses breadth-first shortest generator words for every element excluding $e,r,s$. Correct matrix products follow left-to-right row-vector order; the target element is obtained by the corresponding action lookup. Controls are identity, random generator products, directly fitted element-specific ridge, and D4 matched-length words that evaluate to a different element. All focal errors compare with actual transformed test activations. ``Unseen'' refers to the excluded operator elements, not new state labels. Different D4 elements can act identically on an individual corner; the wrong-word contrast averages over the complete state set. Word length is matched, while individual source-to-target distance is not an additional matched condition.
+
+AFS-B retains historical independent ridge operators and PCA coordinates. It enumerates identity-preserving permutations of group-element labels, excludes group automorphisms, and draws 5,000 non-automorphic permutations with replacement per cell. The same multiplication table is evaluated after relabeling. We retain the recorded smoothed lower-tail score,
+\[
+ s_{\rm MC}=\frac{1+\#\{b:E_b\leq E_{\rm true}\}}{5001}.
+\]
+The observed true registration is not established as exchangeable with these restricted draws, which exclude automorphisms including the identity registration. Accordingly, this score describes separation from the chosen reference ensemble; no calibrated p-value, Type-I-error control or semantic-null rejection is claimed. Historical files retain their original \texttt{empirical\_p} field name and values. Repeated cells share representations, model families, and templates. A universal pass count is not a count of independent discoveries.
+
+AFS-C retains the original activation vectors, template membership and training-fitted PCA. Let $z_{i,t}$ denote the coordinate of state $i$ in template $t$. In the state-relabel condition, each training template receives a seeded permutation $\pi_t$, and the training pairs become
+\[
+ z_{\pi_t(i),t}\ \longmapsto\ z_{\pi_t(g(i)),t}.
+\]
+The same $\pi_t$ is used for all elements within that template, so the induced state action is the coherent conjugate $\pi_t\circ g\circ\pi_t^{-1}$. Permutations are sampled separately by training template; no single global relabeling is imposed. Permutations commuting with every registered action are excluded. In the target-scramble condition, the source remains $z_{i,t}$ and the target becomes $z_{\sigma_{t,g}(g(i)),t}$. For each training template and nonidentity element, a nonidentity target permutation $\sigma_{t,g}$ is sampled separately. Identity-action pairs remain self-pairs, and individual fixed points are allowed. All element-specific Ridge maps are refitted with the original regularization and evaluated against the unchanged true validation/test correspondences. The five control seeds are 70001, 70003, 70009, 70019 and 70039. Neither condition fits one globally coherent alternative and evaluates it against consistently relabeled held-out targets.
+
+\subsection{Rank-matched lexical comparison}
+\label{app:lexical-rank}
+The embedding readout averages token embeddings overlapping the unique target span; it does not average contexts. The saved arrays contain exactly seven distinct weekday vectors or four distinct corner vectors, with each state's vector bitwise identical across its 40 templates. The audit selects one observed row per state only after verifying this equality. Centering $n$ unique rows gives the upper bound $\min(d,n-1)$, not an automatic rank equality. Float64 SVD diagnostics confirm centered ranks 6 and 3 for the four archived lexical inputs, and reproduce all 20 recorded training-split rank checks (\cref{app:dimension-rank-audit}).
+
+The original $q=16$ lexical failure remains in the record. The separate rank-matched protocol uses $q=6$ and $q=3$ for both lexical and internal readouts; matching refers to the ranks of their training projected representations. It covers Llama-3.2-1B and Qwen2.5-1.5B, both groups, five partitions, and four internal depth slots: 20 embedding and 80 internal fit cells. Embedding results have no contextual depth axis and are reused when forming depth comparisons. The later replay reused the same embedding caches and rank records; it supplies no independent lexical observations.
+
+The numerical AFS-D table retains the recorded independent-fit results at these dimensions. It is not a dimension-16 embedding comparison and cannot be merged numerically with the primary six-model FULL result. All 80 original internal training inputs have sufficient rank for their declared truncation: their centered ranks are 195 for weekdays and 111 for corners. The recorded PCA procedure retains the leading $q$ right singular vectors. Together with the audited nonzero retained singular values, this implies training-coordinate rank $q$ at both readouts, as shown in \cref{app:dimension-rank-audit}. The historical record retains evaluation metrics but not the fitted PCA bases, coordinates or operator matrices. Thus the training-rank match is supported by the inputs and algorithm, not by direct remeasurement of those historical outputs. Training rank alone does not establish the rank of every held-out internal bank or any fitted operator.
+
+The verified lexical ranks support applying the finite-orbit construction in \cref{prop:finite} to those raw lexical vectors. They do not show that embedding training discovered group-specific algebra. Matching training projected rank does not match retained information: the leading $q$ directions explain 54.42--69.83\% of the original internal training variance for weekdays and 45.81--73.16\% for corners, whereas the lexical input span has only 6 or 3 dimensions. The internal fractions use the full original training spectrum, not the retained coordinates as denominator. Internal-minus-embedding intervals remain historical matched comparisons with the fixed-panel and repeated-partition limitations.
+
+\subsection{Inference, aggregation, and protocol scope}
+\label{app:inference}
+The supplied summaries preserve the completed experiments' estimands and rounding. Primary FULL means select dimension 16, four specified depths, five split seeds, test templates, and the fixed six-model panel. Random methods additionally average their five technical control seeds. Paired contrasts match method observations on model, group, depth/layer, dimension, split, template, and relevant intervention fields. Exact duplicate rows differing only in technical optimization labels are collapsed. For a random comparator, the single learned estimate is matched against each random seed, which remains a resampling level for that contrast.
+
+The FULL hierarchy is model $\rightarrow$ depth slot $\rightarrow$ split seed $\rightarrow$ random-baseline seed when applicable $\rightarrow$ template. Each nested level is sampled with replacement at its observed size; terminal observations are concatenated and averaged. Percentile endpoints use 5,000 draws. The base seed is 314159, with the frozen analysis- and metric-specific offsets recorded in the runner; the base seed alone does not reproduce every interval. AFS-A resamples model, depth, split and template; AFS-C additionally resamples the scramble seed. AFS-A and AFS-C use bootstrap seed 314159 directly, without the offsets used by some FULL analyses. The AFS-C hierarchy is model, depth, split, scramble seed and template, with each real observation paired to all five corresponding scramble fits. AFS-D instead holds its two models and depth slots fixed within each reported model/group contrast, resampling split and template for data metrics and split only for operator metrics. The global additive-field analysis first forms paired, equally weighted model/depth and group aggregates within each split, then resamples the five split-level contrasts. It does not resample five independent datasets or use the FULL hierarchy.
+
+These procedures retain their recorded observation weighting rather than replacing the FULL mean. In particular, the additive direct values differ slightly from FULL's primary aggregate because the observation weighting differs; this is not a different primary FULL result. The original seed stream and aggregation code accompany each table.
+
+This hierarchy is the implementation's historical procedure, not a proof that all its axes are exchangeable independent sampling units. Models are selected from two related families, depths are repeated locations in the same model, and different split seeds repeatedly partition the same templates. Resampling lower levels separately does not model every crossed dependency or remove reuse of templates across partitions. Accordingly, the intervals quantify this resampling calculation; we do not claim calibrated population coverage over unseen model families or independently sampled datasets. The split variability is best interpreted as robustness to the recorded partitions. Technical seed 42 adds no replication.
+
+AFS-C's permutation keys include the control seed, variant, domain and template, and additionally the element for target scrambling; they do not include model, depth or split. The same template-level assignments are therefore shared across models, layers and overlapping partitions. The nested bootstrap does not encode all these crossed dependencies. Its intervals retain their role as sensitivity summaries under the recorded resampling scheme, rather than calibrated population coverage or a semantic-specificity test.
+
+Protocol files and source/configuration hashes document frozen analysis choices and completed run lineage. A frozen local protocol is not equivalent to an independently timestamped public preregistration. Only the recorded gate family was treated as confirmatory in the original run; other contrasts, post-hoc diagnostics, and the analytical observations in this paper should not be read as globally multiplicity-corrected confirmatory tests. These historical sections preserve the original evidence; the subsequent characterization is reported separately and does not retroactively upgrade a historical gate or supply missing native-intervention outcomes.

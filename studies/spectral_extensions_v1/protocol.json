@@ -1,0 +1,83 @@
+{
+  "alternatives": {
+    "C7_image_subgroups": 120,
+    "D4_image_subgroups": 3,
+    "enumeration": "All distinct conjugate image subgroups, deterministic canonical representatives",
+    "include_fixed_points": true,
+    "include_identity": true,
+    "p_values": false,
+    "planned_units": 2952,
+    "prediction_metric": "Separate training-frozen witness/OLS/ridge prediction on original test bank",
+    "semantic_rank": "Descriptive interval accounting for ties and missing groups",
+    "spectral_metric": "Original test bank's uncentered second moment under each complete action grid"
+  },
+  "automatic_manuscript_promotion": false,
+  "completion_policy": {
+    "execution_complete": "Every planned unit has a verified terminal receipt and source identity remains valid",
+    "retained_failure_status": "completed_with_not_evaluable",
+    "scientific_pass": false,
+    "scientific_pass_assessed": false,
+    "unit_complete": "All distinct numerical endpoints requested for the unit are evaluable"
+  },
+  "domains": [
+    "C7",
+    "D4"
+  ],
+  "independent_confirmation": false,
+  "no_model_execution": true,
+  "paraphrase_ids": [
+    0,
+    1
+  ],
+  "parent_protocol": "spectral_finite_bank_v1_0.4.9",
+  "planned_cells": 48,
+  "population_certificate": false,
+  "protocol_id": "tmlr_spectral_extensions_v1",
+  "rank": 16,
+  "schema_version": 1,
+  "selection": "All original declared training and test blocks; no outcome-based filtering",
+  "simulation": {
+    "M3_is_negative_null": false,
+    "domains": [
+      "C7",
+      "D4"
+    ],
+    "interpretation": "Construction-specific illustrations; no power or false-positive calibration",
+    "mechanisms": [
+      "M1",
+      "M2",
+      "M3"
+    ],
+    "n_test": 32,
+    "n_train": 32,
+    "noise_levels": [
+      0.0,
+      0.05
+    ],
+    "planned_units": 36,
+    "rank": 16,
+    "seeds": [
+      2026102900,
+      2026102901,
+      2026102902
+    ]
+  },
+  "source_changes_require_new_run": true,
+  "status": "prepared_not_executed_research",
+  "test_context_blocks": 128,
+  "test_partition": "test",
+  "training_context_blocks": 96,
+  "training_families": 48,
+  "training_partition": "train",
+  "witness": {
+    "fitting_metric": "Training-bank uncentered second-moment whitening",
+    "matrix_normalized_frobenius_tolerance": 1e-08,
+    "ridge_alpha": 0.001,
+    "scalar_atol": 1e-08,
+    "scalar_rtol": 1e-07,
+    "support_absolute_threshold": 1e-12,
+    "support_relative_threshold": 1e-10,
+    "test_metric": "The frozen training whitening; no test refitting or selection",
+    "unresolved_support_policy": "not_evaluable_witness; never silently delete, jitter or reduce rank"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "study_id": "icml2027-compact-context-exploratory-v1",
+  "parent_study": "icml2027-characterization-v1",
+  "parent_archive_sha256": "79b1c53900cfcd91f0644b3db8405160213785487d0f7cea8b0320244a5aec0a",
+  "coordinate_dimension": 16,
+  "numpy_version": "2.2.6",
+  "scientific_role": "exploratory_existing_test_inspected",
+  "paper_eligible": false,
+  "confirmation_authorized": false,
+  "calibration_repeated": false,
+  "models_loaded": false,
+  "lambda_grid": [
+    0,
+    1e-05,
+    0.001,
+    0.1,
+    1
+  ],
+  "bandwidth_multipliers": [
+    0.5,
+    1.0,
+    2.0
+  ],
+  "budget_multipliers": [
+    0.5,
+    1.0,
+    2.0,
+    4.0,
+    8.0
+  ],
+  "seed": 20261021,
+  "registrations": [
+    "semantic",
+    "consistent_swap01"
+  ],
+  "components": {
+    "compact": [
+      "C7",
+      "D4_corner"
+    ],
+    "context": [
+      "C7",
+      "D4_corner",
+      "S3_role"
+    ]
+  },
+  "scalar_grid": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1.0,
+    1.25
+  ],
+  "fit_partitions": [
+    "train"
+  ],
+  "selection_partitions": [
+    "validation"
+  ],
+  "excluded_partitions": [
+    "reserved",
+    "support"
+  ],
+  "pilot_evaluation_partition": "pilot",
+  "primary_panel": "all six models and four readouts per model; no result-dependent cell selection",
+  "common_coordinate_cost": "fixed q16 PCA shared and excluded from incremental predictor cost",
+  "alternative_action": "conjugate every action table by the fixed state swap (0,1); no outcome-dependent permutation",
+  "error_norm_comparison": "retain per-action prediction error, output norm and cycle/order diagnostics; no post-hoc significance or causal attribution from unmatched predictors",
+  "scope_exclusions": [
+    "raw forward/PCA refit",
+    "native intervention",
+    "peer-method reproduction",
+    "fresh holdout certification",
+    "support-adapted S3 fitting",
+    "old calibration"
+  ],
+  "validation_comparability_factor": 1.25,
+  "validation_comparability_absolute_floor": 1e-12
+}

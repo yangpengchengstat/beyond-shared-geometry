@@ -1,0 +1,33 @@
+FULL_DIAG original_full 100
+FULL_DIAG original_full 200
+FULL_DIAG original_full 300
+FULL_DIAG original_full 400
+FULL_DIAG original_full 500
+FULL_DIAG original_full 600
+FULL_FINISHED original_full 600
+FULL_DIAG replay_full 100
+FULL_DIAG replay_full 200
+FULL_DIAG replay_full 300
+FULL_DIAG replay_full 400
+FULL_DIAG replay_full 500
+FULL_DIAG replay_full 600
+FULL_FINISHED replay_full 600
+Traceback (most recent call last):
+  File "audit_workdir/scripts/audit_saved_matrices.py", line 150, in <module>
+    unit_n='witness/units/'+cell+'.json';unit=follow.json(unit_n)
+                                              ^^^^^^^^^^^^^^^^^^^
+  File "audit_workdir/scripts/audit_saved_matrices.py", line 38, in json
+    def json(self,n):return json.loads(self.read(n))
+                                       ^^^^^^^^^^^^
+  File "audit_workdir/scripts/audit_saved_matrices.py", line 36, in read
+    b=self.f.read(n) if self.kind=='zip' else self.cache[n].read_bytes()
+      ^^^^^^^^^^^^^^
+  File "audit_python_environment/lib/python3.12/zipfile/__init__.py", line 1585, in read
+    with self.open(name, "r", pwd) as fp:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "audit_python_environment/lib/python3.12/zipfile/__init__.py", line 1622, in open
+    zinfo = self.getinfo(name)
+            ^^^^^^^^^^^^^^^^^^
+  File "audit_python_environment/lib/python3.12/zipfile/__init__.py", line 1550, in getinfo
+    raise KeyError(
+KeyError: "There is no item named 'witness/units/meta-llama__Llama-3.2-1B__C7__3.json' in the archive"

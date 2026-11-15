@@ -1,0 +1,15 @@
+% Presentation only: saved full-precision domain aggregates; no new averaging.
+\begin{table*}[t]
+\centering\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Domain & Mean linear risk & Mean exact-action bounds & Mean additional-risk bounds & Mean identity risk \\
+\midrule
+$C_7$ & 0.02563 & [0.02980, 0.05863] & [0.00416, 0.03300] & 0.76012 \\
+$D_4$ & 0.10321 & [0.12944, 0.24895] & [0.02624, 0.14574] & 0.52932 \\
+\bottomrule
+\end{tabular}
+\caption{\textbf{The scale of exact orthogonal-action cost.} All entries use the original Study~2 test bank's own second-moment-whitened metric, at dimension $r=16$, with equal averages over 24 fixed model/readout conditions per domain. Linear risk is the independent least-squares optimum $\eta$ on that bank. The next two columns average cell-wise bounds on the best exact orthogonal-action risk $L^\star$ and its additional cost $L^\star-\eta$. These deterministic intervals are neither confidence intervals nor measured optima; the constraints combine exact group laws and orthogonality. Identity risk uses the same bank and metric. The C7 median lower endpoint is $0.000389$, and two conditions contribute $90.7\%$ of its sum; \cref{tab:bounded-risk} and the accompanying text retain the full heterogeneity. Constructed-action transfer uses a different, frozen training metric (\cref{tab:followup-witness}).}
+\label{tab:core-risk-summary}
+\end{table*}

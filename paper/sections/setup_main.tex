@@ -1,0 +1,448 @@
+\section{Problem Setup and Evaluation Targets}
+\label{sec:setup}
+\subsection{Prescribed actions and fixed representations}
+
+\paragraph{Prescribed actions and paired states.}
+Let $S$ be a finite set of $n$ states and $G$ a finite group.
+The \emph{prescribed action} is the homomorphism $\alpha:G\to\mathrm{Sym}(S)$ that specifies the intended transformations of the named states.
+Write $g(i)=\alpha(g)(i)$. Then $e(i)=i$ and $g_1(g_2(i))=(g_1g_2)(i)$ for every $i\in S$ and $g_1,g_2\in G$ \citep{serre1977linear}.
+For the cyclic group $C_7$, the generator advances the day by one, and the action on the seven days is free and transitive.
+The eight rotations and reflections in $D_4$ act faithfully and transitively on the four corners NW, NE, SE, and SW.
+The identity and one diagonal reflection fix each corner, so the $D_4$ action is not free.
+
+Let $x_{t,i}$ denote the prompt obtained by inserting state $i$ into template $t\in\mathcal T_{\mathrm{tpl}}$.
+The input action in the Introduction is $g\cdot x_{t,i}=x_{t,g(i)}$, which changes the state while holding the template fixed.
+Each template supplies all $n$ state variants.
+The paired design includes fixed points, for which the source and target coincide. Each evaluation below specifies which pairs enter its loss.
+Study~1 uses 40 templates per domain, split into 28 training, six validation, and six test templates in each partition.
+Study~2 uses 48 training, 16 validation, and 64 test context families, each with two template variants.
+\Cref{sec:design} gives the partition details.
+
+\paragraph{State-span readout and fixed coordinates.}
+For a given model and layer, $h_{i,t}=f(x_{t,i})\in\R^{1\times d}$ is the mean of the layer's block outputs at the token positions whose character offsets overlap the named state. The span can cover one or more tokens.
+Causal attention restricts this readout to the tokenized prefix through the last selected token. When that prefix is unchanged, later tokens do not affect the readout.
+The splits hold out templates or context families. They do not enforce disjoint tokenized prefixes.
+The equivariance target $f(g\cdot x_{t,i})$ is therefore $h_{g(i),t}$.
+We store readouts as row vectors so that fitted matrices act by right multiplication.
+
+For each domain, model, layer, and split, we use the complete training set of state--template pairs to estimate the mean and fit principal component analysis (PCA):
+\[
+ \hat\mu=\frac{1}{n|\mathcal T_{\mathrm{train}}|}
+ \sum_{t\in\mathcal T_{\mathrm{train}}}\sum_{i\in S}h_{i,t}
+ \in\R^{1\times d},
+\]
+where $\mathcal T_{\mathrm{train}}\subset\mathcal T_{\mathrm{tpl}}$ is the set of training templates. The projected readout is
+\begin{equation}
+ z_{i,t}=(h_{i,t}-\hat\mu)U_{\mathrm{PCA}}\in\R^{1\times q},
+ \qquad U_{\mathrm{PCA}}^\top U_{\mathrm{PCA}}=I_q.
+ \label{eq:projection}
+\end{equation}
+The columns of $U_{\mathrm{PCA}}\in\R^{d\times q}$ are the leading eigenvectors of the centered training covariance.
+We use the training mean and basis on validation and test templates as well.
+The fitted predictors in the next subsection act on $z_{i,t}$.
+The class-risk analysis applies a separate second-moment whitening step.
+
+PCA captures total training variation, including variation across template means and variation between states within a template.
+For weekdays, the seven state means averaged over templates span at most six dimensions after centering.
+Within any one template, the centered state differences also span at most six dimensions, but their directions can vary across templates.
+The fraction of total variance retained therefore does not tell us how much within-template state variation the projection preserves.
+
+We additionally assess sensitivity to within-template centering
+in the saved 16-dimensional Study~2 coordinates.
+On each complete test bank, we subtract the mean across states
+within each template and compare retaining the original
+test-bank whitening with using the centered bank's own whitening
+(\cref{app:template-centering-sensitivity}).
+This comparison characterizes state-dependent variation
+within the retained PCA subspace.
+Measuring the fraction of full-dimensional within-template
+variation preserved by that subspace, or fitting PCA specifically
+to such variation, requires the corresponding full-dimensional
+readouts.
+
+Study~1 fixed $q=16$ before the final structural run.
+Study~2 retained this dimension for comparability with its development analyses and fitted PCA on its own training templates.
+The Study~2 spectral sensitivity analysis uses the first eight saved coordinates to assess dependence on the retained dimension (\cref{app:spectral-dimension-sensitivity}).
+The lexical comparison matches the training projected ranks at $q=6$ for weekdays and $q=3$ for corners.
+\Cref{app:dimension-rank-audit} documents the choice of dimension, the historical dimension sweep, and the evidence for the rank match.
+
+\subsection{What a fitted operator predicts}
+
+This subsection describes fitted-operator evaluation in the
+structural recovery study (Study~1).
+For each domain, model, layer, and training split, we use the
+training-PCA coordinates $z_{i,t}$ defined in
+\cref{eq:projection}.
+A fitted matrix $R_g\in\R^{q\times q}$ predicts the transformed
+coordinate by right multiplication,
+\begin{equation}
+ z_{i,t}R_g\approx z_{g(i),t}.
+ \label{eq:prediction}
+\end{equation}
+The maps have no intercept and act in the PCA coordinates
+before any second-moment whitening.
+Within each condition, the same matrix for an element is
+applied across all templates.
+Evaluation holds the training mean, PCA basis, and fitted
+matrices fixed and uses complete held-out templates containing
+the same state vocabulary.
+
+Independent ridge fits a separate matrix for every group
+element, including the identity.
+Joint fitting optimizes all element matrices together,
+combining a prediction loss with soft penalties for the
+group law, generator relations, identity, and orthogonality.
+Its identity matrix is learned subject to the identity penalty.
+The fitting objectives and their weights are specified in
+\cref{app:methods}; the normalized evaluation errors are
+defined below.
+Under the row-vector convention, applying $g_2$ and then $g_1$
+multiplies a source row first by $R_{g_2}$ and then by $R_{g_1}$.
+An exact row action therefore obeys
+\begin{equation}
+ R_{g_2}R_{g_1}=R_{g_1\circ g_2},
+ \qquad
+ (g_1\circ g_2)(i)=g_1(g_2(i)).
+ \label{eq:convention}
+\end{equation}
+We evaluate departures from this law both on the observed
+coordinates and in the ambient matrix space.
+
+The generator-only comparison fits the one-day shift $r$
+for $C_7$, or the clockwise quarter-turn $r$ and the
+vertical-axis reflection $s$ for $D_4$.
+The latter swaps NW with NE and SW with SE.
+For a fixed word $g=g_1\circ\cdots\circ g_k$, the predicted
+target is $z_{i,t}R_{g_k}\cdots R_{g_1}$.
+An exact action assigns the same matrix to every word
+representing the same element, whereas fitted generator
+products can depend on the chosen word.
+The weekday evaluation uses the five excluded elements
+$r^2,\ldots,r^6$, with $r^7$ evaluated separately as a
+cycle diagnostic.
+The corner evaluation uses a fixed shortest generator word
+for each of the five elements in $G\setminus\{e,r,s\}$.
+These products are scored against the held-out target
+coordinates $z_{g(i),t}$.
+This comparison holds out both the fitted action elements
+and the evaluation templates while retaining the state
+vocabulary.
+The word construction and matched comparators are described
+in \cref{app:methods}.
+
+For paired row matrices $A,B\in\R^{N\times q}$, Study~1 uses
+\begin{equation}
+ D(A,B)=\frac1N\sum_{j=1}^{N}
+ \frac{\|A_j-B_j\|_2^2}{\|B_j\|_2^2+10^{-12}}.
+ \label{eq:D}
+\end{equation}
+This averages squared discrepancies after normalizing each
+row by the energy of its comparison target.
+Let $Z_t$ stack all $n$ source-state rows in test template $t$,
+and let $Z_{g,t}$ stack their corresponding transformed targets
+in the same source-state order.
+For the set $\mathcal T_{\mathrm{test}}$ of held-out templates,
+the prediction and data-space consistency errors are
+\begin{align*}
+ \Eeq
+ &=
+ \frac{1}{|\mathcal T_{\mathrm{test}}|(|G|-1)}
+ \sum_{t\in\mathcal T_{\mathrm{test}}}
+ \sum_{\substack{g\in G\\g\ne e}}
+ D(Z_tR_g,Z_{g,t}),\\
+ \Ehom
+ &=
+ \frac{1}{|\mathcal T_{\mathrm{test}}||G|^2}
+ \sum_{t\in\mathcal T_{\mathrm{test}}}
+ \sum_{g_1,g_2\in G}
+ D\!\left(
+   Z_tR_{g_2}R_{g_1},
+   Z_tR_{g_1\circ g_2}
+ \right).
+\end{align*}
+The prediction average excludes the identity element and
+retains fixed-point pairs of nonidentity elements.
+In $\Ehom$, the comparison target and its normalization
+come from the directly fitted prediction
+$Z_tR_{g_1\circ g_2}$.
+The metric $\Ecomp$ uses the same consistency expression,
+averaged over $g_1,g_2\in G\setminus\{e\}$;
+their product may still equal the identity.
+These averages are computed within each model--layer--split
+condition before the higher-level aggregation described in
+\cref{app:methods}.
+The relationship between prediction and consistency also
+depends on operator norms and the comparison denominators
+(\cref{prop:propagation}).
+The operator-space homomorphism diagnostic uses an unsquared
+relative Frobenius norm.
+\Cref{app:metrics} specifies the relation diagnostics,
+including their comparison targets and aggregation rules
+in data and operator space.
+The within-template centering analysis in
+\cref{app:template-centering-sensitivity} evaluates spectral
+budgets on complete Study~2 banks using the score $C_{16}/16$.
+
+\subsection{From a fitted predictor to an action class}
+
+We now define a common loss for comparing three classes of
+linear maps on a fixed representation bank.
+Throughout this comparison, we hold the observations, the
+prescribed input action, and the evaluation metric fixed.
+Let $r$ denote the dimension of the retained coordinate space,
+and write $z_{i,t}\in\R^{1\times r}$ for the observation of
+state $i$ in template $t$.
+Expectations average over a fixed template distribution
+$P_T$ and an independent uniform state in $S$.
+For a finite bank with complete templates
+$\mathcal T_B$, we use the empirical average
+\[
+ \mathbb E[\varphi(t,i)]
+ =
+ \frac{1}{|\mathcal T_B|\,n}
+ \sum_{t\in\mathcal T_B}\sum_{i\in S}\varphi(t,i),
+ \qquad n=|S|.
+\]
+The reported Study~2 class-risk calculations use the
+128 complete test-template variants in each condition.
+Group averages include every element, including the identity,
+and retain fixed-point pairs.
+
+Assume that the uncentered second moment is positive definite.
+Define the whitened representation rows by
+\[
+ \Sigma=\mathbb E[z^\top z]\succ0,
+ \qquad
+ x_{i,t}=z_{i,t}\Sigma^{-1/2},
+ \qquad
+ x_g(i,t)=x_{g(i),t},
+ \qquad
+ \mathbb E[x^\top x]=I_r.
+\]
+Here $x$ denotes a whitened representation.
+For the empirical class-risk calculations, $\Sigma$ is
+computed on the bank being characterized.
+On the original bank, this second moment includes the
+contribution of the template means.
+The primary analysis uses $r=q=16$.
+The eight-coordinate sensitivity analysis uses its declared
+truncated space and its own second moment
+(\cref{app:spectral-dimension-sensitivity}).
+Each retained space must satisfy the positive-definiteness
+condition above.
+
+For matrices $A_g\in\R^{r\times r}$ shared across templates,
+define the common prediction loss
+\begin{equation}
+ \mathcal L((A_g)_g)
+ =
+ \frac{1}{r|G|}
+ \sum_{g\in G}\mathbb E\|xA_g-x_g\|_2^2.
+ \label{eq:class-loss-main}
+\end{equation}
+Since $\mathbb E\|x\|_2^2=r$, the factor $1/r$ normalizes
+by the total representation energy in this whitened metric.
+Allowing a separate unrestricted linear map for each element
+gives the ordinary least-squares optimum $\eta$.
+Requiring each map to be orthogonal gives
+$L_{\mathrm{orth}}$, while still allowing the element
+matrices to be chosen independently.
+Finally, define the class of exact row actions
+\[
+ \mathcal R_r(G)
+ =
+ \left\{
+ \rho:G\to O(r):
+ \rho_e=I_r,\ 
+ \rho_g\rho_h=\rho_{hg}
+ \text{ for all }g,h\in G
+ \right\},
+\]
+where
+$O(r)=\{Q\in\R^{r\times r}:Q^\top Q=I_r\}$
+includes rotations and reflections.
+The reversed multiplication order follows the row-vector
+convention in \cref{eq:convention}.
+Transposing the matrices gives the usual column-vector
+representation convention.
+This class permits nonfaithful representations, including
+the action that assigns $I_r$ to every group element.
+
+The three class optima are
+\[
+ \begin{aligned}
+ \eta
+   &=\min_{(A_g)_g\in(\R^{r\times r})^G}
+       \mathcal L((A_g)_g),\\
+ L_{\mathrm{orth}}
+   &=\min_{(Q_g)_g\in O(r)^G}
+       \mathcal L((Q_g)_g),\\
+ L^\star
+   &=\min_{\rho\in\mathcal R_r(G)}
+       \mathcal L(\rho).
+ \end{aligned}
+\]
+Under the unit-second-moment condition, the independent
+least-squares minimizers are
+$A_g^\star=\mathbb E[x^\top x_g]$.
+Both orthogonal classes are nonempty and compact, and the
+loss is continuous, so their minima are attained as well.
+Class inclusion gives
+\[
+ \eta\le L_{\mathrm{orth}}\le L^\star.
+\]
+The difference $L_{\mathrm{orth}}-\eta$ measures the cost
+of orthogonality, while $L^\star-L_{\mathrm{orth}}$
+measures the further cost of enforcing a common group law.
+Both costs refer to the same bank, target pairs, and metric.
+We compute $\eta$ and $L_{\mathrm{orth}}$ directly and
+bound $L^\star$ using the spectral construction in the
+next section.
+We use OLS to denote ordinary least squares.
+
+Constructed-action transfer evaluates a particular feasible
+action obtained from training observations.
+It applies the fixed training-derived matrices to held-out
+observations using the frozen training whitening.
+Its prediction loss is therefore evaluated in the
+training-defined metric.
+The finite-bank class-risk calculations above use the
+evaluated bank's own second moment.
+
+The registration comparison varies the action on state
+labels while holding the representation bank fixed.
+A \emph{registration} is a homomorphism
+$\alpha:G\to\mathrm{Sym}(S)$, with
+$g(i)=\alpha(g)(i)$.
+For a state permutation $\pi$, the conjugate action
+\[
+ \alpha_\pi(g)=\pi\,\alpha(g)\,\pi^{-1}
+\]
+defines coherent alternative targets on the same labeled
+source observations.
+In the faithful, transitive $C_7$ and $D_4$ comparisons,
+we enumerate distinct image subgroups $\alpha(G)$.
+Reparameterizing a registration by a group automorphism
+reindexes the uniform group average and preserves the
+spectral budget.
+For example, the one-day and two-day weekday shifts
+generate the same image subgroup and receive the same
+full-average spectral score.
+The spectral construction below compares the energy
+captured for each candidate's target correspondences.
+An ordering of the exact-action optima requires separate
+justification from the corresponding risk bounds.
+
+The centering analysis in
+\cref{app:template-centering-sensitivity} additionally
+examines the dependence of these spectral comparisons
+on the state-invariant component.
+Its original and rewhitened centered observations satisfy
+the unit-second-moment condition used here.
+For centered observations retaining the original whitening,
+$C_{16}/16$ uses the original total energy as its scale.
+That treatment is reported through its spectral budgets
+and registration ranks.
+Table~\ref{tab:metric-contract} summarizes the prediction
+targets, normalizations, and averaging rules.
+
+\begin{table}[t]
+\caption{
+Evaluation targets and normalizations.
+Each row specifies its own prediction object or spectral
+quantity and averaging rule.
+Full-state averages retain fixed-point pairs.
+In the class-risk analysis, $r$ is the declared retained
+dimension and the bank satisfies the stated nonsingularity
+condition.
+}
+\label{tab:metric-contract}
+\centering
+\small
+\begin{tabular}{
+ @{}p{.19\textwidth}
+ p{.40\textwidth}
+ p{.33\textwidth}@{}
+}
+\toprule
+Target & Loss or normalization & Evaluation scope \\
+\midrule
+
+{\raggedright
+Structural prediction and consistency\par}
+&
+$D(A,B)$ divides each row's squared discrepancy by the
+comparison row's squared norm plus $10^{-12}$.
+&
+Study~1, complete test-template state blocks.
+Prediction and consistency use the element or element-pair
+averages defined above.
+\\[3pt]
+
+Coordinate prediction
+&
+Squared error divided by
+$E_z=\mathbb E_{\rm train}
+ \|z-\bar z_{\rm train}\|_2^2$.
+&
+Study~2 fitted predictors.
+Scoring uses changed-state pairs, with action weighting
+specified by the experiment.
+\\[3pt]
+
+{\raggedright
+Context-difference transport\par}
+&
+Squared error divided by
+$E_u=\mathbb E_{\rm train}\|u\|_2^2$,
+where $u$ is the difference between paired
+same-state contexts.
+&
+Study~2 difference prediction.
+Scoring uses changed-state pairs, with the experiment's
+specified action weighting.
+\\[3pt]
+
+Action-class risks
+&
+$\mathcal L$ in \cref{eq:class-loss-main},
+using the evaluated bank's second-moment whitening
+and division by $r$.
+&
+$\eta$, $L_{\mathrm{orth}}$, and bounds on $L^\star$
+on one bank.
+Uniform averages over complete state blocks and all
+group elements.
+\\[3pt]
+
+{\raggedright
+Constructed-action transfer\par}
+&
+Squared prediction loss divided by $r$,
+using the fixed training whitening and constructed matrices.
+&
+A particular feasible action evaluated on held-out
+observations.
+Complete state blocks and all group elements.
+\\[3pt]
+
+{\raggedright
+Spectral budget and registration\par}
+&
+$C_r(K)/r$, equal to $\gamma_r$ under the
+unit-second-moment condition.
+The fixed-whitening centered treatment uses the original
+energy scale.
+&
+Finite-bank spectral compatibility and candidate-image
+rankings.
+The centering treatments are specified in
+\cref{app:template-centering-sensitivity}.
+\\
+
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Keep the evaluation-contract table before the theory section.
+\FloatBarrier

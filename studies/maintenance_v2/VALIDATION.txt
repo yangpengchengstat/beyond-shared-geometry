@@ -1,0 +1,38 @@
+MAINTENANCE V2 SOFTWARE VALIDATION — 24 OCTOBER 2026
+
+This is a new runtime source contract, not a change to returned scientific
+observations or their original source capsules.
+
+Targeted CPU command:
+  PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
+    python -m pytest -q tests/prospective/test_maintenance_v2.py \
+      tests/prospective/test_extensions.py tests/prospective/test_native_peers.py
+
+The test fixture uses artificial feature arrays and a synthetic semantic
+runtime. No language-model weights, downloads, GPU execution, calibrations, or
+research experiment reruns are involved. The actual Torch training test is
+skipped when Torch is unavailable; this limitation must not be reported as a
+fresh validation of neural numerical training.
+
+Fault injection checks:
+- missing fits directory is created safely before an interface checkpoint;
+- interrupted fit/recipient completion is retried without duplicating completed
+  results, while verified complete checkpoints are reused;
+- corrupted metadata or parameter files fail closed;
+- nonfinite parameter arrays cannot become completed fit checkpoints;
+- another writer cannot concurrently modify the output;
+- incomplete sessions cannot be marked complete;
+- legacy output identity is rejected before creating a model runtime;
+- default selective launcher only prints an offline plan, without output or
+  actual computation, and actual execution requires explicit flags.
+
+Independent parity check against the preserved original peers.py:
+896 complete C7 synthetic-runtime factorial evaluation rows and the summary
+are byte-equivalent between the original implementation and maintenance v2.
+The test exercised the same complete-grid estimators and all eight conditions.
+It does not validate model behavior, native competence, or published results.
+
+Source changes require a new release version and regenerated prospective
+source manifest. Add studies/maintenance_v2 to its coverage. Preserve original
+reproduction source identities and use their matching capsules for historical
+replay. Never regenerate an old frozen manifest in place to bypass a mismatch.

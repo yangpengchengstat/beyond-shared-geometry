@@ -1,0 +1,574 @@
+activation_extraction_convention: mean over the unique target-token span at transformer
+  block output
+batch_size: 8
+bootstrap_samples: 5000
+bootstrap_seed: 314159
+causal:
+  baselines:
+  - identity
+  - random_orthogonal
+  - source_conditioned_additive
+  c7_steps:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  d4_elements:
+  - r
+  - s
+  - r2
+  - r3
+  d4_relations:
+  - r4_identity
+  - s2_identity
+  - srs_r_inverse
+  d4_wrong_order_controls:
+  - rsr_wrong_order
+  learned_method: group_consistent_joint
+  use_all_test_templates: true
+causal_latent_dimensions:
+- 16
+controls:
+- identity
+- random_orthogonal
+cross_model_latent_dimensions:
+- 16
+cross_model_pairs:
+- - llama_1b
+  - llama_3b
+- - llama_3b
+  - llama_8b
+- - llama_1b
+  - llama_8b
+- - qwen_1_5b
+  - qwen_3b
+- - qwen_3b
+  - qwen_7b
+- - qwen_1_5b
+  - qwen_7b
+- - llama_1b
+  - qwen_1_5b
+- - llama_3b
+  - qwen_3b
+- - llama_8b
+  - qwen_7b
+depth_slots:
+- 0.2
+- 0.4
+- 0.6
+- 0.8
+deterministic_fit_seed: 42
+device_map: auto
+dtype: float16
+estimators:
+- independent_ridge
+- group_consistent_joint
+experiment: beyond_shared_geometry_main
+groups:
+- C7
+- D4
+include_terminal_structural: true
+joint_lr: 0.002
+joint_steps: 1200
+layer_convention: transformer block output; embedding hidden state is 0 and excluded
+learned_fit_seeds:
+- 42
+learned_fit_semantics: deterministic_single
+models:
+  llama_1b:
+    blocks: 16
+    depth_layers:
+      0.2: 3
+      0.4: 6
+      0.6: 10
+      0.8: 13
+    id: meta-llama/Llama-3.2-1B
+    revision: 4e20de362430cd3b72f300e6b0f18e50e7166e08
+    terminal_structural_layer: 16
+  llama_3b:
+    blocks: 28
+    depth_layers:
+      0.2: 6
+      0.4: 11
+      0.6: 17
+      0.8: 22
+    id: meta-llama/Llama-3.2-3B
+    revision: 13afe5124825b4f3751f836b40dafda64c1ed062
+    terminal_structural_layer: 28
+  llama_8b:
+    blocks: 32
+    depth_layers:
+      0.2: 6
+      0.4: 13
+      0.6: 19
+      0.8: 26
+    id: meta-llama/Llama-3.1-8B
+    revision: d04e592bb4f6aa9cfee91e2e20afa771667e1d4b
+    terminal_structural_layer: 32
+  qwen_1_5b:
+    blocks: 28
+    depth_layers:
+      0.2: 6
+      0.4: 11
+      0.6: 17
+      0.8: 22
+    id: Qwen/Qwen2.5-1.5B
+    revision: 8faed761d45a263340a0528343f099c05c9a4323
+    terminal_structural_layer: 28
+  qwen_3b:
+    blocks: 36
+    depth_layers:
+      0.2: 7
+      0.4: 14
+      0.6: 22
+      0.8: 29
+    id: Qwen/Qwen2.5-3B
+    revision: 3aab1f1954e9cc14eb9509a215f9e5ca08227a9b
+    terminal_structural_layer: 36
+  qwen_7b:
+    blocks: 28
+    depth_layers:
+      0.2: 6
+      0.4: 11
+      0.6: 17
+      0.8: 22
+    id: Qwen/Qwen2.5-7B
+    revision: d149729398750b98c0af14eb82c78cfe92750796
+    terminal_structural_layer: 28
+optimization_seeds:
+- 42
+primary_depth_slots:
+- 0.2
+- 0.4
+- 0.6
+- 0.8
+primary_latent_dimension: 16
+primary_structural_latent_dimensions:
+- 16
+prompt_construction_version: final_large_experiment_v1
+random_baseline_seeds:
+- 104729
+- 130363
+- 155921
+- 196613
+- 262147
+random_seed_by_optimization_seed:
+  '42': 104729
+requires_core_calibration: true
+ridge_alpha: 0.01
+schema_version: 3
+selected_cross_model_pairs:
+- - llama_1b
+  - llama_3b
+- - llama_3b
+  - llama_8b
+- - llama_1b
+  - llama_8b
+- - qwen_1_5b
+  - qwen_3b
+- - qwen_3b
+  - qwen_7b
+- - qwen_1_5b
+  - qwen_7b
+- - llama_1b
+  - qwen_1_5b
+- - llama_3b
+  - qwen_3b
+- - llama_8b
+  - qwen_7b
+selected_models:
+- blocks: 16
+  causal_layers:
+  - 3
+  - 6
+  - 10
+  - 13
+  depth_layers:
+    0.2: 3
+    0.4: 6
+    0.6: 10
+    0.8: 13
+  depth_slot_by_layer:
+    '10': 0.6
+    '13': 0.8
+    '16': terminal
+    '3': 0.2
+    '6': 0.4
+  depth_slots: &id001
+  - 0.2
+  - 0.4
+  - 0.6
+  - 0.8
+  id: meta-llama/Llama-3.2-1B
+  key: llama_1b
+  layers:
+  - 3
+  - 6
+  - 10
+  - 13
+  - 16
+  primary_layers:
+  - 3
+  - 6
+  - 10
+  - 13
+  revision: 4e20de362430cd3b72f300e6b0f18e50e7166e08
+  terminal_structural_layer: 16
+- blocks: 28
+  causal_layers:
+  - 6
+  - 11
+  - 17
+  - 22
+  depth_layers:
+    0.2: 6
+    0.4: 11
+    0.6: 17
+    0.8: 22
+  depth_slot_by_layer:
+    '11': 0.4
+    '17': 0.6
+    '22': 0.8
+    '28': terminal
+    '6': 0.2
+  depth_slots: *id001
+  id: meta-llama/Llama-3.2-3B
+  key: llama_3b
+  layers:
+  - 6
+  - 11
+  - 17
+  - 22
+  - 28
+  primary_layers:
+  - 6
+  - 11
+  - 17
+  - 22
+  revision: 13afe5124825b4f3751f836b40dafda64c1ed062
+  terminal_structural_layer: 28
+- blocks: 32
+  causal_layers:
+  - 6
+  - 13
+  - 19
+  - 26
+  depth_layers:
+    0.2: 6
+    0.4: 13
+    0.6: 19
+    0.8: 26
+  depth_slot_by_layer:
+    '13': 0.4
+    '19': 0.6
+    '26': 0.8
+    '32': terminal
+    '6': 0.2
+  depth_slots: *id001
+  id: meta-llama/Llama-3.1-8B
+  key: llama_8b
+  layers:
+  - 6
+  - 13
+  - 19
+  - 26
+  - 32
+  primary_layers:
+  - 6
+  - 13
+  - 19
+  - 26
+  revision: d04e592bb4f6aa9cfee91e2e20afa771667e1d4b
+  terminal_structural_layer: 32
+- blocks: 28
+  causal_layers:
+  - 6
+  - 11
+  - 17
+  - 22
+  depth_layers:
+    0.2: 6
+    0.4: 11
+    0.6: 17
+    0.8: 22
+  depth_slot_by_layer:
+    '11': 0.4
+    '17': 0.6
+    '22': 0.8
+    '28': terminal
+    '6': 0.2
+  depth_slots: *id001
+  id: Qwen/Qwen2.5-1.5B
+  key: qwen_1_5b
+  layers:
+  - 6
+  - 11
+  - 17
+  - 22
+  - 28
+  primary_layers:
+  - 6
+  - 11
+  - 17
+  - 22
+  revision: 8faed761d45a263340a0528343f099c05c9a4323
+  terminal_structural_layer: 28
+- blocks: 36
+  causal_layers:
+  - 7
+  - 14
+  - 22
+  - 29
+  depth_layers:
+    0.2: 7
+    0.4: 14
+    0.6: 22
+    0.8: 29
+  depth_slot_by_layer:
+    '14': 0.4
+    '22': 0.6
+    '29': 0.8
+    '36': terminal
+    '7': 0.2
+  depth_slots: *id001
+  id: Qwen/Qwen2.5-3B
+  key: qwen_3b
+  layers:
+  - 7
+  - 14
+  - 22
+  - 29
+  - 36
+  primary_layers:
+  - 7
+  - 14
+  - 22
+  - 29
+  revision: 3aab1f1954e9cc14eb9509a215f9e5ca08227a9b
+  terminal_structural_layer: 36
+- blocks: 28
+  causal_layers:
+  - 6
+  - 11
+  - 17
+  - 22
+  depth_layers:
+    0.2: 6
+    0.4: 11
+    0.6: 17
+    0.8: 22
+  depth_slot_by_layer:
+    '11': 0.4
+    '17': 0.6
+    '22': 0.8
+    '28': terminal
+    '6': 0.2
+  depth_slots: *id001
+  id: Qwen/Qwen2.5-7B
+  key: qwen_7b
+  layers:
+  - 6
+  - 11
+  - 17
+  - 22
+  - 28
+  primary_layers:
+  - 6
+  - 11
+  - 17
+  - 22
+  revision: d149729398750b98c0af14eb82c78cfe92750796
+  terminal_structural_layer: 28
+sensitivity_depth_slots:
+- 0.4
+- 0.8
+sensitivity_latent_dimensions:
+- 8
+- 32
+- 64
+sensitivity_split_seeds:
+- 101
+- 303
+split_seeds:
+- 101
+- 303
+- 909
+- 2701
+- 4243
+structural_latent_dimensions:
+- 8
+- 16
+- 32
+- 64
+template_limit: null
+template_split:
+  test_templates: 6
+  train_templates: 28
+  validation_templates: 6
+tier: full
+tiers:
+  core:
+    bootstrap_samples: 2000
+    causal_baselines:
+    - identity
+    - random_orthogonal
+    - mean_difference
+    causal_d4_wrong_order_controls: []
+    causal_latent_dimensions:
+    - 16
+    depth_slots:
+    - 0.4
+    - 0.8
+    include_terminal_structural: false
+    joint_steps: 1200
+    learned_fit_semantics: historical_seed_replicated
+    model_keys:
+    - llama_1b
+    - llama_3b
+    - qwen_1_5b
+    - qwen_3b
+    optimization_seeds:
+    - 42
+    - 202
+    - 777
+    random_baseline_seeds:
+    - 104729
+    - 130363
+    - 155921
+    split_seeds:
+    - 101
+    - 303
+    - 909
+    structural_latent_dimensions:
+    - 16
+    template_limit: null
+  full:
+    bootstrap_samples: 5000
+    causal_baselines:
+    - identity
+    - random_orthogonal
+    - source_conditioned_additive
+    causal_latent_dimensions:
+    - 16
+    cross_model_latent_dimensions:
+    - 16
+    depth_slots:
+    - 0.2
+    - 0.4
+    - 0.6
+    - 0.8
+    include_terminal_structural: true
+    joint_steps: 1200
+    learned_fit_semantics: deterministic_single
+    model_keys:
+    - llama_1b
+    - llama_3b
+    - llama_8b
+    - qwen_1_5b
+    - qwen_3b
+    - qwen_7b
+    optimization_seeds:
+    - 42
+    primary_structural_latent_dimensions:
+    - 16
+    random_baseline_seeds:
+    - 104729
+    - 130363
+    - 155921
+    - 196613
+    - 262147
+    requires_core_calibration: true
+    sensitivity_depth_slots:
+    - 0.4
+    - 0.8
+    sensitivity_latent_dimensions:
+    - 8
+    - 32
+    - 64
+    sensitivity_split_seeds:
+    - 101
+    - 303
+    split_seeds:
+    - 101
+    - 303
+    - 909
+    - 2701
+    - 4243
+    structural_latent_dimensions:
+    - 8
+    - 16
+    - 32
+    - 64
+    template_limit: null
+  pre_full:
+    bootstrap_samples: 2000
+    causal_baselines:
+    - identity
+    - random_orthogonal
+    - source_conditioned_additive
+    causal_latent_dimensions:
+    - 16
+    cross_model_latent_dimensions:
+    - 16
+    depth_slots:
+    - 0.4
+    - 0.8
+    include_terminal_structural: false
+    joint_steps: 1200
+    learned_fit_semantics: deterministic_single
+    model_keys:
+    - llama_1b
+    - qwen_1_5b
+    optimization_seeds:
+    - 42
+    primary_structural_latent_dimensions:
+    - 16
+    random_baseline_seeds:
+    - 104729
+    - 130363
+    sensitivity_depth_slots: []
+    sensitivity_latent_dimensions: []
+    sensitivity_split_seeds: []
+    split_seeds:
+    - 101
+    - 303
+    structural_latent_dimensions:
+    - 16
+    template_limit: null
+  smoke:
+    bootstrap_samples: 100
+    causal_latent_dimensions:
+    - 16
+    depth_slots:
+    - 0.4
+    include_terminal_structural: false
+    joint_steps: 20
+    model_keys:
+    - llama_1b
+    optimization_seeds:
+    - 42
+    random_baseline_seeds:
+    - 104729
+    split_seeds:
+    - 101
+    structural_latent_dimensions:
+    - 16
+    template_limit: 7
+    template_split:
+      test_templates: 1
+      train_templates: 5
+      validation_templates: 1
+tokenizer:
+  add_special_tokens: true
+  padding_side: right
+  revision_source: model_revision
+  use_fast: true
+weight_decay: 1.0e-05
+weights:
+  lambda_hom: 1.0
+  lambda_identity: 1.0
+  lambda_orth: 0.05
+  lambda_rel: 1.0

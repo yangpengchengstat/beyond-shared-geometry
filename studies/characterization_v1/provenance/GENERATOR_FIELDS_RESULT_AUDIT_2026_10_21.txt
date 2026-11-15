@@ -1,0 +1,120 @@
+Beyond Shared Geometry: generator-only field comparison audit
+Artifact series: 2026-10-21 / generator-fields-v1
+Status: excluded development pilot; not confirmatory manuscript evidence
+
+Decision
+--------
+The input-only nonlinear displacement field has lower held-out-composition
+prediction error than the tested generator ridge maps in every one of the 48
+model/layer/domain cells. Its advantage survives matching the available operation
+supervision: both methods fit only r in C7, and only r and s in D4_corner. This
+closes an important gap in the preceding all-element field comparison. It does
+not establish superiority to every possible group-structured estimator, nor
+identify which computation the language model itself implements.
+
+Input and integrity
+-------------------
+Archive: bsg-generator-fields-v1.zip (5,364,892 bytes; 111 members)
+SHA256: b0e979e5e62ef066ffb1e47bc8155fd77cb512fee007f9171ec27b56a06bec6c
+The supplied SHA256 sidecar matches and all ZIP CRC checks pass.
+All 48 planned cells completed, with no reported error, in 18.245 seconds.
+The archived worker exactly matches the previously prepared worker, SHA256:
+bd0a8cec68d58ce7add26d63420711dc064ca055c89de6c5fb9cb3c29f9c508a
+Parent configuration, summary and run-identity hashes match the supplied
+bsg-existing-pilot-20261021T021914Z.tar.gz. Generator ridge errors and selected
+regularization reproduce the parent's generator results cell by cell.
+
+Independent verification
+------------------------
+An independent NumPy implementation refitted all 48 cells from the exported
+float64, 16-dimensional coordinates, without importing the worker's numerical
+functions or executing uploaded source. It used normal-equation ridge instead
+of the worker's SVD implementation, explicit training-distance enumeration,
+direct-difference Gaussian weights, an independent action/target lookup, and
+recursive predictions using each method's own intermediate vectors.
+
+Checks cover coordinate/row hashes; finite arrays; unique row IDs; disjoint
+train/validation/pilot families; every regularization and bandwidth score;
+selected hyperparameters; per-action, per-family and pooled losses; cycles;
+matched correct/wrong order controls; and stored coordinate counts. Largest
+absolute discrepancy across numerical checks: 9.095e-13.
+
+This verifies refits and scoring conditional on the supplied coordinates and
+metadata. It does not independently repeat model forwards, reconstruct PCA from
+full hidden states, or certify semantic correctness of the original prompts.
+
+Descriptive results
+-------------------
+Errors below are squared target-coordinate errors normalized by training
+activation energy, averaged across 24 cells per domain. Lower is better.
+They are not answer accuracies. Cells share families/models and are not 48
+independent experimental replications.
+
+                     Primitive operations       Unseen operation compositions
+Domain               Ridge       Kernel         Ridge       Kernel
+C7                   0.0118973   0.0039538      0.0247834   0.0060781
+D4_corner            0.0479324   0.0288856      0.0595374   0.0345831
+
+Kernel composition error is lower in 24/24 C7 and 24/24 D4_corner cells.
+Each domain's 12 family-averaged differences also favors the kernel.
+All state categories were seen during training; unseen compositions do not
+mean unseen state vocabulary. No true intermediate state, category snapping,
+projection, or renormalization is supplied during recursive prediction.
+
+Identity-cycle errors, ridge / kernel:
+C7 r^7: 0.0174343 / 0.0002864
+D4 r^4: 0.0406675 / 0.0111562
+D4 s^2: 0.0199088 / 0.0060374
+
+For both methods, correct-order predictions have lower error than wrong-order
+predictions in every D4 cell, in both registered order contrasts. These compare
+both predictions to the same correct target and exclude coincident endpoints.
+The srs/rsr contrast uses 48 eligible observations per cell; rs/sr uses 96.
+Thus cycle and order-sensitive prediction are not exclusive to these linear
+maps. These are geometric prediction diagnostics, not causal interventions.
+
+Capacity and selection limitations
+---------------------------------
+The methods have matched input access and primitive-operation supervision,
+but different capacity and storage. Per cell, the ridge matrices store 256
+coordinates in C7 and 512 in D4. The kernel stores 21,504 coordinates in C7
+and 18,432 in D4 (shared source coordinates plus generator displacements).
+These are storage counts, not independent statistical parameter counts.
+An equal-memory comparison has not been performed. A compactness/accuracy
+tradeoff remains plausible, but has not been established as a contribution.
+
+Every kernel cell selects 0.125, the lowest registered bandwidth. This is a
+valid result within the fixed grid, not evidence of an interior/global optimum.
+The predictor does not take category labels, but task metadata is still used
+to construct paired examples and scoring masks. It is not label-free task
+discovery. These are previously inspected pilot families; no fresh test data,
+formal hypothesis tests, new calibration, or new model execution is involved.
+
+Next research step
+------------------
+Do not restart the stopped native/full continuation or weaken its gates.
+Do not describe the present results as confirmation of a unique learned
+algebraic mechanism or an operator advantage. Preserve the old FULL/AFS
+measurements and their narrower scope.
+
+Prepare a new, explicitly pilot-informed characterization study, with a new
+study identity and frozen analysis contract before accessing independent test
+data. First verify and document whether proposed holdouts have remained unseen.
+Include separate all-element and generator-only supervision tracks, the strong
+input-only field, prespecified accuracy/storage comparisons and relevant cycle
+and order diagnostics. Keep causal intervention claims separate from activation
+prediction. Declare family/model dependence, primary estimands and uncertainty
+procedures; retain the existing failed/limited-precision power conclusions.
+
+The draft characterization amendment remains a proposal, not an implemented
+or approved confirmatory runner. No new GPU command is needed to finish this
+audit. Any later test run requires the new contract and implementation review.
+
+Reproduction
+------------
+offline_audit.json contains machine-readable checks and descriptive results.
+audit_independent.py is the local reproducer; it expects this workspace's
+prepared compare_cached_generator_fields.py and the two original result/parent
+archives at their recorded Downloads paths. It requires Python and NumPy only,
+and performs no network access or model loading. The audit ZIP omits the private
+coordinate archives; retain the original uploaded archive and its SHA256 file.

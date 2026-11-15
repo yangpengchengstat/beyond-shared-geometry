@@ -1,0 +1,37 @@
+\section{Independent Orthogonality and Further Common-Law Cost}
+\label{app:orthogonal-results}
+This completed comparison adds a same-bank class optimum to the original spectral analysis. It separates the computed cost of independent orthogonality from bounds on the further cost of a common exact action. It uses the original canonical semantic registration only; no new state, context, model, alternative-image search or witness fit is introduced. The primary $r=16$ results and the completed spectral sensitivity remain unchanged. All full-precision endpoints, zero lower bounds and numerical checks are retained in the accompanying supplement and public project.
+
+\subsection{Observation and numerical contract}
+The panel contains 48 fixed model/readout/domain conditions at each of $r=16$ and $r=8$, for 96 units. Each test bank has 128 complete context blocks, with seven weekday or four corner states. Dimension eight takes the first eight columns of the saved training-PCA coordinates in their original order. Each dimension uses its own uncentered empirical second moment $\Sigma=Z^\top Z/N$ and symmetric inverse-square-root whitening. There is no extra recentering, PCA refit, new direction, jitter, pseudoinverse or rank reduction. States, context blocks and all group elements receive uniform weights; identity actions and fixed points are included.
+
+The second moment must satisfy the original strict rule $\lambda_{\min}/\lambda_{\max}>10^{-10}$. Matrix identities use the original normalized Frobenius tolerance $10^{-8}$; scalar comparisons use $10^{-8}+10^{-7}\max(|a|,|b|)$. Singular values and risks are retained without clipping. The only clipping in the reported law interval is the mathematical definition $\ell^-=\max(0,L_{\rm lower}-L_{\rm orth})$. Original archive hashes, member identities, model/tokenizer revisions, PCA identities and complete state/template rows bind each input. The fixed runtime was Python 3.11 with NumPy 2.2.6. In the accompanying cell-summary CSV, \texttt{sigma\_min}, \texttt{sigma\_max} and their ratio describe eigenvalues of the unwhitened second moment $\Sigma$.
+
+For each action, compute $M_g=\mathbb E[x^\top x_g]$ by averaging the outer product over the complete state and context bank. If $M_g=U_g^{\rm svd}\operatorname{diag}(\sigma_{g,j})(V_g^{\rm svd})^\top$, one $O(r)$ optimum is $Q_g=U_g^{\rm svd}(V_g^{\rm svd})^\top$. No determinant correction is applied; the admissible class is $O(r)$, including reflections. A singular cross-moment may admit multiple optimal completions; the risk comparison does not identify a unique map. Direct residual risks are checked against
+\[
+ \eta=\frac{1}{r|G|}\sum_{g,j}(1-\sigma_{g,j}^2),\quad
+ L_{\rm orth}=\frac{2}{r|G|}\sum_{g,j}(1-\sigma_{g,j}),\quad
+ \beta=\frac{1}{r|G|}\sum_{g,j}(1-\sigma_{g,j})^2.
+\]
+Here $\eta$ and $L_{\rm orth}$ are class optima on the complete bank used for their calculation, and $\beta=L_{\rm orth}-\eta$ is their difference. They are not training-fitted prediction errors scored on a different bank. The existing $\gamma_r$, $L_{\rm lower}$ and $L_{\rm upper}$ are read from authenticated saved endpoints. They are not re-estimated for this comparison. Independently computed $\eta$, identity risk and second-moment diagnostics must match the saved values under the original checks.
+
+Eight numerical software fixtures passed before the completed analysis, covering an analytic nonzero orthogonality cost, an exact reflection, singular cross-moments, row-vector orientation, deficient moments and invalid weight/masking/nonfinite inputs. All 96 units then completed, with 11,520 recorded checks passing. The two source archives had identical hashes before and after execution. Those are implementation and preservation checks, not calibrated statistical tests or rigorous floating-point enclosures. This manuscript integration reads the completed outputs without repeating tests or analysis.
+
+\subsection{Magnitude, concentration and zero lower endpoints}
+\Cref{tab:core-risk-summary}b reports the saved equal-cell means. The quantities of interest are
+\[
+ L^\star-\eta=\beta+(L^\star-L_{\rm orth}),\qquad
+ \ell^-=\max(0,L_{\rm lower}-L_{\rm orth}),\qquad
+ \ell^+=L_{\rm upper}-L_{\rm orth}.
+\]
+Every $\ell^\pm$ is formed per cell before averaging. In particular, averaging a clipped endpoint differs from clipping a difference of domain means. The exact costs decompose additively. Combining the computed orthogonality cost with the further-law lower endpoint gives the joint lower bound $\beta+\ell^-=\max(\beta,p^-)$, cell by cell. The corresponding upper endpoint is unchanged: $\beta+\ell^+=p^+$. The fraction of the true joint cost due to orthogonality depends on the unknown $L^\star$, rather than the lower endpoint $p^-$.
+
+For $r=16$ C7, the additional-law lower endpoint has median $5.34554\times10^{-6}$ and range $[0,0.02618766]$. Its mean is $0.00109725$, and Llama-3.1-8B at layer 13 contributes $99.4445\%$ of its sum. The condition is retained at its original weight. This is concentration of the \emph{computed bounds}, not of the unknown true additional costs. It is a different quantity from the original joint lower endpoint $p^-$, whose sum has a $90.7\%$ contribution from two C7 conditions. For $r=16$ D4, the additional-law lower median is $0.000338944$ and the range is $[0,0.01261663]$; the largest condition contributes $28.5426\%$ of the sum. Upper bounds in both domains can remain much larger, so small lower bounds do not establish small optimal costs or practical equivalence.
+
+At $r=8$, C7's additional-law lower median is $0.000778193$, with range $[0,0.11416052]$; D4's is $1.30864\times10^{-5}$, with range $[0,0.000401239]$. The smallest threshold-exceeding eight-coordinate C7 lower endpoint is $1.5462046788761175\times10^{-8}$, for Qwen2.5-3B at layer 7, only about $1.55$ times the unchanged software tolerance. It remains in the declared count; no threshold is adjusted retrospectively. These checks do not supply rigorous rounding-error certificates.
+
+The nine computed zero lower endpoints are retained. At $r=16$ they occur for C7 in Llama-3.2-3B at layer 11, and for D4 in Qwen2.5-7B at layer 6. At $r=8$, the C7 cases are Qwen2.5-1.5B and Qwen2.5-7B at layer 6. The five D4 cases are Qwen2.5-7B at layer 22, Llama-3.1-8B at layer 13, Llama-3.2-1B at layer 13, and Llama-3.2-3B at layers 17 and 22. Zero is an inconclusive lower bound on strict positivity, not evidence that group laws have no cost. All 96 conditions remain in every relevant aggregate.
+
+Each dimension changes the observation space, whitening and $1/r$ normalization. The two panels therefore do not select an optimal dimension or establish a common-metric improvement. The comparison concerns only the canonical action and does not rerank alternative images, re-evaluate frozen-witness transfer or add a semantic/native-computation claim. The full-precision table inputs, input mapping, checksums and formatting-only script are under \texttt{supplementary/orthogonal\_comparator}; complete per-cell summaries and the executed source bindings are retained in the public project.
+
+\input{sections/family_influence.tex}

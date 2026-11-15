@@ -1,0 +1,16 @@
+{
+  "frozen_at_utc": "2026-11-05T20:00:18.624993+00:00",
+  "scope": "Read-only existing AFS-D matrices; no model forward or fitting",
+  "numerical_rank": {
+    "compute_dtype": "float64",
+    "rule": "singular value > max(matrix.shape)*numpy.finfo(float64).eps*sigma_max",
+    "absolute_threshold": 0,
+    "historical_rule": "numpy.linalg.matrix_rank after np.asarray(...,dtype=float); confirmed in source before diagnostics"
+  },
+  "ill_conditioned_diagnostic": {
+    "condition": "full numerical rank but sigma_min/sigma_max <= 1e-8",
+    "threshold": 1e-08,
+    "nature": "post hoc diagnostic, fixed before new matrix results"
+  },
+  "centering": "Replicate original training mean or exact unique-row centering where applicable; never average contexts to manufacture unique states"
+}

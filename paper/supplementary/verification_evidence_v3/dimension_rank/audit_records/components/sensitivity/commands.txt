@@ -1,0 +1,11 @@
+Executed from the project repository (read-only inputs):
+
+python3 audit_workdir/agents/sensitivity/audit_existing_sensitivity.py --repo original_research --output audit_workdir/agents/sensitivity/output > audit_workdir/agents/sensitivity/execution.log 2>&1
+
+Successful final exit code: 0.
+
+Earlier local audit-script checks, retained separately:
+1. initial_exact_serialization_check.log: exact floating-point equality rejected a historical decimal serialization difference (3.82e-17 for the first E_eq mismatch). The final script uses a documented checkpoint/aggregate CSV round-trip tolerance of atol=1e-12, rtol=1e-12. This is not a numerical-rank threshold and does not change any source value. Maximum verified absolute difference across the selected metrics was 4.44e-16 in each run.
+2. initial_seeking_interrupted.log: one read-only audit run was interrupted to replace slow backwards seeks in the gzip archive with a sequential hash pass. No experiment or input was modified. Its original-run verification had completed, and the final run repeated both source verifications to completion.
+
+The audit script writes only to --output, refuses an output directory within the source repository, and hashes input archives before and after. It imports only Python standard-library modules; it never imports project fitting or model code.

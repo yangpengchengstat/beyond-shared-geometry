@@ -1,0 +1,117 @@
+Beyond Shared Geometry: input-only field comparison audit
+Evidence: bsg-input-only-fields-v1.zip
+SHA256: 1569e67689f1f20eb4e677314422278406276ba05861346f937797ccf4e40394
+Status: complete excluded-pilot diagnostic; no confirmatory promotion
+
+Audit outcome
+-------------
+The supplied SHA256 sidecar matches; every ZIP member passes its CRC. The
+archive contains 48 cell records, the frozen protocol, the executed script
+and the summary. The script matches the previously prepared SHA256:
+  24a5763009802b351224ecadf8288d1f476e925e8afdd3be7994c4a6b1ab8986
+The parent configuration and pilot identities match the previously audited
+archive. All six-model/four-depth/two-domain cells are present exactly once.
+Execution reports 21.935 seconds, status complete, no error and no test access.
+
+Independently recomputed every cell mean from its 12 family losses, all domain
+means, validation bandwidth selections and descriptive cell/family advantage
+counts. All primary ridge and oracle-local means agree with the parent saved
+pilot. Their ridge penalties and oracle bandwidth choices agree exactly;
+other numeric selection metadata agree within floating-point tolerance
+(rtol 1e-10, atol 1e-12). Small last-digit differences do not change selections.
+Raw activation refits were not independently repeated by this local audit.
+
+Results
+-------
+Equal-cell mean normalized prediction error; lower is better:
+Domain            Linear ridge    Oracle local    Input-only kernel field
+C7                .01635598       .00570353       .00563711
+D4 corner         .05104094       .02999918       .03093907
+
+The input-only field has lower error than linear ridge in all 24 C7 and all
+24 D4 cells. Averaging the fixed 24 model/depth conditions inside each family,
+the input-only advantage is positive for all 12 families in each domain.
+Mean ridge-minus-kernel differences are .01071887 for C7 and .02010187 for D4.
+No binomial significance test over the 48 cells is valid: within-model depths
+and the common families are repeated observations, not independent model draws.
+No formal p-values or confirmation decisions are produced here.
+
+The training-centroid decoder records 100% accuracy on both validation and
+pilot rows in every cell. Replacing true application labels by its predictions
+therefore gives exactly the oracle-local family losses. Retuning bandwidth
+on decoded validation inputs leaves those losses unchanged. The decoder uses
+training category labels; it is matched in application inputs, not in all
+supervision. The separate input-only kernel field receives no state labels in
+its estimator fit/predict API: its supervised inputs are paired training and
+validation activations and the requested action, as in the ridge comparison.
+Dataset metadata still construct the shared action pairs and moved-state
+evaluation mask. Pilot targets score outputs but do not select bandwidths.
+
+These errors are normalized squared activation-prediction losses, not answer
+accuracies, percentages, historical E_eq or downstream intervention effects.
+The four-corner D4 structural task is distinct from the failed full-pose native
+reasoning task. No new pretrained-model execution was needed for this run.
+
+What this resolves
+------------------
+The earlier local-field advantage cannot be attributed solely to revealing the
+true category at application: it persists after decoding that category, and
+a separately fitted label-free input-only smoother also outperforms ridge in
+this excluded-pilot panel. Thus these observations do not support a broad
+claim that a global linear operator is the best activation predictor given
+the same source activation and action.
+
+What this does not resolve
+--------------------------
+1. The kernel field retains more training information. It stores 75,264
+   displacement coordinates per C7 cell and 49,152 per D4 cell, plus training
+   source vectors. These are storage coordinates, not counts of independently
+   optimized parameters. A compact map has a different capacity/memory budget.
+   No equal-capacity, minimum-description-length or optimality claim is tested.
+2. Every kernel cell chooses .125, the narrowest allowed bandwidth. The result
+   is a valid fixed-grid comparison, but the grid does not bracket an interior
+   optimum. Do not claim a globally optimized kernel or expand the grid using
+   pilot performance while presenting the expansion as original confirmation.
+3. Both primary ridge and the kernel field here are trained with paired data
+   for every group element. This does not test learning only generators and
+   predicting actual targets of unseen composites. It does not invalidate the
+   historical AFS-A measurements; it identifies a missing strong comparator.
+4. Twelve excluded context families from a fixed grammar generator are not
+   independent confirmation, an unrestricted language population, or evidence
+   of a unique internal mechanism. Low predictive error alone is not a causal
+   necessity test. Neither method's result proves that the model memorizes
+   categories or lacks algebraic computation.
+
+Next decisive comparison
+------------------------
+Complete the generator-only strong-control design before expensive held-out
+extraction. In a separate disclosed excluded-pilot comparison, give BOTH the
+linear map and input-only kernel field only primitive source/target pairs:
+  C7: generator r only.
+  D4: generators r and s only.
+Select hyperparameters on primitive validation pairs only. Freeze a canonical
+word catalog before scoring, compose each fitted predictor sequentially in the
+same action order, and evaluate actual activation targets for unseen elements.
+Never train an unseen-element kernel with that element's own paired targets,
+or use true intermediate state labels while composing its predictions.
+
+Report direct primitive error, actual-target unseen-composite error, identity/
+relation cycles, D4 order-sensitive controls, retained-array storage and linear
+coefficient counts separately. Match the training inputs and action schedule;
+do not describe richer memory as matched capacity. Keep all model/depth cells,
+including failures. This is a targeted check of the original composition claim,
+not another native prompt/model search. It can use existing caches and requires
+no LLM extraction; no such additional comparison was run in this audit.
+
+Then freeze a new independent held-out characterization study containing both
+all-element and generator-only tracks. Keep development selection and the
+formal test separate, preserve original scientific failures, and disclose the
+post-pilot amendment. A new primary inferential comparison needs its own stated
+analysis assumptions; the old linear true-null calibration is not automatically
+a certificate for nonlinear-comparator inference. Keep the old full continuation
+stopped. There is no reason to enlarge the model panel or repeat the full CPU
+calibration merely to resolve this comparison.
+
+All original archives, code identities, historical FULL/AFS results and manuscript
+tables remain unchanged. The result is informative development evidence, not
+a finalized ICML contribution or guarantee of acceptance.

@@ -1,0 +1,17 @@
+\begin{table}[htbp]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+Domain & $r$ & Mean $\gamma_r$ & Mean $p^-$ & Median $p^-$ & Positive & Unique top \\
+\midrule
+$C_7$ & 16 & 0.985102 & 0.004164 & 0.000389 & 24/24 & 7/24 \\
+$C_7$ & 8 & 0.933943 & 0.064969 & 0.041288 & 24/24 & 4/24 \\
+\addlinespace
+$D_4$ & 16 & 0.935278 & 0.026237 & 0.018756 & 24/24 & 16/24 \\
+$D_4$ & 8 & 0.959581 & 0.010235 & 0.005865 & 24/24 & 19/24 \\
+\bottomrule
+\end{tabular}
+\caption{Spectral sensitivity on the same Study~2 banks, with 24 equally weighted conditions per domain and $q=r$. The 16-dimensional rows reproduce the primary results under their original tolerances; the eight-dimensional rows use the leading eight saved training-PCA coordinates. Here $p^-=\max\{0,2(1-\gamma_r)-\eta\}$ bounds the joint cost of exact laws and orthogonality. Positive counts $p^->\tau(p^-,0)$; unique top counts the semantic image with uniquely largest budget among all 120 C7 or three D4 images. Each dimension has its own whitening metric; lower values across dimensions do not establish a superior dimension.}
+\label{tab:spectral-dimension-sensitivity}
+\end{table}

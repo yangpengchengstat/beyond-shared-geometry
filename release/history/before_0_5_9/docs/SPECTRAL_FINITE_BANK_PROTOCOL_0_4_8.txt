@@ -1,0 +1,185 @@
+Proposed finite-bank spectral diagnostic - revision 0.4.8
+Date: 28 October 2026
+Status: specification only; not implemented or executed by this revision
+Scope: a separate, bounded retrospective analysis of saved coordinates
+
+1. QUESTION AND CLAIM
+Apply Theorem 7 to one explicitly fixed, already-observed coordinate bank per
+model/readout/domain. Estimate no population parameter and claim no new-context
+coverage. The question is what the real-type-constrained invariant-subspace
+budget says about the best exact orthogonal action in these fixed coordinates.
+
+This is a new structural endpoint. It is not a reproduction of a historical
+prediction score, a test-blind predictor, a practical certificate under Theorem
+8, or a semantic/causal mechanism test. The full labeled target orbit is an
+input. Analysis planning after inspecting the earlier results is retrospective,
+not prospective preregistration or independent confirmation.
+
+2. INPUT SET AND PRESENT INVENTORY STATUS
+Proposed primary set: six pinned models x four saved readouts x C7/D4 = 48 cells.
+Use only each cell's original test partition, fixed r=16, and original semantic
+registration. Do not pool models, layers, PCA identities, partitions or domains.
+Do not add coherent registrations, other dimensions or selective subsets in the
+primary analysis after seeing spectral outcomes.
+
+The local project inventory found 24 C7 and 24 D4 coordinate members with
+coordinates.npz, pca.npz, rows.json and cell_complete.json. For each cell, test
+metadata describe 128 complete state blocks: 896 rows in C7 and 512 in D4.
+Grouping by (split, family_id, paraphrase_id, orbit_id) found no missing or
+repeated states in these blocks. This is metadata availability, not a numerical
+rank, conditioning or spectral validation. The blocks are not 128 independent
+natural-language contexts. Preserve the family/paraphrase identities.
+
+The local input archive is recorded relative to the research-project root:
+incoming/rank_recovery_v1/from-zero-v1-rank-recovery.results.zip
+Inputs are private local research artifacts and are not included in this public
+source/Overleaf release. The 48 NPZ coordinate members total about 8.9 MB and can
+be read selectively without expanding the complete result archive. No model
+weights, model forward passes or GPU rental are required for these coordinates.
+A coordinate-level analysis cannot revalidate the original high-dimensional
+activation extraction chain, whose raw tensors are not supplied by this archive.
+
+Before numerical work, write a new immutable input manifest containing:
+- Full archive SHA-256 and each selected member's SHA-256; verify recorded hashes.
+- Model ID and exact revision, layer, readout, domain and frozen source identity.
+- PCA center/basis hashes, coordinate hash, row metadata hash and array schema.
+- Exact selected row/context IDs and bank role, without outcome-based filtering.
+- Canonical state order, full group order, multiplication/inverse/action tables.
+- Analysis source hash, numerical library versions and the finalized protocol.
+
+A matching filename or 16-column shape is insufficient evidence of coordinate
+identity. Repeated copies of a row are an error, not additional observations.
+Any missing block makes that planned cell not_evaluable; do not silently retain
+only its complete or favorable blocks. Existing archive members are read-only.
+
+3. FINITE DISTRIBUTION AND METRIC
+Each of the 128 declared context blocks has weight 1/128. Within a block, all
+states have equal weight: p=7 for C7 and p=4 for the four-corner D4 action.
+All m group elements have weight 1/m: m=7 or 8, including identity. Include fixed
+points. Do not import the historical changed-state evaluation mask.
+
+For saved row coordinates z[c,s], compute the uncentered second moment
+Sigma_emp = mean_{c,s} z[c,s]^T z[c,s].
+Do not subtract a new global or per-context mean. The original training-fitted
+PCA coordinates and all original predictors remain unchanged. If eligible, use
+x[c,s] = z[c,s] Sigma_emp^{-1/2} for this endpoint alone. This full-bank metric
+is newly defined for the diagnostic; it is neither historical D nor the replay
+training-energy normalization. Weak directions can receive large weight, so
+conditioning is part of every output, not just an internal implementation detail.
+
+4. PROPOSED NUMERICAL RULES - TO FREEZE BEFORE EXECUTION
+These are engineering acceptance rules, not a statistical rank test, a validated
+error certificate, or observed checks. Implementation review and small analytic
+software fixtures must precede real-bank execution. Any change must receive a
+new protocol identity before viewing real-bank spectral outcomes.
+
+- Accumulate and solve in float64. Require finite arrays and positive lambda_max.
+- Define numerical full rank by lambda_min(Sigma_emp) > 1e-10 lambda_max.
+  Report all 16 eigenvalues, the ratio and condition number. Failure returns
+  not_evaluable_rank; do not add jitter, regularize, clip or reduce r.
+- For matrix equalities use the normalized Frobenius residual
+  ||A-B||_F / max(1, ||A||_F, ||B||_F) <= 1e-8.
+- For scalar equalities and paired type eigenvalues use
+  |a-b| <= 1e-8 + 1e-7 max(|a|,|b|).
+- Check all eigenvalues of K against [-1e-8, 1+1e-8], and report raw extrema.
+  No eigenvalue clipping may conceal a failed check. A symmetric eigensolver
+  may use (K+K^T)/2 only after the antisymmetric residual passes and is recorded.
+- Use the same declared scalar tolerance for trace/risk/budget identities and
+  normalized absent-type energy. Report residuals as well as pass/fail.
+- Check every required condition. A passed rank rule alone does not imply
+  stable whitening. A failed residual yields not_evaluable_numerics, with raw
+  diagnostic values retained and no substantive risk interpretation.
+
+These tolerances approximate exact finite-bank quantities; they do not enclose
+all floating-point errors. Near-zero values are numerically unresolved at the
+stated precision, not certified strictly positive effects. Do not call the
+reported bounds machine-verified intervals without a separate rigorous numeric
+error analysis. Do not loosen thresholds after observing failed cells.
+
+5. COMPUTATION TO IMPLEMENT
+Form v(c,s) = (x[c,g.s])_{g in G}/sqrt(m) and K = mean_{c,s} v^T v.
+K is only 112 x 112 for C7 or 128 x 128 for D4. This dimension is not a runtime
+promise. Construct the known block action (Lambda_t a)_k = a_{k t^{-1}}, with
+Lambda_g Lambda_h = Lambda_{h g}, matching the manuscript's row convention.
+Verify the action tables and all declared group identities exactly before use.
+
+Build orthogonal isotypic projectors from this known action, not from fitted
+Ridge matrices or untyped numerical eigenvalue multiplicities. For C7 use
+Pi_0 = (1/7) sum_k Lambda_{R^k},
+Pi_j = (2/7) sum_k cos(2*pi*j*k/7) Lambda_{R^k}, j=1,2,3.
+The rotation projector coefficient already accounts for its real character;
+do not multiply it by another factor of two.
+
+For D4 retain R(i)=i+1 and S(i)=1-i modulo 4, and the frozen group order.
+Use the four one-dimensional characters chi_{a,b}(R)=a, chi_{a,b}(S)=b
+and the two-dimensional type E, with their normalized character projectors.
+Only chi_{+,+}, chi_{-,-} and E can have nonzero coordinate energy for this
+four-state action. The other two types are analytic zero-energy checks, not
+possible novel features to interpret if a check fails.
+
+Diagonalize K separately in each isotypic subspace. Check repeated eigenvalues
+within real two-dimensional copies using the specified pairing residual; never
+pair nearby eigenvalues across types. Solve the integer real-dimension budget
+in Appendix B.1, with rank at most 16 and whole real irreducible copies. Retain
+all multiplicity spectra, selected copy counts, selected dimensions and unused
+budget. Do not split a rotation plane to fill the budget. Use a deterministic
+fixed type order for exact ties, preferring less used dimension for zero-energy
+ties; disclose nonunique optimal allocations rather than interpret a tie-break
+as a unique recovered decomposition.
+
+6. REQUIRED CHECKS AND OUTPUTS
+Before scientific interpretation, record:
+- Input identity, exact block completeness, action/row conventions and finiteness.
+- Second-moment spectrum/conditioning and whitening identity E[x^T x]=I.
+- K symmetry, PSD/contraction, trace r, and commutation with every Lambda_g.
+- Type-projector self-adjointness/idempotence, orthogonality and completeness.
+- Type-eigenvalue pairing and absent D4 type energy.
+- Integer-budget feasibility and value versus ordinary top-r truncation.
+- eta_spec = 1-tr(K^2)/r versus direct full-bank least-squares risk, using
+  A_g = mean_{c,s} x[c,s]^T x[c,g.s] and no penalties or intercepts.
+
+Every planned cell gets one output row, including not_evaluable states/reasons.
+For eligible cells report eta_spec, eta_LS, gamma=C_r(K)/r,
+LB=2(1-gamma), UB=2(1-gamma^2), C_untyped=sum of the top r eigenvalues,
+Delta_type=C_untyped-C_r(K), and Delta_type/r.
+
+For each known real type tau report two distinct energy quantities:
+- Total type energy e_tau = tr(Pi_tau K)/r, with sum_tau e_tau=1.
+- Selected contribution b_tau = tr(Pi_tau K Q_star)/r, where Q_star is the
+  selected invariant projection, with sum_tau b_tau=gamma and b_tau<=e_tau.
+Also retain selected dimensions/copies and any optimal-allocation tie flag.
+This separates the energy present in a type from its contribution to the
+finite-r budget. Report the trivial type explicitly. It is state-invariant
+content, possibly including context factors and a constant; it is not a direct
+measurement of pure context information. Do not delete it or weak directions.
+Even small trivial energy and high gamma can coexist with stable category coding.
+
+Save a cell summary, full type spectra, residual log, exact input manifest,
+protocol/code identities and a written interpretation in a fresh output folder.
+Suggested names: cell_summary.csv, type_spectra.csv, validation.json,
+source_manifest.json, protocol.json and interpretation.txt. These files do not
+exist as research outputs merely because this specification names them.
+
+Minimal model-free implementation checks should cover exact C7/D4 actions,
+the manuscript's r=1 type separation, D4 absent types, a rank-deficient input,
+LS/spectral agreement and integer-budget agreement with small exhaustive cases.
+These are software correctness fixtures, not statistical calibration. No check
+claimed by a supplied report is adopted as verified project evidence unless its
+actual code and outputs are independently examined.
+
+7. INTERPRETATION AND STOPPING RULE
+The bounds concern the optimum of exact orthogonal actions in the new empirical
+second-moment metric. Historical Ridge/Joint scores are not comparable witnesses;
+the class also does not include all GL(r) actions or native causal mechanisms.
+No confidence intervals, p-values, bootstrap, population certification or
+independent-context claims are produced. The 48 cells are a selected panel,
+not independent replications. No family deletion/reweighting sweep is included.
+
+For C7/D4, Delta_type/r <= 1/16 analytically. Zero correction does not imply
+gamma=1 and does not invalidate Theorem 7. If the new statistic changes little
+relative to eta or ordinary spectral truncation, say so and limit its main-text
+prominence. Small risk bounds indicate compatibility with low-risk exact actions
+in the specified bank; they do not identify a unique semantic interpretation.
+Failure or instability is a reportable result, never a reason to select a more
+favorable layer, rank or subset. No model extraction or calibration is authorized
+as an automatic repair. Independent-context validation remains a separate task.

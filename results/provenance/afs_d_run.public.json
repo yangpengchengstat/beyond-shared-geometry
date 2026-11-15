@@ -1,0 +1,68 @@
+{
+  "run_id": "afs_d_rank_aware_001",
+  "experiment": "beyond_shared_geometry_afs_d_rank_aware",
+  "tier": "frozen",
+  "status": "SUCCESS",
+  "git_commit": "1b7adfe717c6a7663c90e0a7c31d8a612f22afe9",
+  "git_dirty": false,
+  "config_hash": "99c69b96fb58af61704ab959ba73901e26da3b7c8823a19bb3c08a6b1068a942",
+  "models": [
+    {
+      "blocks": 16,
+      "depth_layers": {
+        "0.2": 3,
+        "0.4": 6,
+        "0.6": 10,
+        "0.8": 13
+      },
+      "id": "meta-llama/Llama-3.2-1B",
+      "key": "llama_1b",
+      "requested_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08",
+      "resolved_revision": "4e20de362430cd3b72f300e6b0f18e50e7166e08"
+    },
+    {
+      "blocks": 28,
+      "depth_layers": {
+        "0.2": 6,
+        "0.4": 11,
+        "0.6": 17,
+        "0.8": 22
+      },
+      "id": "Qwen/Qwen2.5-1.5B",
+      "key": "qwen_1_5b",
+      "requested_revision": "8faed761d45a263340a0528343f099c05c9a4323",
+      "resolved_revision": "8faed761d45a263340a0528343f099c05c9a4323"
+    }
+  ],
+  "groups": [
+    "C7",
+    "D4"
+  ],
+  "depth_slots": [
+    0.2,
+    0.4,
+    0.6,
+    0.8
+  ],
+  "group_latent_dimensions": {
+    "C7": 6,
+    "D4": 3
+  },
+  "original_manifest_sha256": "dfdb8503535e87bfd980d0fde3b1fb8a44ed4f232385e0b73214d6453e5e16fd",
+  "public_derivative_notice": "Whitelist of scientific metadata from the original manifest; local absolute paths, runtime/environment details and unbundled artifact map are omitted. This file is not a byte-original run manifest.",
+  "ledger_module_counts": {
+    "afs_d_postprocessing": 1,
+    "embedding_analysis": 20,
+    "embedding_extraction": 4,
+    "embedding_model_load": 2,
+    "embedding_rank_diagnostic": 20,
+    "internal_activation_source": 1,
+    "internal_rank_matched_analysis": 80
+  },
+  "ledger_status_counts": {
+    "COMPLETE": 128
+  },
+  "ledger_attempt_counts": {
+    "1": 128
+  }
+}

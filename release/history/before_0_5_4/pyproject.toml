@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "beyond-shared-geometry"
+version = "0.5.3"
+description = "Finite-group prediction, exact-action risk, and context-transfer evaluation in language-model representations"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.10,<3.14"
+authors = [{name = "Pengcheng Yang"}]
+dependencies = [
+  "numpy>=1.24,<3",
+  "pandas>=2.0,<4",
+  "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+analysis = ["matplotlib>=3.8,<4"]
+prospective = ["numpy==2.2.6", "scipy==1.15.3"]
+paper = ["pymupdf>=1.24,<2"]
+gpu = [
+  "torch>=2.6,<3",
+  "transformers==4.57.1",
+  "accelerate>=0.30,<2",
+  "huggingface_hub>=0.24,<2",
+  "sentencepiece>=0.1.99,<0.3",
+  "safetensors>=0.4,<1",
+]
+test = ["pytest>=8.0"]
+
+[project.scripts]
+bsg-main-experiment = "bsg.experiments.main_experiment:main"
+bsg-next = "bsg_next.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

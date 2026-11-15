@@ -1,0 +1,134 @@
+[
+  {
+    "path": "from-zero-v1-rank-recovery/historical/runs/additive/run_ledger.json",
+    "units": 240,
+    "status_counts": {
+      "COMPLETE": 240
+    },
+    "type_counts": {
+      "fresh_additive_cell": 240
+    },
+    "failures": []
+  },
+  {
+    "path": "from-zero-v1-rank-recovery/historical/runs/afs_d/run_ledger.json",
+    "units": 128,
+    "status_counts": {
+      "COMPLETE": 128
+    },
+    "type_counts": {
+      "afs_d_postprocessing": 1,
+      "embedding_analysis": 20,
+      "embedding_extraction": 4,
+      "embedding_model_load": 2,
+      "embedding_rank_diagnostic": 20,
+      "internal_activation_source": 1,
+      "internal_rank_matched_analysis": 80
+    },
+    "failures": []
+  },
+  {
+    "path": "from-zero-v1-rank-recovery/historical/runs/afs_full/run_ledger.json",
+    "units": 720,
+    "status_counts": {
+      "COMPLETE": 720
+    },
+    "type_counts": {
+      "algebra_permutation_null": 240,
+      "correspondence_scramble": 240,
+      "generator_composition": 240
+    },
+    "failures": []
+  },
+  {
+    "path": "from-zero-v1-rank-recovery/historical/runs/afs_pre_full/run_ledger.json",
+    "units": 48,
+    "status_counts": {
+      "COMPLETE": 48
+    },
+    "type_counts": {
+      "algebra_permutation_null": 16,
+      "correspondence_scramble": 16,
+      "generator_composition": 16
+    },
+    "failures": []
+  },
+  {
+    "path": "from-zero-v1-rank-recovery/historical/runs/retrospective_full/run_ledger.json",
+    "units": 240,
+    "status_counts": {
+      "COMPLETE": 240
+    },
+    "type_counts": {
+      "retrospective_cell": 240
+    },
+    "failures": []
+  },
+  {
+    "path": "from-zero-v1-rank-recovery/historical/runs/retrospective_pilot/run_ledger.json",
+    "units": 16,
+    "status_counts": {
+      "COMPLETE": 16
+    },
+    "type_counts": {
+      "retrospective_cell": 16
+    },
+    "failures": []
+  },
+  {
+    "path": "parent-from-zero-v1/historical/runs/afs_pre_full/run_ledger.json",
+    "units": 51,
+    "status_counts": {
+      "COMPLETE": 50,
+      "FAILED": 1
+    },
+    "type_counts": {
+      "algebra_permutation_null": 16,
+      "correspondence_scramble": 16,
+      "embedding_analysis": 1,
+      "embedding_extraction": 1,
+      "embedding_model_load": 1,
+      "generator_composition": 16
+    },
+    "failures": [
+      {
+        "unit": "embedding_analysis:87972b68d53f52502cc14d6c4cb6f67eceb274387e0ed56e02b93ce41f13733a",
+        "message": "requested latent_dim=16 exceeds observed centered training rank 6"
+      }
+    ]
+  },
+  {
+    "path": "parent-from-zero-v1/historical/runs/legacy_full/run_ledger.json",
+    "units": 1566,
+    "status_counts": {
+      "COMPLETE": 1566
+    },
+    "type_counts": {
+      "activation_extraction": 12,
+      "causal": 240,
+      "causal_activation_extraction": 60,
+      "cross_model": 360,
+      "model_load": 6,
+      "structural_base": 444,
+      "structural_joint": 444
+    },
+    "failures": []
+  },
+  {
+    "path": "parent-from-zero-v1/historical/runs/legacy_pre_full/run_ledger.json",
+    "units": 70,
+    "status_counts": {
+      "COMPLETE": 70
+    },
+    "type_counts": {
+      "activation_extraction": 4,
+      "causal": 16,
+      "causal_activation_extraction": 8,
+      "cross_model": 8,
+      "model_load": 2,
+      "structural_base": 16,
+      "structural_joint": 16
+    },
+    "failures": []
+  }
+]

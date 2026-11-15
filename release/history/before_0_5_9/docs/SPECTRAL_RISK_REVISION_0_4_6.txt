@@ -1,0 +1,30 @@
+Spectral-risk integration: version 0.4.6, 28 October 2026
+
+Scope
+This is a selective analytical manuscript revision of 0.4.5. It adds no data, model output, calibration, empirical fitting, resampling, or new significance decision. Scientific runtime remains 0.4.0. All results, scientific stops, configuration files, numerical code, generated empirical assets and earlier releases are retained unchanged.
+
+Adopted material
+1. Main text: a concise pointer and bound; the empirical contribution remains the organizing story. All empirical comparisons remain descriptive.
+2. Appendix B (paper/sections/spectral_risk.tex): frozen observation contract; complete uniform finite actions; population second-moment whitening; independent regression versus exact orthogonal action classes; invariant-subspace budget with real representation types.
+3. Theorem 7: 2(1-gamma_r) <= L* <= 2(1-gamma_r^2), with the full intertwiner lower-bound proof and Procrustes/trivial-padding upper-bound proof. The auxiliary construction leaves the predictor dimension and data loss unchanged.
+4. Finite observable Gram construction with type-preserving equivalence, not ordinary top-r spectral truncation.
+5. A C2 x C2 x C7, r=1 example with equal regression risk and equal untyped eigenvalues, but exact-action risks 1 and 2. The full observations distinguish the examples; this is insufficient-summary behavior, not full-data observational nonidentifiability.
+6. A conservative independent-complete-context certificate, its concentration/whitening proof, and explicit limitations. Its precheck alone requires at least 17,492/17,734 independent contexts for C7/D4 at r=16 and alpha=.05. These necessary conditions expose looseness of this bound, not intrinsic sample complexity or recommended experiment size.
+
+Observation and inference boundaries
+The theoretical loss is not historical row-normalized D, changed-state scoring, or later training-energy normalization. Historical Ridge and finite-step penalized Joint are generally not members of the exact O(r) class; their existing scores are neither lower-bounded by the theorem nor witnesses for its upper bound. Positive-risk GL(r) and nonlinear optima are outside this theorem.
+The certificate requires a prior almost-sure population norm bound, independently fixed preprocessing, and iid complete context blocks. A sample maximum cannot serve as that bound. Overlapping template splits, states, layers and models do not supply independent contexts. Simultaneous reporting requires explicit error allocation. A fixed-panel descriptive spectral calculation would be a different exercise and was not performed here. Original false eligibility flags and blocked confirmation remain unchanged.
+
+Attribution
+The invariant-approximation objective and orbit-Gram/spectral methods have precedents in Barbieri et al. (2020). Group averaging, intertwiner construction, irreducible dimension bookkeeping and representation repair are standard tools in Gowers-Hatami (2017), Moore-Russell (2015), and representation theory. Tropp (2012), Theorem 1.3 supplies the matrix Hoeffding inequality.
+The narrower contribution is the explicit connection to fixed-dimensional exact orthogonal action prediction risk. No first/priority or new-general-identification claim is made. Sun's encoder realizability and error decomposition and EbC's jointly learned latent identifiability are complementary targets, not superseded guarantees. New bibliography records were checked against primary publisher/original sources.
+
+Selectively omitted
+No extra varying-group extreme example, redundant small-eta corollary, numerical simulation appendix, implementation claims, or purported verification-script outcomes from the supplied report were imported. The report's self-reported numerical sanity checks were not rerun or independently verified. Its last 13 pages duplicate the separate spectral note.
+
+Preservation and delivery
+The full previous 0.4.5 project remains in its existing version directory. A copy of its manuscript and key release metadata is also retained under release/history/before_0_4_6/. Original results and failure records retain their hashes. The only prospective-source manifest change is package-version metadata in pyproject.toml; numerical objectives and code are untouched.
+Current build and independent Overleaf dependency-closure validation are recorded in release/validation_0_4_6.json and release/pdf_qa.json. The retained official ICML 2026 style is a fallback, not verified ICML 2027 compliance.
+
+Next scientific decision
+No new or repeated experiment is required for the claims retained in this revision. Improve the statistical bound and define an appropriate observation contract before considering population certification. Independent-context validation remains optional future work to strengthen generalization; it is not launched by this revision.

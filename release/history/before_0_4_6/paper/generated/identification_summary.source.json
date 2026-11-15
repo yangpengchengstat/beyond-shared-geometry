@@ -1,0 +1,884 @@
+{
+  "schema_version": 1,
+  "renderer": "scripts/build_identification_table.py",
+  "renderer_sha256": "1ef2106850526c62eecb619a3f2d17293376866aa8c083557c5800a56c3527ee",
+  "operation": "Select recorded aggregates and compute descriptive means/counts only",
+  "model_execution": false,
+  "fitting": false,
+  "resampling": false,
+  "new_significance_or_equivalence_decisions": false,
+  "independent_confirmation": false,
+  "scope": "Different historical and replay experiments; compare losses only within their stated endpoint and study",
+  "inputs": {
+    "results/derived/full/primary_structural_template_metrics.csv": {
+      "sha256": "14a3c1c08d1fe9e3bcc34a35300c03a224132ee61394a1845765dbb3dab049ac",
+      "verified_against": "results/registry.json",
+      "verification_selector": {
+        "entries.path": "results/derived/full/primary_structural_template_metrics.csv"
+      }
+    },
+    "results/derived/afs_abc/primary_generator_composition_metrics.csv": {
+      "sha256": "2c153eb3c92f3aff17a9f5ef335d57a4383259541fe47b36bd2d40412b6f2026",
+      "verified_against": "results/registry.json",
+      "verification_selector": {
+        "entries.path": "results/derived/afs_abc/primary_generator_composition_metrics.csv"
+      }
+    },
+    "results/frozen/afs_abc/permutation_summary.csv": {
+      "sha256": "7862532de1d875bd2b3ea112622cf524351f9765e2005547a7274ff4c8d6f003",
+      "verified_against": "results/registry.json",
+      "verification_selector": {
+        "entries.path": "results/frozen/afs_abc/permutation_summary.csv"
+      }
+    },
+    "results/reproduction_v1_review/derived_summary.json": {
+      "sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "verified_against": "release/artifact_manifest.json",
+      "verification_selector": {
+        "artifacts.path": "results/reproduction_v1_review/derived_summary.json"
+      }
+    },
+    "results/reproduction_v1_review/compact_rows.json": {
+      "sha256": "00f42c0926951d8b4fb72ca4487d625777728d53f2b23f851ce708417888d9e4",
+      "verified_against": "release/reproduction_review.json",
+      "verification_selector": {
+        "inputs": "results/reproduction_v1_review/compact_rows.json"
+      }
+    },
+    "results/reproduction_v1_review/context_rows.json": {
+      "sha256": "a52d9e6d54b673a93173b13cb44422af123591d9988b3f7b41056898985b7821",
+      "verified_against": "release/reproduction_review.json",
+      "verification_selector": {
+        "inputs": "results/reproduction_v1_review/context_rows.json"
+      }
+    },
+    "results/registry.json": {
+      "sha256": "9fb2290172213d4e18a771e56be461870be625aa65ee1355b2c0dd4d5759dc32",
+      "role": "verification contract"
+    },
+    "release/reproduction_review.json": {
+      "sha256": "572c87033ea53fe89ab8607cf055612ab23a1167e0a4e7a2109884e17f7ab982",
+      "role": "verification contract"
+    }
+  },
+  "values": {
+    "C7.full": {
+      "value": 0.04829748092444184,
+      "source_path": "results/derived/full/primary_structural_template_metrics.csv",
+      "source_sha256": "14a3c1c08d1fe9e3bcc34a35300c03a224132ee61394a1845765dbb3dab049ac",
+      "selector": {
+        "where": {
+          "group": "C7",
+          "method": "independent_ridge",
+          "latent_dim": "16"
+        },
+        "field": "E_eq"
+      },
+      "operation": "unweighted arithmetic mean of retained rows",
+      "selected_rows": 720
+    },
+    "C7.generator_composed": {
+      "value": 0.07444276727598749,
+      "source_path": "results/derived/afs_abc/primary_generator_composition_metrics.csv",
+      "source_sha256": "2c153eb3c92f3aff17a9f5ef335d57a4383259541fe47b36bd2d40412b6f2026",
+      "selector": {
+        "where": {
+          "group": "C7",
+          "method": "generator_composed",
+          "latent_dim": "16"
+        },
+        "field": "E_gen_eq"
+      },
+      "operation": "unweighted arithmetic mean of retained rows",
+      "selected_rows": 3600
+    },
+    "C7.direct_ridge": {
+      "value": 0.05112416154047723,
+      "source_path": "results/derived/afs_abc/primary_generator_composition_metrics.csv",
+      "source_sha256": "2c153eb3c92f3aff17a9f5ef335d57a4383259541fe47b36bd2d40412b6f2026",
+      "selector": {
+        "where": {
+          "group": "C7",
+          "method": "direct_ridge",
+          "latent_dim": "16"
+        },
+        "field": "E_gen_eq"
+      },
+      "operation": "unweighted arithmetic mean of retained rows",
+      "selected_rows": 3600
+    },
+    "C7.E_hom_data.below_reference": {
+      "value": 120,
+      "source_path": "results/frozen/afs_abc/permutation_summary.csv",
+      "source_sha256": "7862532de1d875bd2b3ea112622cf524351f9765e2005547a7274ff4c8d6f003",
+      "selector": {
+        "where": {
+          "group": "C7",
+          "data_split": "test",
+          "metric": "E_hom_data",
+          "latent_dim": "16"
+        },
+        "predicate": "true_relation_defect < null_q025"
+      },
+      "operation": "count below recorded restricted-reference quantile",
+      "denominator": 120
+    },
+    "C7.E_hom_op.below_reference": {
+      "value": 120,
+      "source_path": "results/frozen/afs_abc/permutation_summary.csv",
+      "source_sha256": "7862532de1d875bd2b3ea112622cf524351f9765e2005547a7274ff4c8d6f003",
+      "selector": {
+        "where": {
+          "group": "C7",
+          "data_split": "test",
+          "metric": "E_hom_op",
+          "latent_dim": "16"
+        },
+        "predicate": "true_relation_defect < null_q025"
+      },
+      "operation": "count below recorded restricted-reference quantile",
+      "denominator": 120
+    },
+    "C7.compact.ridge": {
+      "value": 0.01489666297644876,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/53/mean",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "ridge"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "C7.compact.decoded_centroid": {
+      "value": 0.012013175607929536,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/37/mean",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "decoded_centroid"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "C7.centroid_wins": {
+      "value": 9,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/paired_compact/1/cells_lower_than_ridge",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "track": "all_element",
+          "method": "decoded_centroid"
+        }
+      },
+      "operation": "read recorded paired count; independently checked against paired reviewed cell losses",
+      "cells": 24
+    },
+    "C7.context.coordinate": {
+      "value": 0.04713707762636069,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/context/16/mean",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "method": "coordinate_fitted_operator_context",
+          "split": "test"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "C7.context.direct_context": {
+      "value": 0.03425993580081357,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/context/19/mean",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "method": "linear_transport_context",
+          "split": "test"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "C7.context.coherent": {
+      "value": 0.03446458727092743,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/context/3/mean",
+        "where": {
+          "domain": "C7",
+          "registration": "consistent_swap01",
+          "method": "linear_transport_context",
+          "split": "test"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "C7.compact.nystrom.0p5": {
+      "value": 0.49295926969324627,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/43/mean",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "nystrom_budget_0p5"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "C7.compact.nystrom.1": {
+      "value": 0.08291604122309308,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/44/mean",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "nystrom_budget_1"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "C7.compact.nystrom.2": {
+      "value": 0.01243061411163434,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/45/mean",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "nystrom_budget_2"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "C7.compact.nystrom.4": {
+      "value": 0.008451175105637925,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/46/mean",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "nystrom_budget_4"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "C7.compact.nystrom.8": {
+      "value": 0.006123495354495169,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/47/mean",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "nystrom_budget_8"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "C7.compact.nystrom.first_tested_crossover": {
+      "value": 2,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "array": "compact",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test"
+        },
+        "candidate_methods": [
+          "nystrom_budget_0p5",
+          "nystrom_budget_1",
+          "nystrom_budget_2",
+          "nystrom_budget_4",
+          "nystrom_budget_8"
+        ],
+        "reference_method": "ridge",
+        "field": "mean"
+      },
+      "operation": "first declared nominal budget whose recorded mean is below the recorded ridge mean",
+      "nominal_budget_grid": [
+        0.5,
+        1,
+        2,
+        4,
+        8
+      ],
+      "interpretation": "descriptive; not a selected deployment policy"
+    },
+    "C7.compact.rff.0p5": {
+      "value": 0.9352900279739291,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/48/mean",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "rff_budget_0p5"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "C7.compact.rff.1": {
+      "value": 0.30032548037093054,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/49/mean",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "rff_budget_1"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "C7.compact.rff.2": {
+      "value": 0.06630960864191542,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/50/mean",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "rff_budget_2"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "C7.compact.rff.4": {
+      "value": 0.011740184286941286,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/51/mean",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "rff_budget_4"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "C7.compact.rff.8": {
+      "value": 0.007078868807491103,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/52/mean",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "rff_budget_8"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "C7.compact.rff.first_tested_crossover": {
+      "value": 4,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "array": "compact",
+        "where": {
+          "domain": "C7",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test"
+        },
+        "candidate_methods": [
+          "rff_budget_0p5",
+          "rff_budget_1",
+          "rff_budget_2",
+          "rff_budget_4",
+          "rff_budget_8"
+        ],
+        "reference_method": "ridge",
+        "field": "mean"
+      },
+      "operation": "first declared nominal budget whose recorded mean is below the recorded ridge mean",
+      "nominal_budget_grid": [
+        0.5,
+        1,
+        2,
+        4,
+        8
+      ],
+      "interpretation": "descriptive; not a selected deployment policy"
+    },
+    "D4.full": {
+      "value": 0.05200063500307484,
+      "source_path": "results/derived/full/primary_structural_template_metrics.csv",
+      "source_sha256": "14a3c1c08d1fe9e3bcc34a35300c03a224132ee61394a1845765dbb3dab049ac",
+      "selector": {
+        "where": {
+          "group": "D4",
+          "method": "independent_ridge",
+          "latent_dim": "16"
+        },
+        "field": "E_eq"
+      },
+      "operation": "unweighted arithmetic mean of retained rows",
+      "selected_rows": 720
+    },
+    "D4.generator_composed": {
+      "value": 0.05655768940631478,
+      "source_path": "results/derived/afs_abc/primary_generator_composition_metrics.csv",
+      "source_sha256": "2c153eb3c92f3aff17a9f5ef335d57a4383259541fe47b36bd2d40412b6f2026",
+      "selector": {
+        "where": {
+          "group": "D4",
+          "method": "generator_composed",
+          "latent_dim": "16"
+        },
+        "field": "E_gen_eq"
+      },
+      "operation": "unweighted arithmetic mean of retained rows",
+      "selected_rows": 3600
+    },
+    "D4.direct_ridge": {
+      "value": 0.05003183510492931,
+      "source_path": "results/derived/afs_abc/primary_generator_composition_metrics.csv",
+      "source_sha256": "2c153eb3c92f3aff17a9f5ef335d57a4383259541fe47b36bd2d40412b6f2026",
+      "selector": {
+        "where": {
+          "group": "D4",
+          "method": "direct_ridge",
+          "latent_dim": "16"
+        },
+        "field": "E_gen_eq"
+      },
+      "operation": "unweighted arithmetic mean of retained rows",
+      "selected_rows": 3600
+    },
+    "D4.E_hom_data.below_reference": {
+      "value": 120,
+      "source_path": "results/frozen/afs_abc/permutation_summary.csv",
+      "source_sha256": "7862532de1d875bd2b3ea112622cf524351f9765e2005547a7274ff4c8d6f003",
+      "selector": {
+        "where": {
+          "group": "D4",
+          "data_split": "test",
+          "metric": "E_hom_data",
+          "latent_dim": "16"
+        },
+        "predicate": "true_relation_defect < null_q025"
+      },
+      "operation": "count below recorded restricted-reference quantile",
+      "denominator": 120
+    },
+    "D4.E_hom_op.below_reference": {
+      "value": 120,
+      "source_path": "results/frozen/afs_abc/permutation_summary.csv",
+      "source_sha256": "7862532de1d875bd2b3ea112622cf524351f9765e2005547a7274ff4c8d6f003",
+      "selector": {
+        "where": {
+          "group": "D4",
+          "data_split": "test",
+          "metric": "E_hom_op",
+          "latent_dim": "16"
+        },
+        "predicate": "true_relation_defect < null_q025"
+      },
+      "operation": "count below recorded restricted-reference quantile",
+      "denominator": 120
+    },
+    "D4.compact.ridge": {
+      "value": 0.041919489335583336,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/125/mean",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "ridge"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "D4.compact.decoded_centroid": {
+      "value": 0.0638211098864194,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/109/mean",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "decoded_centroid"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "D4.centroid_wins": {
+      "value": 2,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/paired_compact/73/cells_lower_than_ridge",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "track": "all_element",
+          "method": "decoded_centroid"
+        }
+      },
+      "operation": "read recorded paired count; independently checked against paired reviewed cell losses",
+      "cells": 24
+    },
+    "D4.context.coordinate": {
+      "value": 0.13230432974229778,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/context/48/mean",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "method": "coordinate_fitted_operator_context",
+          "split": "test"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "D4.context.direct_context": {
+      "value": 0.11638618921310222,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/context/51/mean",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "method": "linear_transport_context",
+          "split": "test"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "D4.context.coherent": {
+      "value": 0.11716502559429286,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/context/35/mean",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "consistent_swap01",
+          "method": "linear_transport_context",
+          "split": "test"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "D4.compact.nystrom.0p5": {
+      "value": 0.1703514264079906,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/115/mean",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "nystrom_budget_0p5"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "D4.compact.nystrom.1": {
+      "value": 0.04942430988041263,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/116/mean",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "nystrom_budget_1"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "D4.compact.nystrom.2": {
+      "value": 0.03152904061656247,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/117/mean",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "nystrom_budget_2"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "D4.compact.nystrom.4": {
+      "value": 0.02332645347695347,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/118/mean",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "nystrom_budget_4"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "D4.compact.nystrom.8": {
+      "value": 0.019601459336954712,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/119/mean",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "nystrom_budget_8"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "D4.compact.nystrom.first_tested_crossover": {
+      "value": 2,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "array": "compact",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test"
+        },
+        "candidate_methods": [
+          "nystrom_budget_0p5",
+          "nystrom_budget_1",
+          "nystrom_budget_2",
+          "nystrom_budget_4",
+          "nystrom_budget_8"
+        ],
+        "reference_method": "ridge",
+        "field": "mean"
+      },
+      "operation": "first declared nominal budget whose recorded mean is below the recorded ridge mean",
+      "nominal_budget_grid": [
+        0.5,
+        1,
+        2,
+        4,
+        8
+      ],
+      "interpretation": "descriptive; not a selected deployment policy"
+    },
+    "D4.compact.rff.0p5": {
+      "value": 0.6345304958643506,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/120/mean",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "rff_budget_0p5"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "D4.compact.rff.1": {
+      "value": 0.2126465989044171,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/121/mean",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "rff_budget_1"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "D4.compact.rff.2": {
+      "value": 0.06643567273516242,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/122/mean",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "rff_budget_2"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "D4.compact.rff.4": {
+      "value": 0.027778532616018984,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/123/mean",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "rff_budget_4"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "D4.compact.rff.8": {
+      "value": 0.022292691155157543,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "json_pointer": "/compact/124/mean",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test",
+          "method": "rff_budget_8"
+        }
+      },
+      "operation": "read recorded aggregate; mean independently checked against reviewed cell rows",
+      "cells": 24
+    },
+    "D4.compact.rff.first_tested_crossover": {
+      "value": 4,
+      "source_path": "results/reproduction_v1_review/derived_summary.json",
+      "source_sha256": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+      "selector": {
+        "array": "compact",
+        "where": {
+          "domain": "D4_corner",
+          "registration": "semantic",
+          "track": "all_element",
+          "split": "test"
+        },
+        "candidate_methods": [
+          "rff_budget_0p5",
+          "rff_budget_1",
+          "rff_budget_2",
+          "rff_budget_4",
+          "rff_budget_8"
+        ],
+        "reference_method": "ridge",
+        "field": "mean"
+      },
+      "operation": "first declared nominal budget whose recorded mean is below the recorded ridge mean",
+      "nominal_budget_grid": [
+        0.5,
+        1,
+        2,
+        4,
+        8
+      ],
+      "interpretation": "descriptive; not a selected deployment policy"
+    }
+  }
+}

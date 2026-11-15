@@ -1,0 +1,141 @@
+Beyond Shared Geometry: excluded development pilot audit
+Archive timestamp: 2026-10-21 UTC (2026-10-20 US Eastern)
+
+Conclusion
+----------
+The supplied archive is sufficient to review the saved pilot results and power
+planning. It does not support resuming the original joint-positive full study.
+The next justified work is an explicit characterization-study amendment, with
+the old study and its failures preserved. No new model, GPU job, fit, Monte
+Carlo calibration or confirmation was run in this audit.
+
+Integrity and scope
+-------------------
+Input: bsg-existing-pilot-20261021T021914Z.tar.gz
+SHA256: 8ce78df1e2a429d870203190ec04cae3036385e7672c3456b89bcafb5b4920bf
+The supplied sidecar matches. The complete gzip CRC/footer passes. All 124 file
+members have recorded hashes. The 72-cell panel exactly covers six pinned
+base models, four configured block depths and three structural domains.
+All cells use dimension 16, excluded pilot rows, train-only PCA and eligible
+context energy. Recorded model/tokenizer revisions and BF16 extraction settings
+match the study configuration. Content identities for all three stage manifests
+verify and match the preserved v0.3.1 numerical source identity:
+  f2ff2cd1398674757e0bb22ae5585ead94bf3c2b2fdc5f91426b940b2ff90f17
+
+Reconstructed all family/orbit primary and local-comparator summaries from the
+72 saved cell records. Verified their exact agreement with the saved summary,
+the 12-by-4 C7/D4 power-input array and 12-by-8-by-2 S3 crossed input. Recomputed
+the crossed variance components and all saved power scenario binomial interval
+calculations. Verified the six structural and 18 S3 scenario files against the
+power summaries and their decision rules. These are checks of saved outputs
+and planning arithmetic, not independent raw-activation refits or proof that
+the recorded weights/forward passes executed exactly as stated. Raw activation
+arrays and dataset manifests are outside this small package.
+
+The snapshot records successful CPU calibration, completed structural pilot
+and power calculations, and native_prepare stopped by clean competence. A
+stage marked complete means its calculation finished; it does not convert a
+limited-precision result into a scientific pass. No confirmation outcomes are
+reported in this snapshot; the eligibility record says test_outcomes_collected
+is false. This does not inspect the current remote Pod beyond the snapshot.
+
+Structural pilot results
+------------------------
+All figures below are descriptive excluded-pilot estimates, not confirmatory
+tests. The selected six models and four depths are fixed repeated conditions,
+not 24 independent model populations. The inference units are 12 context
+families, plus eight crossed entity triples for S3. No p-values are calculated
+to promote these development outcomes into publication results.
+
+Equal-cell mean normalized prediction loss (lower is better):
+Domain             Independent ridge    Local displacement    Local lower
+C7                 0.01635598           0.00570353            24/24 cells
+D4 corner          0.05104094           0.02999918            24/24 cells
+S3 role            0.01839620           0.01898348             0/24 cells
+
+The local comparator has oracle source-category information. Its result limits
+a broad superiority claim, but is not an equal-information or equal-capacity
+victory over the z,g-only operator. The category-plus-residual procedure also
+has lower loss in all 24 C7 and all 24 D4 cells. Information-access tracks must
+remain explicit in any next benchmark.
+
+Against the protocol's validation-selected category comparator, the primary
+baseline-minus-operator prediction contrast is:
+  C7:        -0.00325397
+  D4 corner: +0.02366223
+  S3 role:   +0.00045986
+Positive favors the operator. C7 selects displacement in all 24 cells. D4
+selects displacement in 19 and residual-retention .75 in five. S3 selects a
+potential field in 14 and displacement in ten. These selected-baseline effects
+are therefore not the same contrast as the local-comparator table above.
+
+Difference-feature context contrasts are:
+  C7:        +0.01272404
+  D4 corner: +0.09681785
+  S3 role:   -0.00000679
+The context endpoint compares a separately fitted difference operator with
+a separately validation-selected residual-retention comparator. It is not
+prediction superiority against the local field. Positive context transport in
+C7/D4 can coexist with weaker absolute target prediction than that field.
+
+Normalization is squared Euclidean target error divided by training activation
+energy. These figures are not accuracies, percentages or historical E_eq. C7
+prediction differs by model: positive descriptive selected-baseline contrasts
+for the three Qwen models, negative for the three Llama models. All individual
+models/depths remain in offline_audit.json; no favorable subset is selected.
+
+The D4 corner task here transports four visible corner labels. It is different
+from the eight-state full-square native reasoning task that failed clean
+competence. Success or failure in one must not be substituted for the other.
+
+What the power output actually says
+----------------------------------
+C7/D4:
+  status = limited_precision_do_not_claim_powered
+  selected_families = null
+  candidate size = 64 context families
+  assumed true advantage = .02; meaningful-superiority margin = .01
+  variance inflation = 2; 5,000 simulations per scenario
+At the two normal-correlation scenarios, the joint four-endpoint detection
+rates are .0264 and .0464. They concern a hypothetical common .02 effect under
+the registered variation model, not the probability that the scientific claim
+is true or the probability that the paper will be accepted. Observed pilot
+means are not .02 for all four outcomes; in particular C7 prediction is negative.
+Do not interpret more families as a justified route to a positive joint result.
+
+S3:
+  status = power_target_met
+  selected_families = 64; selected_orbits = 16
+  assumed true advantage = .02; superiority margin = .01
+The planning calculation uses measured pilot variance but injects the assumed
+.02 mean effect. This is a legitimate conditional power calculation; it does
+not say that such an effect was observed. The actual pilot prediction effect
+.00045986 and context effect -.00000679 are both much smaller than .01. The
+saved high power cannot certify a large benefit, and near-zero point estimates
+do not establish equivalence without a fresh evaluation and the appropriate
+uncertainty analysis. The crossed variance estimate also comes from only eight
+pilot entity triples and remains uncertain.
+
+Decision
+--------
+1. Preserve the old positive-claim study as stopped. Do not restart the old
+   full continuation, change margins, drop weak endpoints, or relabel a power
+   flag as an empirical effect.
+2. Prepare a separate, explicitly amended study that characterizes predictive
+   recovery, category/context alternatives and their limits. Read AMENDMENT_DRAFT
+   for endpoints, information conditions, holdout handling and bounded scope.
+3. Do not run more native D4 model/prompt searches merely to obtain a pass.
+   A native causal branch requires both clean competence and an effective
+   computed-state patch carrier, neither supplied by these structural results.
+4. Do not add more models before the claim and comparisons are fixed. No
+   additional upload is needed to make the present decision.
+
+The historical FULL/AFS recovery measurements remain evidence in their actual
+scope. Current results narrow the claim; they do not prove a universal absence
+of algebraic computation, a complete category-code explanation, or lack of
+value in the project. A characterization paper still needs a distinct and
+useful contribution relative to prior work; acceptance is not guaranteed.
+
+No frozen results, published repository, manuscript table, source lock or old
+failure was changed. The following proposed amendment remains a draft, not an
+executed experiment or confirmation authorization.

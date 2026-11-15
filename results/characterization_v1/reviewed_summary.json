@@ -1,0 +1,256 @@
+{
+  "study_id": "icml2027-characterization-v1",
+  "recorded_status": "complete_limited_precision_characterization",
+  "source_archive_sha256": "79b1c53900cfcd91f0644b3db8405160213785487d0f7cea8b0320244a5aec0a",
+  "source_members": [
+    "summary.json",
+    "study_contract.json",
+    "analysis/descriptive_uncertainty.json",
+    "analysis/*/legacy.json",
+    "analysis/*/fields.json"
+  ],
+  "original_flags": {
+    "paper_eligible": false,
+    "formal_inference_enabled": false,
+    "technical_test": false,
+    "native_run": false,
+    "old_power_gate_passed": false
+  },
+  "integration": {
+    "date": "2026-10-21",
+    "purpose": "Manually reviewed descriptive manuscript revision requested by the user; no automated run promotion or original flag change.",
+    "human_scientific_signoff": false,
+    "formal_confirmation": false
+  },
+  "panel": {
+    "models": 6,
+    "readouts_per_model": 4,
+    "q": 16,
+    "legacy_cells": 72,
+    "legacy_split_records": 120,
+    "field_cells": 48
+  },
+  "fresh_rows": {
+    "per_model": 41728,
+    "total": 250368,
+    "C7": 896,
+    "D4": 512,
+    "S3": 40320
+  },
+  "interval_scope": {
+    "replicates": 10000,
+    "seed": 314159,
+    "interpretation": "Fixed-panel family/crossed percentile sensitivity; not calibrated coverage, multiplicity control or model-population inference."
+  },
+  "legacy_contrasts": {
+    "C7|test": {
+      "prediction": {
+        "mean": -0.0028870773721016638,
+        "percentile_ci95": [
+          -0.0032902839046728923,
+          -0.002495415528149284
+        ],
+        "family_count": 64,
+        "orbit_count": 1,
+        "unique_fixed_conditions": 24,
+        "max_stored_discrepancy": 0.0,
+        "formal_decision": false,
+        "mean_vs_old_margin_0.01": -0.012887077372101664,
+        "ci_vs_old_margin_0.01": [
+          -0.013290283904672892,
+          -0.012495415528149284
+        ]
+      },
+      "context": {
+        "mean": 0.011484984376278306,
+        "percentile_ci95": [
+          0.009997326149410074,
+          0.01308659308087565
+        ],
+        "family_count": 64,
+        "orbit_count": 1,
+        "unique_fixed_conditions": 24,
+        "max_stored_discrepancy": 0.0,
+        "formal_decision": false,
+        "mean_vs_old_margin_0.01": 0.0014849843762783053,
+        "ci_vs_old_margin_0.01": [
+          -2.6738505899265297e-06,
+          0.0030865930808756502
+        ]
+      }
+    },
+    "D4_corner|test": {
+      "prediction": {
+        "mean": 0.019611738624575957,
+        "percentile_ci95": [
+          0.01473023623725913,
+          0.025945151716209387
+        ],
+        "family_count": 64,
+        "orbit_count": 1,
+        "unique_fixed_conditions": 24,
+        "max_stored_discrepancy": 0.0,
+        "formal_decision": false,
+        "mean_vs_old_margin_0.01": 0.009611738624575957,
+        "ci_vs_old_margin_0.01": [
+          0.0047302362372591295,
+          0.015945151716209388
+        ]
+      },
+      "context": {
+        "mean": 0.06091764109971423,
+        "percentile_ci95": [
+          0.04988266985291626,
+          0.07292031702821802
+        ],
+        "family_count": 64,
+        "orbit_count": 1,
+        "unique_fixed_conditions": 24,
+        "max_stored_discrepancy": 0.0,
+        "formal_decision": false,
+        "mean_vs_old_margin_0.01": 0.05091764109971423,
+        "ci_vs_old_margin_0.01": [
+          0.03988266985291626,
+          0.06292031702821803
+        ]
+      }
+    },
+    "S3_role|test_context": {
+      "prediction": {
+        "mean": -0.0004867487573243457,
+        "percentile_ci95": [
+          -0.0007908395125948065,
+          -0.0002494763930953309
+        ],
+        "family_count": 64,
+        "orbit_count": 24,
+        "unique_fixed_conditions": 24,
+        "max_stored_discrepancy": 0.0,
+        "formal_decision": false,
+        "mean_vs_old_margin_0.01": -0.010486748757324346,
+        "ci_vs_old_margin_0.01": [
+          -0.010790839512594807,
+          -0.010249476393095331
+        ]
+      },
+      "context": {
+        "mean": 0.0001767710288219865,
+        "percentile_ci95": [
+          9.734461852622202e-06,
+          0.0003479990539014621
+        ],
+        "family_count": 64,
+        "orbit_count": 24,
+        "unique_fixed_conditions": 24,
+        "max_stored_discrepancy": 0.0,
+        "formal_decision": false,
+        "mean_vs_old_margin_0.01": -0.009823228971178013,
+        "ci_vs_old_margin_0.01": [
+          -0.009990265538147377,
+          -0.009652000946098539
+        ]
+      }
+    },
+    "S3_role|test_entity": {
+      "prediction": {
+        "mean": 0.0006733801808543677,
+        "percentile_ci95": [
+          0.00044343115307456376,
+          0.0009271808811698043
+        ],
+        "family_count": 48,
+        "orbit_count": 16,
+        "unique_fixed_conditions": 24,
+        "max_stored_discrepancy": 5.421010862427522e-20,
+        "formal_decision": false,
+        "mean_vs_old_margin_0.01": -0.009326619819145633,
+        "ci_vs_old_margin_0.01": [
+          -0.009556568846925436,
+          -0.009072819118830195
+        ]
+      },
+      "context": {
+        "mean": 0.0007386443996368631,
+        "percentile_ci95": [
+          0.0005423737608631159,
+          0.0009779926074418896
+        ],
+        "family_count": 48,
+        "orbit_count": 16,
+        "unique_fixed_conditions": 24,
+        "max_stored_discrepancy": 2.168404344971009e-19,
+        "formal_decision": false,
+        "mean_vs_old_margin_0.01": -0.009261355600363137,
+        "ci_vs_old_margin_0.01": [
+          -0.009457626239136884,
+          -0.009022007392558111
+        ]
+      }
+    },
+    "S3_role|test_joint": {
+      "prediction": {
+        "mean": 0.0004600117642962906,
+        "percentile_ci95": [
+          0.000261899767878066,
+          0.0006727776311611604
+        ],
+        "family_count": 64,
+        "orbit_count": 16,
+        "unique_fixed_conditions": 24,
+        "max_stored_discrepancy": 5.421010862427522e-20,
+        "formal_decision": false,
+        "mean_vs_old_margin_0.01": -0.00953998823570371,
+        "ci_vs_old_margin_0.01": [
+          -0.009738100232121934,
+          -0.00932722236883884
+        ]
+      },
+      "context": {
+        "mean": 0.00015403646224259107,
+        "percentile_ci95": [
+          -1.6686665875849213e-05,
+          0.0003379154328336485
+        ],
+        "family_count": 64,
+        "orbit_count": 16,
+        "unique_fixed_conditions": 24,
+        "max_stored_discrepancy": 6.776263578034403e-21,
+        "formal_decision": false,
+        "mean_vs_old_margin_0.01": -0.009845963537757409,
+        "ci_vs_old_margin_0.01": [
+          -0.01001668666587585,
+          -0.009662084567166352
+        ]
+      }
+    }
+  },
+  "full_kernel_generator_ratio": {
+    "C7": 84,
+    "D4": 36
+  },
+  "limitations": [
+    "Raw hidden-state extraction and PCA not independently replayed.",
+    "Joint and S3 potential neural optimizers not independently replayed.",
+    "All current test results accessed; later comparisons are exploratory unless evaluated on genuinely fresh frozen units.",
+    "Centroid controls use training labels and exact action tables.",
+    "No new native, peer, cross-model or dimension-sweep result."
+  ],
+  "derived_files": {
+    "storage_accounting.csv": {
+      "sha256": "92667aad347b5fc991954561e2d516fe6db0a2cc5fd2a54dec2e1640b609b799",
+      "transformation": "Reviewed fixed-panel summaries from independent coordinate/statistical audit; no model refit or newly selected outcome."
+    },
+    "baseline_by_model.csv": {
+      "sha256": "b99714c08f33a7e44c9b35f42f1c03ac267fe0281cbb3d58510a533be3910662",
+      "transformation": "Reviewed fixed-panel summaries from independent coordinate/statistical audit; no model refit or newly selected outcome."
+    },
+    "sensitivity_contrasts.csv": {
+      "sha256": "d9e301541176f8ccec2b1d054e7487500ca137d8a79a0e0f9caf3e5a8b95bdb1",
+      "transformation": "Reviewed fixed-panel summaries from independent coordinate/statistical audit; no model refit or newly selected outcome."
+    },
+    "prediction_summary.csv": {
+      "sha256": "a901125e9033ff9a351f8f5cbc444d38c4ac48863e4f69643d1244960540ebb0",
+      "transformation": "Reviewed fixed-panel summaries from independent coordinate/statistical audit; no model refit or newly selected outcome."
+    }
+  }
+}

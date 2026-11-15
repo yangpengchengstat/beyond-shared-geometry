@@ -1,0 +1,314 @@
+{
+  "scope": "Remove each test template's state mean after applying its original bank whitening. No rewhitening, PCA refit, re-extraction, or Lstar bounds for the fixed-metric residual.",
+  "normalization": "Ranking and d_top use C16/16 for every form. For the fixed-metric residual this is not a fraction of the residual energy. Residual-energy shares are recorded separately.",
+  "rank_pairwise_atol": 1e-08,
+  "rank_pairwise_rtol": 1e-07,
+  "input_archives_sha256": {
+    "parent": "6a4c38237bf1368d4c77c97504f666d0d933bfebed9417d173fbf7441c0fecef",
+    "followup": "ef87e9aaeb8f093ba0c2438590d6a30b5dffcd256993e2366bd600cca3cb5bbb"
+  },
+  "archived_comparison_file_sha256": {
+    "diagnose.py": "91993bc743422355387164f29ea818b53065ee7345f4122884d097d9858a839c",
+    "run.log": "1596dd2b3c8352c6b6ac00a2b514361999afd5690dcbee6255ea6bdde3cb188c",
+    "summary.json": "3505187fcfbe77ecf1c86e57119656aad365b1530fe50c1a52e65707ff6ba4fa",
+    "cell_results.csv": "b34d02032960f2cefa13c2858c8e95cade24359935e4d17f7f554b84b0cd0d0d",
+    "image_results.csv": "cff22b03f9a6b8f471db59f03435fee28b2fe1ca38223ebae22c5e6d21836cc9"
+  },
+  "kernel": {
+    "source_sha256": "e91c735890bdf888a25db07d1207d3f44cdce8ce1bf6ee7e2efcf7bf40a50f41",
+    "source_unmodified": true
+  },
+  "numpy": "2.2.6",
+  "fixed_metric_images": 2952,
+  "fixed_metric_banks": 48,
+  "max_crosscheck_eigenvalue_residual": 1.0658141036401503e-14,
+  "domains": {
+    "C7": {
+      "original": {
+        "rank_classes": {
+          "behind": 17,
+          "unique_leading": 7
+        },
+        "rank_intervals": {
+          "82\u201389": 1,
+          "94\u201395": 1,
+          "100\u2013100": 1,
+          "102\u2013105": 1,
+          "56\u201356": 1,
+          "92\u201392": 1,
+          "1\u20131": 7,
+          "62\u201363": 1,
+          "65\u201366": 2,
+          "3\u20133": 1,
+          "24\u201326": 1,
+          "4\u20134": 1,
+          "56\u201359": 1,
+          "6\u20137": 1,
+          "21\u201331": 1,
+          "5\u20136": 1,
+          "52\u201352": 1
+        },
+        "C16": {
+          "mean": 15.761629780317902,
+          "median": 15.824160166570632,
+          "min": 14.781211734543811,
+          "max": 15.94798867873212
+        },
+        "budget_over_16": {
+          "mean": 0.9851018612698689,
+          "median": 0.9890100104106645,
+          "min": 0.9238257334089882,
+          "max": 0.9967492924207575
+        },
+        "fraction_of_own_total_energy": {
+          "mean": 0.9851018612698689,
+          "median": 0.9890100104106645,
+          "min": 0.9238257334089882,
+          "max": 0.9967492924207575
+        },
+        "total_energy_in_metric": {
+          "mean": 16.0,
+          "median": 16.0,
+          "min": 16.0,
+          "max": 16.0
+        },
+        "d_top_over_16": {
+          "mean": -2.9691448924419144e-05,
+          "median": -5.520176028395163e-06,
+          "min": -0.00030287169320897256,
+          "max": 1.9671060620951586e-05
+        }
+      },
+      "within_template_centered_fixed_whitening": {
+        "rank_classes": {
+          "behind": 9,
+          "unique_leading": 15
+        },
+        "rank_intervals": {
+          "3\u20133": 2,
+          "1\u20131": 15,
+          "37\u201337": 1,
+          "2\u20132": 4,
+          "6\u20136": 1,
+          "4\u20134": 1
+        },
+        "C16": {
+          "mean": 6.016940878150852,
+          "median": 6.069212969062465,
+          "min": 5.163086513490023,
+          "max": 6.166823090880414
+        },
+        "budget_over_16": {
+          "mean": 0.3760588048844283,
+          "median": 0.3793258105664041,
+          "min": 0.3226929070931264,
+          "max": 0.3854264431800259
+        },
+        "fraction_of_own_total_energy": {
+          "mean": 0.9894205849144854,
+          "median": 0.9904263111719434,
+          "min": 0.9807501690993047,
+          "max": 0.9962087560218763
+        },
+        "total_energy_in_metric": {
+          "mean": 6.080998056264225,
+          "median": 6.1271989816467425,
+          "min": 5.25767968174913,
+          "max": 6.271791297772805
+        },
+        "d_top_over_16": {
+          "mean": 6.395867461874798e-05,
+          "median": 8.473627388030924e-05,
+          "min": -0.00022934540295516115,
+          "max": 0.00028333447690509495
+        }
+      },
+      "within_template_centered": {
+        "rank_classes": {
+          "unique_leading": 18,
+          "behind": 6
+        },
+        "rank_intervals": {
+          "1\u20131": 18,
+          "13\u201313": 1,
+          "6\u20136": 1,
+          "4\u20134": 1,
+          "2\u20132": 2,
+          "5\u20135": 1
+        },
+        "C16": {
+          "mean": 10.21811413739233,
+          "median": 10.203758752606582,
+          "min": 9.534714655125192,
+          "max": 10.917164124455608
+        },
+        "budget_over_16": {
+          "mean": 0.6386321335870206,
+          "median": 0.6377349220379114,
+          "min": 0.5959196659453245,
+          "max": 0.6823227577784755
+        },
+        "fraction_of_own_total_energy": {
+          "mean": 0.6386321335870206,
+          "median": 0.6377349220379114,
+          "min": 0.5959196659453245,
+          "max": 0.6823227577784755
+        },
+        "total_energy_in_metric": {
+          "mean": 16.0,
+          "median": 16.0,
+          "min": 16.0,
+          "max": 16.0
+        },
+        "d_top_over_16": {
+          "mean": 0.006883963448146684,
+          "median": 0.008462571093808435,
+          "min": -0.0178832577389626,
+          "max": 0.023831058708982833
+        }
+      },
+      "original -> within_template_centered_fixed_whitening": {
+        "rank_intervals_changed": 19,
+        "leading_to_not_leading": 2,
+        "not_leading_to_leading": 10
+      },
+      "within_template_centered_fixed_whitening -> within_template_centered": {
+        "rank_intervals_changed": 7,
+        "leading_to_not_leading": 0,
+        "not_leading_to_leading": 3
+      }
+    },
+    "D4": {
+      "original": {
+        "rank_classes": {
+          "unique_leading": 16,
+          "behind": 8
+        },
+        "rank_intervals": {
+          "1\u20131": 16,
+          "2\u20132": 6,
+          "3\u20133": 1,
+          "2\u20133": 1
+        },
+        "C16": {
+          "mean": 14.964454272166215,
+          "median": 15.008928135502375,
+          "min": 13.736253488358287,
+          "max": 15.613566253764224
+        },
+        "budget_over_16": {
+          "mean": 0.9352783920103884,
+          "median": 0.9380580084688984,
+          "min": 0.8585158430223929,
+          "max": 0.975847890860264
+        },
+        "fraction_of_own_total_energy": {
+          "mean": 0.9352783920103884,
+          "median": 0.9380580084688984,
+          "min": 0.8585158430223929,
+          "max": 0.975847890860264
+        },
+        "total_energy_in_metric": {
+          "mean": 16.0,
+          "median": 16.0,
+          "min": 16.0,
+          "max": 16.0
+        },
+        "d_top_over_16": {
+          "mean": 0.0011328377898113667,
+          "median": 5.955768246135307e-06,
+          "min": -0.01233037710935081,
+          "max": 0.038213640997174614
+        }
+      },
+      "within_template_centered_fixed_whitening": {
+        "rank_classes": {
+          "behind": 24
+        },
+        "rank_intervals": {
+          "2\u20132": 10,
+          "3\u20133": 14
+        },
+        "C16": {
+          "mean": 4.036728005949836,
+          "median": 3.7787606153427387,
+          "min": 3.1510503612704026,
+          "max": 6.235186662155792
+        },
+        "budget_over_16": {
+          "mean": 0.25229550037186477,
+          "median": 0.23617253845892117,
+          "min": 0.19694064757940016,
+          "max": 0.389699166384737
+        },
+        "fraction_of_own_total_energy": {
+          "mean": 0.9542295574217577,
+          "median": 0.9546236240740387,
+          "min": 0.9181547735212916,
+          "max": 0.9786863057879064
+        },
+        "total_energy_in_metric": {
+          "mean": 4.23457149540272,
+          "median": 3.9700945158017618,
+          "min": 3.2424141771531416,
+          "max": 6.459214477954175
+        },
+        "d_top_over_16": {
+          "mean": -0.0007679399928412755,
+          "median": -0.000676401010199737,
+          "min": -0.0020475360325753478,
+          "max": -2.337211142167117e-05
+        }
+      },
+      "within_template_centered": {
+        "rank_classes": {
+          "behind": 24
+        },
+        "rank_intervals": {
+          "2\u20132": 4,
+          "3\u20133": 20
+        },
+        "C16": {
+          "mean": 9.545688522972263,
+          "median": 9.381647313304157,
+          "min": 8.688414066153705,
+          "max": 11.177993219394587
+        },
+        "budget_over_16": {
+          "mean": 0.5966055326857664,
+          "median": 0.5863529570815098,
+          "min": 0.5430258791346065,
+          "max": 0.6986245762121617
+        },
+        "fraction_of_own_total_energy": {
+          "mean": 0.5966055326857664,
+          "median": 0.5863529570815098,
+          "min": 0.5430258791346065,
+          "max": 0.6986245762121617
+        },
+        "total_energy_in_metric": {
+          "mean": 16.0,
+          "median": 16.0,
+          "min": 16.0,
+          "max": 16.0
+        },
+        "d_top_over_16": {
+          "mean": -0.0272323367857196,
+          "median": -0.025615272713871262,
+          "min": -0.07107888466874235,
+          "max": -0.0010005397869453647
+        }
+      },
+      "original -> within_template_centered_fixed_whitening": {
+        "rank_intervals_changed": 22,
+        "leading_to_not_leading": 16,
+        "not_leading_to_leading": 0
+      },
+      "within_template_centered_fixed_whitening -> within_template_centered": {
+        "rank_intervals_changed": 8,
+        "leading_to_not_leading": 0,
+        "not_leading_to_leading": 0
+      }
+    }
+  }
+}

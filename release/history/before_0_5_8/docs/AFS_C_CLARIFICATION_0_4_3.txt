@@ -1,0 +1,66 @@
+AFS-C local manuscript clarification - release 0.4.3
+26 October 2026
+
+Scope
+-----
+This is a publication-only revision of release 0.4.2 following the completed
+AFS-C scientific code audit. The audit's Decision A is retained: the current
+bounded claim requires local clarification, not an additional experiment.
+The audit's saved-output reconstruction belongs to that earlier audit; it was
+not repeated as part of this publication revision.
+
+Applied changes
+---------------
+1. paper/main.tex, "Invalid registration differs from a coherent alternative":
+   separate AFS-B's restricted operator-registration comparison from AFS-C's
+   training-pair corruption, Ridge refitting and true held-out target scoring.
+   Explain that ordinary supervised predictors can degrade similarly.
+2. paper/sections/methods.tex, AFS-C paragraph: state the exact source/target
+   correspondence under each perturbation. State relabeling is coherent
+   conjugacy within each training template; no single global relabeling is
+   imposed. Target permutations vary by template and nonidentity element.
+   Identity-action pairs remain self-pairs, and fixed points are allowed.
+3. paper/sections/results.tex, paragraph after diagnostic_controls: specify
+   that recorded mean prediction and relation defects increase. Explain that
+   unmatched predictive errors/operator norms and condition-dependent relation
+   denominators prevent interpreting this as extra semantic-specificity proof.
+4. scripts/build_paper_assets.py and paper/generated/diagnostic_controls.tex:
+   clarify the caption's refitting, true targets, contrast sign and historical
+   interval scope. Every numerical table row remains unchanged. Other tables
+   rendered by the same function are byte-identical; figures are not regenerated.
+5. paper/sections/methods.tex, inference appendix: identify AFS-A/C's direct
+   bootstrap seed 314159 without FULL offsets, the complete AFS-C hierarchy,
+   and shared template-level scramble assignments across models/depths/splits.
+
+Preservation and limits
+-----------------------
+The abstract, introduction, theory, contribution boundary, discussion and
+conclusion are retained. No new main-table row, reference, estimate, interval,
+gate decision, fitting procedure or scientific objective is introduced.
+
+All src/, configs/, results/ and studies/ files are preserved byte-for-byte.
+The historical source lock, characterization manifests, evidence registry,
+original-source restoration map and all 250 restoration entries are preserved.
+The active prospective manifest changes only the package version-file hash;
+scientific runtime remains 0.4.0. Its predecessor manifest is retained under
+release/history/before_0_4_3/. The prior table renderer and publication metadata
+are also retained there. The entire original 0.4.2 directory remains unchanged.
+
+Scientific stops remain recorded: original calibration, the rank-16 lexical
+control, native clean competence, limited structural power, and blocked
+confirmations. Publication completion does not convert any of these into a pass.
+
+Validation and distribution
+---------------------------
+See release/paper_revision_0_4_3.json for input/change provenance,
+release/validation_0_4_3.json for checks performed, and release/pdf_qa.json for
+the compiled PDF and source hashes. dist/reviewed-0.4.3/ contains the anonymous
+Overleaf package and the separately identified public source package.
+
+No model run, calibration, empirical resampling or experiment replay was
+performed. Validation is limited to CPU software checks, source/evidence
+integrity, document compilation, visual review and archive round-trip checks.
+
+The unchanged official ICML 2026 style is an explicit fallback. ICML 2027
+requirements remain unverified, and no acceptance probability or automatic
+submission readiness is claimed.

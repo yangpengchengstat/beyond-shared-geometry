@@ -1,0 +1,18 @@
+\begin{table}[htbp]
+\caption{Original characterization contrasts on the grammar-derived held-out banks, with recorded 95\% percentile sensitivity intervals (10,000 draws, seed 314159). Prediction compares validation-selected oracle-source category/retention controls, additionally including the S3 input-metadata potential, with coordinate Ridge. Context compares scalar retention with maps fitted directly to training paraphrase differences. Each contrast is baseline minus fitted-map loss, so positive values favor the fitted map. The endpoints use different training-energy denominators and pool changed-state pairs. Fitted models and selections remain fixed during family or crossed family/entity resampling. These banks and comparators differ from the later authored-context study.}
+\label{tab:characterization-intervals}\centering\small
+\begin{tabular}{llrrr}\toprule
+Domain / split & Endpoint & Baseline minus linear & Lower & Upper \\
+\midrule
+$C_7$, new context & prediction & -0.002887 & -0.003290 & -0.002495 \\
+$C_7$, new context & context & 0.011485 & 0.009997 & 0.013087 \\
+$D_4$, new context & prediction & 0.019612 & 0.014730 & 0.025945 \\
+$D_4$, new context & context & 0.060918 & 0.049883 & 0.072920 \\
+$S_3$, context & prediction & -0.000487 & -0.000791 & -0.000249 \\
+$S_3$, context & context & 0.000177 & 0.000010 & 0.000348 \\
+$S_3$, entity & prediction & 0.000673 & 0.000443 & 0.000927 \\
+$S_3$, entity & context & 0.000739 & 0.000542 & 0.000978 \\
+$S_3$, joint & prediction & 0.000460 & 0.000262 & 0.000673 \\
+$S_3$, joint & context & 0.000154 & -0.000017 & 0.000338 \\
+\bottomrule\end{tabular}
+\end{table}

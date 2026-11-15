@@ -1,0 +1,19 @@
+{"aggregate_rows": 42624, "checkpoint_csv_roundtrip_atol": 1e-12, "checkpoint_csv_roundtrip_rtol": 1e-12, "config_hash": "910d430f18c5f865d88948c3284e0c9eaea531323aaf9c697ad2399cbeb372dd", "manifest_status": "SUCCESS", "matched_aggregate_cells": 3072, "matched_input_rows": 18432, "max_absolute_roundtrip_error": 4.440892098500626e-16, "max_roundtrip_error_over_max_one_absolute_value": 2.4651543519692674e-16, "run": "main_full_003", "verified_checkpoint_rows": 18432, "verified_completed_units": 384}
+Traceback (most recent call last):
+  File "audit_workdir/agents/sensitivity/audit_existing_sensitivity.py", line 249, in <module>
+    raise SystemExit(main())
+  File "audit_workdir/agents/sensitivity/audit_existing_sensitivity.py", line 132, in main
+    b=read(member);sha=digest(b)
+  File "audit_workdir/agents/sensitivity/audit_existing_sensitivity.py", line 79, in read
+    return arc.read(member) if kind=='zip' else arc.extractfile(member).read()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/tarfile.py", line 683, in read
+    self.fileobj.seek(offset + (self.position - start))
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/gzip.py", line 392, in seek
+    return self._buffer.seek(offset, whence)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/_compression.py", line 143, in seek
+    data = self.read(min(io.DEFAULT_BUFFER_SIZE, offset))
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/gzip.py", line 493, in read
+    buf = self._fp.read(io.DEFAULT_BUFFER_SIZE)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/gzip.py", line 96, in read
+    self.file.read(size-self._length+read)
+KeyboardInterrupt

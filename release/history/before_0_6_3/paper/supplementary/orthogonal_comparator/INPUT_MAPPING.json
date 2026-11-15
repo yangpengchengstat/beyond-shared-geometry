@@ -1,0 +1,38 @@
+{
+  "purpose": "Reformat saved completed endpoints only; no fresh numerical analysis",
+  "input_rows": "96 canonical conditions,48per dimension,24per domain/dimension",
+  "source_run": "bsg_orthogonal_comparator_20261106_v1",
+  "source_result_archive_sha256": "963a61ff2ef236c2f14456ecd4b281ec494fbe3394e298bc6dc747467ff6e64b",
+  "inputs": {
+    "cell_summary.csv": {
+      "sha256": "a854db94382443ab5221e4daac0dbb92271763228a91bac198b1887133c46f5d",
+      "project_source": "results/orthogonal_comparator_v1/cell_summary.csv"
+    },
+    "nonpositive_lower_cases.json": {
+      "sha256": "74b6c08e346c1865cec06c0ca6d02f657bfbdca7c9f0cb21435623c2eeff9069",
+      "project_source": "results/orthogonal_comparator_v1/review/nonpositive_lower_cases.json"
+    },
+    "domain_diagnostics.json": {
+      "sha256": "1ebca8904955077d6771ba7dd896a9c0acdc0949ddfdc849ec3e8d47d33d1c3f",
+      "project_source": "results/orthogonal_comparator_v1/review/domain_diagnostics.json"
+    },
+    "domain_risk_reference.csv": {
+      "sha256": "c2d7f7be8dc9b5fc5110f8c67c80ad395694ffa66c703e518f5d535d2e1b1994",
+      "project_source": "results/main30_bounded_v1/domain_risk_reference.csv"
+    },
+    "coverage.json": {
+      "sha256": "af1eb161515063d94c604d074ad07397a45d24a94d2345b8f22fc7bbbcc0a66b",
+      "project_source": "results/orthogonal_comparator_v1/coverage.json"
+    },
+    "execution_verification.json": {
+      "sha256": "69a9e45eb5f9c4248f1f6eeea66ffc75bbe3068fa8d5d310dfa5447f2751bf4b",
+      "project_source": "results/orthogonal_comparator_v1/review/verification.json"
+    },
+    "input_binding.json": {
+      "sha256": "62519caa426afc8a58d2faa8f501d920d490905fdcfe114445e13d86ffc3c6d0",
+      "project_source": "results/orthogonal_comparator_v1/binding.json"
+    }
+  },
+  "mean_contract": "Use saved means of max(0,L_lower-Lorth) computed per cell. Do not subtract domain means or reconstruct from rounded tables.",
+  "new_source_column_rule": "Original first-r PCA columns, own uncentered second-moment whitening per r; no PCA refit."
+}

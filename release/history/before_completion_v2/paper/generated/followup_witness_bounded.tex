@@ -1,0 +1,14 @@
+\begin{table}[t]
+\centering\small
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+& Construction bank & \multicolumn{3}{c}{Old test bank, frozen training metric} & Witness worse \\
+Domain & Witness & Witness & OLS & Ridge & than OLS \\
+\midrule
+$C_7$ & 0.02906 & 0.02806 & 0.02141 & 0.02141 & 24/24 \\
+$D_4$ & 0.11996 & 0.11117 & 0.08878 & 0.08878 & 24/24 \\
+\bottomrule
+\end{tabular}
+\caption{Transfer of frozen predictors at $r=16$ in the training metric. These means use training whitening for both construction and old test banks, including identity and fixed points. OLS and ridge need not obey group laws. The witness is feasible, not claimed optimal. Its transfer loss is not checked against Table~\ref{tab:followup-spectral}'s test-metric exact-orthogonal bounds: changing whitening can also change admissibility of the same raw-coordinate function (\cref{app:metric-conjugation}).}
+\label{tab:followup-witness}
+\end{table}

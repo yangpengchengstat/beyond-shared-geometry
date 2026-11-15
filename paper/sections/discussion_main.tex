@@ -1,0 +1,67 @@
+% Keep the Discussion heading with its opening paragraph.
+\Needspace{12\baselineskip}
+\section{Discussion and Limitations}
+\label{sec:reading-protocol}
+Our evaluations distinguish held-out prediction, exact-action compatibility on a fixed bank, and spectral preference among coherent state actions.
+The class-risk bounds apply to a common set of observations, targets, weights and whitening metric.
+An independent orthogonal comparator gives the orthogonality cost and bounds the further cost of enforcing the group law, without requiring a fitting algorithm to attain the class optimum.
+Witness transfer evaluates a separate object: a particular action constructed in training-whitened coordinates and tested with that metric frozen.
+Its higher held-out loss than OLS is consistent with the class bounds, which use the test bank's own whitening and concern its best exact orthogonal action (\cref{sec:witness-transfer}).
+
+The empirical interpretation depends on the magnitude and distribution of the computed bounds.
+Positive joint-cost lower endpoints follow from a positive independent-linear optimum $\eta>0$ under the theorem's assumptions.
+At $r=16$, one weekday condition contributes $99.44\%$ of the sum of the further group-law lower endpoints $\ell^-$; this is a concentration of lower bounds, not a share of the unknown true costs.
+The wider upper bounds allow larger actual costs elsewhere.
+Deleting individual complete C7 families preserves this concentration under each reduced bank's own whitening, but does not test alternative-image rankings (\cref{app:c7-family-influence}).
+The representation-type correction measures a different quantity: the loss in captured energy relative to ordinary spectral truncation.
+It exceeds the declared comparison tolerance in one primary condition and in eight C7 conditions at $r=8$.
+Neither this count nor a small correction determines the additional group-law cost.
+
+The centering diagnostic shows that registration preference depends on which components enter the dimension budget.
+Across the original banks, within-template centering with the original whitening, and centering with its own whitening, the prescribed image is uniquely leading in $7$, $15$ and $18$ of the 24 weekday conditions, compared with $16$, $0$ and $0$ corner conditions (\cref{tab:template-centering-main}).
+The corner image falls behind an alternative in every centered condition even before the whitening metric changes.
+All candidate images are transitive and share the same total trivial-component energy within a bank; removing this component changes the competition for the finite dimension budget.
+The resulting ranks compare relative spectral support and do not establish the absence of compatible exact actions.
+The increase in weekday leading counts also does not imply improvement in every condition.
+A stable state code remains compatible with accurate transformations, and even a uniquely leading image leaves its generator reparameterizations unresolved.
+
+The new-context experiment addresses predictive transport separately.
+Under its evaluation protocol, difference fitting lowers weekday mean loss and raises corner mean loss relative to coordinate fitting.
+This is not a replication of class-risk or registration rankings.
+The comparison with the earlier protocol changes wording, validation selection and, for D4, action weighting together, so the change in the D4 contrast cannot be attributed to wording alone.
+The result supports a domain-dependent comparison of the two fitting objectives on the authored bank (\cref{sec:new-context}).
+
+The retained coordinates also limit the interpretation.
+Study~1 fixed $q=16$ before its final structural run, although the available records do not establish why that particular value was initially preferred.
+Study~2 retained 16 for comparability with its development analyses and fitted PCA on its own training bank (\cref{app:dimension-rank-audit}).
+These records establish an analysis setting, not optimality or external preregistration.
+The eight-coordinate analysis supplies a sensitivity check.
+Centering the saved coordinates probes the existing 16-dimensional subspace; it neither measures the fraction of full-dimensional within-template variation retained nor substitutes for PCA fitted to within-template differences.
+Such a comparison would require full-dimensional readouts, a basis fitted on training differences, and a separate evaluation.
+
+The primary representation analyses use a fixed panel of six models and four readouts per model.
+These repeated measurements do not constitute independent samples from a population of language models.
+The main tasks and new-context bank retain already-seen state identities.
+In the joint held-out stratum of the supplementary $S_3$ task, entity names and contexts are held out while the abstract assignment states remain familiar; its predictive results do not establish native group computation.
+Historical activation edits use different information and intervention spaces, and the separate native-program branch failed its clean-task competence gate, leaving its confirmation analysis blocked (\cref{app:behavior,app:reproduction}).
+This limits what that protocol establishes about computation.
+The finite-bank bounds likewise require additional sampling assumptions for population-level guarantees.
+
+For other representation studies, each claim should specify the retained dimension, centering, metric, target correspondences and evaluation weights.
+A held-out score evaluates a trained predictor; a class-risk interval evaluates compatibility on a fixed bank; a registration margin compares spectral budgets across coherent targets.
+For centered observations retaining the original whitening, $C_{16}/16$ is normalized by the original energy and cannot be inserted directly into the unit-second-moment risk bounds.
+Keeping these evaluation objects explicit allows predictive, structural and registration results to be interpreted together.
+
+\section{Conclusion}
+We derive computable bounds on the minimum prediction risk of fixed-dimensional exact orthogonal actions from a type-constrained invariant-subspace budget.
+On each complete representation bank, independent linear and orthogonal comparators under the same whitened loss identify the orthogonality cost and bound the additional cost of enforcing the group law.
+The computed lower bounds vary substantially across model--readout conditions.
+Separately, our constructed exact actions have higher held-out loss than OLS when both are evaluated under the frozen training metric.
+
+Spectral preference for the prescribed state-action image depends on the retained space, state-invariant components and whitening metric.
+Within-template centering increases the number of conditions in which the prescribed weekday image leads, but leaves the prescribed corner image behind an alternative in every condition, even with the original whitening retained.
+Rewhitening further changes the scores and rankings.
+These are changes in relative spectral support.
+On the separately authored context bank, difference fitting lowers mean transport loss relative to coordinate fitting for weekdays but raises it for corners.
+Predictive recovery, fixed-bank compatibility with exact orthogonal actions, and spectral preference among candidate images therefore support distinct claims about the observed representations.
+Establishing that the model itself uses these transformations in computation requires additional evidence.

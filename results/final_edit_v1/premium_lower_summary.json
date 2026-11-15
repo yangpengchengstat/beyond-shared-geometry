@@ -1,0 +1,45 @@
+{
+  "decimal_policy": "Parse saved CSV decimals exactly; 50-digit arithmetic for sums and division",
+  "domains": {
+    "C7": {
+      "largest_two": [
+        {
+          "cell": "meta-llama__Llama-3.1-8B__C7__13",
+          "layer": "13",
+          "model_id": "meta-llama/Llama-3.1-8B",
+          "premium_lower": "0.06254392518998934"
+        },
+        {
+          "cell": "meta-llama__Llama-3.2-3B__C7__11",
+          "layer": "11",
+          "model_id": "meta-llama/Llama-3.2-3B",
+          "premium_lower": "0.028087973960786328"
+        }
+      ],
+      "largest_two_share_percent": "90.680648757877520474149515888716916482500844304341",
+      "max": "0.06254392518998934",
+      "mean": "0.0041644266808956480205833333333333333333333333333333",
+      "median": "0.00038929152944697925",
+      "min": "0.000034867499308447944",
+      "n": 24,
+      "sum": "0.099946240341495552494"
+    },
+    "D4": {
+      "max": "0.08718769943343879",
+      "mean": "0.026236942302582775875",
+      "median": "0.0187559524517441415",
+      "min": "0.002538358344475869",
+      "n": 24,
+      "sum": "0.629686615261986621"
+    }
+  },
+  "excluded_cells": 0,
+  "field": "premium_lower = p_minus = max(0, 2(1-gamma)-eta)",
+  "input": "results/main30_bounded_v1/cell_risk_reference.csv",
+  "input_sha256": "ec52b77b536d8241edf5229b548d559ec09b8845454807946e03a4bf6171ae61",
+  "interpretation": "Lower bounds on the joint exact-group-law and orthogonality class premium, not exact premiums",
+  "lofo_status": "PREPARED_NOT_RUN",
+  "new_model_execution": false,
+  "original_analyses_rerun": false,
+  "weighting": "unchanged equal weight for all 24 cells within each domain"
+}

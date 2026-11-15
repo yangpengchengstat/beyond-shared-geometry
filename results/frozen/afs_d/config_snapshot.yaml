@@ -1,0 +1,163 @@
+batch_size: 8
+bootstrap_samples: 5000
+bootstrap_seed: 314159
+confidence_level: 0.95
+depth_slots:
+- 0.2
+- 0.4
+- 0.6
+- 0.8
+device_map: auto
+dtype: float16
+embedding_convention: Hugging Face hidden_states[0], before transformer block 1; mean
+  over the unique target-token span
+expected_embedding_centered_ranks:
+  C7: 6
+  D4: 3
+experiment: beyond_shared_geometry_afs_d_rank_aware
+group_latent_dimensions:
+  C7: 6
+  D4: 3
+groups:
+- C7
+- D4
+immutable_sources:
+  afs_abc:
+    config_hash: 24c0dcad7ba3c8514a1193ec3c30c2910281b7f066689ec10be6fedbb5691533
+    execution_modules:
+    - A
+    - B
+    - C
+    experiment: beyond_shared_geometry_algebra_falsification
+    files:
+      afs/generator_composition_metrics.csv: a3c2f02059c32c34e76a7198a38a175074bcec317651297912f97928dbfa2a69
+      manifest.json: 0a04aa05d51a29af121fda465eb113b007c0c32882a0194dcb4d3b1d9360774d
+      run_ledger.json: df6572467aed1dd78c163b3c215dff860140bb45805a1ed5752ad73df241f7ee
+    git_commit: 9a491f89d5adf48c3119a89ec8ce1b215ec7802d
+    run_id: afs_full_abc_001
+    status: SUCCESS
+    tier: full
+  full:
+    config_hash: 910d430f18c5f865d88948c3284e0c9eaea531323aaf9c697ad2399cbeb372dd
+    experiment: beyond_shared_geometry_main
+    files:
+      manifest.json: 80a1bbd67374d4298d781ceb3aac77e5cd110df158ecaece45216e46b67dfacc
+      structural/template_metrics.csv: 2f6ba0ac0f060e5ad57ff8a923c8a63e077167eeadb0a537903b87707d520821
+    git_commit: 30f3c6369a185f43e94b17ca03b0499cd5d65a78
+    run_id: main_full_003
+    status: SUCCESS
+    tier: full
+metrics:
+  co_primary:
+  - E_gen_eq
+  - E_rel_data
+  d4_relation_components:
+  - E_rel_r4_data
+  - E_rel_s2_data
+  - E_rel_srs_r_inverse_data
+  secondary:
+  - E_eq
+  - E_hom_op
+  supporting:
+  - E_hom_data
+  - E_comp_data
+models:
+  llama_1b:
+    architecture: llama
+    blocks: 16
+    depth_layers:
+      0.2: 3
+      0.4: 6
+      0.6: 10
+      0.8: 13
+    id: meta-llama/Llama-3.2-1B
+    revision: 4e20de362430cd3b72f300e6b0f18e50e7166e08
+  qwen_1_5b:
+    architecture: qwen2
+    blocks: 28
+    depth_layers:
+      0.2: 6
+      0.4: 11
+      0.6: 17
+      0.8: 22
+    id: Qwen/Qwen2.5-1.5B
+    revision: 8faed761d45a263340a0528343f099c05c9a4323
+prompt_construction_version: final_large_experiment_v1
+random_generator_seed: 2718281
+rank_matched_internal_inputs:
+  activation_extraction_convention: mean over the unique target-token span at transformer
+    block output
+  archive: runpod_output_by_date/result_9_6_2026/run_outputs_9_4_2026_full3.zip
+  archive_sha256: 5fe7234572120073d8dfab2e8dc0d3373a741f8d48abadc92288f98ab16721f4
+  cache_subdir: run_outputs/activation_cache
+  provenance: immutable FULL activation cache only; rank-matched internal metrics
+    are recomputed inside repaired AFS-D without modifying FULL or AFS-A/B/C
+  source: main_full_003_activation_cache
+ridge_alpha: 0.01
+schema_version: 1
+selected_models:
+- architecture: llama
+  blocks: 16
+  depth_layers:
+    0.2: 3
+    0.4: 6
+    0.6: 10
+    0.8: 13
+  depth_slot_by_layer:
+    '10': 0.6
+    '13': 0.8
+    '3': 0.2
+    '6': 0.4
+  depth_slots:
+  - 0.2
+  - 0.4
+  - 0.6
+  - 0.8
+  id: meta-llama/Llama-3.2-1B
+  key: llama_1b
+  primary_layers:
+  - 3
+  - 6
+  - 10
+  - 13
+  revision: 4e20de362430cd3b72f300e6b0f18e50e7166e08
+- architecture: qwen2
+  blocks: 28
+  depth_layers:
+    0.2: 6
+    0.4: 11
+    0.6: 17
+    0.8: 22
+  depth_slot_by_layer:
+    '11': 0.4
+    '17': 0.6
+    '22': 0.8
+    '6': 0.2
+  depth_slots:
+  - 0.2
+  - 0.4
+  - 0.6
+  - 0.8
+  id: Qwen/Qwen2.5-1.5B
+  key: qwen_1_5b
+  primary_layers:
+  - 6
+  - 11
+  - 17
+  - 22
+  revision: 8faed761d45a263340a0528343f099c05c9a4323
+split_seeds:
+- 101
+- 303
+- 909
+- 2701
+- 4243
+template_split:
+  test_templates: 6
+  train_templates: 28
+  validation_templates: 6
+tokenizer:
+  add_special_tokens: true
+  padding_side: right
+  revision_source: model_revision
+  use_fast: true

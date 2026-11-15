@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "scope": "Frozen prospective execution-source identities retained; four named publication engineering derivatives bound separately. This is not a regenerated scientific source manifest.",
+  "frozen_manifest": "release/prospective_source_manifest.json",
+  "frozen_manifest_sha256": "b613628ad370f8f8a5d5461907cd458590f3d1a0bb7f3623564a2bce09e29e23",
+  "original_strict_verifier": "scripts/verify_prospective.py",
+  "engineering_bindings": {
+    ".github/workflows/ci.yml": {
+      "execution_source": "release/history/before_completion_v2/.github/workflows/ci.yml",
+      "execution_sha256": "e7afc1c59a41b655fe3bfa1cb543e5fe4abd6783489a9e3a225d4255b3d7fe85",
+      "publication_sha256": "9cba27585d962d2cd3551aea5aaf16cd54002f6748d3b4590431d54b67c6538b",
+      "reason": "Publication CI performs stdlib-only static verification, rather than triggering scientific dependencies or analyses."
+    },
+    "pyproject.toml": {
+      "execution_source": "release/history/before_completion_v3/pyproject.toml",
+      "execution_sha256": "68cfdd4fb2fc0d878701ce71454d046d2d5a08de269c598a53cffe7f2d7af4c8",
+      "publication_sha256": "9261657c3497e498bee317c78e1cd3032eb1defa638915f5078182284280e6dd",
+      "reason": "Publication metadata/dependency packaging update; scientific modules and configurations retain their frozen identities."
+    },
+    "scripts/check_release.py": {
+      "execution_source": "release/history/before_0_6_2/scripts/check_release.py",
+      "execution_sha256": "b397fc1f75d871b011c0a364c2729cc5b6a04a9b4f2ae7cfe5bd66467fad38f5",
+      "publication_sha256": "a93735a14fc5f0c405527045a029584de3e64be183becda1a8e5f585208bcb70",
+      "reason": "Current publication dependencies and explicit engineering-source preservation verification; frozen source verifier remains unchanged."
+    },
+    "scripts/package_release.py": {
+      "execution_source": "release/history/before_completion_v3/scripts/package_release.py",
+      "execution_sha256": "f32143420fa087130f04fb0eb6b86d7f09ea5a0c6616c445a50c1f39a91dcdf4",
+      "publication_sha256": "2ab9cb3be57d0a669f26c5f69738c0866f4ddd852b16392b697b821f74038f52",
+      "reason": "Current editorial packaging wrapper delegates to fresh-output package_submission.py; execution-time packaging implementation remains preserved."
+    }
+  },
+  "scientific_fallback_permitted": false
+}

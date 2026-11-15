@@ -1,0 +1,12 @@
+\begin{table}[htbp]
+\caption{Validation-selected supervised interfaces: 72 model/readout/seed cells per objective and domain, 500 steps per candidate. The loss is normalized full-hidden target-prediction error; it is not the compact-coordinate endpoint. State classification is an interface-head score, not language-model answer accuracy. Seed replicates are not independent datasets.}
+\label{tab:reproduction-interface}\centering\small
+\begin{tabular}{lrrrr}\toprule
+Objective & $C_7$ loss & $D_4$ loss & $S_3$ joint loss & $S_3$ joint acc. \\
+\midrule
+Reconstruction & 0.212166 & 0.244488 & 0.410680 & 0.1657 \\
+Orbit augmentation & 0.212144 & 0.244781 & 0.410358 & 0.1659 \\
+Equivariance & 0.229303 & 0.254190 & 0.401808 & 0.1671 \\
+Group regularization & 0.227646 & 0.253783 & 0.401694 & 0.1671 \\
+\bottomrule\end{tabular}
+\end{table}

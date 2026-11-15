@@ -1,0 +1,12 @@
+{
+  "audit_id": "dimension_rank_audit_20261105",
+  "created_utc": "2026-11-05T20:01:11.688527+00:00",
+  "primary_source": "paper_editing/main.tex",
+  "scope": "posthoc read-only numerical diagnostics; no fitting, PCA changes, forwards or study reruns",
+  "svd_rank_rule": "count(s_j > max(shape)*eps_float64*s_1), float64 computation, tau_abs=0",
+  "historical_spectral_rule": "lambda_min(Sigma) > 1e-10 * lambda_max(Sigma), no extra centering; whitening normalized Frobenius residual <=1e-8",
+  "posthoc_ill_conditioned_rule": "full rank but s_min/s_max <=1e-8; flag only, no output changes",
+  "EVR_rule": "NA unless full original training spectrum or reliable original total variance available",
+  "operator_rule": "same float64 SVD rule; low rank does not invalidate prediction; exact full-space action requires invertibility",
+  "threshold_frozen_before_new_svd": true
+}

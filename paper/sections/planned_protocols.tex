@@ -1,0 +1,320 @@
+\section{Completed Follow-up Methods and Provenance}
+\label{app:pending-protocols}
+The completed analyses in \cref{sec:pending-studies} follow the frozen source and protocol records supplied with the project. All declared units of the original five-analysis follow-up produced evaluable outputs: 48 same-bank spectral cells, 48 new-context predictor cells, 48 training-fit witnesses, 2,952 image-subgroup units and 36 mechanism settings. The audit of the historical execution verified 13,250 files against its export manifest and retained the earlier preparation and authentication failures. Execution completion is distinct from the scientific interpretation of each endpoint. The later optional all-image family-deletion protocol below remains prepared and unexecuted; it is not included in these completed-unit counts.
+
+\subsection{Finite-bank spectral analysis on retained coordinates}
+The primary bank consists of the original Study~2 test partition for six models, four fixed readouts and C7/D4: 48 cells, each at $r=16$. Each cell contains 128 complete context blocks (64 families with two paired variants), with all states and all group elements equally weighted. This completed analysis used already acquired coordinates, without new model execution or a rerun of historical calibration. The group average includes the identity and fixed points, unlike changed-state prediction endpoints elsewhere in the paper.
+
+For each cell, the implementation verifies the archive and source identity, saved PCA, row correspondence and complete-state coverage, then evaluates the empirical second moment, orbit Gram matrix and real-type budget. The recorded quantities are $\gamma_r$, $\eta$, $\Delta_{\rm type}$, total and selected type energies $e_\tau,b_\tau$, and the two class-risk bounds. The risk-premium interval follows \cref{eq:risk-premium-main}. The additional offline derivation in \cref{app:bounded-risk-details} uses these saved full-precision values, including total type energies; its identity residual check is separately identified from the original spectral computation. Full-rank, symmetry, positivity, contraction, projector and least-squares consistency checks have fixed numerical tolerances. In particular, the uncentered second moment must satisfy $\lambda_{\min}>10^{-10}\lambda_{\max}$ and the whitening identity must pass a $10^{-8}$ normalized Frobenius tolerance; the input audit in \cref{app:dimension-rank-audit} rechecks all 48 cells without changing their coordinates or weights. A failed cell remains explicitly unevaluable; rank reduction, jitter, clipping and favorable cell selection are not permitted repairs.
+
+This analysis describes the retained bank and estimates no unseen-context coverage probability. The separate witness analysis below has its own fitting and evaluation contract. A small type correction at the primary dimension limits the demonstrated effect there; it does not justify selecting a more favorable dimension. The separately specified $8/16$ comparison in \cref{app:spectral-dimension-sensitivity} retains all conditions and the original primary dimension, and reports how this effect changes. High total $\gamma_r$ must be read alongside the selected trivial contribution; an exact shared action and stable category coding remain compatible explanations.
+
+\subsection{Context transport under a new language construction}
+The context study compares coordinate-fitted and difference-fitted predictors on separately constructed language contexts. Its comparison with the earlier results also changes regularization selection and, for D4, evaluation weights, as specified below. It reuses the declared model revisions, readouts and training-only PCA, and freezes the coordinate-fitted and difference-fitted predictors before evaluating the new bank. Both estimators fit only the 48 original training families, using all training states for each nonidentity action. Each primary arm selects a ridge coefficient separately for each action on the 16 original validation families. The arms use the same fixed grid $\{0,10^{-5},10^{-3},10^{-1},1\}$ and the same changed-state context-difference validation loss. The primary paired contrast subtracts the loss of this transport-tuned coordinate fit from the loss of the difference fit, on identical targets and with the same original training difference-energy denominator. The new bank is held out from all fitting and selection.
+
+In the earlier compact-context comparison, the coordinate fit selected one coefficient shared across actions by equal-action coordinate validation loss. The difference fit selected a separate coefficient per action by context-difference validation loss (\cref{app:reproduction}). The new secondary coordinate arm uses coordinate validation loss but still selects a coefficient per action. Difference-minus-secondary contrasts retain the same domain signs: $-0.005878$ for C7 and $+0.006197$ for D4. The old context table pools changed state--action pairs, whereas the new analysis weights actions equally after averaging the changed states within each action. These weights coincide for C7. In D4 the two nonidentity actions with fixed corners contribute two changed states each, while the other five contribute four each. The old and new primary results thus compare different language constructions, selection rules and, for D4, scoring weights. Identity provides a reference. Additional predictors and registrations have their own information and target conditions.
+
+The bank instantiates 64 fixed assistant-authored frames in both domains, with two paired variants and all seven C7 or four D4 states per frame: 896 C7 prompts and 512 D4 prompts per model. The executable frame definitions are in \texttt{studies/context\_generalization\_v1/bank.py}. The review guide asks an operator to check meaning, state spans and competing state mentions before execution. The recorded attestation binds that review to the bank hash. The available study records give the released frames and review procedure. The assistant model version and initial drafting process are unspecified. Each domain retains a fixed factual clause (``The scheduled weekday is [state]'' or ``The marked square corner is [state]''); the surrounding narrative changes. The state-token representation uses the current target token(s) and preceding text; paired variants differ in their preceding text. The original clauses were ``the designated weekday is [state]'' and ``the marked corner is [state]''. Thus the executed study changes outer narratives and limited factual wording together; it cannot isolate their effects. The frozen protocol shorthand that only the outer narrative changes is too narrow and is corrected here without modifying that historical protocol. State vocabulary remains seen, and these prompts are not independently sampled human prose. Exact prompt-disjointness checks establish neither semantic independence nor independent authorship.
+
+The code preserves family, variant, text, PCA and model identities. Within each family, scores average changed states within each nonidentity action and then actions equally. Equal weights over the 24 fixed model/readout cells per domain and over the two domains produce 64 paired family effects. All 48 cells are present in the primary panel. A fixed 2,000-draw family bootstrap (seed 2026102901) keeps the two domains, states, actions, variants, models and layers together and describes sensitivity over this authored bank. It is neither calibrated population coverage nor the certificate in \cref{sp:certificate}, and excludes uncertainty from refitting historical pipelines. Panel size is a design choice, not achieved power. Original fixed-panel results remain visible whether the new contrast improves, vanishes or reverses.
+
+\subsection{Constructed exact-action witness and transfer}
+The witness study constructs one $r$-dimensional orthogonal action from the invariant-subspace selection underlying \cref{sp:main}. The empirical training second moment, without additional centering, defines its whitening metric; type selection, invariant basis and alignment are fitted on training contexts only and frozen before test evaluation. The construction retains complete real-type blocks, using invariant rotation planes for C7 and reflection pairing for the D4 two-dimensional type, to obtain an equivariant basis, followed by orthogonal Procrustes alignment. It records the complete operators, their identity, orthogonality and multiplication residuals, and prediction losses for the construction bank and the held-out bank. The latter uses the same training metric and operators. Ordinary least squares and ridge with fixed coefficient $10^{-3}$ are fitted on the same training coordinates and scored on the same full state/action grid, including identity and fixed points. They are predictive controls, not assumed to satisfy the exact-action constraints. This is distinct from recomputing a descriptive spectral bound using the test bank's own second moment.
+
+\paragraph{Changing the whitening metric changes the orthogonal class.}
+\label{app:metric-conjugation}
+In the row-vector convention, a training-whitened witness $\rho_g$ represents the raw-coordinate function
+\[
+ R_g=\Sigma_{\rm tr}^{-1/2}\rho_g\Sigma_{\rm tr}^{1/2}.
+\]
+The same function in test-whitened coordinates has matrix
+\[
+ \rho_g^{(\rm te)}=\Sigma_{\rm te}^{1/2}R_g\Sigma_{\rm te}^{-1/2}.
+\]
+Conjugation preserves the group law but generally not Euclidean orthogonality. A frozen training-metric witness therefore need not belong to the test-metric exact-orthogonal class. Changing the scoring metric alone does not establish that the frozen predictor is admissible for the test-bank lower bound; even an admissible candidate need not satisfy the existence upper bound. No test-bank witness is fitted for this comparison.
+
+A successfully constructed witness gives a feasible action and an attained risk, not a proof that its risk equals $L^\star$. The attained witness risk is checked against the theorem's upper endpoint on the same construction bank and metric. Held-out witness risk uses frozen operators and is a separate quantity. Numerical invariant-subspace or rank failures remain explicit failures. Neither raw-coordinate Euclidean orthogonality nor historical row-normalized $D$ is substituted for the declared metric.
+
+\subsection{Exhaustive alternative permutation-image subgroups}
+For these small state sets, the implementation enumerates the $6!/6=120$ distinct cyclic order-seven subgroups of $S_7$ and the three order-eight Sylow subgroups of $S_4$, which are dihedral. In the cyclic case each subgroup has six generating seven-cycles. These are distinct permutation \emph{images}; they are not a count of all labeled homomorphisms or every possible semantic interpretation. Equivalent generator descriptions of one image are deduplicated. Each candidate is evaluated on the same complete coordinate bank, dimension and empirical metric, retaining the specified semantic action and every alternative. The source/state/action grid and weights are fixed, but each subgroup defines its own target correspondences; this is a comparison of registered tasks, not identical target labels.
+
+For each image, frozen training-bank witnesses, OLS and ridge are also evaluated on the old test bank using training whitening. These transfer losses are distinct from the descriptive spectral bounds computed in the test bank's own metric. The comparison reports the spectral budget and class-risk bounds for each image, with the specified action's rank and ties stated under a fixed numerical tolerance. It uses a descriptive complete enumeration, not a permutation $p$-value or a test selected by observed scores. \Cref{app:bounded-margin-details} maps the saved canonical image identities to absolute margins without changing the enumeration or tie rule. A competitive alternative shows compatibility within this finite comparator class. Even a uniquely favored image would not establish semantic uniqueness, since automorphisms, state coding and other generative explanations remain possible.
+
+\subsection{Controlled mechanism comparisons}
+Three declared synthetic mechanisms examine interpretation of the spectral summaries and constructed witnesses. M1 uses one action shared across contexts. M2 changes the action's coordinate orientation by context-dependent conjugation; the sampled construction, rather than the label alone, determines whether a shared action remains feasible. M3 combines a stable state code with complementary context features. M3 admits a valid shared action that is trivial on the context coordinates: it is a coding control, \emph{not} a negative null for existence of a shared action.
+
+The frozen simulation design contains 36 settings: two domains, three mechanisms, noise levels $0$ and $0.05$, and three fixed seeds. Each setting uses $r=16$ and 32 training plus 32 test contexts, with complete states and group actions. M3 uses an oblique direct sum of state-code and context coordinates and has an exact shared action in the noiseless construction. Mechanism parameters, seeds, context partitions and output quantities are fixed before execution. It reports each declared setting rather than choosing a favorable mechanism after inspection. These runs test consequences of specified constructions; they do not establish false-positive calibration, power, a universal identification procedure or the population certificate in \cref{sp:certificate}.
+
+
+\subsection{Complete mechanism accounting and numerical scope}
+\input{generated/followup_simulations.tex}
+All 36 settings completed. In noiseless M1 and M3, test witness losses are at machine scale (below $3\times10^{-28}$); noisy M1/M3 remain distinct from the particular M2 draws. The archived numbers retain floating-point deviations, including gamma values infinitesimally above one, rather than clipping them into an apparent exact certificate. For the 48 LLM witnesses produced by this constructor, the recorded training-bank losses lie within the analytic interval up to the frozen numerical tolerances; maximum multiplication and orthogonality residuals are $3.80\times10^{-15}$ and $7.20\times10^{-15}$. This upper-endpoint check concerns the specified construction; feasibility alone would not require every exact-action candidate to attain the theorem's existence upper bound. These checks concern numerical implementations, not rigorous interval-arithmetic certificates.
+
+For the witness predictive control, the training second moment after whitening is the identity. With the frozen coefficient $10^{-3}$, ridge therefore shrinks OLS by $1/(1+10^{-3})$ up to floating-point error. The near-identical two test means are not evidence from a broad regularization search. All cell-level spectra, witness losses, image ranks, 36 simulation rows and authored-family transport effects are retained as compact public tables, with member hashes linking them to the immutable raw result archive. No resampling, model extraction or experimental refitting was repeated to generate the manuscript tables.
+
+
+\subsection{Same-bank derived references and complete cell accounting}
+\label{app:bounded-risk-details}
+The bounded offline revision reads the full-precision saved spectral and type rows, not rounded manuscript means. Each join binds the original Study~2 test partition, model and tokenizer revisions, readout, saved PCA, rank, row identities, semantic image, state/group/context weights and whitening metric. There are 64 families with two complete-state variants per family in every cell. The public input map and member hashes accompany the derivation code; the raw archive remains separately preserved.
+
+Total and selected type energies are already divided by $r$ in the source. We check $\sum_\tau e_\tau=1$, $\sum_\tau b_\tau=\gamma_r$ and $0\le b_\tau\le e_\tau$ under the original tolerances. All nontrivial energy is $1-e_{\rm triv}$, whereas selected nontrivial energy is $\gamma_r-b_{\rm triv}$; neither is $1-b_{\rm triv}$. Identity risk is derived from total energy using \cref{sp:identity-reference}, then independently checked by direct full-grid residuals after the same uncentered test-bank whitening. The maximum discrepancy is \BoundedIdentityMaxError. That previously completed bounded revision included an offline endpoint check on saved coordinates, not a rerun of spectral fitting, model extraction or the original experiments. The current editorial revision retains those values without repeating the check.
+
+The numerical positivity check records $p^->\tau_0(p^-)$, with the original scalar tolerance against zero
+\[
+ \tau_0(p^-)=10^{-8}+10^{-7}|p^-|.
+\]
+Strict mathematical positivity already follows from nonzero $\eta$ under \cref{sp:premium-positivity}. This recorded numerical rule is applied to the computed lower endpoint; it does not bound error propagation through whitening, spectral computation or subtraction, and it is not an interval-arithmetic certificate. It is separate from the pairwise spectral-budget comparison used to rank permutation images in \cref{app:bounded-margin-details}.
+
+Premium endpoints are computed cell-wise before equal-cell aggregation. Checks retain $\eta\le L(I)$, $2(1-\gamma_r)\le L(I)$ and $p^-\le p^+$; they do not impose $L(I)\le2(1-\gamma_r^2)$, which is not required by the theorem. No additional numerical clipping is applied beyond the stated mathematical $\max(0,\cdot)$ endpoint definitions, and no tolerance or dimension is changed. The code retains full precision, including signs of numerical roundoff near zero, and rounds only for display. The following tables give every declared cell; L and Q abbreviate the Llama and Qwen2.5 model identifiers, and $e_0,b_0$ denote total and selected trivial energy.
+
+\begin{table}[p]
+\caption{C7 same-bank references and premium endpoints, all \BoundedCellsPerDomain{} fixed cells. $L(I)$ is the identity-action risk, not the loss for the identity group element alone.}
+\label{tab:bounded-cell-risk-c7}
+\centering\small\setlength{\tabcolsep}{3pt}
+\input{generated/bounded_cell_risk_C7.tex}
+\end{table}
+\begin{table}[p]
+\caption{D4 same-bank references and premium endpoints, all \BoundedCellsPerDomain{} fixed cells. No family or model resampling enters these quantities.}
+\label{tab:bounded-cell-risk-d4}
+\centering\small\setlength{\tabcolsep}{3pt}
+\input{generated/bounded_cell_risk_D4.tex}
+\end{table}
+\begin{table}[p]
+\caption{C7 total/selected type-energy pairs $e_\tau/b_\tau$. Complete real rotation planes are retained in the budget; total energy and selected energy are distinct.}
+\label{tab:bounded-cell-types-c7}
+\centering\small\setlength{\tabcolsep}{3pt}
+\input{generated/bounded_cell_type_energy_C7.tex}
+\end{table}
+\begin{table}[p]
+\caption{D4 total/selected type-energy pairs $e_\tau/b_\tau$. The corner action has only four states; absent types retain their recorded machine-scale values in the CSV, rounded here for display.}
+\label{tab:bounded-cell-types-d4}
+\centering\small\setlength{\tabcolsep}{3pt}
+\input{generated/bounded_cell_type_energy_D4.tex}
+\end{table}
+
+\FloatBarrier
+\subsection{Registration margins and prepared all-image family sensitivity}
+\label{app:bounded-margin-details}
+Margins use every saved image on each fixed bank: 120 for C7 and three for D4, including the semantic image. Canonical sorted permutation identities, rather than candidate ordinal numbers, define image equality. The semantic image is excluded from both the strongest-alternative maximum and the alternative median; the full-image spread still includes it. We retain the original dimensionless pairwise tolerance
+\[
+ \tau(a,b)=10^{-8}+10^{-7}\max(|a|,|b|).
+\]
+The rank interval is $[1+N_{\rm better},1+N_{\rm better}+N_{\rm tied}]$, where better alternatives exceed the semantic budget by more than their pairwise tolerance and tied alternatives differ by at most that tolerance. Unique/tied/behind counts and the original recorded ranks agree. No tolerance is chosen from the margins. Near numerical ties are distinct from finite-family sensitivity and statistical equivalence.
+
+The repository additionally prepares an optional all-image registration leave-one-family-out (LOFO) analysis: each deletion keeps the two variants and all states together, retains the original PCA and rank, and recomputes the reduced bank's second moment, whitening and every image budget. Group-only structures and per-family state-pair moments reduce repeated computation. Synthetic engineering tests compare this implementation with direct coordinate calculation and retain rank failures. Metadata inspection establishes that the required saved inputs exist; no real-data execution of this all-image protocol or bootstrap was performed. This optional registration study remains prepared and unexecuted. It is distinct from the completed C7, $r=16$ canonical-action family-risk analysis in \cref{app:c7-family-influence}, which does not rerank alternative images. Neither study is a prerequisite for the original complete-bank bounds.
+
+\begin{table}[p]
+\caption{C7 complete spectral margins, spread and original-tolerance rank intervals. U/T/B denotes unique leading/tied leading/behind. Full-precision CSV values and canonical image hashes are retained.}
+\label{tab:bounded-cell-margins-c7}
+\centering\small
+\input{generated/bounded_cell_margins_C7.tex}
+\end{table}
+\begin{table}[p]
+\caption{D4 complete spectral margins, spread and original-tolerance rank intervals. These registered tasks have different target correspondences and do not provide exact-action risk rankings.}
+\label{tab:bounded-cell-margins-d4}
+\centering\small
+\input{generated/bounded_cell_margins_D4.tex}
+\end{table}
+\FloatBarrier
+
+\subsection{Sensitivity to within-template centering and whitening}
+\label{app:template-centering-sensitivity}
+
+This post hoc analysis uses the saved 16-dimensional Study~2
+test coordinates for all six models, four readouts, and two domains.
+Each condition contains 128 complete template variants from
+64 paired context families.
+Centering is performed separately within each template variant.
+States and group elements receive uniform weights,
+including identity actions and fixed points.
+The candidate sets contain the same 120 weekday images and
+three corner images used in the primary registration comparison.
+
+Let $n=|S|$ and let $z_{i,t}\in\mathbb R^{1\times16}$
+denote the saved training-PCA coordinate of state $i$
+in test template $t$.
+Define
+\[
+ \bar z_t=\frac1n\sum_{i\in S}z_{i,t},
+ \qquad
+ z^{\mathrm c}_{i,t}=z_{i,t}-\bar z_t.
+\]
+Writing $\mathbb E_{t,i}$ for the uniform average over complete
+test-template state blocks, define the second moments
+\[
+ \Sigma=\mathbb E_{t,i}[z_{i,t}^{\top}z_{i,t}],
+ \qquad
+ \Sigma_{\mathrm c}
+ =\mathbb E_{t,i}[
+   (z^{\mathrm c}_{i,t})^{\top}z^{\mathrm c}_{i,t}].
+\]
+The three treatments are
+\begin{align}
+ x^{(\mathrm{orig})}_{i,t}
+   &=z_{i,t}\Sigma^{-1/2}, \nonumber\\
+ x^{(\mathrm{fixed})}_{i,t}
+   &=z^{\mathrm c}_{i,t}\Sigma^{-1/2}, \nonumber\\
+ x^{(\mathrm{white})}_{i,t}
+   &=z^{\mathrm c}_{i,t}\Sigma_{\mathrm c}^{-1/2}.
+ \label{eq:template-centering-treatments}
+\end{align}
+The second treatment removes the template mean in the original
+whitened coordinates.
+The third additionally rescales the centered observations by
+their own second moment.
+All three treatments use the same retained PCA subspace.
+
+For each candidate image $H$ and treatment $a$, construct
+$K_H^{(a)}$ by the orbit-Gram formula in
+\cref{eq:orbit-gram-main}, using $x^{(a)}$.
+Apply the invariant-subspace optimization in
+\cref{eq:budget-main} with dimension budget 16, and define
+\[
+ s_{16}^{(a)}(H)
+   =\frac{C_{16}(K_H^{(a)})}{16},
+ \qquad
+ d_{\rm top}^{(a)}
+   =s_{16}^{(a)}(H_0)
+    -\max_{H\ne H_0}s_{16}^{(a)}(H),
+\]
+where $H_0$ is the prescribed image.
+For the original and rewhitened treatments,
+$s_{16}^{(a)}=\gamma_{16}^{(a)}$.
+Ranks and margins use the same pairwise tolerance as the
+primary analysis,
+\[
+ \tau(a,b)=10^{-8}+10^{-7}\max\{|a|,|b|\}.
+\]
+
+Every candidate image is transitive.
+Its invariant projection therefore extracts the same
+within-template state mean
+(\cref{sp:transitive-trivial-energy}).
+Let $\Pi_{\rm triv}$ be the projection onto the trivial
+isotypic component of the orbit block action.
+Then
+\[
+ K_H^{(\mathrm{fixed})}
+  =(I-\Pi_{\rm triv})K_H^{(\mathrm{orig})}
+    (I-\Pi_{\rm triv}).
+\]
+The original orbit Gram matrix commutes with
+$\Pi_{\rm triv}$, so this operation removes its trivial block
+and preserves its nontrivial spectral blocks.
+We compute the centered budget by setting the number of
+selected trivial copies to zero and solving the integer
+allocation in \cref{sp:integer} again with budget 16.
+The dimensions released by removing trivial copies become
+available to nontrivial copies.
+Consequently, the shared trivial spectrum can affect candidate
+rankings through competition for the dimension budget.
+
+For each treatment, let
+\[
+ E^{(a)}
+   =\mathbb E_{t,i}\|x^{(a)}_{i,t}\|_2^2
+   =\operatorname{tr}K_H^{(a)}.
+\]
+This energy is common to all candidate images within a condition.
+The original and rewhitened treatments have $E^{(a)}=16$.
+For the treatment retaining the original whitening,
+\[
+ E^{(\mathrm{fixed})}
+   =16\bigl(1-e_{\rm triv}^{(\mathrm{orig})}\bigr).
+\]
+Thus $s_{16}^{(\mathrm{fixed})}$ expresses captured energy
+relative to the original total energy, while
+$C_{16}/E^{(\mathrm{fixed})}$ expresses the fraction of
+remaining centered energy captured by the budget.
+The fixed-whitening residual generally has a second moment
+different from $I_{16}$.
+We use this treatment for spectral-budget and rank comparisons.
+The unit-second-moment hypothesis of
+\cref{sp:main} holds for the original and rewhitened treatments.
+
+\begin{table}[H]
+\centering
+\small
+\setlength{\tabcolsep}{5pt}
+\caption{
+Energy and prescribed-image budgets under the three treatments.
+Each entry is an arithmetic mean across the 24 conditions
+in its domain.
+The last column averages the per-condition ratios $C_{16}/E$.
+}
+\label{tab:template-centering-energy}
+\begin{tabular}{llrrr}
+\toprule
+Domain & Treatment & Mean $E$ & Mean $C_{16}$
+       & Mean $C_{16}/E$ \\
+\midrule
+$C_7$ & Original
+      & 16.0000 & 15.7616 & 0.985102 \\
+      & Centered, original whitening
+      & 6.0810 & 6.0169 & 0.989421 \\
+      & Centered, own whitening
+      & 16.0000 & 10.2181 & 0.638632 \\
+\midrule
+$D_4$ & Original
+      & 16.0000 & 14.9645 & 0.935278 \\
+      & Centered, original whitening
+      & 4.2346 & 4.0367 & 0.954230 \\
+      & Centered, own whitening
+      & 16.0000 & 9.5457 & 0.596606 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+All 48 original banks and all 48 centered banks have numerical
+rank 16 and satisfy
+$\lambda_{\min}(\Sigma)/
+ \lambda_{\max}(\Sigma)>10^{-10}$
+for their respective second moments.
+The minimum centered-bank eigenvalue ratios are
+$2.46\times10^{-5}$ for $C_7$ and
+$2.15\times10^{-5}$ for $D_4$.
+The largest normalized Frobenius whitening residual across
+the original and rewhitened banks is below
+$7.84\times10^{-13}$ and satisfies the threshold $10^{-8}$.
+The original canonical budgets, candidate budgets, and
+registration ranks reproduce their saved references.
+For all 2,952 candidate images, we also directly rebuild
+the centered orbit Gram matrix under the original whitening.
+Its nontrivial multiplicity eigenvalues agree with those
+obtained by removing the original trivial block to within
+$1.07\times10^{-14}$.
+
+Table~\ref{tab:template-centering-main} reports the leading
+counts and strongest-alternative margins.
+Under the original whitening, centering changes the rank
+interval in 19/24 weekday and 22/24 corner conditions.
+For weekdays, ten conditions gain a unique lead and two lose
+one, giving a net increase from seven to fifteen.
+All fifteen remain uniquely leading after rewhitening,
+and three further conditions gain a unique lead.
+For corners, the fixed-whitening centered treatment places
+the prescribed image second in ten conditions and third
+in fourteen.
+After rewhitening, these counts become four and twenty.
+
+The prescribed image captures, on average, 98.94\% of the
+remaining weekday energy and 95.42\% of the remaining corner
+energy under the original whitening.
+High captured-energy fractions therefore coexist with the
+corner action falling behind an alternative in every condition.
+The ranking comparison depends on the relative budgets of
+the candidate actions. It does not order their unknown
+exact-action optima or establish that compatible exact
+actions cease to exist. The fixed-whitening centered score
+is not substituted into the unit-second-moment risk bounds.
+
+These results characterize the complete test banks within
+the saved training-PCA subspaces.
+The numerical archive retains per-condition budgets,
+rank intervals, all candidate scores, and input checksums.
+Assessing how much full-dimensional within-template variation
+the original PCA projection preserves requires the corresponding
+full-dimensional readouts.
+Fitting PCA specifically to that variation would require
+estimating a new basis from centered training-template
+readouts and evaluating it on the corresponding test banks.

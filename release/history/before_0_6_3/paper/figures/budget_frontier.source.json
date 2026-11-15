@@ -1,0 +1,50 @@
+{
+  "role": "visualization_of_existing_reviewed_means",
+  "source_run": "from-zero-v1-rank-recovery + parent-from-zero-v1",
+  "source_archive_sha256": "6a4c38237bf1368d4c77c97504f666d0d933bfebed9417d173fbf7441c0fecef",
+  "archive_source_path": "parent-from-zero-v1/compact_context/checkpoints/*.json",
+  "inputs": {
+    "results/reproduction_v1_review/derived_summary.json": "5177de3e3be727581e8f818261c3ad9dd6302add1c95518db84c76df8a1ba190",
+    "release/reproduction_review.json": "572c87033ea53fe89ab8607cf055612ab23a1167e0a4e7a2109884e17f7ab982"
+  },
+  "script": "scripts/plot_budget_frontier.py",
+  "script_sha256": "31d1c3aaf6faee8697cfe83ab33981ea4fea4c4c5a30fc67374dfe5465bdfc0f",
+  "selector": {
+    "registration": "semantic",
+    "track": "all_element",
+    "split": "test",
+    "domains": [
+      "C7",
+      "D4_corner"
+    ],
+    "budgets": [
+      0.5,
+      1.0,
+      2.0,
+      4.0,
+      8.0
+    ],
+    "methods": [
+      "limited_support",
+      "rff",
+      "nystrom"
+    ],
+    "reference": "ridge"
+  },
+  "endpoint": "all-element changed-state compact-coordinate prediction",
+  "existing_aggregation": "Equal action means followed by equal means over 24 fixed model/readout cells per domain",
+  "x_axis": "Nominal incremental parameter-storage budget relative to identity-pruned ridge; not exact realized bytes or total RAM",
+  "transformation": "Select existing scalar means and plot all five declared budgets; copy scalar values to CSV. No recomputation of statistical summaries.",
+  "new_statistics": false,
+  "model_execution": false,
+  "refitting": false,
+  "resampling": false,
+  "confidence_intervals": false,
+  "error_bands": false,
+  "scope": "Fixed-panel descriptive means, not a test-selected budget policy or unseen-element endpoint",
+  "outputs": {
+    "paper/figures/budget_frontier.csv": "3502b80c21148c1e8439b741ebf14ee58a5e64829db06923b62488350d878815",
+    "paper/figures/budget_frontier.pdf": "845e06dd2c14ff0341245dc618ccc87a6303fe3f76574257375e2269f2464850",
+    "paper/figures/budget_frontier.png": "3e23f6990e8fafada783a3f876ed78de14c9ca92b09a84294f79d8c3c18f2014"
+  }
+}

@@ -1,0 +1,28 @@
+% Presentation only: select and round previously saved means.
+\begin{table*}[t]
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\textbf{(a) Joint constraint cost, $r=16$}\par\smallskip
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Domain & Mean $\eta$ & Mean $L^\star$ bounds & Mean $L^\star-\eta$ bounds & Mean $L(I)$ \\
+\midrule
+$C_7$ & 0.02563 & [0.02980, 0.05863] & [0.00416, 0.03300] & 0.76012 \\
+$D_4$ & 0.10321 & [0.12944, 0.24895] & [0.02624, 0.14574] & 0.52932 \\
+\bottomrule
+\end{tabular}
+\par\medskip
+\textbf{(b) Independent orthogonality and further group-law cost}\par\smallskip
+\begin{tabular}{@{}rlrrrr@{}}
+\toprule
+$r$ & Domain & Mean $L_{\rm orth}$ & Mean $\beta$ & Mean $L^\star-L_{\rm orth}$ bounds & $\ell^->\tau$ \\
+\midrule
+16 & $C_7$ & 0.028706 & 0.003074 & [0.001097, 0.029927] & 23/24 \\
+16 & $D_4$ & 0.127737 & 0.024531 & [0.001842, 0.121209] & 23/24 \\
+8 & $C_7$ & 0.096717 & 0.029571 & [0.035397, 0.151842] & 22/24 \\
+8 & $D_4$ & 0.080819 & 0.010217 & [0.000052, 0.076930] & 19/24 \\
+\bottomrule
+\end{tabular}
+\caption{\textbf{Same-bank risks and constraint costs.} Each row averages 24 fixed model/readout conditions on the original Study~2 test banks. In panel (b), $L_{\rm orth}$ is the optimum over independently chosen $O(r)$ maps, $\beta=L_{\rm orth}-\eta$, and $\ell^-=\max\{0,2(1-\gamma_r)-L_{\rm orth}\}$ is a lower bound on further common group-law cost. Bounds are computed per cell before averaging; the last column uses the fixed numerical tolerance $\tau=10^{-8}+10^{-7}|\ell^-|$. The intervals are bounds on average class optima, not confidence intervals or measured optima. Each dimension has its own second-moment-whitened metric. For $r=16$ C7, one condition contributes $99.44\%$ of the sum of $\ell^-$, whose median is $5.35\times10^{-6}$; this is concentration of lower bounds, not of true costs (\cref{par:orthogonal-results,app:orthogonal-results}). Frozen-predictor transfer uses a different training metric (\cref{tab:followup-witness}).}
+\label{tab:core-risk-summary}
+\end{table*}

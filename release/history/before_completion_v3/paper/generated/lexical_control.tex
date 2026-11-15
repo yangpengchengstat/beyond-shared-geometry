@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\centering
+\small
+\begin{tabular}{lllrrr}
+\toprule
+Group & Model & Location & $E_{\rm eq}$ & $E_{\rm gen,eq}$ & $E_{\rm rel,data}$ \\
+\midrule
+C7 & Llama 1B & Embedding & $3.64\!\times\!10^{-6}$ & $5.87\!\times\!10^{-5}$ & $6.37\!\times\!10^{-5}$ \\
+C7 & Llama 1B & Internal mean & 0.132327 & 0.198978 & 0.092076 \\
+C7 & Qwen 1.5B & Embedding & $2.48\!\times\!10^{-6}$ & $4.25\!\times\!10^{-5}$ & $4.72\!\times\!10^{-5}$ \\
+C7 & Qwen 1.5B & Internal mean & 0.171656 & 0.315743 & 0.187296 \\
+D4 & Llama 1B & Embedding & $4.97\!\times\!10^{-7}$ & $2.97\!\times\!10^{-6}$ & $3.95\!\times\!10^{-6}$ \\
+D4 & Llama 1B & Internal mean & 0.096634 & 0.133246 & 0.051652 \\
+D4 & Qwen 1.5B & Embedding & $3.02\!\times\!10^{-7}$ & $1.80\!\times\!10^{-6}$ & $2.39\!\times\!10^{-6}$ \\
+D4 & Qwen 1.5B & Internal mean & 0.055191 & 0.059383 & 0.027160 \\
+\bottomrule
+\end{tabular}
+\caption{Rank-matched lexical control using independent Ridge, with generator-only composed predictions for $E_{\rm gen,eq}$. Matching refers to training projected rank, supported by audited input spectra and the recorded PCA procedure rather than direct remeasurement of historical coordinates (\cref{app:dimension-rank-audit}). Both locations use C7 $q=6$ or D4 $q=3$; these are not the FULL $q=16$ estimates. Internal means average four fixed depths. Embedding errors are smaller in every tested model/group; all 150 archived internal-minus-embedding intervals are positive. Repeated templates at the embedding location reuse the same category vectors.}
+\label{tab:lexical-control}
+\end{table*}

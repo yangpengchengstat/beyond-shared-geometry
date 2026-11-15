@@ -1,0 +1,85 @@
+schema_version: 1
+experiment: beyond_shared_geometry_algebra_falsification
+historical_source:
+  run_id: main_full_003
+  experiment: beyond_shared_geometry_main
+  tier: full
+  status: SUCCESS
+  git_commit: 30f3c6369a185f43e94b17ca03b0499cd5d65a78
+  config_hash: 910d430f18c5f865d88948c3284e0c9eaea531323aaf9c697ad2399cbeb372dd
+groups: [C7, D4]
+template_split: {train_templates: 28, validation_templates: 6, test_templates: 6}
+primary_latent_dimension: 16
+depth_slots: [0.20, 0.40, 0.60, 0.80]
+split_seeds: [101, 303, 909, 2701, 4243]
+ridge_alpha: 0.01
+dtype: float16
+device_map: auto
+batch_size: 8
+tokenizer: {use_fast: true, add_special_tokens: true, padding_side: right, revision_source: model_revision}
+prompt_construction_version: final_large_experiment_v1
+embedding_convention: Hugging Face hidden_states[0], before transformer block 1; mean over the unique target-token span
+algebra_permutation_seed: 8675309
+scramble_seeds: [70001, 70003, 70009, 70019, 70039]
+bootstrap_seed: 314159
+confidence_level: 0.95
+random_generator_seed: 2718281
+models:
+  llama_1b:
+    id: meta-llama/Llama-3.2-1B
+    revision: 4e20de362430cd3b72f300e6b0f18e50e7166e08
+    blocks: 16
+    architecture: llama
+    depth_layers: {0.20: 3, 0.40: 6, 0.60: 10, 0.80: 13}
+  llama_3b:
+    id: meta-llama/Llama-3.2-3B
+    revision: 13afe5124825b4f3751f836b40dafda64c1ed062
+    blocks: 28
+    architecture: llama
+    depth_layers: {0.20: 6, 0.40: 11, 0.60: 17, 0.80: 22}
+  llama_8b:
+    id: meta-llama/Llama-3.1-8B
+    revision: d04e592bb4f6aa9cfee91e2e20afa771667e1d4b
+    blocks: 32
+    architecture: llama
+    depth_layers: {0.20: 6, 0.40: 13, 0.60: 19, 0.80: 26}
+  qwen_1_5b:
+    id: Qwen/Qwen2.5-1.5B
+    revision: 8faed761d45a263340a0528343f099c05c9a4323
+    blocks: 28
+    architecture: qwen2
+    depth_layers: {0.20: 6, 0.40: 11, 0.60: 17, 0.80: 22}
+  qwen_3b:
+    id: Qwen/Qwen2.5-3B
+    revision: 3aab1f1954e9cc14eb9509a215f9e5ca08227a9b
+    blocks: 36
+    architecture: qwen2
+    depth_layers: {0.20: 7, 0.40: 14, 0.60: 22, 0.80: 29}
+  qwen_7b:
+    id: Qwen/Qwen2.5-7B
+    revision: d149729398750b98c0af14eb82c78cfe92750796
+    blocks: 28
+    architecture: qwen2
+    depth_layers: {0.20: 6, 0.40: 11, 0.60: 17, 0.80: 22}
+tiers:
+  smoke:
+    model_keys: [llama_1b]
+    depth_slots: [0.40]
+    split_seeds: [101]
+    permutation_samples: 100
+    scramble_seeds: [70001]
+    bootstrap_samples: 200
+  pre_full:
+    model_keys: [llama_1b, qwen_1_5b]
+    depth_slots: [0.40, 0.80]
+    split_seeds: [101, 303]
+    permutation_samples: 1000
+    scramble_seeds: [70001, 70003, 70009, 70019, 70039]
+    bootstrap_samples: 2000
+  full:
+    model_keys: [llama_1b, llama_3b, llama_8b, qwen_1_5b, qwen_3b, qwen_7b]
+    depth_slots: [0.20, 0.40, 0.60, 0.80]
+    split_seeds: [101, 303, 909, 2701, 4243]
+    permutation_samples: 5000
+    scramble_seeds: [70001, 70003, 70009, 70019, 70039]
+    bootstrap_samples: 5000

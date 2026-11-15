@@ -1,0 +1,252 @@
+\section{Proofs and the Identification Problem}
+\label{app:theory}
+\label{sec:appendix}
+\subsection{Supporting finite-state statements}
+The following elementary statements support Section~\ref{sec:boundaries}; they are not presented as new general theory. Their original mathematical content is retained.
+
+\begin{proposition}[Finite-orbit realizability]
+\label{prop:finite}
+Let $X\in\R^{n\times(n-1)}$ have centered rows and rank $n-1$. For a permutation $g$, define $(P_gX)_i=X_{g(i)}$. There is a unique invertible $R_g=X^\dagger P_gX$ satisfying $XR_g=P_gX$, and $R_gR_h=R_{h\circ g}$.
+\end{proposition}
+
+Write $e_g(i,t)=z_{i,t}R_g-z_{g(i),t}$.
+\begin{proposition}[Prediction-error propagation]
+\label{prop:propagation}
+For $p=g_1\circ g_2$, the composition residual is
+\begin{align}
+ z_{i,t}(R_{g_2}R_{g_1}-R_p)
+ &=e_{g_2}(i,t)R_{g_1} \nonumber\\
+ &\quad+e_{g_1}(g_2(i),t)-e_p(i,t).
+\end{align}
+Its norm is at most $\norm{e_{g_2}}_2\norm{R_{g_1}}_{\rm op}+\norm{e_{g_1}(g_2(i),t)}_2+\norm{e_p}_2$.
+\end{proposition}
+
+\begin{proposition}[Global-field cancellation]
+\label{prop:additive}
+For any permutation $g$ of a complete uniformly weighted orbit, $\sum_i(z_{g(i),t}-z_{i,t})=0$. Therefore the train-fitted global displacement $v_g=\mathbb{E}_{i,t}[z_{g(i),t}-z_{i,t}]$ is zero for every element of both tested groups, up to numerical precision.
+\end{proposition}
+
+\subsection{Finite-orbit realizability}
+\begin{proof}[Proof of \cref{prop:finite}]
+Centering implies $\operatorname{col}(X)\subseteq\mathbf{1}^{\perp}$. Both spaces have dimension $n-1$, so they are equal. Every permutation matrix preserves $\mathbf{1}^{\perp}$; hence $P_gX$ lies in the column space of $X$. Full column rank gives the unique solution $R_g=(X^\top X)^{-1}X^\top P_gX$. Our definition implies $P_gP_h=P_{h\circ g}$, and consequently
+\[
+ XR_gR_h=P_gXR_h=P_gP_hX=P_{h\circ g}X=XR_{h\circ g}.
+\]
+Uniqueness establishes the multiplication rule. Taking $h=g^{-1}$ proves $R_gR_{g^{-1}}=R_e=\Id$ and the reverse product similarly, so every $R_g$ is invertible.
+\end{proof}
+If $n$ lexical vectors are affinely independent, their centered span has dimension $n-1$. Keeping all these PCA dimensions makes only an invertible coordinate change, so the proposition still applies. Neither regular polygon geometry nor pretrained knowledge of a named group is required. The induced matrices need not be orthogonal in the measured Euclidean metric. Their exact abstract action and their geometric shape are separate questions.
+
+This interpolation issue also limits representation comparison: invariance to arbitrary invertible changes can make sufficiently high-dimensional sample representations indistinguishable \citep{kornblith2019similarity}. That observation concerns comparison statistics; it does not establish out-of-context transformation prediction.
+
+\subsection{Separate contextual realizations need not be shared}
+Consider centered three-state coordinates
+\[
+ X=\begin{bmatrix}1&0\\0&1\\-1&-1\end{bmatrix},\qquad
+ R=\begin{bmatrix}0&1\\-1&-1\end{bmatrix}.
+\]
+For the cycle $g:1\mapsto2\mapsto3\mapsto1$, $XR=P_gX$. A second contextual copy $Y=XA$, with $A=\operatorname{diag}(2,1)$, has forced operator
+\[
+ R'=A^{-1}RA=\begin{bmatrix}0&1/2\\-2&-1\end{bmatrix}\ne R.
+\]
+A shared operator $S$ would satisfy both $XS=P_gX$ and $YS=P_gY$. Full column rank forces $S=R$ from the first and $S=R'$ from the second, a contradiction. This gives a precise reason why training one operator family and evaluating held-out contexts is stronger than recovering a separate action on each finite orbit.
+
+\subsection{Shared contextual realizations can still reflect state identity}
+The preceding counterexample is a non-guarantee, not evidence that context uniformity uniquely identifies semantic computation. Let $x_i$ be any centered full-affine-rank state code, and let $c_t$ be any context vector. In the direct-sum representation
+\[
+ z_{i,t}=(x_i,c_t),\qquad
+ R_g=\begin{bmatrix}A_g&0\\0&\Id\end{bmatrix},
+\]
+where $x_iA_g=x_{g(i)}$, one shared family maps all contexts exactly and satisfies all group relations. No contextual calculation of a weekday shift or geometric rotation is necessary for this construction. The same state code admits consistently registered alternative permutation actions. A global invertible coordinate change preserves this example up to conjugacy, so visible separation of state and context coordinates is unnecessary.
+
+This construction is a sufficiency example, not a claim that the tested activations have this exact form. Historical AFS-B changes operator labels inconsistently with the registered multiplication table, while AFS-C changes correspondence across training contexts; both can damage a stable state code. The later characterization and replay explicitly evaluate category predictors and a coherent alternative registration (\cref{sec:characterization,app:reproduction}). Their competitive results leave stable state coding compatible with the observations. These comparisons do not establish semantic specificity or constitute a conditional test jointly matched in prediction error, operator norm, information and capacity.
+
+\subsection{Shared contextual actions as a subspace test}
+\label{app:contextual-realization}
+Stack contextual rows into $Z\in\R^{N\times q}$ and let $P_g$ permute states within each complete template. At any rank, standard least-squares projection gives
+\[
+ \min_R\norm{ZR-P_gZ}_F^2
+ =\norm{(\Id-ZZ^\dagger)P_gZ}_F^2.
+\]
+Indeed, $ZZ^\dagger P_gZ$ is the orthogonal projection of the target matrix onto $\operatorname{col}(Z)$, leaving the displayed orthogonal residual. Thus an exact shared map exists if and only if this residual vanishes, equivalently $P_g\operatorname{col}(Z)\subseteq\operatorname{col}(Z)$. When $Z$ has full column rank, the exact solution $R_g=Z^\dagger P_gZ$ is unique; group-wide existence then gives the opposite multiplication convention of \cref{prop:finite}.
+
+Equivalently, let $K=\ker(Z^\top)$, the space of linear dependencies among rows. Exact realizability is equivalent to
+\[
+ P_g^\top K\subseteq K.
+\]
+Necessity follows from $a^\top Z=0\Rightarrow a^\top P_gZ=a^\top ZR_g=0$. Conversely, this condition makes the rule $a^\top Z\mapsto a^\top P_gZ$ well defined on the row span; it therefore defines a linear map there. For a whole group the induced maps are invertible and obey the row-action law. This is invariance of the \emph{left} kernel; preservation of only equal-row pairs, or of the right kernel $\ker Z$, is not this linear-realizability criterion. For example, the three distinct centered scalar states $(-1,0,1)$ have no exact linear realization of their three-cycle, since $(0,1,-1)$ is not a scalar multiple of $(-1,0,1)$.
+
+When $Z$ is rank deficient, only the action on its row span is identified. The minimum-norm solution has $R_e=Z^\dagger Z$, a projector rather than the ambient identity, and need not be invertible. If all the subspace conditions hold, a coherent invertible extension is
+\[
+ \widetilde R_g=Z^\dagger P_gZ+(\Id-Z^\dagger Z),
+\]
+which acts as the induced action on the row span and as identity on its orthogonal complement. It satisfies $\widetilde R_e=\Id$ and $\widetilde R_g\widetilde R_h=\widetilde R_{h\circ g}$. Its unobserved complementary action is a choice, not a property identified by the data. This uniqueness concerns fixed coordinates on the finite observed bank: different ambient matrices can agree on its span, while new contexts can impose additional constraints.
+
+This elementary criterion connects shared contextual fitting with subspace preservation. It is an unregularized, unnormalized characterization, not a formula for the recorded row-normalized test error or evidence of population generalization. Ridge instead returns
+\[
+ R_g^{(\alpha)}=(Z^\top Z+\alpha\Id)^{-1}Z^\top P_gZ.
+\]
+If an exact $R_g^\star$ exists, this is $B_\alpha R_g^\star$, where $B_\alpha=(Z^\top Z+\alpha\Id)^{-1}Z^\top Z$. In particular, the independently fitted identity is $B_\alpha$, not necessarily $\Id$. Shrinkage can therefore introduce power and relation errors even in an exactly realizable system. Joint relation/identity penalties target precisely such deviations. The current comparison does not separate those regularization effects from any additional semantic information.
+
+\subsection{An exact common-design ridge identity}
+\label{app:ridge-identity}
+Let every element use the same source matrix $Z\in\R^{N\times q}$, regularization $\alpha>0$, and permutation targets $P_gZ$. Write
+\begin{align*}
+ L_\alpha&=(Z^\top Z+\alpha\Id)^{-1}Z^\top,\\
+ K_\alpha&=\Id-ZL_\alpha,\qquad R_g=L_\alpha P_gZ.
+\end{align*}
+Then the paper's convention $P_gP_h=P_{h\circ g}$ gives the exact identities
+\begin{align}
+ ZR_g-P_gZ&=-K_\alpha P_gZ,\label{eq:ridge-fit-identity}\\
+ R_gR_h-R_{h\circ g}&=-L_\alpha P_gK_\alpha P_hZ.
+ \label{eq:ridge-law-identity}
+\end{align}
+To prove them, substitute $ZL_\alpha=\Id-K_\alpha$ into $ZR_g$ and into $L_\alpha P_g(ZL_\alpha)P_hZ$, respectively. No exact realizability or full-rank assumption is needed. For positive $\alpha$, $K_\alpha$ is a ridge residual operator, not in general an orthogonal projector. These equalities make the dependence between fit and composition defects explicit for a common design. They are not independent significance tests, and they do not apply unchanged to element-specific training subsets, weights, regularization, or independently centered targets. Their unnormalized matrices must not be identified with the row-normalized test metric in \cref{eq:D}.
+
+\subsection{Equal within-context geometry need not permit shared transport}
+\label{app:orientation}
+We give a restricted analytical construction, using standard orthogonal representation and averaging tools \citep{serre1977linear}. It specifies an identification boundary; it is not an assumed model of the measured activations or an additional calibration experiment.
+
+Let $V\in\R^{n\times r}$ have centered rows, $V^\top V/n=\Id_r$, and $VQ_g=P_gV$, where $Q_g\in O(r)$ and $Q_gQ_h=Q_{h\circ g}$. For $d\geq r$, choose $A_c\in\R^{d\times r}$ with $A_c^\top A_c=\Id_r$ and set $X_c=VA_c^\top$. State count $n$, orbit rank $r$, and ambient dimension $d$ are distinct. Every context has identical within-context Gram matrix $X_cX_c^\top=VV^\top$ and an exact local orthogonal action
+\[
+ R_{c,g}=A_cQ_gA_c^\top+(\Id_d-A_cA_c^\top).
+\]
+Indeed $X_cR_{c,g}=P_gX_c$, and the two orthogonal subspaces carry $Q_g$ and the identity. Cross-context inner products are not fixed by this construction.
+
+\begin{proposition}[Independent-orientation risk]
+\label{prop:orientation}
+For a nonempty $S\subseteq G$, define
+\[
+ \ell_c(R)=\frac{1}{nr|S|}\sum_{g\in S}\norm{X_cR_g-P_gX_c}_F^2.
+\]
+If a fresh $A_c$ is Haar-uniform on the Stiefel manifold and independent of the fitted family $\widehat R$, then, conditional on that fit,
+\begin{equation}
+\begin{aligned}
+ &\mathbb E[\ell_c(\widehat R)\mid\widehat R]\\
+ &\quad=\beta_S+\frac{1}{d|S|}\sum_{g\in S}
+ \norm{\widehat R_g-\frac{\chi(g)}r\Id_d}_F^2,
+\end{aligned}
+\end{equation}
+where $\chi(g)=\operatorname{tr}(Q_g)$ and
+\[
+ \beta_S=1-\frac1{|S|}\sum_{g\in S}\left(\frac{\chi(g)}r\right)^2.
+\]
+Thus $\beta_S$ is the minimum expected risk among unrestricted shared matrix predictors in this model.
+\end{proposition}
+\begin{proof}
+Whitening gives $\norm{X_cR-P_gX_c}_F^2/(nr)=\norm{A_c^\top R-Q_gA_c^\top}_F^2/r$. Haar invariance and traces imply $\mathbb E[AA^\top]=(r/d)\Id_d$ and $\mathbb E[AQ_gA^\top]=(\chi(g)/d)\Id_d$. Expanding the square yields
+\begin{align*}
+ &\frac1d\norm R_F^2+1-\frac{2\chi(g)}{rd}\operatorname{tr}R\\
+ &\quad=1-\frac{\chi(g)^2}{r^2}
+   +\frac1d\norm{R-\frac{\chi(g)}r\Id_d}_F^2.
+\end{align*}
+Average over $S$. Independence allows conditioning on the learned matrices; the scalar family attains the bound, although it need not itself be a group representation.
+\end{proof}
+For the centered seven-state cycle, $r=6$, $\chi(e)=6$, and $\chi(g)=-1$ for every other element. Hence $\beta_G=5/6$ and $\beta_{G\setminus\{e\}}=35/36$. For the centered four-corner $D_4$ action, $r=3$ and each nonidentity character is $+1$ or $-1$, giving $7/9$ and $8/9$, respectively. These constants apply only to the specified whitened-orbit risk and independence hypothesis. Comparing them numerically with the reported $\Eeq$ would mix different distributions and normalizations. No Haar randomization test or empirical rejection of this model is claimed.
+
+\subsection{A commutant criterion in the full-rank construction}
+\label{app:commutant}
+Specialize the preceding construction to $d=r$, writing $A_c=O_c\in O(r)$. Orientations can now have any distribution. Define
+\begin{align*}
+ \mathcal C_Q&=\{B:BQ_g=Q_gB\ \forall g\},\\
+ \Pi_Q(B)&=\frac1{|G|}\sum_g Q_gBQ_g^\top.
+\end{align*}
+The group average is the Frobenius orthogonal projection onto $\mathcal C_Q$: reindexing the group shows its image commutes with every $Q_g$, it fixes every commuting matrix, and inverse closure makes the average self-adjoint.
+
+\begin{proposition}[Relative-orientation obstruction]
+\label{prop:commutant}
+For independent copies $c,c'$ of the context, $U=O_c^\top O_{c'}$, and $S=G$,
+\[
+ \inf_{\{R_g\}}\mathbb E_c\ell_c(R)
+ =\frac1r\mathbb E_{c,c'}\norm{U-\Pi_Q(U)}_F^2.
+\]
+Consequently an exact shared action exists almost surely precisely when the relative orientations commute with every $Q_g$ almost surely.
+\end{proposition}
+\begin{proof}
+The local action is $R_{c,g}=O_cQ_gO_c^\top$, and the loss for element $g$ is $\norm{R_g-R_{c,g}}_F^2/r$. The unrestricted minimizer is $\mathbb E_cR_{c,g}$. The pairwise variance identity therefore gives optimum risk
+\[
+ \frac1{2r|G|}\mathbb E_{c,c'}\sum_g\norm{Q_gU-UQ_g}_F^2.
+\]
+Expansion and the projection identity give $|G|^{-1}\sum_g\norm{Q_gU-UQ_g}_F^2=2\norm{U-\Pi_Q(U)}_F^2$. Nonnegativity proves the equivalence; when the risk is zero the common matrices equal a local action and inherit its group law. At positive risk, the mean matrices need not form a representation.
+\end{proof}
+Large context rotations within the commutant can therefore leave the action unchanged. This is a full-rank, whitened, noiseless characterization; it is not a characterization of every contextual representation. For $m$ iid contexts in this same construction, define the unregularized mean of the local matrices and its empirical risk by
+\[
+ \widehat R_{m,g}=\frac1m\sum_{j=1}^mR_{c_j,g},\qquad
+ \widehat L_m=\frac1m\sum_{j=1}^m\ell_{c_j}(\widehat R_m),\qquad
+ b=\inf_{\{R_g\}}\mathbb E_c\ell_c(R).
+\]
+For an independent $c_{\rm new}$, the variance identity gives
+\[
+ \mathbb E\widehat L_m=(1-1/m)b,\qquad
+ \mathbb E\ell_{c_{\rm new}}(\widehat R_m)=(1+1/m)b.
+\]
+Both expectations include the sampled training contexts; the second also averages over the fresh context. These are sample-mean identities, not a learning-curve forecast for ridge fits to the actual $q=16$ activations. The proofs supply analytical checks on interpretation, not a claim of new general representation theory or a validation of the construction in the language models.
+
+\subsection{Prediction-error propagation}
+\begin{proof}[Proof of \cref{prop:propagation}]
+Insert and subtract $z_{g_2(i),t}R_{g_1}$ and $z_{g_1(g_2(i)),t}$. Since $p(i)=g_1(g_2(i))$,
+\begin{align*}
+ z_{i,t}R_{g_2}R_{g_1}-z_{i,t}R_p
+ &=\bigl(z_{i,t}R_{g_2}-z_{g_2(i),t}\bigr)R_{g_1}\\
+ &\quad+\bigl(z_{g_2(i),t}R_{g_1}-z_{p(i),t}\bigr)
+       -\bigl(z_{i,t}R_p-z_{p(i),t}\bigr).
+\end{align*}
+This is the stated identity. The triangle inequality and $\norm{vA}_2\leq\norm{v}_2\norm{A}_{\rm op}$ give the norm bound.
+\end{proof}
+For example, if every unnormalized prediction error is at most $\delta$ on a group-closed evaluation set and $\norm{R_g}_{\rm op}\leq M$, every pairwise residual is at most $(M+2)\delta$. A corresponding squared bound follows from $(a+b+c)^2\leq3(a^2+b^2+c^2)$. If additionally every comparison target satisfies $\norm{z_{i,t}R_p}_2^2+10^{-12}\geq b>0$, each corresponding normalized defect is bounded by $(M+2)^2\delta^2/b$. Neither a useful $b$ nor a uniform $\delta$ follows merely from a small average direct error. Thus this is not a numerical bound on the reported $D$ without additionally accounting for its sample-specific denominators. Nor does it certify small composition defects when norms are uncontrolled. It establishes a dependence that must be addressed before claiming algebraic consistency beyond what prediction already entails. We have not performed an error-matched conditional null analysis in the present experiments.
+
+\subsection{Global additive cancellation}
+\begin{proof}[Proof of \cref{prop:additive}]
+Since $g$ is a bijection, $\{g(i):i=1,\ldots,n\}=\{1,\ldots,n\}$. Thus
+\[
+ \sum_{i=1}^n z_{g(i),t}=\sum_{i=1}^n z_{i,t}.
+\]
+Subtracting gives zero separately in every template. Averaging over any training templates preserves zero. Centering and PCA are unnecessary for this cancellation.
+\end{proof}
+The conclusion holds for every element of both tested groups, including reflections, and for any representation dimension. More generally it holds for a weighting invariant under the action. An incomplete or non-invariantly weighted orbit need not cancel. Those designs were not the tested estimator. A vector conditioned on source state, $v_{g,i}=\mathbb{E}_t[h_{g(i),t}-h_{i,t}]$, also need not cancel because the source average is removed.
+
+\subsection{State-conditioned additive actions can compose}
+\label{app:additive-composition}
+For training-only state means $\mu_i=\mathbb{E}_{t\in\mathcal T_{\rm train}}h_{i,t}$ and the complete balanced training orbits, the existing comparator satisfies
+\[
+ v_{g,i}=\mathbb{E}_t(h_{g(i),t}-h_{i,t})=\mu_{g(i)}-\mu_i.
+\]
+To compose these edits, retain the source-state index and update it after each action. The augmented-state map is
+\[
+ A_g(h,i)=(h+\mu_{g(i)}-\mu_i,\ g(i)).
+\]
+For $p=g_1\circ g_2$,
+\begin{align*}
+ (A_{g_1}\circ A_{g_2})(h,i)
+ &=\bigl(h+(\mu_{g_2(i)}-\mu_i)
+             +(\mu_{p(i)}-\mu_{g_2(i)}),p(i)\bigr)\\
+ &=\bigl(h+\mu_{p(i)}-\mu_i,p(i)\bigr)=A_p(h,i).
+\end{align*}
+The means telescope. For noncommuting actions the two orders may have different target means, so this source-conditioned additive rule can preserve order as well as exact composition. Its composition law is on the augmented state carrying the source identity; it is not a constant vector update or an identified native neural mechanism. The behavioral experiment supplies this identity as an oracle condition and fits vectors in the full hidden dimension. The historical study does not provide a structural comparison in the same PCA subspace with matched identity information. Subsequent excluded development comparisons informed the separate characterization study. Its returned coordinate-level results have since been audited; these label-informed controls retain their declared information conditions and do not identify a native mechanism. The identity also shows why global additive cancellation does not establish an intrinsic advantage of multiplicative notation: every linear map obeys $zR_g=z+z(R_g-\Id)$.
+
+The preceding exact composition guarantee assumes that the state index is carried forward. A stateless rule that re-decodes every intermediate vector need not compose: with centroids $\mu_0=0$, $\mu_1=2$ and the swap $s$, nearest-centroid decoding gives $F_s(-2)=0$ and $F_s(0)=2$, so $F_s(F_s(-2))\ne-2$ although $s^2=e$. Perfect decoding on clean evaluation inputs alone does not certify decoding after edits. Likewise, looking up the known composite action after a single input decode is not an empirical test of repeated learned primitive edits.
+
+\subsection{Faithful actions need not be free}
+\label{app:faithful-not-free}
+Faithfulness means that no nonidentity group element fixes every state. Freeness means that no nonidentity element fixes even one state. The four-corner $D_4$ action is faithful but not free: each corner has a stabilizer of size two, so a single source corner has only four distinguishable endpoints for eight group elements. Aggregating a full orbit can distinguish the transformations; an arbitrary single endpoint cannot. Under $r(i)=i+1$ and $s(i)=1-i$ modulo four, $srs(i)=i-1$ and $rsr(i)=1-i$ coincide at $i=1,3$, whereas $rs(i)=2-i$ and $sr(i)=-i$ differ at all four corners. Order comparisons must therefore report their endpoint-discriminating state set. Success on this action is not evidence of a free eight-state action or of native group multiplication.
+
+\subsection{Coordinate equivalence and the metric of approximation}
+\label{app:coordinates}
+For an invertible coordinate change $S$, set $z'=zS$ and $R'_g=S^{-1}R_gS$. Then
+\[
+ z'R'_g-z'_{g}= (zR_g-z_g)S,\qquad
+ R'_{g_2}R'_{g_1}-R'_{p}
+ =S^{-1}(R_{g_2}R_{g_1}-R_p)S.
+\]
+Consequently, exact realization and exact group identities are invariant under simultaneous conjugacy. This does not make an arbitrary approximate score coordinate invariant. Orthogonal $S$ preserves the Euclidean row norms and Frobenius norms used here, and therefore the corresponding recorded defects. General invertible $S$ can change their values, their conditioning, and the weighting of representation directions. Euclidean ridge penalties and PCA truncation likewise encode a chosen geometry; refitting after a nonorthogonal change need not yield the conjugated original estimate. Changing the retained PCA subspace is not merely rotating its coordinates.
+
+The semantic action group acting on input states is distinct from the coordinate-equivalence group acting on the representation description \citep{yao2026groupaction}. Our coordinates and semantic labels are fixed. Context-specific realignments would change the shared-operator question; coherent state relabelings define alternative registered tasks, rather than a free equivalence when testing semantic preference. The present numerical claims concern the specified unwhitened PCA metric. They are not invariant quantitative claims under arbitrary reparameterizations. For an unnormalized activation-conditioned matrix defect $D$, the second-moment identity
+\[
+ \mathbb{E}\norm{zD}_2^2=\operatorname{tr}(D^\top\Sigma D),\qquad
+ \Sigma=\mathbb{E}[z^\top z],
+\]
+shows how covariance weights directions. A small data-space value can reflect low variance rather than an exactly unsupported subspace. Our actual $D(A,B)$ additionally normalizes each row by its target norm, and the operator diagnostics use different powers and, in the C7 relation case, different aggregands. Their numerical comparison cannot by itself establish a sharp supported/unsupported dichotomy.
+
+
+For an exact finite group action, an invariant positive-definite metric always exists: $H=|G|^{-1}\sum_gR_gR_g^\top$ satisfies $R_hHR_h^\top=H$. Choosing coordinates with $SS^\top=H$ makes the conjugated matrices orthogonal. This fact does not make the measured Euclidean metric invariant, and approximate fits need not admit this exact construction. It further separates abstract algebraic realizability from a preferred geometry of the observed activations.
+
+The same distinction applies to optional character diagnostics in the released code. The centered full-rank $n$-state representation has character $\chi(g)=\#\{i:g(i)=i\}-1$, whereas the full permutation representation has character equal to the number of fixed states. Comparing normalized traces against the latter reference does not measure distance to every valid representation, particularly after centering or changing dimension. Character-inner-product expressions computed from approximately consistent fitted matrices are descriptive real numbers; they are not certified integer irreducible multiplicities.

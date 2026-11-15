@@ -1,0 +1,129 @@
+{
+  "bootstrap_reps": 5000,
+  "bootstrap_seed": 314159,
+  "c7_powers": [
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "d4_words": {
+    "r_then_s": {
+      "additive": "v_r+v_s",
+      "group_element": "(3, 1)",
+      "operator_product": "R(r)R(s)"
+    },
+    "s_then_r": {
+      "additive": "v_s+v_r",
+      "group_element": "(1, 1)",
+      "operator_product": "R(s)R(r)"
+    },
+    "s_then_r_then_s": {
+      "additive": "v_s+v_r+v_s",
+      "group_element": "(3, 0)",
+      "operator_product": "R(s)R(r)R(s)"
+    },
+    "srs_equals_r_inverse": true
+  },
+  "depth_slots": [
+    0.2,
+    0.4,
+    0.6,
+    0.8
+  ],
+  "groups": [
+    "C7",
+    "D4"
+  ],
+  "latent_dim": 16,
+  "models": [
+    {
+      "blocks": 16,
+      "depth_layers": {
+        "0.2": 3,
+        "0.4": 6,
+        "0.6": 10,
+        "0.8": 13
+      },
+      "family": "Llama",
+      "id": "meta-llama/Llama-3.2-1B",
+      "key": "llama_1b"
+    },
+    {
+      "blocks": 28,
+      "depth_layers": {
+        "0.2": 6,
+        "0.4": 11,
+        "0.6": 17,
+        "0.8": 22
+      },
+      "family": "Llama",
+      "id": "meta-llama/Llama-3.2-3B",
+      "key": "llama_3b"
+    },
+    {
+      "blocks": 32,
+      "depth_layers": {
+        "0.2": 6,
+        "0.4": 13,
+        "0.6": 19,
+        "0.8": 26
+      },
+      "family": "Llama",
+      "id": "meta-llama/Llama-3.1-8B",
+      "key": "llama_8b"
+    },
+    {
+      "blocks": 28,
+      "depth_layers": {
+        "0.2": 6,
+        "0.4": 11,
+        "0.6": 17,
+        "0.8": 22
+      },
+      "family": "Qwen",
+      "id": "Qwen/Qwen2.5-1.5B",
+      "key": "qwen_1_5b"
+    },
+    {
+      "blocks": 36,
+      "depth_layers": {
+        "0.2": 7,
+        "0.4": 14,
+        "0.6": 22,
+        "0.8": 29
+      },
+      "family": "Qwen",
+      "id": "Qwen/Qwen2.5-3B",
+      "key": "qwen_3b"
+    },
+    {
+      "blocks": 28,
+      "depth_layers": {
+        "0.2": 6,
+        "0.4": 11,
+        "0.6": 17,
+        "0.8": 22
+      },
+      "family": "Qwen",
+      "id": "Qwen/Qwen2.5-7B",
+      "key": "qwen_7b"
+    }
+  ],
+  "raw_full_zip": "runpod_output_by_date/result_9_6_2026/run_outputs_9_4_2026_full3.zip",
+  "raw_full_zip_sha256": "5fe7234572120073d8dfab2e8dc0d3373a741f8d48abadc92288f98ab16721f4",
+  "run_id": "additive_field_falsification_001",
+  "split_seeds": [
+    101,
+    303,
+    909,
+    2701,
+    4243
+  ],
+  "template_split": {
+    "test_templates": 6,
+    "train_templates": 28,
+    "validation_templates": 6
+  }
+}

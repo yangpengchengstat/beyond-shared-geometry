@@ -1,0 +1,89 @@
+\section{Problem Setup and Evaluation Targets}
+\label{sec:setup}
+\subsection{Paired states in fixed coordinates}
+Let $S$ be a finite set of $n$ states and $G$ a prescribed finite group acting on $S$ by permutations. For a state $i\in S$, an element $g\in G$ produces state $g(i)$. A contextual template $t\in\mathcal T_{\mathrm{tpl}}$ supplies the surrounding text. Thus a source--target pair changes the state while keeping its context fixed. We use the cyclic group $C_7$ of order seven for weekday shifts and the dihedral group $D_4$ of order eight for rotations and reflections of NW, NE, SE and SW. The latter has four states but eight distinct permutations. Each corner is fixed by two elements, so this action is faithful but not free.
+
+Fix a domain, model, layer and data split, with training templates $\mathcal T_{\mathrm{train}}\subset\mathcal T_{\mathrm{tpl}}$. The hidden readout $h_{i,t}\in\R^{1\times d}$ has the model's hidden dimension $d$. It is obtained by averaging the selected layer's block outputs over token positions overlapping the unique state occurrence. It represents a state visible in the input. To define one coordinate system for all contexts, we estimate the mean on the complete training state--template product and retain $q$ principal components:
+\[
+ \hat\mu=\frac{1}{n|\mathcal T_{\mathrm{train}}|}
+ \sum_{t\in\mathcal T_{\mathrm{train}}}\sum_{i\in S}h_{i,t}
+ \in\R^{1\times d},
+\]
+\begin{equation}
+ z_{i,t}=(h_{i,t}-\hat\mu)U_{\mathrm{PCA}}\in\R^{1\times q},
+ \qquad U_{\mathrm{PCA}}^\top U_{\mathrm{PCA}}=I_q.
+ \label{eq:projection}
+\end{equation}
+Here $U_{\mathrm{PCA}}\in\R^{d\times q}$ contains the leading eigenvectors of the centered training covariance. The principal component analysis (PCA) scores $z_{i,t}$ reconstruct $\hat h_{i,t}=\hat\mu+z_{i,t}U_{\mathrm{PCA}}^\top$; they omit the residual outside the retained subspace. Mean and basis remain fixed on validation and test templates. They are fitted separately across domains, models, layers and splits. PCA here centers and projects; the second-moment whitening used for class-risk analysis is a separate operation.
+
+The primary retained dimension is $q=16$, a fixed analysis setting whose original selection rationale is not recoverable from the available records. It is not an intrinsic-dimension estimate or an established optimum. We also examine the leading eight saved coordinates. The lexical comparison matches the ranks of \emph{training projected representations} at $q=6$ for weekdays and $q=3$ for corners. Centering $n$ unique lexical vectors gives only the upper bound $n-1$; equality requires evidence beyond the state count. Retained dimension, training-data rank, coordinate-bank rank and operator rank remain distinct, and matching rank does not match retained information. \Cref{app:dimension-rank-audit} gives the supporting rank evidence and archival limits.
+
+\subsection{What a fitted operator predicts}
+For each element $g$, we fit a matrix $R_g\in\R^{q\times q}$ with the prediction target
+\begin{equation}
+ z_{i,t}R_g\approx z_{g(i),t}.
+ \label{eq:prediction}
+\end{equation}
+The same family acts across contexts within the fixed coordinate space above; there is no context-specific realignment or matrix shared across models. Both PCA and operator fitting use training templates. Holding out a template holds out its complete set of state variants, while the state vocabulary remains familiar.
+
+Independent ridge fits the element matrices separately. Joint fitting optimizes them together with soft prediction, homomorphism, relation, identity and orthogonality terms. These penalties encourage consistency without enforcing an exact orthogonal action. Under our row-vector convention, applying $g_2$ and then $g_1$ corresponds to
+\begin{equation}
+ R_{g_2}R_{g_1}\approx R_{g_1\circ g_2},
+ \qquad (g_1\circ g_2)(i)=g_1(g_2(i)).
+ \label{eq:convention}
+\end{equation}
+The first matrix is on the left because row vectors multiply on the right. Generator-only fitting supervises the one-day shift for $C_7$, or the clockwise quarter-turn and the reflection swapping NW/NE and SW/SE for $D_4$. For a fixed word $g=g_1\circ\cdots\circ g_k$, it predicts with $R_{g_k}\cdots R_{g_1}$. An exact action assigns equivalent words the same matrix; an approximate fit need not. Its transfer test compares these products with actual transformed activations, not merely with other fitted matrices.
+
+The structural study evaluates paired row matrices $A,B\in\R^{N\times q}$ using
+\begin{equation}
+ D(A,B)=\frac1N\sum_{j=1}^{N}
+ \frac{\|A_j-B_j\|_2^2}{\|B_j\|_2^2+10^{-12}}.
+ \label{eq:D}
+\end{equation}
+This is a mean squared error relative to each target row's energy; zero means exact prediction. It is not an accuracy percentage or a root-mean-square error. Stack one template's source states in $Z$ and its ordered targets in $Z_g$. Prediction error $\Eeq$ averages $D(ZR_g,Z_g)$ over nonidentity elements. Consistency error $\Ehom$ instead averages $D(ZR_{g_2}R_{g_1},ZR_{g_1\circ g_2})$ over element pairs; $\Ecomp$ excludes pairs containing identity. The latter two compare composed and fitted predictions. Because prediction residuals and operator norms also constrain composition residuals, good consistency is not automatically additional identification evidence. Data-space relation diagnostics likewise use $D$; operator-space diagnostics instead use unsquared relative Frobenius norms. The definitions are given in \cref{app:metrics}.
+
+\subsection{From a fitted predictor to an action class}
+To compare constraints on the same scale, write the observations as $z_{c,s}\in\R^{1\times r}$, with context $c$ and state $s$. Fix a context distribution $P_C$ and use uniform states and a full uniform group average, including identity and fixed points. Assume the uncentered second moment is positive definite, and whiten it:
+\[
+ \Sigma=\mathbb E[z^\top z]\succ0,\qquad
+ x=z\Sigma^{-1/2},\qquad x_g(c,s)=x(c,g(s)),\qquad
+ \mathbb E[x^\top x]=I_r.
+\]
+For a finite coordinate bank the expectations are its empirical averages. We take $r=q$ only when the stated nonsingularity condition holds. A deficient bank would define a different problem if its dimension or whitening were changed; it is not silently repaired here.
+
+For matrices $A_g\in\R^{r\times r}$, use the common prediction loss
+\begin{equation}
+ \mathcal L((A_g)_g)=\frac{1}{r|G|}\sum_{g\in G}
+ \mathbb E\|xA_g-x_g\|_2^2.
+ \label{eq:class-loss-main}
+\end{equation}
+Allowing each $A_g$ to be any real matrix gives the ordinary least-squares optimum $\eta$. Requiring each matrix to be orthogonal gives $L_{\mathrm{orth}}$, but still permits unrelated choices for different elements. Finally require one exact row action,
+\[
+ \mathcal R_r(G)=\{\rho:G\to O(r):\rho_e=I_r,\ \rho_g\rho_h=\rho_{hg}\},
+\]
+and denote its optimum by $L^\star$. Here $gh$ means first $h$, then $g$, so the reversed matrix order is the convention in \cref{eq:convention}. The three targets are
+\[
+ \eta=\inf_{(A_g)_g}\mathcal L((A_g)_g),\qquad
+ L_{\mathrm{orth}}=\inf_{Q_g\in O(r)}\mathcal L((Q_g)_g),\qquad
+ L^\star=\inf_{\rho\in\mathcal R_r(G)}\mathcal L(\rho),
+\]
+Each successive class adds a constraint, so $\eta\le L_{\mathrm{orth}}\le L^\star$. Their differences therefore measure costs within one distribution and metric. A training-fitted predictor's held-out loss is another target: its matrices and training metric remain fixed while the evaluation observations change. We use OLS for ordinary least squares below.
+
+The third research question changes the target action itself. A \emph{registration} assigns the prescribed transformations to the labeled states. A coherent alternative, such as conjugating the weekday cycle by a state-label swap, keeps group laws but changes which state is the target of each transformation. We compare distinct permutation-image subgroups on the same source bank. The spectral budget introduced next measures each candidate's compatibility with the exact-action class. It does not turn these different registered tasks into identical-target predictor comparisons.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{@{}p{.19\textwidth}p{.40\textwidth}p{.33\textwidth}@{}}
+\toprule
+Target & Loss / normalization & Interpretation \\
+\midrule
+{\raggedright Structural prediction and consistency\par} & $D(A,B)$: squared error divided by each target row's squared norm & Fitted maps in Study~1; the target depends on the endpoint. \\
+Coordinate prediction & Squared error divided by $E_z=\mathbb E_{\rm train}\|z-\bar z_{\rm train}\|_2^2$ & Study~2 predictors; training-only energy denominator. \\
+{\raggedright Context-difference transport\par} & Squared error divided by $E_u=\mathbb E_{\rm train}\|u\|_2^2$, where $u$ is the difference between paired same-state contexts & Study~2 difference prediction; no extra recentering. \\
+Action-class risks & $\mathcal L$ in \cref{eq:class-loss-main}: second-moment whitening, division by $r$, full group average & $\eta,L_{\rm orth},L^\star$ on the same distribution; bank bounds use its own metric. \\
+{\raggedright Constructed-action transfer\par} & The same squared loss form, retaining training whitening and fitted maps & A particular predictor on a new bank, not that bank's class optimum. \\
+\bottomrule
+\end{tabular}
+\caption{Targets used in the experiments. The denominators and prediction objects differ across rows, so their numerical values are not directly comparable. In the spectral analysis, the action dimension $r$ equals retained dimension $q$ in a nonsingular bank.}
+\label{tab:metric-contract}
+\end{table}

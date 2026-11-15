@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "protocol_id": "spectral_dimension_sensitivity_v1",
+  "status": "prepared_not_executed",
+  "dimensions": [
+    8,
+    16
+  ],
+  "execution_order": [
+    16,
+    8
+  ],
+  "planned_cells": 48,
+  "available_source_dimension": 16,
+  "q32_status": "unavailable_same_study2_cache",
+  "q32_scope": "Not scheduled; cannot recover missing directions from width-16 scores or singular values. New-context raw activations and Study1 caches are not substitutes.",
+  "original_primary_dimension": 16,
+  "primary_results_immutable": true,
+  "expected_runtime": {
+    "python_major_minor": "3.11",
+    "numpy": "2.2.6"
+  },
+  "column_rule": "first_q_columns_of_saved_training_PCA_coordinates_in_original_order",
+  "pca_refit": false,
+  "historical_ridge_joint_operator_refit": false,
+  "independent_ols_risk_computed_for_each_dimension": true,
+  "model_execution": false,
+  "new_context_extraction": false,
+  "partition": "test",
+  "context_blocks_per_cell": 128,
+  "families_per_cell": 64,
+  "state_weights": "uniform",
+  "context_weights": "uniform",
+  "action_weights": "uniform",
+  "include_identity": true,
+  "include_fixed_points": true,
+  "extra_centering": false,
+  "whitening": "fresh_uncentered_second_moment_of_each_declared_q_test_bank",
+  "rank_relative_threshold": 1e-10,
+  "matrix_normalized_frobenius_tolerance": 1e-08,
+  "k_spectrum_atol": 1e-08,
+  "scalar_atol": 1e-08,
+  "scalar_rtol": 1e-07,
+  "eigenvalue_clipping": false,
+  "regularization": false,
+  "jitter": false,
+  "pseudoinverse": false,
+  "automatic_rank_reduction": false,
+  "eta_definition": "eta_LS; eta_spec retained as independently checked identity",
+  "premium_lower": "max(0,2*(1-gamma)-eta_LS)",
+  "premium_upper": "2*(1-gamma**2)-eta_LS",
+  "risk_premium_scope": "joint cost of exact group laws and orthogonality; interval not exact optimum",
+  "image_counts": {
+    "C7": 120,
+    "D4": 3
+  },
+  "all_images_required": true,
+  "semantic_ranking": "descending gamma with original pairwise scalar tolerance",
+  "semantic_margins": [
+    "gamma_semantic-max_gamma_alternative",
+    "gamma_semantic-median_gamma_alternatives"
+  ],
+  "anchor_dimension": 16,
+  "anchor_policy": "all48 canonical and all2952 registered-image stored results must agree under frozen tolerances before any q8 computation",
+  "reporting": "all planned cells and failures; equal 24 cells per domain; no domain mean if incomplete",
+  "dimension_selection_by_results": false,
+  "statistical_significance_tests": false,
+  "bootstrap": false,
+  "LOFO": false,
+  "witness_training": false,
+  "simulation_expansion": false,
+  "independent_confirmation": false,
+  "population_certificate": false,
+  "automatic_scientific_promotion": false,
+  "execution_requires_explicit_opt_in": true,
+  "input_archives": {
+    "parent": {
+      "relative_path": "incoming/rank_recovery_v1/from-zero-v1-rank-recovery.results.zip",
+      "sha256": "6a4c38237bf1368d4c77c97504f666d0d933bfebed9417d173fbf7441c0fecef"
+    },
+    "followup": {
+      "relative_path": "incoming/tmlr_all_v2/tmlr-all-v2.20261030T203725Z-5489fd.results.zip",
+      "sha256": "ef87e9aaeb8f093ba0c2438590d6a30b5dffcd256993e2366bd600cca3cb5bbb"
+    }
+  }
+}
