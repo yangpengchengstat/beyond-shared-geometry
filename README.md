@@ -6,15 +6,16 @@ Research code, manuscript and retained evidence for **Beyond Shared Geometry: Pr
 
 Pengcheng Yang. **Beyond Shared Geometry: Predictive Recovery, Exact Actions, and Registration Preference in Language-Model Representations**. Zenodo, version 1.0, November 15, 2026 (publication date displayed by Zenodo).
 
-[Read the paper](https://doi.org/10.5281/zenodo.24238471) · [Download the included PDF](publication/bsg_arxiv_paper.pdf)
+[Read the paper](https://doi.org/10.5281/zenodo.24238471) · [Dataset (Hugging Face)](https://huggingface.co/datasets/yangpengchengstat/beyond-shared-geometry) · [Download the included PDF](publication/bsg_arxiv_paper.pdf)
 
-The preprint is released under CC BY 4.0. The software retains its MIT license. The paper DOI identifies the manuscript, not a separately archived software release.
+The preprint is released under CC BY 4.0. The software retains its MIT license. The paper DOI identifies the manuscript, not a separately archived software release. The Hugging Face release provides saved coordinates, recorded results, and the portable centering-analysis capsule; its data are CC BY 4.0 and its software retains MIT.
 
 ## Start here
 
 | Purpose | Entry |
 |---|---|
 | Read the public paper | [publication/bsg_arxiv_paper.pdf](publication/bsg_arxiv_paper.pdf) |
+| Download retained coordinates and results | [Hugging Face dataset and reproduction capsule](https://huggingface.co/datasets/yangpengchengstat/beyond-shared-geometry) |
 | Inspect the preserved submission snapshot | [paper/main.pdf](paper/main.pdf) (anonymous v6) |
 | Edit or compile | [paper/main.tex](paper/main.tex), [COMPILE_CHECK.md](COMPILE_CHECK.md) |
 | Verify files | `python3 -B scripts/verify_delivery.py` and `python3 -B scripts/verify_submission_surface.py` |
